@@ -1,4 +1,1033 @@
-﻿/* fixed in datatable */
+﻿/* color */
+.m-application .black {
+    color: #FFFFFF !important;
+}
+
+.m-application .white {
+    color: #000000 !important;
+}
+
+.m-application .transparent {
+    color: currentColor !important;
+}
+
+.m-application .red {
+    color: #FFFFFF !important;
+}
+
+.m-application .red.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .red.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .red.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .red.lighten-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .red.lighten-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .red.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .red.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .red.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .red.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .red.accent-1 {
+    color: #000000 !important;
+}
+
+.m-application .red.accent-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .red.accent-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .red.accent-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .pink {
+    color: #FFFFFF !important;
+}
+
+.m-application .pink.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .pink.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .pink.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .pink.lighten-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .pink.lighten-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .pink.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .pink.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .pink.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .pink.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .pink.accent-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .pink.accent-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .pink.accent-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .pink.accent-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .purple {
+    color: #FFFFFF !important;
+}
+
+.m-application .purple.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .purple.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .purple.lighten-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .purple.lighten-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .purple.lighten-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .purple.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .purple.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .purple.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .purple.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .purple.accent-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .purple.accent-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .purple.accent-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .purple.accent-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-purple {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-purple.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .deep-purple.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .deep-purple.lighten-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-purple.lighten-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-purple.lighten-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-purple.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-purple.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-purple.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-purple.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-purple.accent-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-purple.accent-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-purple.accent-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-purple.accent-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .indigo {
+    color: #FFFFFF !important;
+}
+
+.m-application .indigo.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .indigo.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .indigo.lighten-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .indigo.lighten-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .indigo.lighten-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .indigo.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .indigo.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .indigo.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .indigo.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .indigo.accent-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .indigo.accent-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .indigo.accent-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .indigo.accent-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .blue.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .blue.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .blue.lighten-2 {
+    color: #000000 !important;
+}
+
+.m-application .blue.lighten-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue.accent-1 {
+    color: #000000 !important;
+}
+
+.m-application .blue.accent-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue.accent-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue.accent-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .light-blue {
+    color: #FFFFFF !important;
+}
+
+.m-application .light-blue.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .light-blue.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .light-blue.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .light-blue.lighten-2 {
+    color: #000000 !important;
+}
+
+.m-application .light-blue.lighten-1 {
+    color: #000000 !important;
+}
+
+.m-application .light-blue.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .light-blue.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .light-blue.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .light-blue.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .light-blue.accent-1 {
+    color: #000000 !important;
+}
+
+.m-application .light-blue.accent-2 {
+    color: #000000 !important;
+}
+
+.m-application .light-blue.accent-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .light-blue.accent-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .cyan {
+    color: #000000 !important;
+}
+
+.m-application .cyan.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .cyan.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .cyan.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .cyan.lighten-2 {
+    color: #000000 !important;
+}
+
+.m-application .cyan.lighten-1 {
+    color: #000000 !important;
+}
+
+.m-application .cyan.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .cyan.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .cyan.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .cyan.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .cyan.accent-1 {
+    color: #000000 !important;
+}
+
+.m-application .cyan.accent-2 {
+    color: #000000 !important;
+}
+
+.m-application .cyan.accent-3 {
+    color: #000000 !important;
+}
+
+.m-application .cyan.accent-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .teal {
+    color: #FFFFFF !important;
+}
+
+.m-application .teal.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .teal.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .teal.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .teal.lighten-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .teal.lighten-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .teal.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .teal.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .teal.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .teal.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .teal.accent-1 {
+    color: #000000 !important;
+}
+
+.m-application .teal.accent-2 {
+    color: #000000 !important;
+}
+
+.m-application .teal.accent-3 {
+    color: #000000 !important;
+}
+
+.m-application .teal.accent-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .green {
+    color: #FFFFFF !important;
+}
+
+.m-application .green.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .green.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .green.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .green.lighten-2 {
+    color: #000000 !important;
+}
+
+.m-application .green.lighten-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .green.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .green.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .green.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .green.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .green.accent-1 {
+    color: #000000 !important;
+}
+
+.m-application .green.accent-2 {
+    color: #000000 !important;
+}
+
+.m-application .green.accent-3 {
+    color: #000000 !important;
+}
+
+.m-application .green.accent-4 {
+    color: #000000 !important;
+}
+
+.m-application .light-green {
+    color: #000000 !important;
+}
+
+.m-application .light-green.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .light-green.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .light-green.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .light-green.lighten-2 {
+    color: #000000 !important;
+}
+
+.m-application .light-green.lighten-1 {
+    color: #000000 !important;
+}
+
+.m-application .light-green.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .light-green.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .light-green.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .light-green.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .light-green.accent-1 {
+    color: #000000 !important;
+}
+
+.m-application .light-green.accent-2 {
+    color: #000000 !important;
+}
+
+.m-application .light-green.accent-3 {
+    color: #000000 !important;
+}
+
+.m-application .light-green.accent-4 {
+    color: #000000 !important;
+}
+
+.m-application .lime {
+    color: #000000 !important;
+}
+
+.m-application .lime.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .lime.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .lime.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .lime.lighten-2 {
+    color: #000000 !important;
+}
+
+.m-application .lime.lighten-1 {
+    color: #000000 !important;
+}
+
+.m-application .lime.darken-1 {
+    color: #000000 !important;
+}
+
+.m-application .lime.darken-2 {
+    color: #000000 !important;
+}
+
+.m-application .lime.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .lime.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .lime.accent-1 {
+    color: #000000 !important;
+}
+
+.m-application .lime.accent-2 {
+    color: #000000 !important;
+}
+
+.m-application .lime.accent-3 {
+    color: #000000 !important;
+}
+
+.m-application .lime.accent-4 {
+    color: #000000 !important;
+}
+
+.m-application .yellow {
+    color: #000000 !important;
+}
+
+.m-application .yellow.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .yellow.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .yellow.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .yellow.lighten-2 {
+    color: #000000 !important;
+}
+
+.m-application .yellow.lighten-1 {
+    color: #000000 !important;
+}
+
+.m-application .yellow.darken-1 {
+    color: #000000 !important;
+}
+
+.m-application .yellow.darken-2 {
+    color: #000000 !important;
+}
+
+.m-application .yellow.darken-3 {
+    color: #000000 !important;
+}
+
+.m-application .yellow.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .yellow.accent-1 {
+    color: #000000 !important;
+}
+
+.m-application .yellow.accent-2 {
+    color: #000000 !important;
+}
+
+.m-application .yellow.accent-3 {
+    color: #000000 !important;
+}
+
+.m-application .yellow.accent-4 {
+    color: #000000 !important;
+}
+
+.m-application .amber {
+    color: #000000 !important;
+}
+
+.m-application .amber.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .amber.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .amber.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .amber.lighten-2 {
+    color: #000000 !important;
+}
+
+.m-application .amber.lighten-1 {
+    color: #000000 !important;
+}
+
+.m-application .amber.darken-1 {
+    color: #000000 !important;
+}
+
+.m-application .amber.darken-2 {
+    color: #000000 !important;
+}
+
+.m-application .amber.darken-3 {
+    color: #000000 !important;
+}
+
+.m-application .amber.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .amber.accent-1 {
+    color: #000000 !important;
+}
+
+.m-application .amber.accent-2 {
+    color: #000000 !important;
+}
+
+.m-application .amber.accent-3 {
+    color: #000000 !important;
+}
+
+.m-application .amber.accent-4 {
+    color: #000000 !important;
+}
+
+.m-application .orange {
+    color: #000000 !important;
+}
+
+.m-application .orange.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .orange.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .orange.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .orange.lighten-2 {
+    color: #000000 !important;
+}
+
+.m-application .orange.lighten-1 {
+    color: #000000 !important;
+}
+
+.m-application .orange.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .orange.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .orange.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .orange.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .orange.accent-1 {
+    color: #000000 !important;
+}
+
+.m-application .orange.accent-2 {
+    color: #000000 !important;
+}
+
+.m-application .orange.accent-3 {
+    color: #000000 !important;
+}
+
+.m-application .orange.accent-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-orange {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-orange.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .deep-orange.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .deep-orange.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .deep-orange.lighten-2 {
+    color: #000000 !important;
+}
+
+.m-application .deep-orange.lighten-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-orange.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-orange.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-orange.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-orange.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-orange.accent-1 {
+    color: #000000 !important;
+}
+
+.m-application .deep-orange.accent-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-orange.accent-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .deep-orange.accent-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .brown {
+    color: #FFFFFF !important;
+}
+
+.m-application .brown.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .brown.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .brown.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .brown.lighten-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .brown.lighten-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .brown.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .brown.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .brown.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .brown.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue-grey {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue-grey.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .blue-grey.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .blue-grey.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .blue-grey.lighten-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue-grey.lighten-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue-grey.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue-grey.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue-grey.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .blue-grey.darken-4 {
+    color: #FFFFFF !important;
+}
+
+.m-application .grey {
+    color: #FFFFFF !important;
+}
+
+.m-application .grey.lighten-5 {
+    color: #000000 !important;
+}
+
+.m-application .grey.lighten-4 {
+    color: #000000 !important;
+}
+
+.m-application .grey.lighten-3 {
+    color: #000000 !important;
+}
+
+.m-application .grey.lighten-2 {
+    color: #000000 !important;
+}
+
+.m-application .grey.lighten-1 {
+    color: #000000 !important;
+}
+
+.m-application .grey.darken-1 {
+    color: #FFFFFF !important;
+}
+
+.m-application .grey.darken-2 {
+    color: #FFFFFF !important;
+}
+
+.m-application .grey.darken-3 {
+    color: #FFFFFF !important;
+}
+
+.m-application .grey.darken-4 {
+    color: #FFFFFF !important;
+}
+
+/* fixed in datatable */
 .m-data-table .scrolled-to-left tr, .m-data-table .scrolled-to-right tr, .m-data-table .scrolling tr {
     background: rgba(var(--m-theme-surface-container-low));
 }

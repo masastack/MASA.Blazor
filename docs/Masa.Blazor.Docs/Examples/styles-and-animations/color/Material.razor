@@ -3,15 +3,15 @@
         @foreach (var item in _materialInfos)
         {
             <MCol Md="6" Lg="4" Cols="12">
-                <MCard Color="@item.Title" Outlined Rounded="true" Tile>
-                    <MCardText>
+                <MCard Rounded="true" Tile Flat>
+                    <MCardText Class="@item.Title">
                         <span class="text-h6">@item.Title</span>
                     </MCardText>
                 </MCard>
                 @if (!string.IsNullOrWhiteSpace(item.Name))
                 {
-                    <MCard Color="@item.Name" Flat Rounded="true" Tile>
-                        <MCardText Class="white--text">
+                    <MCard Flat Rounded="true" Tile>
+                        <MCardText Class="@item.Name">
                             <MRow>
                                 <MCol Cols="7" Class="text-caption">
                                     <span>@item.Name</span>
@@ -23,10 +23,11 @@
                         </MCardText>
                     </MCard>
                 }
-                @foreach (var info in item.Chridren)
+                @foreach (var info in item.Children)
                 {
-                    <MCard Color="@($"{(!string.IsNullOrWhiteSpace(item.Name)? $"{item.Name} {info.Name}" : info.Name)}")" Flat Rounded="true" Tile>
-                        <MCardText Class="@($"{(info.IsDark ? "white": "black")}--text")">
+                    <MCard Flat Rounded="true" Tile>
+                        <MCardText
+                            Class="@($"{(!string.IsNullOrWhiteSpace(item.Name) ? $"{item.Name} {info.Name}" : info.Name)}")">
                             <MRow>
                                 <MCol Cols="7" Class="text-caption">
                                     @if (!string.IsNullOrWhiteSpace(item.Name))
@@ -49,443 +50,308 @@
 
 @code
 {
-    private class MaterialInfo
-    { 
-        public string Name { get; set; }
+    private record MaterialInfo(string? Name, string Title, string Color, List<MaterialChildren> Children);
 
-        public string Title { get; set; }
+    private record MaterialChildren(string Name, string Color);
 
-        public string Color { get; set; }
+    private readonly List<MaterialInfo> _materialInfos =
+    [
+        new("red", "red", "#F44336", [
+            new("lighten-5", "#FFEBEE"),
+            new("lighten-4", "#FFCDD2"),
+            new("lighten-3", "#EF9A9A"),
+            new("lighten-2", "#E57373"),
+            new("lighten-1", "#EF5350"),
+            new("darken-1", "#E53935"),
+            new("darken-2", "#D32F2F"),
+            new("darken-3", "#C62828"),
+            new("darken-4", "#B71C1C"),
+            new("accent-1", "#FF8A80"),
+            new("accent-2", "#FF5252"),
+            new("accent-3", "#FF1744"),
+            new("accent-4", "#D50000")
+        ]),
 
-        public List<MaterialChridren> Chridren { get; set; }
-    }
+        new MaterialInfo("pink", "pink", "#E91E63", [
+            new("lighten-5", "#FCE4EC"),
+            new("lighten-4", "#F8BBD0"),
+            new("lighten-3", "#F48FB1"),
+            new("lighten-2", "#F06292"),
+            new("lighten-1", "#EC407A"),
+            new("darken-1", "#D81B60") { Color = "#D81B60" },
+            new("darken-2", "#C2185B") { Color = "#C2185B" },
+            new("darken-3", "#AD1457") { Color = "#AD1457" },
+            new("darken-4", "#880E4F") { Color = "#880E4F" },
+            new("accent-1", "#FF80AB"),
+            new("accent-2", "#FF4081"),
+            new("accent-3", "#F50057"),
+            new("accent-4", "#C51162")
+        ]),
 
-    private class MaterialChridren
-    {
-        public string Name { get; set; }
+        new MaterialInfo("purple", "purple", "#9C27B0", [
+            new("lighten-5", "#F3E5F5"),
+            new("lighten-4", "#E1BEE7"),
+            new("lighten-3", "#CE93D8"),
+            new("lighten-2", "#BA68C8"),
+            new("lighten-1", "#AB47BC"),
+            new("darken-1", "#8E24AA") { Color = "#8E24AA" },
+            new("darken-2", "#7B1FA2") { Color = "#7B1FA2" },
+            new("darken-3", "#6A1B9A") { Color = "#6A1B9A" },
+            new("darken-4", "#4A148C") { Color = "#4A148C" },
+            new("accent-1", "#EA80FC"),
+            new("accent-2", "#E040FB"),
+            new("accent-3", "#D500F9"),
+            new("accent-4", "#AA00FF")
+        ]),
 
-        public string Color { get; set; }
+        new MaterialInfo("deep-purple", "deep-purple", "#673AB7", [
+            new("lighten-5", "#EDE7F6"),
+            new("lighten-4", "#D1C4E9"),
+            new("lighten-3", "#B39DDB"),
+            new("lighten-2", "#9575CD"),
+            new("lighten-1", "#7E57C2"),
+            new("darken-1", "#5E35B1") { Color = "#5E35B1" },
+            new("darken-2", "#512DA8") { Color = "#512DA8" },
+            new("darken-3", "#4527A0") { Color = "#4527A0" },
+            new("darken-4", "#311B92") { Color = "#311B92" },
+            new("accent-1", "#B388FF"),
+            new("accent-2", "#7C4DFF"),
+            new("accent-3", "#651FFF"),
+            new("accent-4", "#6200EA")
+        ]),
 
-        public bool IsDark { get; set; }
-    }
+        new MaterialInfo("indigo", "indigo", "#3F51B5", [
+            new("lighten-5", "#E8EAF6"),
+            new("lighten-4", "#C5CAE9"),
+            new("lighten-3", "#9FA8DA"),
+            new("lighten-2", "#7986CB"),
+            new("lighten-1", "#5C6BC0"),
+            new("darken-1", "#3949AB") { Color = "#3949AB" },
+            new("darken-2", "#303F9F") { Color = "#303F9F" },
+            new("darken-3", "#283593") { Color = "#283593" },
+            new("darken-4", "#1A237E") { Color = "#1A237E" },
+            new("accent-1", "#8C9EFF"),
+            new("accent-2", "#536DFE"),
+            new("accent-3", "#3D5AFE"),
+            new("accent-4", "#304FFE")
+        ]),
 
-    private List<MaterialInfo> _materialInfos = new()
-    {
-        new() 
-        {
-            Name = "red",
-            Title = "red",
-            Color = "#F44336",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#FFEBEE", IsDark = false},
-                new() { Name = "lighten-4", Color = "#FFCDD2", IsDark = false},
-                new() { Name = "lighten-3", Color = "#EF9A9A", IsDark = false},
-                new() { Name = "lighten-2", Color = "#E57373", IsDark = false},
-                new() { Name = "lighten-1", Color = "#EF5350", IsDark = false},
-                new() { Name = "darken-1", Color = "#E53935", IsDark = true},
-                new() { Name = "darken-2", Color = "#D32F2F", IsDark = true},
-                new() { Name = "darken-3", Color = "#C62828", IsDark = true},
-                new() { Name = "darken-4", Color = "#B71C1C", IsDark = true},
-                new() { Name = "accent-1", Color = "#FF8A80", IsDark = false},
-                new() { Name = "accent-2", Color = "#FF5252", IsDark = false},
-                new() { Name = "accent-3", Color = "#FF1744", IsDark = false},
-                new() { Name = "accent-4", Color = "#D50000", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "pink",
-            Title = "pink",
-            Color = "#E91E63",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#FCE4EC", IsDark = false},
-                new() { Name = "lighten-4", Color = "#F8BBD0", IsDark = false},
-                new() { Name = "lighten-3", Color = "#F48FB1", IsDark = false},
-                new() { Name = "lighten-2", Color = "#F06292", IsDark = false},
-                new() { Name = "lighten-1", Color = "#EC407A", IsDark = false},
-                new() { Name = "darken-1", Color = "#D81B60", IsDark = true},
-                new() { Name = "darken-2", Color = "#C2185B", IsDark = true},
-                new() { Name = "darken-3", Color = "#AD1457", IsDark = true},
-                new() { Name = "darken-4", Color = "#880E4F", IsDark = true},
-                new() { Name = "accent-1", Color = "#FF80AB", IsDark = false},
-                new() { Name = "accent-2", Color = "#FF4081", IsDark = false},
-                new() { Name = "accent-3", Color = "#F50057", IsDark = false},
-                new() { Name = "accent-4", Color = "#C51162", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "purple",
-            Title = "purple",
-            Color = "#9C27B0",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#F3E5F5", IsDark = false},
-                new() { Name = "lighten-4", Color = "#E1BEE7", IsDark = false},
-                new() { Name = "lighten-3", Color = "#CE93D8", IsDark = false},
-                new() { Name = "lighten-2", Color = "#BA68C8", IsDark = false},
-                new() { Name = "lighten-1", Color = "#AB47BC", IsDark = false},
-                new() { Name = "darken-1", Color = "#8E24AA", IsDark = true},
-                new() { Name = "darken-2", Color = "#7B1FA2", IsDark = true},
-                new() { Name = "darken-3", Color = "#6A1B9A", IsDark = true},
-                new() { Name = "darken-4", Color = "#4A148C", IsDark = true},
-                new() { Name = "accent-1", Color = "#EA80FC", IsDark = false},
-                new() { Name = "accent-2", Color = "#E040FB", IsDark = false},
-                new() { Name = "accent-3", Color = "#D500F9", IsDark = false},
-                new() { Name = "accent-4", Color = "#AA00FF", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "deep-purple",
-            Title = "deep-purple",
-            Color = "#673AB7",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#EDE7F6", IsDark = false},
-                new() { Name = "lighten-4", Color = "#D1C4E9", IsDark = false},
-                new() { Name = "lighten-3", Color = "#B39DDB", IsDark = false},
-                new() { Name = "lighten-2", Color = "#9575CD", IsDark = false},
-                new() { Name = "lighten-1", Color = "#7E57C2", IsDark = false},
-                new() { Name = "darken-1", Color = "#5E35B1", IsDark = true},
-                new() { Name = "darken-2", Color = "#512DA8", IsDark = true},
-                new() { Name = "darken-3", Color = "#4527A0", IsDark = true},
-                new() { Name = "darken-4", Color = "#311B92", IsDark = true},
-                new() { Name = "accent-1", Color = "#B388FF", IsDark = false},
-                new() { Name = "accent-2", Color = "#7C4DFF", IsDark = false},
-                new() { Name = "accent-3", Color = "#651FFF", IsDark = false},
-                new() { Name = "accent-4", Color = "#6200EA", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "indigo",
-            Title = "indigo",
-            Color = "#3F51B5",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#E8EAF6", IsDark = false},
-                new() { Name = "lighten-4", Color = "#C5CAE9", IsDark = false},
-                new() { Name = "lighten-3", Color = "#9FA8DA", IsDark = false},
-                new() { Name = "lighten-2", Color = "#7986CB", IsDark = false},
-                new() { Name = "lighten-1", Color = "#5C6BC0", IsDark = false},
-                new() { Name = "darken-1", Color = "#3949AB", IsDark = true},
-                new() { Name = "darken-2", Color = "#303F9F", IsDark = true},
-                new() { Name = "darken-3", Color = "#283593", IsDark = true},
-                new() { Name = "darken-4", Color = "#1A237E", IsDark = true},
-                new() { Name = "accent-1", Color = "#8C9EFF", IsDark = false},
-                new() { Name = "accent-2", Color = "#536DFE", IsDark = false},
-                new() { Name = "accent-3", Color = "#3D5AFE", IsDark = false},
-                new() { Name = "accent-4", Color = "#304FFE", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "blue",
-            Title = "blue",
-            Color = "#2196F3",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#E3F2FD", IsDark = false},
-                new() { Name = "lighten-4", Color = "#BBDEFB", IsDark = false},
-                new() { Name = "lighten-3", Color = "#90CAF9", IsDark = false},
-                new() { Name = "lighten-2", Color = "#64B5F6", IsDark = false},
-                new() { Name = "lighten-1", Color = "#42A5F5", IsDark = false},
-                new() { Name = "darken-1", Color = "#1E88E5", IsDark = true},
-                new() { Name = "darken-2", Color = "#1976D2", IsDark = true},
-                new() { Name = "darken-3", Color = "#1565C0", IsDark = true},
-                new() { Name = "darken-4", Color = "#0D47A1", IsDark = true},
-                new() { Name = "accent-1", Color = "#82B1FF", IsDark = false},
-                new() { Name = "accent-2", Color = "#448AFF", IsDark = false},
-                new() { Name = "accent-3", Color = "#2979FF", IsDark = false},
-                new() { Name = "accent-4", Color = "#2962FF", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "light-blue",
-            Title = "light-blue",
-            Color = "#03A9F4",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#E1F5FE", IsDark = false},
-                new() { Name = "lighten-4", Color = "#B3E5FC", IsDark = false},
-                new() { Name = "lighten-3", Color = "#81D4FA", IsDark = false},
-                new() { Name = "lighten-2", Color = "#81D4FA", IsDark = false},
-                new() { Name = "lighten-1", Color = "#81D4FA", IsDark = false},
-                new() { Name = "darken-1", Color = "#039BE5", IsDark = true},
-                new() { Name = "darken-2", Color = "#039BE5", IsDark = true},
-                new() { Name = "darken-3", Color = "#0277BD", IsDark = true},
-                new() { Name = "darken-4", Color = "#01579B", IsDark = true},
-                new() { Name = "accent-1", Color = "#80D8FF", IsDark = false},
-                new() { Name = "accent-2", Color = "#40C4FF", IsDark = false},
-                new() { Name = "accent-3", Color = "#00B0FF", IsDark = false},
-                new() { Name = "accent-4", Color = "#0091EA", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "cyan",
-            Title = "cyan",
-            Color = "#00BCD4",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#E0F7FA", IsDark = false},
-                new() { Name = "lighten-4", Color = "#B2EBF2", IsDark = false},
-                new() { Name = "lighten-3", Color = "#80DEEA", IsDark = false},
-                new() { Name = "lighten-2", Color = "#4DD0E1", IsDark = false},
-                new() { Name = "lighten-1", Color = "#26C6DA", IsDark = false},
-                new() { Name = "darken-1", Color = "#00ACC1", IsDark = true},
-                new() { Name = "darken-2", Color = "#0097A7", IsDark = true},
-                new() { Name = "darken-3", Color = "#00838F", IsDark = true},
-                new() { Name = "darken-4", Color = "#006064", IsDark = true},
-                new() { Name = "accent-1", Color = "#84FFFF", IsDark = false},
-                new() { Name = "accent-2", Color = "#18FFFF", IsDark = false},
-                new() { Name = "accent-3", Color = "#00E5FF", IsDark = false},
-                new() { Name = "accent-4", Color = "#00B8D4", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "teal",
-            Title = "teal",
-            Color = "#009688",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#E0F2F1", IsDark = false},
-                new() { Name = "lighten-4", Color = "#B2DFDB", IsDark = false},
-                new() { Name = "lighten-3", Color = "#80CBC4", IsDark = false},
-                new() { Name = "lighten-2", Color = "#4DB6AC", IsDark = false},
-                new() { Name = "lighten-1", Color = "#26A69A", IsDark = false},
-                new() { Name = "darken-1", Color = "#00897B", IsDark = true},
-                new() { Name = "darken-2", Color = "#00796B", IsDark = true},
-                new() { Name = "darken-3", Color = "#00695C", IsDark = true},
-                new() { Name = "darken-4", Color = "#004D40", IsDark = true},
-                new() { Name = "accent-1", Color = "#A7FFEB", IsDark = false},
-                new() { Name = "accent-2", Color = "#64FFDA", IsDark = false},
-                new() { Name = "accent-3", Color = "#1DE9B6", IsDark = false},
-                new() { Name = "accent-4", Color = "#00BFA5", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "green",
-            Title = "green",
-            Color = "#4CAF50",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#E8F5E9", IsDark = false},
-                new() { Name = "lighten-4", Color = "#C8E6C9", IsDark = false},
-                new() { Name = "lighten-3", Color = "#A5D6A7", IsDark = false},
-                new() { Name = "lighten-2", Color = "#81C784", IsDark = false},
-                new() { Name = "lighten-1", Color = "#66BB6A", IsDark = false},
-                new() { Name = "darken-1", Color = "#43A047", IsDark = true},
-                new() { Name = "darken-2", Color = "#388E3C", IsDark = true},
-                new() { Name = "darken-3", Color = "#2E7D32", IsDark = true},
-                new() { Name = "darken-4", Color = "#1B5E20", IsDark = true},
-                new() { Name = "accent-1", Color = "#B9F6CA", IsDark = false},
-                new() { Name = "accent-2", Color = "#69F0AE", IsDark = false},
-                new() { Name = "accent-3", Color = "#00E676", IsDark = false},
-                new() { Name = "accent-4", Color = "#00C853", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "light-green",
-            Title = "light-green",
-            Color = "#8BC34A",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#F1F8E9", IsDark = false},
-                new() { Name = "lighten-4", Color = "#DCEDC8", IsDark = false},
-                new() { Name = "lighten-3", Color = "#C5E1A5", IsDark = false},
-                new() { Name = "lighten-2", Color = "#AED581", IsDark = false},
-                new() { Name = "lighten-1", Color = "#9CCC65", IsDark = false},
-                new() { Name = "darken-1", Color = "#7CB342", IsDark = true},
-                new() { Name = "darken-2", Color = "#689F38", IsDark = true},
-                new() { Name = "darken-3", Color = "#558B2F", IsDark = true},
-                new() { Name = "darken-4", Color = "#33691E", IsDark = true},
-                new() { Name = "accent-1", Color = "#CCFF90", IsDark = false},
-                new() { Name = "accent-2", Color = "#B2FF59", IsDark = false},
-                new() { Name = "accent-3", Color = "#76FF03", IsDark = false},
-                new() { Name = "accent-4", Color = "#64DD17", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "lime",
-            Title = "lime",
-            Color = "#CDDC39",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#F9FBE7", IsDark = false},
-                new() { Name = "lighten-4", Color = "#F0F4C3", IsDark = false},
-                new() { Name = "lighten-3", Color = "#E6EE9C", IsDark = false},
-                new() { Name = "lighten-2", Color = "#DCE775", IsDark = false},
-                new() { Name = "lighten-1", Color = "#D4E157", IsDark = false},
-                new() { Name = "darken-1", Color = "#C0CA33", IsDark = true},
-                new() { Name = "darken-2", Color = "#AFB42B", IsDark = true},
-                new() { Name = "darken-3", Color = "#9E9D24", IsDark = true},
-                new() { Name = "darken-4", Color = "#827717", IsDark = true},
-                new() { Name = "accent-1", Color = "#F4FF81", IsDark = false},
-                new() { Name = "accent-2", Color = "#EEFF41", IsDark = false},
-                new() { Name = "accent-3", Color = "#C6FF00", IsDark = false},
-                new() { Name = "accent-4", Color = "#AEEA00", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "yellow",
-            Title = "yellow",
-            Color = "#FFEB3B",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#FFFDE7", IsDark = false},
-                new() { Name = "lighten-4", Color = "#FFF9C4", IsDark = false},
-                new() { Name = "lighten-3", Color = "#FFF59D", IsDark = false},
-                new() { Name = "lighten-2", Color = "#FFF176", IsDark = false},
-                new() { Name = "lighten-1", Color = "#FFEE58", IsDark = false},
-                new() { Name = "darken-1", Color = "#FDD835", IsDark = true},
-                new() { Name = "darken-2", Color = "#FBC02D", IsDark = true},
-                new() { Name = "darken-3", Color = "#F9A825", IsDark = true},
-                new() { Name = "darken-4", Color = "#F57F17", IsDark = true},
-                new() { Name = "accent-1", Color = "#FFFF8D", IsDark = false},
-                new() { Name = "accent-2", Color = "#FFFF00", IsDark = false},
-                new() { Name = "accent-3", Color = "#FFEA00", IsDark = false},
-                new() { Name = "accent-4", Color = "#FFD600", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "amber",
-            Title = "amber",
-            Color = "#FFC107",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#FFF8E1", IsDark = false},
-                new() { Name = "lighten-4", Color = "#FFECB3", IsDark = false},
-                new() { Name = "lighten-3", Color = "#FFE082", IsDark = false},
-                new() { Name = "lighten-2", Color = "#FFD54F", IsDark = false},
-                new() { Name = "lighten-1", Color = "#FFCA28", IsDark = false},
-                new() { Name = "darken-1", Color = "#FFB300", IsDark = true},
-                new() { Name = "darken-2", Color = "#FFA000", IsDark = true},
-                new() { Name = "darken-3", Color = "#FF8F00", IsDark = true},
-                new() { Name = "darken-4", Color = "#FF6F00", IsDark = true},
-                new() { Name = "accent-1", Color = "#FFE57F", IsDark = false},
-                new() { Name = "accent-2", Color = "#FFD740", IsDark = false},
-                new() { Name = "accent-3", Color = "#FFC400", IsDark = false},
-                new() { Name = "accent-4", Color = "#FFAB00", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "orange",
-            Title = "orange",
-            Color = "#FF9800",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#FFF3E0", IsDark = false},
-                new() { Name = "lighten-4", Color = "#FFE0B2", IsDark = false},
-                new() { Name = "lighten-3", Color = "#FFCC80", IsDark = false},
-                new() { Name = "lighten-2", Color = "#FFB74D", IsDark = false},
-                new() { Name = "lighten-1", Color = "#FFA726", IsDark = false},
-                new() { Name = "darken-1", Color = "#FB8C00", IsDark = true},
-                new() { Name = "darken-2", Color = "#F57C00", IsDark = true},
-                new() { Name = "darken-3", Color = "#EF6C00", IsDark = true},
-                new() { Name = "darken-4", Color = "#E65100", IsDark = true},
-                new() { Name = "accent-1", Color = "#FFD180", IsDark = false},
-                new() { Name = "accent-2", Color = "#FFAB40", IsDark = false},
-                new() { Name = "accent-3", Color = "#FF9100", IsDark = false},
-                new() { Name = "accent-4", Color = "#FF6D00", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "deep-orange",
-            Title = "deep-orange",
-            Color = "#FF5722",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#FBE9E7", IsDark = false},
-                new() { Name = "lighten-4", Color = "#FFCCBC", IsDark = false},
-                new() { Name = "lighten-3", Color = "#FFAB91", IsDark = false},
-                new() { Name = "lighten-2", Color = "#FF8A65", IsDark = false},
-                new() { Name = "lighten-1", Color = "#FF7043", IsDark = false},
-                new() { Name = "darken-1", Color = "#F4511E", IsDark = true},
-                new() { Name = "darken-2", Color = "#E64A19", IsDark = true},
-                new() { Name = "darken-3", Color = "#D84315", IsDark = true},
-                new() { Name = "darken-4", Color = "#BF360C", IsDark = true},
-                new() { Name = "accent-1", Color = "#FF9E80", IsDark = false},
-                new() { Name = "accent-2", Color = "#FF6E40", IsDark = false},
-                new() { Name = "accent-3", Color = "#FF3D00", IsDark = false},
-                new() { Name = "accent-4", Color = "#DD2C00", IsDark = false}
-            }
-        },
-        new() 
-        {
-            Name = "brown",
-            Title = "brown",
-            Color = "#795548",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#EFEBE9", IsDark = false},
-                new() { Name = "lighten-4", Color = "#D7CCC8", IsDark = false},
-                new() { Name = "lighten-3", Color = "#BCAAA4", IsDark = false},
-                new() { Name = "lighten-2", Color = "#A1887F", IsDark = false},
-                new() { Name = "lighten-1", Color = "#8D6E63", IsDark = false},
-                new() { Name = "darken-1", Color = "#6D4C41", IsDark = true},
-                new() { Name = "darken-2", Color = "#5D4037", IsDark = true},
-                new() { Name = "darken-3", Color = "#4E342E", IsDark = true},
-                new() { Name = "darken-4", Color = "#3E2723", IsDark = true}
-            }
-        },
-        new() 
-        {
-            Name = "blue-grey",
-            Title = "blue-grey",
-            Color = "#607D8B",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#ECEFF1", IsDark = false},
-                new() { Name = "lighten-4", Color = "#CFD8DC", IsDark = false},
-                new() { Name = "lighten-3", Color = "#B0BEC5", IsDark = false},
-                new() { Name = "lighten-2", Color = "#90A4AE", IsDark = false},
-                new() { Name = "lighten-1", Color = "#78909C", IsDark = false},
-                new() { Name = "darken-1", Color = "#546E7A", IsDark = true},
-                new() { Name = "darken-2", Color = "#455A64", IsDark = true},
-                new() { Name = "darken-3", Color = "#37474F", IsDark = true},
-                new() { Name = "darken-4", Color = "#263238", IsDark = true}
-            }
-        },
-        new() 
-        {
-            Name = "grey",
-            Title = "grey",
-            Color = "#9E9E9E",
-            Chridren = new()
-            {
-                new() { Name = "lighten-5", Color = "#FAFAFA", IsDark = false},
-                new() { Name = "lighten-4", Color = "#F5F5F5", IsDark = false},
-                new() { Name = "lighten-3", Color = "#EEEEEE", IsDark = false},
-                new() { Name = "lighten-2", Color = "#E0E0E0", IsDark = false},
-                new() { Name = "lighten-1", Color = "#BDBDBD", IsDark = false},
-                new() { Name = "darken-1", Color = "#757575", IsDark = true},
-                new() { Name = "darken-2", Color = "#616161", IsDark = true},
-                new() { Name = "darken-3", Color = "#424242", IsDark = true},
-                new() { Name = "darken-4", Color = "#212121", IsDark = true}
-            }
-        },
-        new()
-        {
-            Title = "shades",
-            Chridren = new()
-            {
-                new() { Name = "black", Color = "#000000", IsDark = true},
-                new() { Name = "white", Color = "#FFFFFF"},
-                new() { Name = "transparent"}
-            }
-        }
-    };
+        new MaterialInfo("blue", "blue", "#2196F3", [
+            new("lighten-5", "#E3F2FD"),
+            new("lighten-4", "#BBDEFB"),
+            new("lighten-3", "#90CAF9"),
+            new("lighten-2", "#64B5F6"),
+            new("lighten-1", "#42A5F5"),
+            new("darken-1", "#1E88E5") { Color = "#1E88E5" },
+            new("darken-2", "#1976D2") { Color = "#1976D2" },
+            new("darken-3", "#1565C0") { Color = "#1565C0" },
+            new("darken-4", "#0D47A1") { Color = "#0D47A1" },
+            new("accent-1", "#82B1FF"),
+            new("accent-2", "#448AFF"),
+            new("accent-3", "#2979FF"),
+            new("accent-4", "#2962FF")
+        ]),
+
+        new MaterialInfo("light-blue", "light-blue", "#03A9F4", [
+            new("lighten-5", "#E1F5FE"),
+            new("lighten-4", "#B3E5FC"),
+            new("lighten-3", "#81D4FA"),
+            new("lighten-2", "#4FC3F7"),
+            new("lighten-1", "#29B6F6"),
+            new("darken-1", "#039BE5") { Color = "#039BE5" },
+            new("darken-2", "#0288D1") { Color = "#0288D1" },
+            new("darken-3", "#0277BD") { Color = "#0277BD" },
+            new("darken-4", "#01579B") { Color = "#01579B" },
+            new("accent-1", "#80D8FF"),
+            new("accent-2", "#40C4FF"),
+            new("accent-3", "#00B0FF"),
+            new("accent-4", "#0091EA")
+        ]),
+
+        new MaterialInfo("cyan", "cyan", "#00BCD4", [
+            new("lighten-5", "#E0F7FA"),
+            new("lighten-4", "#B2EBF2"),
+            new("lighten-3", "#80DEEA"),
+            new("lighten-2", "#4DD0E1"),
+            new("lighten-1", "#26C6DA"),
+            new("darken-1", "#00ACC1") { Color = "#00ACC1" },
+            new("darken-2", "#0097A7") { Color = "#0097A7" },
+            new("darken-3", "#00838F") { Color = "#00838F" },
+            new("darken-4", "#006064") { Color = "#006064" },
+            new("accent-1", "#84FFFF"),
+            new("accent-2", "#18FFFF"),
+            new("accent-3", "#00E5FF"),
+            new("accent-4", "#00B8D4")
+        ]),
+
+        new MaterialInfo("teal", "teal", "#009688", [
+            new("lighten-5", "#E0F2F1"),
+            new("lighten-4", "#B2DFDB"),
+            new("lighten-3", "#80CBC4"),
+            new("lighten-2", "#4DB6AC"),
+            new("lighten-1", "#26A69A"),
+            new("darken-1", "#00897B") { Color = "#00897B" },
+            new("darken-2", "#00796B") { Color = "#00796B" },
+            new("darken-3", "#00695C") { Color = "#00695C" },
+            new("darken-4", "#004D40") { Color = "#004D40" },
+            new("accent-1", "#A7FFEB"),
+            new("accent-2", "#64FFDA"),
+            new("accent-3", "#1DE9B6"),
+            new("accent-4", "#00BFA5")
+        ]),
+
+        new MaterialInfo("green", "green", "#4CAF50", [
+            new("lighten-5", "#E8F5E9"),
+            new("lighten-4", "#C8E6C9"),
+            new("lighten-3", "#A5D6A7"),
+            new("lighten-2", "#81C784"),
+            new("lighten-1", "#66BB6A"),
+            new("darken-1", "#43A047") { Color = "#43A047" },
+            new("darken-2", "#388E3C") { Color = "#388E3C" },
+            new("darken-3", "#2E7D32") { Color = "#2E7D32" },
+            new("darken-4", "#1B5E20") { Color = "#1B5E20" },
+            new("accent-1", "#B9F6CA"),
+            new("accent-2", "#69F0AE"),
+            new("accent-3", "#00E676"),
+            new("accent-4", "#00C853")
+        ]),
+
+        new MaterialInfo("light-green", "light-green", "#8BC34A", [
+            new("lighten-5", "#F1F8E9"),
+            new("lighten-4", "#DCEDC8"),
+            new("lighten-3", "#C5E1A5"),
+            new("lighten-2", "#AED581"),
+            new("lighten-1", "#9CCC65"),
+            new("darken-1", "#7CB342") { Color = "#7CB342" },
+            new("darken-2", "#689F38") { Color = "#689F38" },
+            new("darken-3", "#558B2F") { Color = "#558B2F" },
+            new("darken-4", "#33691E") { Color = "#33691E" },
+            new("accent-1", "#CCFF90"),
+            new("accent-2", "#B2FF59"),
+            new("accent-3", "#76FF03"),
+            new("accent-4", "#64DD17")
+        ]),
+
+        new MaterialInfo("lime", "lime", "#CDDC39", [
+            new("lighten-5", "#F9FBE7"),
+            new("lighten-4", "#F0F4C3"),
+            new("lighten-3", "#E6EE9C"),
+            new("lighten-2", "#DCE775"),
+            new("lighten-1", "#D4E157"),
+            new("darken-1", "#C0CA33") { Color = "#C0CA33" },
+            new("darken-2", "#AFB42B") { Color = "#AFB42B" },
+            new("darken-3", "#9E9D24") { Color = "#9E9D24" },
+            new("darken-4", "#827717") { Color = "#827717" },
+            new("accent-1", "#F4FF81"),
+            new("accent-2", "#EEFF41"),
+            new("accent-3", "#C6FF00"),
+            new("accent-4", "#AEEA00")
+        ]),
+
+        new MaterialInfo("yellow", "yellow", "#FFEB3B", [
+            new("lighten-5", "#FFFDE7"),
+            new("lighten-4", "#FFF9C4"),
+            new("lighten-3", "#FFF59D"),
+            new("lighten-2", "#FFF176"),
+            new("lighten-1", "#FFEE58"),
+            new("darken-1", "#FDD835") { Color = "#FDD835" },
+            new("darken-2", "#FBC02D") { Color = "#FBC02D" },
+            new("darken-3", "#F9A825") { Color = "#F9A825" },
+            new("darken-4", "#F57F17") { Color = "#F57F17" },
+            new("accent-1", "#FFFF8D"),
+            new("accent-2", "#FFFF00"),
+            new("accent-3", "#FFEA00"),
+            new("accent-4", "#FFD600")
+        ]),
+
+        new MaterialInfo("amber", "amber", "#FFC107", [
+            new("lighten-5", "#FFF8E1"),
+            new("lighten-4", "#FFECB3"),
+            new("lighten-3", "#FFE082"),
+            new("lighten-2", "#FFD54F"),
+            new("lighten-1", "#FFCA28"),
+            new("darken-1", "#FFB300") { Color = "#FFB300" },
+            new("darken-2", "#FFA000") { Color = "#FFA000" },
+            new("darken-3", "#FF8F00") { Color = "#FF8F00" },
+            new("darken-4", "#FF6F00") { Color = "#FF6F00" },
+            new("accent-1", "#FFE57F"),
+            new("accent-2", "#FFD740"),
+            new("accent-3", "#FFC400"),
+            new("accent-4", "#FFAB00")
+        ]),
+
+        new MaterialInfo("orange", "orange", "#FF9800", [
+            new("lighten-5", "#FFF3E0"),
+            new("lighten-4", "#FFE0B2"),
+            new("lighten-3", "#FFCC80"),
+            new("lighten-2", "#FFB74D"),
+            new("lighten-1", "#FFA726"),
+            new("darken-1", "#FB8C00") { Color = "#FB8C00" },
+            new("darken-2", "#F57C00") { Color = "#F57C00" },
+            new("darken-3", "#EF6C00") { Color = "#EF6C00" },
+            new("darken-4", "#E65100") { Color = "#E65100" },
+            new("accent-1", "#FFD180"),
+            new("accent-2", "#FFAB40"),
+            new("accent-3", "#FF9100"),
+            new("accent-4", "#FF6D00")
+        ]),
+
+        new MaterialInfo("deep-orange", "deep-orange", "#FF5722", [
+            new("lighten-5", "#FBE9E7"),
+            new("lighten-4", "#FFCCBC"),
+            new("lighten-3", "#FFAB91"),
+            new("lighten-2", "#FF8A65"),
+            new("lighten-1", "#FF7043"),
+            new("darken-1", "#F4511E") { Color = "#F4511E" },
+            new("darken-2", "#E64A19") { Color = "#E64A19" },
+            new("darken-3", "#D84315") { Color = "#D84315" },
+            new("darken-4", "#BF360C") { Color = "#BF360C" },
+            new("accent-1", "#FF9E80"),
+            new("accent-2", "#FF6E40"),
+            new("accent-3", "#FF3D00"),
+            new("accent-4", "#DD2C00")
+        ]),
+
+        new MaterialInfo("brown", "brown", "#795548", [
+            new("lighten-5", "#EFEBE9"),
+            new("lighten-4", "#D7CCC8"),
+            new("lighten-3", "#BCAAA4"),
+            new("lighten-2", "#A1887F"),
+            new("lighten-1", "#8D6E63"),
+            new("darken-1", "#6D4C41") { Color = "#6D4C41" },
+            new("darken-2", "#5D4037") { Color = "#5D4037" },
+            new("darken-3", "#4E342E") { Color = "#4E342E" },
+            new("darken-4", "#3E2723") { Color = "#3E2723" }
+        ]),
+
+        new MaterialInfo("blue-grey", "blue-grey", "#607D8B", [
+            new("lighten-5", "#ECEFF1"),
+            new("lighten-4", "#CFD8DC"),
+            new("lighten-3", "#B0BEC5"),
+            new("lighten-2", "#90A4AE"),
+            new("lighten-1", "#78909C"),
+            new("darken-1", "#546E7A") { Color = "#546E7A" },
+            new("darken-2", "#455A64") { Color = "#455A64" },
+            new("darken-3", "#37474F") { Color = "#37474F" },
+            new("darken-4", "#263238") { Color = "#263238" }
+        ]),
+
+        new MaterialInfo("grey", "grey", "#9E9E9E", [
+            new("lighten-5", "#FAFAFA"),
+            new("lighten-4", "#F5F5F5"),
+            new("lighten-3", "#EEEEEE"),
+            new("lighten-2", "#E0E0E0"),
+            new("lighten-1", "#BDBDBD"),
+            new("darken-1", "#757575") { Color = "#757575" },
+            new("darken-2", "#616161") { Color = "#616161" },
+            new("darken-3", "#424242") { Color = "#424242" },
+            new("darken-4", "#212121") { Color = "#212121" }
+        ]),
+
+        new MaterialInfo(null, "shades", string.Empty, [
+            new("black", "#000000"),
+            new("white", "#FFFFFF"),
+            new("transparent", string.Empty)
+        ])
+    ];
 }
