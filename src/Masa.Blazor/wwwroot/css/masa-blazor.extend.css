@@ -24,7 +24,7 @@
 .m-data-table__column--fixed-left:after {
     position: absolute;
     top: 0;
-    bottom: -1px;
+    bottom: 0;
     right: -60px;
     width: 30px;
     transform: translateX(-100%);
