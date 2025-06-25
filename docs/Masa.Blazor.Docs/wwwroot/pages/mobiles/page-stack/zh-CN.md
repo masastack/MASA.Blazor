@@ -147,7 +147,7 @@ builder.Services
   
       private async void NavControllerOnTabRefreshRequested(object? sender, PageStackTabRefreshRequestedEventArgs e)
       {
-          if (_pullToRefresh is null)
+          if (_pullRefresh is null)
           {
               return;
           }

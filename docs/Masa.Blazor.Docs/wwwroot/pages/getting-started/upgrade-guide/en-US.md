@@ -2,6 +2,18 @@
 
 ## Upgrading from v1.9.x to v1.10.0
 
+<app-alert type="warning" content="For WebAssembly projects, including Auto mode Web App projects, after updating dependencies, you may need to delete the `bin` and `obj` folders and recompile. [Issue #2453](https://github.com/masastack/MASA.Blazor/issues/2453)"></app-alert>
+
+For the projects that do not use [MapStaticAssets](https://learn.microsoft.com/en-us/aspnet/core/blazor/fundamentals/static-files?view=aspnetcore-9.0#static-asset-delivery-in-server-side-blazor-apps) in .NET 9,
+please update the Masa.Blazor CSS and JS references in the `_Host.cshtml` or `index.html` file.
+
+```diff
+- <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
++ <link href="_content/Masa.Blazor/css/masa-blazor.min.css?v=1.10.0" rel="stylesheet" />
+- <script src="_content/Masa.Blazor/js/masa-blazor.js"></script>
++ <script src="_content/Masa.Blazor/js/masa-blazor.js?v=1.10.0"></script>
+```
+
 ### Features {#v1-10-0-features}
 
 #### Themes {#v1-10-0-themes}

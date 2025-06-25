@@ -67,7 +67,8 @@ public partial class MAppBarTitle : MasaComponentBase
         var ratio = EaseInOutCubic(Math.Min(1, AppBarScrollRatio * 1.5));
 
         StringBuilder stringBuilder = new();
-        stringBuilder.Append($"width: {min + (max - min) * ratio}px; ");
+        // The '+1' offset ensures proper visual alignment or accounts for potential rounding errors in width calculation.
+        stringBuilder.Append($"width: {min + (max - min) * ratio + 1}px; ");
         stringBuilder.Append($"visibility: {(AppBarScrollRatio > 0 ? "visible" : "hidden")};");
         return stringBuilder.ToString();
 

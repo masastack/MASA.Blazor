@@ -2,6 +2,18 @@
 
 ## 从 v1.9.x 升级到 v1.10.0 {#upgrading-from-v1-9-x-to-v1-10-0}
 
+<app-alert type="warning" content="对于 WebAssembly 项目，包括 Auto 模式的 Web App 项目，更新依赖后可能需要删除 `bin` 和 `obj` 文件夹并重新编译。[Issue #2453](https://github.com/masastack/MASA.Blazor/issues/2453)"></app-alert>
+
+对于没有使用 .NET 9 的[映射静态资产](https://learn.microsoft.com/zh-cn/aspnet/core/blazor/fundamentals/static-files?view=aspnetcore-9.0#static-asset-delivery-in-server-side-blazor-apps) 的项目，
+请更新 `_Host.cshtml` 或 `index.html` 文件中的 Masa.Blazor 的 CSS 和 JS 引用。
+
+```diff
+- <link href="_content/Masa.Blazor/css/masa-blazor.min.css" rel="stylesheet" />
++ <link href="_content/Masa.Blazor/css/masa-blazor.min.css?v=1.10.0" rel="stylesheet" />
+- <script src="_content/Masa.Blazor/js/masa-blazor.js"></script>
++ <script src="_content/Masa.Blazor/js/masa-blazor.js?v=1.10.0"></script>
+```
+
 ### 特性 {#v1-10-0-features}
 
 #### Theme {#v1-10-0-theme}
