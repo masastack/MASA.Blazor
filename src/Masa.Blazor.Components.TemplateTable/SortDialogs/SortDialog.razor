@@ -30,15 +30,22 @@
                      Style="width: 160px; max-width: 160px;">
             </MSelect>
 
-            <MButton IconName="mdi-close"
-                     OnClick="@(() => RemoveSort(option))">
-            </MButton>
+            @if (option.Persistent)
+            {
+                <div style="min-width: 36px;"></div>
+            }
+            else
+            {
+                <MButton IconName="mdi-close"
+                         OnClick="@(() => RemoveSort(option))">
+                </MButton>
+            }
         </div>
     }
 
     @if (ComputedColumns.Count > 0)
     {
-        <div class="text-right">
+        <div class="text-right" style="margin-right: 44px;">
             <SortBy Columns="@ComputedColumns"
                     OnSelect="@AddSort">
                 @(_sorts.Count == 0 ? "Sort by" : "Then by")
@@ -82,7 +89,7 @@
             _sorts = [];
             return;
         }
-        
+
         _sorts.Clear();
 
         foreach (var option in ActiveView.Sort.Options.OrderBy(u => u.Index))
@@ -95,7 +102,9 @@
 
             _sorts.Add(new SortModel(column, option.Index)
             {
-                OrderBy = option.OrderBy
+                OrderBy = option.OrderBy,
+                Type = option.Type,
+                Persistent = option.Persistent
             });
         }
     }
@@ -119,6 +128,11 @@
 
     private void RemoveSort(SortModel model)
     {
+        if (model.Persistent)
+        {
+            return;
+        }
+        
         _sorts.Remove(model);
     }
 

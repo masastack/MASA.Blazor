@@ -30,7 +30,7 @@ public class ColumnInfo : Column
         return type switch
         {
             ColumnType.Date => JsonSerializer.Deserialize<DateConfig>(config),
-            ColumnType.MultiSelect or ColumnType.Select => JsonSerializer.Deserialize<SelectConfig>(config),
+            ColumnType.Select => JsonSerializer.Deserialize<SelectConfig>(config),
             ColumnType.Number => JsonSerializer.Deserialize<NumberConfig>(config),
             ColumnType.Progress => JsonSerializer.Deserialize<ProgressConfig>(config),
             ColumnType.Link => JsonSerializer.Deserialize<LinkConfig>(config),

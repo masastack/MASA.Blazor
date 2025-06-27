@@ -7,7 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="HotChocolate.Abstractions" Version="13.9.12" />
+        <PackageReference Include="HotChocolate.Abstractions" Version="13.9.12"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Masa.Blazor.Components.TemplateTable.Core\Masa.Blazor.Components.TemplateTable.Core.csproj" />
     </ItemGroup>
 
 </Project>

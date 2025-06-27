@@ -20,6 +20,10 @@ public class Column
         Config = System.Text.Json.JsonSerializer.Serialize(configObject);
     }
 
+    /// <summary>
+    /// The unique identifier for the column.
+    /// Same as the property name in the data model.
+    /// </summary>
     public string Id { get; init; }
 
     public string Name { get; set; }
@@ -30,4 +34,6 @@ public class Column
     public string? Config { get; set; }
 
     public bool Searchable { get; set; }
+
+    public bool IsNested => Id.Contains('.');
 }

@@ -12,13 +12,9 @@ public class ViewInfo
 
     public Dictionary<Row, bool> Selection { get; set; } = [];
 
-    public int PageIndex { get; set; } = 1;
+    public int PageIndex { get; set; }
 
-    public int PageSize { get; set; } = 5;
-
-    public bool HasPreviousPage { get; set; }
-
-    public bool HasNextPage { get; set; }
+    public int PageSize { get; set; }
 
     public bool IsDefaultView { get; internal set; }
 

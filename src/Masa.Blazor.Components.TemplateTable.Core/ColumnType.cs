@@ -1,7 +1,4 @@
-﻿using System.Text.Json.Serialization;
-using HotChocolate;
-
-namespace Masa.Blazor.Components.TemplateTable;
+﻿namespace Masa.Blazor.Components.TemplateTable;
 
 public enum ColumnType
 {
@@ -11,7 +8,6 @@ public enum ColumnType
     Phone = 3,
     Image = 6,
     Select = 11,
-    [GraphQLName("MultiSelect")] MultiSelect = 12,
     Date = 20,
     Number = 30,
     Progress = 31,

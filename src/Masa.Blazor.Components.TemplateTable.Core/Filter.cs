@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Masa.Blazor.Components.TemplateTable;
+namespace Masa.Blazor.Components.TemplateTable.Core;
 
 public class Filter
 {
@@ -22,18 +22,22 @@ public class FilterOption
 {
     public string ColumnId { get; set; }
 
-    public string Func { get; set; }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public StandardFilter Func { get; set; }
 
     public string Expected { get; set; } = string.Empty;
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public ExpectedType Type { get; set; }
+
+    public bool Persistent { get; set; }
 }
 
 public enum ExpectedType
 {
     String,
-    Number,
+    Float,
+    DateTime,
     Boolean,
     Expression
 }

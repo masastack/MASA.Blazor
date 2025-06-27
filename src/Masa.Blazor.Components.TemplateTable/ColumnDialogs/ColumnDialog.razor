@@ -71,7 +71,7 @@
             case ColumnType.Date:
                 input = @<DateConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>;
                 break;
-            case ColumnType.Select or ColumnType.MultiSelect:
+            case ColumnType.Select:
                 input = @<SelectConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>;
                 break;
             case ColumnType.Progress:
@@ -97,7 +97,7 @@
 
     private static IList<(string Name, ColumnType Value)> _columnTypeMetadata = GetEnumMetadata<ColumnType>();
 
-    private bool HasColumnTypeConfig => _column.Type is ColumnType.Date or ColumnType.Select or ColumnType.MultiSelect or ColumnType.Progress or ColumnType.Number;
+    private bool HasColumnTypeConfig => _column.Type is ColumnType.Date or ColumnType.Select or ColumnType.Progress or ColumnType.Number;
 
     private void HandleOnColumnTypeSelect(((string Name, ColumnType Value) Item, bool Selected) item)
     {

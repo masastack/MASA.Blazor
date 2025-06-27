@@ -116,9 +116,9 @@ public partial class Viewer : IAsyncDisposable
 
     private int RowHeightValue => RowHeight switch
     {
-        RowHeight.Low => 42,
-        RowHeight.Medium => 63,
-        RowHeight.High => 105,
+        RowHeight.Low => 1,
+        RowHeight.Medium => 2,
+        RowHeight.High => 5,
         _ => throw new ArgumentOutOfRangeException()
     };
 
@@ -284,9 +284,11 @@ public partial class Viewer : IAsyncDisposable
 
         StyleBuilder styleBuilder = new();
 
-        var width = template.Column.Type is ColumnType.Actions
-            ? (RowActionsContext?.Width ?? 0)
-            : template.Width;
+        // var width = template.Column.Type is ColumnType.Actions
+        //     ? (RowActionsContext?.Width ?? 0)
+        //     : template.Width;
+
+        var width = template.Width;
 
         if (width > 0)
         {

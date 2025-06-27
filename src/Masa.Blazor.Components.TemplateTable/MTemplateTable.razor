@@ -2,6 +2,7 @@
 @using Masa.Blazor.Components.TemplateTable
 @using Masa.Blazor.Components.TemplateTable.Actions
 @using Masa.Blazor.Components.TemplateTable.ColumnDialogs
+@using Masa.Blazor.Components.TemplateTable.Core
 @using Masa.Blazor.Components.TemplateTable.FilterDialogs
 @using Masa.Blazor.Components.TemplateTable.Viewers
 @using Microsoft.JSInterop
@@ -186,10 +187,10 @@
     {
         var actionsColumn = _sheet?.ActiveView.Columns.FirstOrDefault(u => u.ColumnId == Preset.ActionsColumnId);
         if (actionsColumn is null) return;
-        if (HasCustomRowActions)
-        {
-            actionsColumn.Width = _rowActionsContext.Width;
-        }
+        // if (HasCustomRowActions)
+        // {
+        //     actionsColumn.Width = _rowActionsContext.Width;
+        // }
     }
 
     private async Task AddNewView()
@@ -304,7 +305,7 @@
         if (_sheet.ActiveView.Rows is null)
         {
             _sheet.ActiveView.PageIndex = 1;
-            _sheet.ActiveView.PageSize = 5; // TODO:使用用户输入的值
+            _sheet.ActiveView.PageSize = DefaultPageSize;
 
             await RefreshItemsAsync(GetItemsProviderRequest());
         }
@@ -491,13 +492,16 @@
     {
         var sheet = new Sheet()
         {
-            Columns = _sheet!.Columns.Where(u => !Preset.InternalColumnIds.Contains(u.Id)).Select(Column (u) => u),
+            QueryBody = _sheet!.QueryBody,
+            CountField = _sheet.CountField,
+            Columns = _sheet.Columns.Where(u => !Preset.InternalColumnIds.Contains(u.Id)).Select(Column (u) => u),
             Views = _sheet.Views.Where(u => u.AccessRole == Role.Manager).Select(View (u) => u.ToView()).ToList(),
             Pagination = _sheet.Pagination,
             ActiveViewId = _sheet.ActiveViewId,
             DefaultViewId = _sheet.DefaultViewId,
             ItemKeyName = _sheet.ItemKeyName
         };
+
         await OnSave.InvokeAsync(sheet);
     }
 

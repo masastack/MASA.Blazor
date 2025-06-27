@@ -36,6 +36,10 @@ internal class SheetInfo
     /// </summary>
     public required string ItemKeyName { get; set; }
 
+    public required string QueryBody { get; set; }
+
+    public required string CountField { get; set; }
+
     [JsonIgnore] internal List<ViewColumnInfo> ActiveViewColumns => ActiveView.Columns;
 
     [JsonIgnore]
@@ -73,6 +77,8 @@ internal class SheetInfo
 
         return new SheetInfo
         {
+            QueryBody = sheet.QueryBody,
+            CountField = sheet.CountField,
             Columns = columnInfos,
             Views = views,
             Pagination = sheet.Pagination,
@@ -111,11 +117,8 @@ internal class SheetInfo
         ActiveView.Value.RowHeight = rowHeight;
     }
 
-    internal void UpdateActiveViewItems(ICollection<Row> items,
-        bool hasPreviousPage, bool hasNextPage)
+    internal void UpdateActiveViewItems(ICollection<Row> items)
     {
         ActiveView.Rows = items;
-        ActiveView.HasPreviousPage = hasPreviousPage;
-        ActiveView.HasNextPage = hasNextPage;
     }
 }

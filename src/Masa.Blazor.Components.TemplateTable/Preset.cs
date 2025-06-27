@@ -10,7 +10,6 @@ internal static class Preset
         [ColumnType.Email] = "mdi-email-outline",
         [ColumnType.Image] = "mdi-image-outline",
         [ColumnType.Link] = "mdi-link-variant",
-        [ColumnType.MultiSelect] = "mdi-format-list-checkbox",
         [ColumnType.Number] = "mdi-numeric",
         [ColumnType.Phone] = "mdi-phone-outline",
         [ColumnType.Progress] = "mdi-calendar-clock",
@@ -43,7 +42,7 @@ internal static class Preset
             ColumnId = ActionsColumnId,
             Column = CreateActionsColumn(),
             Fixed = ColumnFixed.Right,
-            Width = 61
+            Width = 120
         };
     }
 

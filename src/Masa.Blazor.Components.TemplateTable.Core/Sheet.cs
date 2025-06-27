@@ -31,7 +31,25 @@ public class Sheet
     /// The identifier of the row item.
     /// </summary>
     public string? ItemKeyName { get; set; }
+
+    /// <summary>
+    /// The query body of the GraphQL query.
+    /// It should be the minimal query body without any parameters.
+    /// </summary>
+    /// <example>
+    /// users {
+    ///   id
+    ///   name
+    ///   email
+    /// }
+    /// </example>
+    public required string QueryBody { get; set; }
     
+    /// <summary>
+    /// The field name for counting the total number of items.
+    /// </summary>
+    public required string CountField { get; set; }
+
     // TODO: 支持建列自动隐藏（添加新的属性，如HideItemKeyColumn）
 }
 

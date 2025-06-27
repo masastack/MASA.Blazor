@@ -1,9 +1,20 @@
 ﻿using System.Text.Json.Serialization;
+using Masa.Blazor.Components.TemplateTable.Core;
 
 namespace Masa.Blazor.Components.TemplateTable;
 
 public class View
 {
+    public View(string name, List<ViewColumn> viewColumns)
+    {
+        Name = name;
+        Columns = viewColumns;
+    }
+
+    public View()
+    {
+    }
+    
     public Guid Id { get; set; } = Guid.NewGuid();
 
     public string? Name { get; set; }

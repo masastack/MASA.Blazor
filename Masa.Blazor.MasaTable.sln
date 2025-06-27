@@ -11,9 +11,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.Temp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotChocolateDemo", "src\HotChocolateDemo\HotChocolateDemo.csproj", "{61E89E60-8A46-4DA4-A1FB-1588EA05AFF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.TemplateTable.Contracts", "src\Masa.Blazor.Components.TemplateTable.Contracts\Masa.Blazor.Components.TemplateTable.Contracts.csproj", "{91A0BF01-019B-4E2A-924D-9A1E0E2040C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.TemplateTable.Core", "src\Masa.Blazor.Components.TemplateTable.Core\Masa.Blazor.Components.TemplateTable.Core.csproj", "{91A0BF01-019B-4E2A-924D-9A1E0E2040C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Test", "test\Masa.Blazor.Test\Masa.Blazor.Test.csproj", "{3609DC9F-FD09-4CDA-BE09-1BEF421A7221}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.SourceGenerator", "src\Masa.Blazor.SourceGenerator\Masa.Blazor.SourceGenerator.csproj", "{D6A1F4BF-6120-4AFC-9A61-4DD0BFECDD91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.TemplateTable.Test", "test\Masa.Blazor.Components.TemplateTable.Test\Masa.Blazor.Components.TemplateTable.Test.csproj", "{E83CAEE0-E6B0-4D1D-9192-835C2F546F0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL", "src\Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL\Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL.csproj", "{8C844897-2D78-4348-99DA-B9750ECAF920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.TemplateTable.HotChocolate", "src\Masa.Blazor.Components.TemplateTable.HotChocolate\Masa.Blazor.Components.TemplateTable.HotChocolate.csproj", "{35456625-9A78-416C-84CB-46975357F9B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +47,22 @@ Global
 		{91A0BF01-019B-4E2A-924D-9A1E0E2040C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91A0BF01-019B-4E2A-924D-9A1E0E2040C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91A0BF01-019B-4E2A-924D-9A1E0E2040C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3609DC9F-FD09-4CDA-BE09-1BEF421A7221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3609DC9F-FD09-4CDA-BE09-1BEF421A7221}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3609DC9F-FD09-4CDA-BE09-1BEF421A7221}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3609DC9F-FD09-4CDA-BE09-1BEF421A7221}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6A1F4BF-6120-4AFC-9A61-4DD0BFECDD91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6A1F4BF-6120-4AFC-9A61-4DD0BFECDD91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6A1F4BF-6120-4AFC-9A61-4DD0BFECDD91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6A1F4BF-6120-4AFC-9A61-4DD0BFECDD91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E83CAEE0-E6B0-4D1D-9192-835C2F546F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E83CAEE0-E6B0-4D1D-9192-835C2F546F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E83CAEE0-E6B0-4D1D-9192-835C2F546F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E83CAEE0-E6B0-4D1D-9192-835C2F546F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C844897-2D78-4348-99DA-B9750ECAF920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C844897-2D78-4348-99DA-B9750ECAF920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C844897-2D78-4348-99DA-B9750ECAF920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C844897-2D78-4348-99DA-B9750ECAF920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35456625-9A78-416C-84CB-46975357F9B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35456625-9A78-416C-84CB-46975357F9B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35456625-9A78-416C-84CB-46975357F9B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35456625-9A78-416C-84CB-46975357F9B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

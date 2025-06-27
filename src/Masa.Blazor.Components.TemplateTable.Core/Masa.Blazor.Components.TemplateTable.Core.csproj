@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Masa.Blazor.Components.TemplateTable.Contracts</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Masa.Blazor\Masa.Blazor.csproj" />
+        <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="6.1.0"/>
+        <PackageReference Include="GraphQL.Client" Version="6.1.0"/>
+        <PackageReference Include="GraphQL.Client.Abstractions" Version="6.1.0"/>
+    </ItemGroup>
+
+</Project>

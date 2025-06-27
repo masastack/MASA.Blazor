@@ -1,15 +1,12 @@
-﻿@namespace Masa.Blazor.Components.TemplateTable.FilterDialogs
+﻿@using Masa.Blazor.Components.TemplateTable.Core
+@namespace Masa.Blazor.Components.TemplateTable.FilterDialogs
 
 <PModal @bind-Value="dialog"
         Width="640"
+        BodyStyle="min-height: 180px"
         Title="Filters"
         Persistent
         OnSave="HandleOnSave">
-
-    @if (_filters.Count == 0)
-    {
-        <p class="grey--text">No filters applied</p>
-    }
 
     @for (int i = 0; i < _filters.Count; i++)
     {
@@ -17,7 +14,7 @@
         var filter = _filters[index];
 
         <div class="d-flex align-center mb-2">
-            <div style="width: 86px; max-width: 86px;"
+            <div style="width: 86px; flex: none;"
                  class="mr-2 text-right">
                 @if (index == 0)
                 {
@@ -58,7 +55,7 @@
             </MSelect>
             <MSelect @bind-Value="@filter.Func"
                      Items="@filter.FuncList"
-                     ItemText="u => u"
+                     ItemText="u => u.ToString()"
                      ItemValue="u => u"
                      Label="Func"
                      Class="mr-2"
@@ -67,7 +64,7 @@
                      Filled
                      HideDetails="@true">
             </MSelect>
-            @if ((filter.Func is FilterTypes.SelectFilterEqual or FilterTypes.SelectFilterNotEqual) && filter.SelectOptions is not null)
+            @if ((filter.Func is StandardFilter.Equals or StandardFilter.NotEquals) && filter.SelectOptions is not null)
             {
                 <MSelect @bind-Value="@filter.Expected"
                          Items="@filter.SelectOptions"
@@ -81,25 +78,6 @@
                          HideDetails="@true">
                 </MSelect>
             }
-            else if ((filter.Func is FilterTypes.MultiSelectContainsOne or FilterTypes.MultiSelectNotContains) && filter.SelectOptions is not null)
-            {
-                <MSelect @bind-Value="@filter.MultiSelect"
-                         TItem="SelectOption"
-                         TItemValue="string"
-                         TValue="List<string>"
-                         Items="@filter.SelectOptions"
-                         ItemText="u => u.Label"
-                         ItemValue="u => u.Value"
-                         Label="Expected"
-                         Class="mr-2"
-                         Style="max-width: 150px"
-                         Multiple
-                         Dense
-                         Filled
-                         HideDetails="@true"
-                         OnSelect="_ => OnMultiSelect(filter)">
-                </MSelect>
-            }
             else if (!_noExpectedFuncs.Contains(filter.Func))
             {
                 <MTextField @bind-Value="@filter.Expected"
@@ -111,19 +89,30 @@
                             HideDetails="@true">
                 </MTextField>
             }
+
             <MSpacer/>
-            <MButton IconName="mdi-close"
-                     OnClick="@(() => RemoveFilter(filter))">
-            </MButton>
+
+            @if (filter.Persistent)
+            {
+                <div style="min-width: 36px;"></div>
+            }
+            else
+            {
+                <MButton IconName="mdi-close"
+                         OnClick="@(() => RemoveFilter(filter))">
+                </MButton>
+            }
         </div>
     }
 
-    <MButton Text
-             LeftIconName="mdi-plus"
-             Color="primary"
-             OnClick="@AddNewFilter">
-        Add filter
-    </MButton>
+    <div class="text-right" style="margin-right: 44px;">
+        <MButton Text
+                 LeftIconName="mdi-plus"
+                 Color="primary"
+                 OnClick="@AddNewFilter">
+            Add filter
+        </MButton>
+    </div>
 </PModal>
 
 @code {
@@ -141,13 +130,12 @@
 
     private static readonly IList<string> Operators = ["and", "or"];
 
-    private static readonly HashSet<string> _noExpectedFuncs =
+    private static readonly HashSet<StandardFilter> _noExpectedFuncs =
     [
-        FilterTypes.Empty,
-        FilterTypes.NotEmpty,
-        FilterTypes.MultiSelectEmpty,
-        FilterTypes.MultiSelectNotEmpty,
-        ..FilterTypes.SupportedBooleanFilters
+        StandardFilter.Set,
+        StandardFilter.NotSet,
+        StandardFilter.True,
+        StandardFilter.False
     ];
 
     private HashSet<string> _prevHiddenColumnIds = [];
@@ -184,10 +172,10 @@
                     var filterOption = new FilterModel(column)
                     {
                         Func = option.Func,
-                        Expected = option.Expected
+                        Expected = option.Expected,
+                        Persistent = option.Persistent
                     };
 
-                    StandardToLogical(filterOption);
                     _filters.Add(filterOption);
                 }
 
@@ -198,7 +186,7 @@
 
     private bool dialog;
 
-    private List<FilterModel> _filters = [];
+    private readonly List<FilterModel> _filters = [];
 
     internal void Open()
     {
@@ -214,11 +202,17 @@
         }
 
         var filter = new FilterModel(Columns.First());
+
         _filters.Add(filter);
     }
 
     private void RemoveFilter(FilterModel filterModel)
     {
+        if (filterModel.Persistent)
+        {
+            return;
+        }
+
         _filters.Remove(filterModel);
     }
 
@@ -233,157 +227,11 @@
 
         var request = new Filter
         {
-            Options = _filters.Select(u =>
-            {
-                var item = u.ToFilterOption();
-                LogicalToStandard(item);
-                return item;
-            }).ToList(),
+            Options = _filters.Select(u => u.ToFilterOption()).ToList(),
             Operator = _operator == "and" ? FilterOperator.And : FilterOperator.Or
         };
 
         OnSave.InvokeAsync(request);
-    }
-
-    private void LogicalToStandard(FilterOption option)
-    {
-        if (FilterTypes.SupportedBooleanFilters.Contains(option.Func))
-        {
-            var isEq = option.Func == FilterTypes.BooleanFilterEqualTrue;
-            option.Func = "eq";
-            option.Expected = isEq ? "true" : "false";
-        }
-        else if (FilterTypes.SupportedSelectFilters.Contains(option.Func))
-        {
-            switch (option.Func)
-            {
-                case FilterTypes.SelectFilterEqual:
-                    option.Func = "eq";
-                    break;
-                case FilterTypes.SelectFilterNotEqual:
-                    option.Func = "neq";
-                    break;
-                case FilterTypes.Empty:
-                    option.Func = "eq";
-                    option.Expected = string.Empty;
-                    break;
-                case FilterTypes.NotEmpty:
-                    option.Func = "neq";
-                    option.Expected = string.Empty;
-                    break;
-            }
-        }
-        else if (FilterTypes.EmptyFilters.Contains(option.Func))
-        {
-            switch (option.Func)
-            {
-                case FilterTypes.Empty:
-                    option.Func = "eq";
-                    option.Expected = string.Empty;
-                    break;
-                case FilterTypes.NotEmpty:
-                    option.Func = "neq";
-                    option.Expected = string.Empty;
-                    break;
-                default:
-                    throw new NotSupportedException($"Unsupported filter func: {option.Func}");
-            }
-        }
-        else if (FilterTypes.SupportedMultiSelectFilters.Contains(option.Func))
-        {
-            if (option.Func is FilterTypes.MultiSelectContainsOne)
-            {
-                option.Func = "some";
-                option.Type = ExpectedType.Expression;
-
-                if (string.IsNullOrWhiteSpace(option.Expected))
-                {
-                    option.Expected = "{ in: [] }";
-                }
-            }
-            else if (option.Func is FilterTypes.MultiSelectNotContains)
-            {
-                option.Func = "none";
-                option.Type = ExpectedType.Expression;
-
-                if (string.IsNullOrWhiteSpace(option.Expected))
-                {
-                    option.Expected = "{ in: [] }";
-                }
-            }
-            else if (option.Func is FilterTypes.MultiSelectEmpty)
-            {
-                option.Func = "any";
-                option.Expected = "false";
-                option.Type = ExpectedType.Boolean;
-            }
-            else if (option.Func is FilterTypes.MultiSelectNotEmpty)
-            {
-                option.Func = "any";
-                option.Expected = "true";
-                option.Type = ExpectedType.Boolean;
-            }
-        }
-    }
-
-    private void StandardToLogical(FilterModel option)
-    {
-        if (option.Column.Type == ColumnType.Checkbox)
-        {
-            option.Func = option.Expected == "true" ? FilterTypes.BooleanFilterEqualTrue : FilterTypes.BooleanFilterEqualFalse;
-        }
-        else if (option.Column.Type == ColumnType.Select)
-        {
-            option.Func = option.Func switch
-            {
-                "eq" => option.Expected == string.Empty ? FilterTypes.Empty : FilterTypes.SelectFilterEqual,
-                "neq" => option.Expected == string.Empty ? FilterTypes.NotEmpty : FilterTypes.SelectFilterNotEqual,
-                _ => option.Func
-            };
-        }
-        else if (option.Column.Type == ColumnType.Image)
-        {
-            option.Func = option.Func switch
-            {
-                "eq" => FilterTypes.Empty,
-                "neq" => FilterTypes.NotEmpty,
-                _ => throw new NotSupportedException($"Unsupported filter func: {option.Func}")
-            };
-        }
-        else if (option.Column.Type == ColumnType.MultiSelect)
-        {
-            Console.Out.WriteLine("option.Expected: " + option.Expected);
-            if (option.Func == "any")
-            {
-                option.Func = option.Expected == "true" ? FilterTypes.MultiSelectNotEmpty : FilterTypes.MultiSelectEmpty;
-            }
-            else
-            {
-                if (option.Func == "some")
-                {
-                    option.Func = FilterTypes.MultiSelectContainsOne;
-                }
-                else if (option.Func == "none")
-                {
-                    option.Func = FilterTypes.MultiSelectNotContains;
-                }
-
-                if (option.Expected == "{ in: [] }")
-                {
-                    option.Expected = string.Empty;
-                }
-
-                var firstQuote = option.Expected.IndexOf('"');
-                var lastQuote = option.Expected.LastIndexOf('"');
-
-                if (firstQuote != -1 && lastQuote != -1)
-                {
-                    var values = option.Expected.Substring(firstQuote + 1, lastQuote - firstQuote - 1).Split(", ");
-                    Console.Out.WriteLine("values: " + string.Join(", ", values));
-                    option.MultiSelect = values.ToList();
-                }
-            }
-        }
     }
 
 }

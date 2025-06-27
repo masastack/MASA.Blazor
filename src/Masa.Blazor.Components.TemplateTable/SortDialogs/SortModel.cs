@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Components.TemplateTable.SortDialogs;
+﻿using Masa.Blazor.Components.TemplateTable.Core;
+
+namespace Masa.Blazor.Components.TemplateTable.SortDialogs;
 
 public class SortModel : SortOption
 {
@@ -9,6 +11,8 @@ public class SortModel : SortOption
         Column = column;
         ColumnId = column.Id;
         Index = index;
+
+        UpdateOperator();
     }
 
     internal static SortModel From(SortOption option, Column column)
@@ -25,7 +29,30 @@ public class SortModel : SortOption
         {
             ColumnId = ColumnId,
             OrderBy = OrderBy,
-            Index = Index
+            Index = Index,
+            Type = Type
         };
+    }
+
+    private void UpdateOperator()
+    {
+        switch (Column.Type)
+        {
+            case ColumnType.Text or ColumnType.Link or ColumnType.Email or ColumnType.Phone or ColumnType.Image:
+                Type = ExpectedType.String;
+                break;
+            case ColumnType.Number or ColumnType.Rating or ColumnType.Progress:
+                Type = ExpectedType.Float;
+                break;
+            case ColumnType.Checkbox:
+                Type = ExpectedType.Boolean;
+                break;
+            case ColumnType.Select:
+                Type = ExpectedType.String;
+                break;
+            case ColumnType.Date:
+                Type = ExpectedType.DateTime;
+                break;
+        }
     }
 }

@@ -1,11 +1,11 @@
 ﻿@using System.Globalization
 @using BemIt
+@using GraphQL.Client.Abstractions.Utilities
 @using Microsoft.AspNetCore.Components.Web.Virtualization
-@using Masa.Blazor.Components.TemplateTable.Actions
 
 <MSimpleTable FixedHeader
               Class="@_modifierBuilder.Add(RowHeight.ToString()).Add(_sized).Build()"
-              Style="@($"--mt-row-height: {RowHeightValue}px")"
+              Style="@($"--mt-row-height: {RowHeightValue}")"
               Height="@Height"
               @ref="_simpleTable">
     <thead>
@@ -89,17 +89,39 @@
                                 }
                                 else
                                 {
-                                    var key = item.Data.Keys.FirstOrDefault(u => string.Equals(u, template.ColumnId, StringComparison.OrdinalIgnoreCase));
-                                    if (key is not null)
+                                    JsonElement? value = null;
+
+                                    if (template.Column.IsNested)
                                     {
-                                        var value = item.Data[key];
-                                        @GenCell(template.Column, value, item.Data)
+                                        var tree = template.Column.Id.Split('.');
+                                        var firstKey = tree[0];
+                                        var key = item.Data.Keys.FirstOrDefault(u => string.Equals(u, firstKey, StringComparison.OrdinalIgnoreCase));
+                                        if (key is not null)
+                                        {
+                                            value = item.Data[key];
+                                            for (var i = 1; i < tree.Length; i++)
+                                            {
+                                                // 默认使用驼峰命名法
+                                                value = value.Value.GetProperty(tree[i].ToCamelCase());
+                                            }
+                                        }
                                     }
                                     else
                                     {
-                                        <div class="error--text">
-                                            @("Key not found: " + template.ColumnId)
-                                        </div>
+                                        var key = item.Data.Keys.FirstOrDefault(u => string.Equals(u, template.ColumnId, StringComparison.OrdinalIgnoreCase));
+                                        if (key is not null)
+                                        {
+                                            value = item.Data[key];
+                                        }
+                                    }
+
+                                    if (value is null)
+                                    {
+                                        @GenNotNull(template.Column)
+                                    }
+                                    else
+                                    {
+                                        @GenCell(template.Column, value.Value)
                                     }
                                 }
                             </div>
@@ -139,9 +161,6 @@
             case ColumnType.Select:
                 @GenSelectCell(column.ConfigObject, value)
                 break;
-            case ColumnType.MultiSelect:
-                @GenMultiSelectCell(column.ConfigObject, value)
-                break;
             case ColumnType.Date:
                 @GenDateCell(column.ConfigObject, value)
                 break;
@@ -157,7 +176,7 @@
         }
     };
 
-    private RenderFragment GenCell(ColumnInfo column, JsonElement value, IReadOnlyDictionary<string, JsonElement>? item = default) => __builder =>
+    private RenderFragment GenCell(ColumnInfo column, JsonElement value) => __builder =>
     {
         if (column.Type == ColumnType.Image)
         {
@@ -169,20 +188,29 @@
         }
     };
 
+    private RenderFragment GenNotNull(ColumnInfo column) => __builder =>
+    {
+        <span class="error--text">@column.Id not found</span>
+    };
+
     private static RenderFragment GenCheckboxCell(JsonElement value) => __builder =>
     {
         var isChecked = value.GetBoolean();
         <MIcon Icon="@(isChecked ? "$checkboxOn" : "$checkboxOff")"
-               Color="@(isChecked ? "primary" : "")" />
+               Color="@(isChecked ? "primary" : "")"/>
     };
-    
+
     private static RenderFragment GenSwitchCell(JsonElement value) => __builder =>
     {
         var isChecked = value.GetBoolean();
-        <MSwitch Value="@isChecked" Inset Disabled />
+        <MSwitch Value="@isChecked" Inset Disabled/>
     };
 
-    private static RenderFragment GenTextCell(JsonElement value) => __builder => { @value.GetString() };
+    private static RenderFragment GenTextCell(JsonElement value) => __builder =>
+    {
+        var str = value.GetString();
+        <span title="@str">@str</span>
+    };
 
     private static RenderFragment GenEmailCell(JsonElement value) => __builder =>
     {
@@ -200,7 +228,7 @@
         {
             href = linkConfig.Url.Replace("{query}", value.ToString());
         }
-        
+
         <a href="@href" target="_blank">@value</a>
     };
 
@@ -252,36 +280,6 @@
         }
 
         @text
-    };
-
-    private static RenderFragment GenMultiSelectCell(object? configObject, JsonElement value) => __builder =>
-    {
-        IEnumerable<string> values = value.ValueKind == JsonValueKind.Array ? value.EnumerateArray().Select(u => u.GetString()) : [value.GetString()];
-
-        if (configObject is SelectConfig config)
-        {
-            foreach (var item in values)
-            {
-                var option = config.Options.FirstOrDefault(u => u.Value == item);
-                var label = option?.Label ?? item;
-                if (config.Color)
-                {
-                    var isDarken = option?.Color?.Contains("darken") is true;
-                    <MChip Label Small Color="@option?.Color" Dark="isDarken">@label</MChip>
-                }
-                else
-                {
-                    <span class="option">@label</span>
-                }
-            }
-
-            return;
-        }
-
-        foreach (var item in values)
-        {
-            <span class="option">@item</span>
-        }
     };
 
     private static RenderFragment GenProgressCell(object? configObject, JsonElement value) => __builder =>
@@ -372,6 +370,8 @@
     {
         Action detailAction = () => OnDetail.InvokeAsync(item);
 
+        // TODO: RowActionsContext
+
         if (HasCustomRowActions)
         {
             foreach (var action in RowActionsContext.DisplayActions.OrderBy(u => u.Index))
@@ -405,7 +405,7 @@
                             @foreach (var action in RowActionsContext.MenuActions.OrderBy(u => u.Index))
                             {
                                 var click = action.InternalId == RowDetailAction.DefaultId ? detailAction : () => action.OnClick.InvokeAsync(item);
-                                
+
                                 <MListItem Title="@action.Text"
                                            OnClick="@click"/>
                             }

@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Components.TemplateTable.FilterDialogs;
+﻿using Masa.Blazor.Components.TemplateTable.Core;
+
+namespace Masa.Blazor.Components.TemplateTable.FilterDialogs;
 
 public class FilterModel : FilterOption
 {
@@ -9,7 +11,7 @@ public class FilterModel : FilterOption
     // TODO: 初始化
     public List<string> MultiSelect { get; internal set; } = [];
 
-    public string[] FuncList { get; private set; }
+    public StandardFilter[] FuncList { get; private set; }
 
     public FilterModel(ColumnInfo column)
     {
@@ -43,37 +45,31 @@ public class FilterModel : FilterOption
 
         switch (Column.Type)
         {
-            case ColumnType.Text or ColumnType.Link or ColumnType.Email or ColumnType.Phone:
-                FuncList = FilterTypes.SupportedStringFilters;
+            case ColumnType.Text or ColumnType.Link or ColumnType.Email or ColumnType.Phone or ColumnType.Image:
+                FuncList = SupportedFilter.SupportedStringFilters;
                 Func = FuncList[0];
                 Type = ExpectedType.String;
                 break;
-            case ColumnType.Number or ColumnType.Rating or ColumnType.Progress or ColumnType.Date:
-                FuncList = FilterTypes.SupportedComparableFilters;
+            case ColumnType.Number or ColumnType.Rating or ColumnType.Progress:
+                FuncList = SupportedFilter.SupportedNumberFilters;
                 Func = FuncList[0];
-                Type = Column.Type is ColumnType.Date ? ExpectedType.String : ExpectedType.Number;
+                Type = ExpectedType.Float;
                 break;
             case ColumnType.Checkbox:
-                FuncList = FilterTypes.SupportedBooleanFilters;
+                FuncList = SupportedFilter.SupportedBooleanFilters;
                 Func = FuncList[0];
                 Type = ExpectedType.Boolean;
                 break;
             case ColumnType.Select:
-                FuncList = FilterTypes.SupportedSelectFilters;
+                FuncList = SupportedFilter.SupportedSelectFilters;
                 Func = FuncList[0];
                 Type = ExpectedType.String;
                 SelectOptions = (Column.ConfigObject as SelectConfig)?.Options;
                 break;
-            case ColumnType.MultiSelect:
-                FuncList = FilterTypes.SupportedMultiSelectFilters;
+            case ColumnType.Date:
+                FuncList = SupportedFilter.SupportedDateTimeFilters;
                 Func = FuncList[0];
-                Type = ExpectedType.String;
-                SelectOptions = (Column.ConfigObject as SelectConfig)?.Options;
-                break;
-            case ColumnType.Image:
-                FuncList = FilterTypes.EmptyFilters;
-                Func = FuncList[0];
-                Type = ExpectedType.String;
+                Type = ExpectedType.DateTime;
                 break;
         }
     }
