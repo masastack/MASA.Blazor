@@ -8,10 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Masa.Blazor\Masa.Blazor.csproj" />
+        <ProjectReference Include="..\..\..\Masa.Blazor\Masa.Blazor.csproj" />
         <PackageReference Include="GraphQL.Client.Serializer.SystemTextJson" Version="6.1.0"/>
         <PackageReference Include="GraphQL.Client" Version="6.1.0"/>
         <PackageReference Include="GraphQL.Client.Abstractions" Version="6.1.0"/>
+        <ProjectReference Include="..\Masa.Blazor.Components.TemplateTable.Contracts\Masa.Blazor.Components.TemplateTable.Contracts.csproj" />
     </ItemGroup>
 
 </Project>

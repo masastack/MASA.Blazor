@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Masa.Blazor.Components.TemplateTable.Core\Masa.Blazor.Components.TemplateTable.Core.csproj" />
+    <ProjectReference Include="..\..\src\Masa.Blazor.Components.TemplateTable.Contracts\Masa.Blazor.Components.TemplateTable.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
