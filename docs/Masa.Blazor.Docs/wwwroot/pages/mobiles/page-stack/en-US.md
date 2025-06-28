@@ -119,15 +119,22 @@ The `a` tag has an unavoidable problem: continuous clicks will cause multiple tr
   In a MAUI Blazor Hybrid app, it is challenging to implement the back button on the tab page to exit the application.
   Wrapping the `a` tag or component with the **PPageStackTab** component changes the default navigation behavior to replace the current page with the `replace` method, thus not increasing the history.
 
-  ```razor
-  <PPagStackTab href="/tab-1">
-      <a @attributes="@context.Attrs">Stack page</a>
-  </PPagStackTab>
+  ```razor PageStackLayout.razor
+  @using Masa.Blazor.Presets.PageStack
+  
+  <PPageStackTab href="/tab-1" TabRule="@TabRule1">
+      <MButton @attributes="@context.Attrs">Stack page</MButton>
+  </PPageStackTab>
+  
+  @code {
+      internal static TabRule TabRule1 = new("/tab-1$");
+  }
   ```
 
 - When the activated tab is clicked again, it will trigger the `TabRefreshRequested` event. When used with the [Pull to refresh component](/blazor/mobiles/pull-refresh), it can achieve a pull-to-refresh effect.
 
-  ```razor
+  ```razor Tab1.razor
+  @using Masa.Blazor.Presets.PageStack.NavController
   @inject PageStackNavController NavController
   @implements IDisposable
   
@@ -152,7 +159,7 @@ The `a` tag has an unavoidable problem: continuous clicks will cause multiple tr
               return;
           }
 
-          if (e.TargetHref?.Equals("/tab-1", StringComparison.OrdinalIgnoreCase) is not true)
+          if (e.TargetTab != PageStackLayout.TabRule1)
           {
               return;
           }
