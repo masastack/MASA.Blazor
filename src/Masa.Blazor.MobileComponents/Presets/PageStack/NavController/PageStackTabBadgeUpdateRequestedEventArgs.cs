@@ -2,20 +2,38 @@
 
 public class PageStackTabBadgeUpdateRequestedEventArgs : EventArgs
 {
-    public PageStackTabBadgeUpdateRequestedEventArgs(string targetHref, bool dot, bool overLap = false)
+    /// <summary>
+    /// Creates an event args to update the badge with a dot for a specific target href.
+    /// </summary>
+    /// <param name="targetHref"></param>
+    /// <param name="dot"></param>
+    /// <param name="overLap"></param>
+    /// <param name="color"></param>
+    public PageStackTabBadgeUpdateRequestedEventArgs(string targetHref, bool dot, bool overLap = false,
+        string color = "red")
     {
         Value = true;
         TargetHref = targetHref;
         Dot = dot;
         OverLap = overLap;
+        Color = color;
     }
 
-    public PageStackTabBadgeUpdateRequestedEventArgs(string targetHref, StringNumber content, bool overLap = false)
+    /// <summary>
+    /// Creates an event args to update the badge with a text or number for a specific target href.
+    /// </summary>
+    /// <param name="targetHref"></param>
+    /// <param name="badge"></param>
+    /// <param name="overLap"></param>
+    /// <param name="color"></param>
+    public PageStackTabBadgeUpdateRequestedEventArgs(string targetHref, StringNumber badge, bool overLap = false,
+        string color = "red")
     {
         Value = true;
         TargetHref = targetHref;
-        Content = content;
+        Badge = badge;
         OverLap = overLap;
+        Color = color;
     }
 
     private PageStackTabBadgeUpdateRequestedEventArgs(string targetHref, bool value)
@@ -33,14 +51,14 @@ public class PageStackTabBadgeUpdateRequestedEventArgs : EventArgs
     {
         return new PageStackTabBadgeUpdateRequestedEventArgs(targetHref, false);
     }
-    
+
     public string? TargetHref { get; set; }
 
     public bool Dot { get; set; }
 
-    public StringNumber? Content { get; set; }
+    public StringNumber? Badge { get; set; }
 
-    public string? Color { get; set; } = "red";
+    public string? Color { get; set; }
 
     public bool OverLap { get; set; }
 

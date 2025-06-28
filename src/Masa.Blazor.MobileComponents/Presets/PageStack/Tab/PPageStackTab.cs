@@ -20,9 +20,28 @@ public class PPageStackTab : ComponentBase, IDisposable
 
     [Parameter] [EditorRequired] public string? Href { get; set; }
 
+    /// <summary>
+    /// Initialize the badge for the tab.
+    /// </summary>
+    [Parameter] public PageStackTabBadgeProps? InitialBadge { get; set; }
+
     private readonly PageStackTabContext _context = new();
 
+    private bool _flagForInitBadge;
     private PageStackNavController? _internalPageStackNavController;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        _context.Attrs["href"] = Href;
+
+        if (!_flagForInitBadge && InitialBadge is not null)
+        {
+            _flagForInitBadge = true;
+            _context.InternalBadgeContent = CreateBadgeContent(InitialBadge);
+        }
+    }
 
     protected override void OnInitialized()
     {
@@ -35,23 +54,18 @@ public class PPageStackTab : ComponentBase, IDisposable
         _context.Attrs["onclick"] = EventCallback.Factory.Create<MouseEventArgs>(this, HandleOnClick);
     }
 
-    private void InternalPageStackNavControllerOnTabBadgeUpdated(object? sender, PageStackTabBadgeUpdateRequestedEventArgs e)
+    private void InternalPageStackNavControllerOnTabBadgeUpdated(object? sender,
+        PageStackTabBadgeUpdateRequestedEventArgs e)
     {
         if (Href?.Equals(e.TargetHref, StringComparison.OrdinalIgnoreCase) is not true)
         {
             return;
         }
 
+        _flagForInitBadge = true;
         _context.InternalBadgeContent = e.Value ? CreateBadgeContent(e) : v => v;
 
         InvokeAsync(StateHasChanged);
-    }
-
-    protected override void OnParametersSet()
-    {
-        base.OnParametersSet();
-
-        _context.Attrs["href"] = Href;
     }
 
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -83,23 +97,32 @@ public class PPageStackTab : ComponentBase, IDisposable
         }
     }
 
-    private static RenderFragment<RenderFragment> CreateBadgeContent(PageStackTabBadgeUpdateRequestedEventArgs args)
+    private static RenderFragment<RenderFragment> CreateBadgeContent(bool dot, StringNumber? badge = null,
+        bool overLap = false, string? color = "red")
     {
-        return value =>
+        return childContent =>
         {
             return builder =>
             {
                 builder.OpenComponent<MBadge>(0);
-                builder.AddAttribute(1, nameof(MBadge.Dot), args.Dot);
-                builder.AddAttribute(2, nameof(MBadge.Content), args.Content);
-                builder.AddAttribute(3, nameof(MBadge.Color), args.Color);
-                builder.AddAttribute(4, nameof(MBadge.OverLap), args.OverLap);
+                builder.AddAttribute(1, nameof(MBadge.Dot), dot);
+                builder.AddAttribute(2, nameof(MBadge.Content), badge);
+                builder.AddAttribute(3, nameof(MBadge.Color), color);
+                builder.AddAttribute(4, nameof(MBadge.OverLap), overLap);
                 builder.AddAttribute(5, nameof(MBadge.ChildContent),
-                    (RenderFragment)(badgeBuilder => { badgeBuilder.AddContent(6, value); }));
+                    (RenderFragment)(badgeBuilder => { badgeBuilder.AddContent(6, childContent); }));
                 builder.CloseComponent();
             };
         };
     }
+
+    private static RenderFragment<RenderFragment> CreateBadgeContent(PageStackTabBadgeProps badgeProps)
+    {
+        return CreateBadgeContent(badgeProps.Dot, badgeProps.Badge, badgeProps.OverLap, badgeProps.Color);
+    }
+
+    private static RenderFragment<RenderFragment> CreateBadgeContent(PageStackTabBadgeUpdateRequestedEventArgs args)
+        => CreateBadgeContent(args.Dot, args.Badge, args.OverLap, args.Color);
 
     public void Dispose()
     {
@@ -114,14 +137,14 @@ public class PageStackTabContext
 {
     internal RenderFragment<RenderFragment> InternalBadgeContent { get; set; } = value => value;
 
-    public RenderFragment GenBadgeContent(string value)
+    public RenderFragment GenBadgeContent(string childContent)
     {
-        return InternalBadgeContent(builder => { builder.AddContent(0, value); });
+        return InternalBadgeContent(builder => { builder.AddContent(0, childContent); });
     }
 
-    public RenderFragment GenBadgeContent(RenderFragment value)
+    public RenderFragment GenBadgeContent(RenderFragment childContent)
     {
-        return InternalBadgeContent(value);
+        return InternalBadgeContent(childContent);
     }
 
     public Dictionary<string, object?> Attrs { get; } = new();

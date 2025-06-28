@@ -21,7 +21,8 @@
                      @attributes="@context.Attrs">Tab 2
             </MButton>
         </PPageStackTab>
-        <PPageStackTab Href="/blazor/examples/page-stack/tab3">
+        <PPageStackTab Href="/blazor/examples/page-stack/tab3"
+                       InitialBadge="_initialBadge">
             <MButton @attributes="@context.Attrs">
                 @context.GenBadgeContent("Tab 3")
             </MButton>
@@ -37,5 +38,22 @@
         new("^/blazor/examples/page-stack/tab2/*", Self: true),
         new("^/blazor/examples/page-stack/tab3$")
     ];
+
+    private PageStackTabBadgeProps? _initialBadge;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await SimulateSetBadgeAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task SimulateSetBadgeAsync()
+    {
+        await Task.Delay(1000);
+        _initialBadge = new PageStackTabBadgeProps(true);
+    }
 
 }

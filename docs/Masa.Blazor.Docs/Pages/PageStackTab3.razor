@@ -81,7 +81,7 @@
     {
         _badgeAdded++;
         NavController.RequestTabBadgeUpdate(
-            new PageStackTabBadgeUpdateRequestedEventArgs("/blazor/examples/page-stack/tab3", content: _badgeAdded));
+            new PageStackTabBadgeUpdateRequestedEventArgs("/blazor/examples/page-stack/tab3", badge: _badgeAdded));
     }
 
     public void Dispose()
