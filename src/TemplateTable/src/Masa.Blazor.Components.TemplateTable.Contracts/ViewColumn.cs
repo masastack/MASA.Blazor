@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Masa.Blazor.Components.TemplateTable;
+namespace Masa.Blazor.Components.TemplateTable.Contracts;
 
 public class ViewColumn
 {

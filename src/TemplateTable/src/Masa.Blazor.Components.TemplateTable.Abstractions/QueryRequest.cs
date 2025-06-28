@@ -1,8 +1,8 @@
-﻿namespace Masa.Blazor.Components.TemplateTable.Core;
+﻿namespace Masa.Blazor.Components.TemplateTable.Abstractions;
 
 public struct QueryRequest
 {
-    internal QueryRequest(string queryBody,
+    public QueryRequest(string queryBody,
         string countField,
         Filter? filter,
         Sort? sort,

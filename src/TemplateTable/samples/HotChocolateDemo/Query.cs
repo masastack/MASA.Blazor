@@ -1,6 +1,4 @@
 ﻿using System.Text.Json;
-using Masa.Blazor.Components.TemplateTable;
-using Masa.Blazor.Components.TemplateTable.ColumnConfigs;
 using Path = System.IO.Path;
 
 namespace HotChocolateDemo;

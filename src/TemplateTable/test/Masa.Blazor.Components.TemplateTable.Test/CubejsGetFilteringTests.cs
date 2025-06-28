@@ -1,5 +1,4 @@
-﻿using Masa.Blazor.Components.TemplateTable;
-using Masa.Blazor.Components.TemplateTable.Core;
+﻿using Masa.Blazor.Components.TemplateTable.Contracts;
 using Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL;
 
 namespace Masa.Blazor.Test.TemplateTable;

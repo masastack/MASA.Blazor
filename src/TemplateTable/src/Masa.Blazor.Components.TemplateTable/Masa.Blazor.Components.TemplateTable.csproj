@@ -6,22 +6,16 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
-
     <ItemGroup>
         <SupportedPlatform Include="browser"/>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.7"/>
-
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Masa.Blazor.Components.TemplateTable.Core\Masa.Blazor.Components.TemplateTable.Core.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <UpToDateCheckInput Remove="ColumnConfigs\Actions\ActionsConfigInput.razor" />
+      <ProjectReference Include="..\Masa.Blazor.Components.TemplateTable.Abstractions\Masa.Blazor.Components.TemplateTable.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>

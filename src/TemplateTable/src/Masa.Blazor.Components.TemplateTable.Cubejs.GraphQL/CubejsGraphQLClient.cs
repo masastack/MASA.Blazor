@@ -2,7 +2,8 @@
 using GraphQL;
 using GraphQL.Client.Abstractions.Utilities;
 using GraphQL.Client.Http;
-using Masa.Blazor.Components.TemplateTable.Core;
+using Masa.Blazor.Components.TemplateTable.Abstractions;
+using Masa.Blazor.Components.TemplateTable.Contracts;
 
 [assembly: InternalsVisibleTo("Masa.Blazor.Components.TemplateTable.Test")]
 
@@ -10,20 +11,20 @@ namespace Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL;
 
 public class CubejsGraphQLClient(GraphQLHttpClient httpClient) : IGraphQLClient
 {
-    public async Task<Result> QueryAsync(QueryRequest request)
+    public async Task<QueryResult> QueryAsync(QueryRequest request)
     {
         var (itemsQuery, countQuery) = GetQuery(request);
 
         var itemsResponse = await httpClient.SendQueryAsync<CubejsQueryResult>(new GraphQLRequest(itemsQuery));
         if (itemsResponse.Errors?.Length > 0)
         {
-            return new Result(itemsResponse.Errors);
+            return new QueryResult(itemsResponse.Errors);
         }
 
         var countResponse = await httpClient.SendQueryAsync<CubejsQueryResult>(new GraphQLRequest(countQuery));
         if (countResponse.Errors?.Length > 0)
         {
-            return new Result(countResponse.Errors);
+            return new QueryResult(countResponse.Errors);
         }
 
         long total = 0;
@@ -33,7 +34,7 @@ public class CubejsGraphQLClient(GraphQLHttpClient httpClient) : IGraphQLClient
             total = countItem[request.CountField].GetInt64();
         }
 
-        return new Result(itemsResponse.Data.Items, total, null);
+        return new QueryResult(itemsResponse.Data.Items, total, null);
     }
 
     internal static (string itemsQuery, string countQuery) GetQuery(QueryRequest request)
@@ -179,50 +180,50 @@ public class CubejsGraphQLClient(GraphQLHttpClient httpClient) : IGraphQLClient
         CubejsFilter filter;
         string? expected;
         ExpectedType type;
-        if (option.Func == StandardFilter.NotSet)
+        switch (option.Func)
         {
-            filter = CubejsFilter.Set;
-            expected = "false";
-            type = ExpectedType.Boolean;
-        }
-        else if (option.Func == StandardFilter.True)
-        {
-            filter = CubejsFilter.Equals;
-            expected = "true";
-            type = ExpectedType.String;
-        }
-        else if (option.Func == StandardFilter.False)
-        {
-            filter = CubejsFilter.Equals;
-            expected = "false";
-            type = ExpectedType.String;
-        }
-        else
-        {
-            filter = option.Func switch
-            {
-                StandardFilter.Equals => CubejsFilter.Equals,
-                StandardFilter.NotEquals => CubejsFilter.NotEquals,
-                // StandardFilter.In => CubejsFilter.In,
-                // StandardFilter.NotIn => CubejsFilter.NotIn,
-                StandardFilter.Contains => CubejsFilter.Contains,
-                StandardFilter.NotContains => CubejsFilter.NotContains,
-                StandardFilter.StartsWith => CubejsFilter.StartsWith,
-                StandardFilter.NotStartsWith => CubejsFilter.NotStartsWith,
-                StandardFilter.EndsWith => CubejsFilter.EndsWith,
-                StandardFilter.NotEndsWith => CubejsFilter.NotEndsWith,
-                StandardFilter.Gt => CubejsFilter.Gt,
-                StandardFilter.Gte => CubejsFilter.Gte,
-                StandardFilter.Lt => CubejsFilter.Lt,
-                StandardFilter.Lte => CubejsFilter.Lte,
-                StandardFilter.BeforeDate => CubejsFilter.BeforeDate,
-                StandardFilter.BeforeOrOnDate => CubejsFilter.BeforeOrOnDate,
-                StandardFilter.AfterDate => CubejsFilter.AfterDate,
-                StandardFilter.AfterOrOnDate => CubejsFilter.AfterOrOnDate,
-                _ => throw new ArgumentOutOfRangeException(nameof(option.Func), option.Func, null)
-            };
-            expected = option.Expected;
-            type = option.Type;
+            case StandardFilter.NotSet:
+                filter = CubejsFilter.Set;
+                expected = "false";
+                type = ExpectedType.Boolean;
+                break;
+            case StandardFilter.True:
+                filter = CubejsFilter.Equals;
+                expected = "true";
+                type = ExpectedType.String;
+                break;
+            case StandardFilter.False:
+                filter = CubejsFilter.Equals;
+                expected = "false";
+                type = ExpectedType.String;
+                break;
+            default:
+                filter = option.Func switch
+                {
+                    StandardFilter.Set => CubejsFilter.Set,
+                    StandardFilter.Equals => CubejsFilter.Equals,
+                    StandardFilter.NotEquals => CubejsFilter.NotEquals,
+                    // StandardFilter.In => CubejsFilter.In,
+                    // StandardFilter.NotIn => CubejsFilter.NotIn,
+                    StandardFilter.Contains => CubejsFilter.Contains,
+                    StandardFilter.NotContains => CubejsFilter.NotContains,
+                    StandardFilter.StartsWith => CubejsFilter.StartsWith,
+                    StandardFilter.NotStartsWith => CubejsFilter.NotStartsWith,
+                    StandardFilter.EndsWith => CubejsFilter.EndsWith,
+                    StandardFilter.NotEndsWith => CubejsFilter.NotEndsWith,
+                    StandardFilter.Gt => CubejsFilter.Gt,
+                    StandardFilter.Gte => CubejsFilter.Gte,
+                    StandardFilter.Lt => CubejsFilter.Lt,
+                    StandardFilter.Lte => CubejsFilter.Lte,
+                    StandardFilter.BeforeDate => CubejsFilter.BeforeDate,
+                    StandardFilter.BeforeOrOnDate => CubejsFilter.BeforeOrOnDate,
+                    StandardFilter.AfterDate => CubejsFilter.AfterDate,
+                    StandardFilter.AfterOrOnDate => CubejsFilter.AfterOrOnDate,
+                    _ => throw new ArgumentOutOfRangeException(nameof(option.Func), option.Func, null)
+                };
+                expected = option.Expected;
+                type = option.Type;
+                break;
         }
 
         return (filter.ToString().ToCamelCase(), FormatExpected(type, expected));

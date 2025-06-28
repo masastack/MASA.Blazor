@@ -1,11 +1,6 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Security.Cryptography;
 using System.Text.Json;
 using HotChocolate.Types.Pagination;
 using HotChocolateDemo;
-using Masa.Blazor.Components.TemplateTable;
-using Masa.Blazor.Components.TemplateTable.ColumnConfigs;
-using Microsoft.AspNetCore.Authorization;
 using Path = System.IO.Path;
 
 var builder = WebApplication.CreateBuilder(args);

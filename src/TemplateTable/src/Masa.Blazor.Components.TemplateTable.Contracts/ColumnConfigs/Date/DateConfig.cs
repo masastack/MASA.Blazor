@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Components.TemplateTable.ColumnConfigs;
+﻿namespace Masa.Blazor.Components.TemplateTable.Contracts;
 
 public class DateConfig
 {

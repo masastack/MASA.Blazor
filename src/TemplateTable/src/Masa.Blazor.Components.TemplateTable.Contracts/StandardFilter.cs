@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Components.TemplateTable.Core;
+﻿namespace Masa.Blazor.Components.TemplateTable.Contracts;
 
 public enum StandardFilter
 {

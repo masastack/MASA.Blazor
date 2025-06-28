@@ -1,4 +1,4 @@
-﻿using Masa.Blazor.Components.TemplateTable.Core;
+﻿using Masa.Blazor.Components.TemplateTable.Abstractions;
 using Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL;
 
 namespace Microsoft.Extensions.DependencyInjection;

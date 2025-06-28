@@ -1,11 +1,10 @@
-﻿using Masa.Blazor.Components.TemplateTable;
-using Masa.Blazor.Components.TemplateTable.Contracts;
-using Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL;
+﻿using Masa.Blazor.Components.TemplateTable.Contracts;
+using Masa.Blazor.Components.TemplateTable.HotChocolate;
 
 namespace Masa.Blazor.Test.TemplateTable;
 
 [TestClass]
-public class CubejsGetSortingTests
+public class HotChocolateGetSortingTests
 {
     [TestMethod]
     public void GetSorting_SingleAscOption()
@@ -22,9 +21,9 @@ public class CubejsGetSortingTests
             ]
         };
 
-        var expected = """orderBy: {name: asc}""";
+        var expected = """order: {name: ASC}""";
 
-        var actual = CubejsGraphQLClient.GetSorting(sortRequest);
+        var actual = HotChocolateGraphQLClient.GetSorting(sortRequest);
         Assert.AreEqual(expected, actual);
     }
 
@@ -43,9 +42,9 @@ public class CubejsGetSortingTests
             ]
         };
 
-        var expected = """orderBy: {name: desc}""";
+        var expected = """order: {name: DESC}""";
 
-        var actual = CubejsGraphQLClient.GetSorting(sortRequest);
+        var actual = HotChocolateGraphQLClient.GetSorting(sortRequest);
         Assert.AreEqual(expected, actual);
     }
 
@@ -69,9 +68,9 @@ public class CubejsGetSortingTests
             ]
         };
 
-        var expected = """orderBy: {name: asc, age: desc}""";
+        var expected = """order: {name: ASC, age: DESC}""";
 
-        var actual = CubejsGraphQLClient.GetSorting(sortRequest);
+        var actual = HotChocolateGraphQLClient.GetSorting(sortRequest);
         Assert.AreEqual(expected, actual);
     }
 
@@ -83,10 +82,10 @@ public class CubejsGetSortingTests
             Options = []
         };
 
-        var actual = CubejsGraphQLClient.GetSorting(sortRequest);
+        var actual = HotChocolateGraphQLClient.GetSorting(sortRequest);
         Assert.IsNull(actual);
 
-        var actual2 = CubejsGraphQLClient.GetSorting(null);
+        var actual2 = HotChocolateGraphQLClient.GetSorting(null);
         Assert.IsNull(actual2);
     }
 
@@ -99,22 +98,22 @@ public class CubejsGetSortingTests
             [
                 new SortOption()
                 {
-                    ColumnId = "datekey.value",
+                    ColumnId = "datekey",
                     OrderBy = SortOrder.Asc,
                     Type = ExpectedType.DateTime
                 },
                 new SortOption()
                 {
-                    ColumnId = "user.info.createdAt.value",
+                    ColumnId = "user.info.createdAt",
                     OrderBy = SortOrder.Desc,
                     Type = ExpectedType.DateTime
                 }
             ]
         };
 
-        var expected = "orderBy: {datekey: asc, user: {info: {createdAt: desc}}}";
+        var expected = "order: {datekey: ASC, user: {info: {createdAt: DESC}}}";
 
-        var actual = CubejsGraphQLClient.GetSorting(sortRequest);
+        var actual = HotChocolateGraphQLClient.GetSorting(sortRequest);
         Assert.AreEqual(expected, actual);
     }
 
@@ -134,9 +133,9 @@ public class CubejsGetSortingTests
             ]
         };
 
-        var expected = "orderBy: {user: {position: {name: asc}}}";
+        var expected = "order: {user: {position: {name: ASC}}}";
 
-        var actual = CubejsGraphQLClient.GetSorting(sortRequest);
+        var actual = HotChocolateGraphQLClient.GetSorting(sortRequest);
         Assert.AreEqual(expected, actual);
     }
 }

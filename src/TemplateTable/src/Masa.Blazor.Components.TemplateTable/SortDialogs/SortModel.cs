@@ -1,6 +1,4 @@
-﻿using Masa.Blazor.Components.TemplateTable.Core;
-
-namespace Masa.Blazor.Components.TemplateTable.SortDialogs;
+﻿namespace Masa.Blazor.Components.TemplateTable.SortDialogs;
 
 public class SortModel : SortOption
 {

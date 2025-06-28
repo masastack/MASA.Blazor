@@ -1,7 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Text.Json.Serialization;
-
-namespace Masa.Blazor.Components.TemplateTable;
+﻿namespace Masa.Blazor.Components.TemplateTable;
 
 // TODO: rename this
 internal class SheetInfo
@@ -29,7 +26,7 @@ internal class SheetInfo
     /// <summary>
     /// The options for pagination.
     /// </summary>
-    public Pagination Pagination { get; set; } = new();
+    public Contracts.Pagination Pagination { get; set; } = new();
 
     /// <summary>
     /// The identifier of the row item.

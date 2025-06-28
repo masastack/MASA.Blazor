@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Masa.Blazor.Components.TemplateTable.Core\Masa.Blazor.Components.TemplateTable.Core.csproj" />
+      <ProjectReference Include="..\Masa.Blazor.Components.TemplateTable.Abstractions\Masa.Blazor.Components.TemplateTable.Abstractions.csproj" />
     </ItemGroup>
 
     <ItemGroup>

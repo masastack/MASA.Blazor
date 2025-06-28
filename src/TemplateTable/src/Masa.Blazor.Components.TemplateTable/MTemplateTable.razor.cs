@@ -1,8 +1,4 @@
-﻿using GraphQL;
-using GraphQL.Client.Http;
-using Masa.Blazor.Components.TemplateTable.Core;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace Masa.Blazor;
 

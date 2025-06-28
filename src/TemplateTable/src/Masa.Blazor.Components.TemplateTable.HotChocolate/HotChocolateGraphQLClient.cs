@@ -3,7 +3,8 @@ using System.Text;
 using GraphQL;
 using GraphQL.Client.Abstractions.Utilities;
 using GraphQL.Client.Http;
-using Masa.Blazor.Components.TemplateTable.Core;
+using Masa.Blazor.Components.TemplateTable.Abstractions;
+using Masa.Blazor.Components.TemplateTable.Contracts;
 
 [assembly: InternalsVisibleTo("Masa.Blazor.Components.TemplateTable.Test")]
 
@@ -11,17 +12,17 @@ namespace Masa.Blazor.Components.TemplateTable.HotChocolate;
 
 public class HotChocolateGraphQLClient(GraphQLHttpClient httpClient) : IGraphQLClient
 {
-    public async Task<Result> QueryAsync(QueryRequest request)
+    public async Task<QueryResult> QueryAsync(QueryRequest request)
     {
         var itemsQuery = GetQuery(request);
 
         var itemsResponse = await httpClient.SendQueryAsync<HotChocolateQueryResult>(new GraphQLRequest(itemsQuery));
         if (itemsResponse.Errors?.Length > 0)
         {
-            return new Result(itemsResponse.Errors);
+            return new QueryResult(itemsResponse.Errors);
         }
 
-        return new Result(itemsResponse.Data.Result.Items, itemsResponse.Data.Result.Count, null);
+        return new QueryResult(itemsResponse.Data.Result.Items, itemsResponse.Data.Result.Count, null);
     }
 
     internal static string GetQuery(QueryRequest request)
@@ -74,36 +75,32 @@ public class HotChocolateGraphQLClient(GraphQLHttpClient httpClient) : IGraphQLC
             return null;
         }
 
-        var argumentsBuilder = new StringBuilder();
-        var prefix = "where: ";
-        var suffix = "";
-
-        if (filterRequest.Options.Count == 1)
+        var filterItems = filterRequest.Options.Select(option =>
         {
-            var option = filterRequest.Options.First();
             var (func, expected) = GetHotChocolateFilter(option);
-            argumentsBuilder.Append(
-                $"{{{option.ColumnId.ToCamelCase()}: {{{func}: {expected}}}}}");
+            var filterValue = $"{{{func}: {expected}}}";
+
+            var parts = option.ColumnId.Split('.');
+            for (var i = parts.Length - 1; i >= 0; i--)
+            {
+                filterValue = $"{{{parts[i].ToCamelCase()}: {filterValue}}}";
+            }
+
+            return filterValue;
+        });
+
+        string filterContent;
+        if (filterRequest.Options.Count > 1)
+        {
+            var op = filterRequest.Operator.ToString().ToLowerInvariant();
+            filterContent = $"{{{op}: [{string.Join(", ", filterItems)}]}}";
         }
         else
         {
-            foreach (var option in filterRequest.Options)
-            {
-                var (func, expected) = GetHotChocolateFilter(option);
-                argumentsBuilder.Append(
-                    $"{{{option.ColumnId.ToCamelCase()}: {{{func}: {expected}}}}}, ");
-            }
-
-            argumentsBuilder.Remove(argumentsBuilder.Length - 2, 2);
+            filterContent = filterItems.First();
         }
 
-        if (filterRequest.Options.Count > 1)
-        {
-            prefix += $"{{{filterRequest.Operator.ToString().ToLowerInvariant()}: [";
-            suffix = "]}" + suffix;
-        }
-
-        return prefix + argumentsBuilder + suffix;
+        return $"where: {filterContent}";
     }
 
     internal static string? GetSorting(Sort? sortRequest)
@@ -113,11 +110,19 @@ public class HotChocolateGraphQLClient(GraphQLHttpClient httpClient) : IGraphQLC
             return null;
         }
 
-        List<string> arguments = new();
+        var arguments = new List<string>();
 
         foreach (var option in sortRequest.Options)
         {
-            arguments.Add($"{option.ColumnId.ToCamelCase()}: {option.OrderBy.ToString().ToUpperInvariant()}");
+            var parts = option.ColumnId.Split('.');
+            var sorting = $"{option.OrderBy.ToString().ToUpperInvariant()}";
+
+            for (var i = parts.Length - 1; i >= 0; i--)
+            {
+                sorting = $"{{{parts[i].ToCamelCase()}: {sorting}}}";
+            }
+
+            arguments.Add(sorting.Substring(1, sorting.Length - 2));
         }
 
         return $"order: {{{string.Join(", ", arguments)}}}";

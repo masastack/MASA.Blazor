@@ -1,5 +1,5 @@
 ﻿using Masa.Blazor.Components.TemplateTable;
-using Masa.Blazor.Components.TemplateTable.Core;
+using Masa.Blazor.Components.TemplateTable.Contracts;
 using Masa.Blazor.Components.TemplateTable.HotChocolate;
 
 namespace Masa.Blazor.Test.TemplateTable;
@@ -121,7 +121,7 @@ public class HotChocolateGetFilteringTests
         var actual = HotChocolateGraphQLClient.GetFiltering(filterRequest);
         Assert.AreEqual(expected, actual);
     }
-    
+
     [TestMethod]
     public void GetFiltering_Set()
     {

@@ -1,6 +1,4 @@
-﻿using Masa.Blazor.Components.TemplateTable.Core;
-
-namespace Masa.Blazor.Components.TemplateTable.FilterDialogs;
+﻿namespace Masa.Blazor.Components.TemplateTable.FilterDialogs;
 
 public class FilterModel : FilterOption
 {
