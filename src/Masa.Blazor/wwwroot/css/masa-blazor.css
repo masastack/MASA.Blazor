@@ -21149,7 +21149,7 @@ html.overflow-y-hidden {
     flex-direction: column-reverse;
     height: inherit;
 }
-.m-item-group.m-bottom-navigation .m-btn .m-btn__content > *:not(.m-icon) {
+.m-item-group.m-bottom-navigation .m-btn .m-btn__content > *:not(.m-icon):not(.m-badge) {
     line-height: 1.2;
 }
 .m-item-group.m-bottom-navigation .m-btn.m-btn--active {

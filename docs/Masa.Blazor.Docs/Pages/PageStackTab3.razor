@@ -20,7 +20,7 @@
                       Language="html"
                       Style="font-size: 10px">
     </MSyntaxHighlight>
-    
+
     <MDivider Class="my-2"/>
 
     <MButton Outlined Class="text-capitalize" OnClick="@AddBadge">
@@ -60,7 +60,8 @@
             return;
         }
 
-        if (e.TargetHref?.Equals("/blazor/examples/page-stack/tab3", StringComparison.OrdinalIgnoreCase) is not true)
+        // Here we check the TabRule
+        if (e.TargetTab != PageStackLayout.TabRule3)
         {
             return;
         }
@@ -74,14 +75,13 @@
         await Task.Delay(2000);
 
         _badgeAdded = 0;
-        NavController.RequestTabBadgeClear("/blazor/examples/page-stack/tab3");
+        NavController.RequestTabBadgeClear(PageStackLayout.TabRule3);
     }
 
     private void AddBadge()
     {
         _badgeAdded++;
-        NavController.RequestTabBadgeUpdate(
-            new PageStackTabBadgeUpdateRequestedEventArgs("/blazor/examples/page-stack/tab3", badge: _badgeAdded));
+        NavController.RequestTabBadgeUpdate(new PageStackTabBadgeUpdateRequestedEventArgs(PageStackLayout.TabRule3, badge: _badgeAdded));
     }
 
     public void Dispose()

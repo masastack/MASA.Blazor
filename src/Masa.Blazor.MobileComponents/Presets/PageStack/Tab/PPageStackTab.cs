@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Presets.PageStack.NavController;
+﻿using Masa.Blazor.Presets.PageStack;
+using Masa.Blazor.Presets.PageStack.NavController;
 using Microsoft.AspNetCore.Components.Rendering;
 
 namespace Masa.Blazor.Presets;
@@ -18,7 +19,9 @@ public class PPageStackTab : ComponentBase, IDisposable
 
     [Parameter] public EventCallback<string?> OnNavigate { get; set; }
 
-    [Parameter] [EditorRequired] public string? Href { get; set; }
+    [Parameter] [EditorRequired] public string Href { get; set; } = null!;
+
+    [Parameter] [EditorRequired] public TabRule TabRule { get; set; } = null!;
 
     /// <summary>
     /// Initialize the badge for the tab.
@@ -34,7 +37,11 @@ public class PPageStackTab : ComponentBase, IDisposable
     {
         base.OnParametersSet();
 
+        ArgumentNullException.ThrowIfNull(TabRule, nameof(TabRule));
+        ArgumentNullException.ThrowIfNull(Href, nameof(Href));
+
         _context.Attrs["href"] = Href;
+        _context.Attrs["matchPattern"] = TabRule.Pattern;
 
         if (!_flagForInitBadge && InitialBadge is not null)
         {
@@ -57,7 +64,7 @@ public class PPageStackTab : ComponentBase, IDisposable
     private void InternalPageStackNavControllerOnTabBadgeUpdated(object? sender,
         PageStackTabBadgeUpdateRequestedEventArgs e)
     {
-        if (Href?.Equals(e.TargetHref, StringComparison.OrdinalIgnoreCase) is not true)
+        if (e.TargetTab != TabRule)
         {
             return;
         }
@@ -81,9 +88,9 @@ public class PPageStackTab : ComponentBase, IDisposable
         }
 
         var tabPath = _internalPageStackNavController?.LastVisitedTabPath ?? NavigationManager.GetAbsolutePath();
-        if (tabPath.Equals(Href, StringComparison.OrdinalIgnoreCase))
+        if (TabRule.Regex.IsMatch(tabPath))
         {
-            _internalPageStackNavController?.NotifyTabRefresh(Href);
+            _internalPageStackNavController?.NotifyTabRefresh(TabRule);
             return;
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace Masa.Blazor.Presets.PageStack.NavController;
 
-public class PageStackTabRefreshRequestedEventArgs(string targetHref) : EventArgs
+public class PageStackTabRefreshRequestedEventArgs(TabRule targetTab) : EventArgs
 {
-    public string? TargetHref { get; } = targetHref;
+    public TabRule? TargetTab { get; } = targetTab;
 }
