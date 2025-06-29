@@ -175,8 +175,7 @@ public partial class BaseLayout
         var uri = NavigationManager.BaseUri.Replace("http://", "").Replace("https://", "").TrimEnd('/');
         _env = uri switch
         {
-            "docs.masastack.com" or "blazor.masastack.com" => "prd_",
-            "blazor-dev.masastack.com" or "docs-dev.masastack.com" => "dev_",
+            "docs.masastack.com" => "prd_",
             _ => "local_"
         };
     }
