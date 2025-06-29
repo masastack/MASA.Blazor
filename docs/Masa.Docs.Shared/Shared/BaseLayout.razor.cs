@@ -109,7 +109,8 @@ public partial class BaseLayout
         if (_project is not null && _projectMap.TryGetValue(_project, out _projectInfo)) return;
 
         _projectInfo = new Project(
-            "MASA Stack",
+            Key: null,
+            "MASA Docs",
             null,
             "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,h_24,m_lfit",
             "https://github.com/masastack");
@@ -174,9 +175,9 @@ public partial class BaseLayout
         var uri = NavigationManager.BaseUri.Replace("http://", "").Replace("https://", "").TrimEnd('/');
         _env = uri switch
         {
-            "docs.masastack.com" or "blazor.masastack.com"         => "prd_",
+            "docs.masastack.com" or "blazor.masastack.com" => "prd_",
             "blazor-dev.masastack.com" or "docs-dev.masastack.com" => "dev_",
-            _                                                      => "local_"
+            _ => "local_"
         };
     }
 
