@@ -2,7 +2,7 @@
 
 public class EChartsJSModule : JSModule
 {
-    public EChartsJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/proxies/echarts-proxy.js")
+    public EChartsJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/wrappers/echarts.js")
     {
     }
 

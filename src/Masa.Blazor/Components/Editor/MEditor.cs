@@ -107,7 +107,7 @@ public partial class MEditor : MasaComponentBase
     {
         _objRef = DotNetObjectReference.Create(this);
         _quillHelper =
-            await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/proxies/quill/quill-helper.js");
+            await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/wrappers/quill/quill-helper.js");
 
         await _quillHelper.InvokeVoidAsync("init",
             ContentRef,

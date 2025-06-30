@@ -2,7 +2,7 @@
 {
     public class BaiduMapJSModule : JSModule
     {
-        public BaiduMapJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/proxies/baidumap-proxy.js")
+        public BaiduMapJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/wrappers/baidumap.js")
         {
         }
 

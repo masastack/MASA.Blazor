@@ -71,7 +71,7 @@ public class JSManifestGenerator : IIncrementalGenerator
 
     private static string SanitizeIdentifier(string key)
     {
-        if (key.StartsWith("components/") || key.StartsWith("mixins/") || key.StartsWith("proxies/"))
+        if (key.StartsWith("components/") || key.StartsWith("mixins/") || key.StartsWith("wrappers/"))
         {
             key = key[(key.IndexOf('/') + 1)..];
         }
