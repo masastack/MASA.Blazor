@@ -60,6 +60,7 @@ dotnet add package MASA.Blazor.MobileComponents
     +     .AddMobileComponents();
      ```
   - **PageStackBarInit** component has been deprecated, use **PPageStackBar** instead. No longer need to force re-render by setting `RerenderKey`.
+  - The latest recommended usage can be found in the [example source code](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Shared/PageStackLayout.razor).
 
 #### Swiper
 

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
+using Masa.Blazor.Presets.PageStack;
 using Masa.Blazor.Presets.PageStack.NavController;
 
 namespace Masa.Blazor.Presets;
@@ -321,9 +322,13 @@ public class PageStackNavController
         TabChanged?.Invoke(this, new PageStackTabChangedEventArgs(currentTabPath, currentTabPattern.IsMatch));
     }
 
-    internal void NotifyTabRefresh(string targetHref)
+    /// <summary>
+    /// Request a refresh for the specified tab.
+    /// </summary>
+    /// <param name="targetTab"></param>
+    internal void NotifyTabRefresh(TabRule targetTab)
     {
-        TabRefreshRequested?.Invoke(this, new PageStackTabRefreshRequestedEventArgs(targetHref));
+        TabRefreshRequested?.Invoke(this, new PageStackTabRefreshRequestedEventArgs(targetTab));
     }
 
     /// <summary>
@@ -338,10 +343,10 @@ public class PageStackNavController
     /// <summary>
     /// Request to clear a badge for a specific tab.
     /// </summary>
-    /// <param name="targetHref">The tab href to clear the badge for.</param>
-    public void RequestTabBadgeClear(string targetHref)
+    /// <param name="targetTab"></param>
+    public void RequestTabBadgeClear(TabRule targetTab)
     {
-        TabBadgeUpdated?.Invoke(this, PageStackTabBadgeUpdateRequestedEventArgs.CreateClearEventArgs(targetHref));
+        TabBadgeUpdated?.Invoke(this, PageStackTabBadgeUpdateRequestedEventArgs.CreateClearEventArgs(targetTab));
     }
 
     /// <summary>
