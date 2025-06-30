@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Attributes;
+﻿using System.Diagnostics.CodeAnalysis;
+using Masa.Blazor.Attributes;
 using Masa.Blazor.Core;
 using Masa.Blazor.JSComponents.DriverJS;
 using Microsoft.AspNetCore.Components;
@@ -11,6 +12,8 @@ public partial class MDriverJS : DisposableComponentBase
     [Inject] private IJSRuntime JSRuntime { get; set; } = null!;
 
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
+
+    [Inject] private I18n I18n { get; set; } = null!;
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
@@ -39,6 +42,10 @@ public partial class MDriverJS : DisposableComponentBase
     public float OverlayOpacity { get; set; } = 0.25f;
 
     [Parameter]
+    [MasaApiParameter(OverlayClickBehavior.Close, ReleasedIn = "v1.10.0")]
+    public OverlayClickBehavior OverlayClickBehavior { get; set; }
+
+    [Parameter]
     [MasaApiParameter(10)]
     public int StagePadding { get; set; } = 10;
 
@@ -59,21 +66,31 @@ public partial class MDriverJS : DisposableComponentBase
     public int PopoverOffset { get; set; } = 10;
 
     [Parameter]
-    [MasaApiParameter(new[] { "next", "previous", "close" })]
-    public string[]? ShowButtons { get; set; } = ["next", "previous", "close"];
+    [MasaApiParameter("[\"previous\", \"next\", \"close\"]", ReleasedIn = "v1.10.0")]
+    public PopoverButton[] ShowButtons { get; set; } =
+        [PopoverButton.Previous, PopoverButton.Next, PopoverButton.Close];
 
-    // disableButtons seems not working, not expose it for now, the version I tested is 1.3.5
-    // [Parameter] public string[]? DisableButtons { get; set; }
+    [Parameter] public PopoverButton[] DisableButtons { get; set; } = [];
 
     [Parameter] public bool ShowProgress { get; set; }
 
     [Parameter] public string? ProgressText { get; set; }
 
-    [Parameter] public string? NextBtnText { get; set; }
+    [Parameter]
+    [MasaApiParameter(DefaultNextBtnText)]
+    public string? NextBtnText { get; set; } = DefaultNextBtnText;
 
-    [Parameter] public string? PrevBtnText { get; set; }
+    [Parameter]
+    [MasaApiParameter(DefaultPrevBtnText)]
+    public string? PrevBtnText { get; set; } = DefaultPrevBtnText;
 
-    [Parameter] public string? DoneBtnText { get; set; }
+    [Parameter]
+    [MasaApiParameter(DefaultDoneBtnText)]
+    public string? DoneBtnText { get; set; } = DefaultDoneBtnText;
+
+    private const string DefaultNextBtnText = "$masaBlazor.driverjs.next";
+    private const string DefaultPrevBtnText = "$masaBlazor.driverjs.prev";
+    private const string DefaultDoneBtnText = "$masaBlazor.driverjs.done";
 
     private bool _initSteps;
     private bool _hasRendered;
@@ -100,10 +117,25 @@ public partial class MDriverJS : DisposableComponentBase
     /// <summary>
     /// Highlight an element.
     /// </summary>
-    /// <param name="step"></param>
+    /// <param name="selector"></param>
+    /// <param name="popover"></param>
     [MasaApiParameter]
-    public void Highlight(DriverStep step)
-        => _ = _importJSObjectReference?.InvokeVoidAsync("highlight", GetConfig(), step).ConfigureAwait(false);
+    [SuppressMessage("Usage", "BL0005:Component parameter should not be set outside of its component.")]
+    public void Highlight(string selector, Action<Popover> popover)
+    {
+        var defaultPopover = new Popover()
+        {
+            ShowButtons = [PopoverButton.Close],
+            NextBtnText = I18n.T(DefaultDoneBtnText), // Use done button for single highlight
+            PrevBtnText = I18n.T(DefaultPrevBtnText),
+        };
+
+        popover(defaultPopover);
+
+        var step = new DriverStep(selector, defaultPopover);
+
+        _ = _importJSObjectReference?.InvokeVoidAsync("highlight", GetConfig(), step).ConfigureAwait(false);
+    }
 
     /// <summary>
     /// Start the driver.
@@ -153,12 +185,11 @@ public partial class MDriverJS : DisposableComponentBase
             return;
         }
 
-        var steps = _steps.Select(s => new DriverStep(s.Element, new Popover(
-            s.Title,
-            s.Description,
-            s.Side,
-            s.Align,
-            s.PopoverClass))).ToArray();
+        var steps = _steps.Select(s =>
+        {
+            var popover = s as Popover;
+            return new DriverStep(s.Element, popover!);
+        }).ToArray();
 
         await _importJSObjectReference.InvokeVoidAsync("drive", GetConfig(steps), stepIndex);
     }
@@ -168,8 +199,13 @@ public partial class MDriverJS : DisposableComponentBase
         var overlayColor = OverlayColor;
         if (string.IsNullOrWhiteSpace(overlayColor))
         {
-            overlayColor = MasaBlazor.Theme.CurrentTheme.InverseSurface ?? (MasaBlazor.Theme.Dark ? "light" : "dark");
+            overlayColor = MasaBlazor.Theme.CurrentTheme.InverseSurface ??
+                           (MasaBlazor.Theme.CurrentTheme.IsDarkScheme ? "light" : "dark");
         }
+
+        var nextBtnText = I18n.T(DefaultNextBtnText);
+        var prevBtnText = I18n.T(DefaultPrevBtnText);
+        var doneBtnText = I18n.T(DefaultDoneBtnText);
 
         return new Config(
             steps,
@@ -178,6 +214,7 @@ public partial class MDriverJS : DisposableComponentBase
             SmoothScroll,
             AllowClose,
             OverlayOpacity,
+            OverlayClickBehavior,
             StagePadding,
             StageRadius,
             AllowKeyboardControl,
@@ -185,12 +222,12 @@ public partial class MDriverJS : DisposableComponentBase
             PopoverClass,
             PopoverOffset,
             ShowButtons,
-            // DisableButtons,
+            DisableButtons,
             ShowProgress,
             ProgressText,
-            NextBtnText,
-            PrevBtnText,
-            DoneBtnText
+            nextBtnText,
+            prevBtnText,
+            doneBtnText
         );
     }
 

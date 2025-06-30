@@ -1,16 +1,5 @@
 ﻿using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Masa.Blazor.JSInterop;
 
-public class JsonCamelStringEnumConverter : JsonStringEnumConverter
-{
-    public JsonCamelStringEnumConverter() : base(new ToLowerNamingPolicy())
-    {
-    }
-
-    private class ToLowerNamingPolicy : JsonNamingPolicy
-    {
-        public override string ConvertName(string name) => name[..1].ToLower() + name[1..];
-    }
-}
+public class JsonCamelStringEnumConverter() : JsonStringEnumConverter(JsonNamingPolicy.CamelCase);

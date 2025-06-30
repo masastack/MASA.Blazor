@@ -1,0 +1,25 @@
+﻿@using Masa.Blazor.JSComponents.DriverJS
+
+<MDriverJS OverlayClickBehavior="OverlayClickBehavior.NextStep" @ref="_driverJs">
+    <MDriverJSStep Element="#install-cli pre"
+                   Title="Add the package"
+                   Description="Before using the package, you need to install it."></MDriverJSStep>
+    <MDriverJSStep Element="#install-style pre"
+                   Title="Add the style"
+                   Description="The style is required to use the package."></MDriverJSStep>
+    <MDriverJSStep Element="#usage [aria-label='view-source']"
+                   Title="View source"
+                   Description="You can view the source code of the example."></MDriverJSStep>
+</MDriverJS>
+
+<MButton Color="primary"
+         Class="text-none"
+         OnClick="@(() => _driverJs?.Drive())">
+    Start the tour
+</MButton>
+
+@code {
+
+    private MDriverJS? _driverJs;
+
+}

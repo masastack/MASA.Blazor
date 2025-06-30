@@ -1,21 +1,22 @@
 ﻿using System.Text.Json.Serialization;
 using Masa.Blazor.JSInterop;
+using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor.JSComponents.DriverJS;
 
-public record Popover
+public class Popover
 {
-    public Popover(string? Title,
-        string? Description,
-        PopoverSide Side,
-        PopoverAlign Align,
-        string? PopoverClass)
+    public Popover(string? title,
+        string? description,
+        PopoverSide side,
+        PopoverAlign align,
+        string? popoverClass)
     {
-        this.Title = Title;
-        this.Description = Description;
-        this.Side = Side;
-        this.Align = Align;
-        this.PopoverClass = PopoverClass;
+        Title = title;
+        Description = description;
+        Side = side;
+        Align = align;
+        PopoverClass = popoverClass;
     }
 
     public Popover(string title, string description)
@@ -24,26 +25,61 @@ public record Popover
         Description = description;
     }
 
-    public string? Title { get; init; }
-    public string? Description { get; init; }
-
-    [JsonConverter(typeof(JsonCamelStringEnumConverter))]
-    public PopoverSide Side { get; init; }
-
-    [JsonConverter(typeof(JsonCamelStringEnumConverter))]
-    public PopoverAlign Align { get; init; }
-
-    public string? PopoverClass { get; init; }
-
-    public void Deconstruct(out string? Title, out string? Description, out PopoverSide Side, out PopoverAlign Align,
-        out string? PopoverClass)
+    internal Popover()
     {
-        Title = this.Title;
-        Description = this.Description;
-        Side = this.Side;
-        Align = this.Align;
-        PopoverClass = this.PopoverClass;
     }
+
+    [Parameter] public string? Title { get; set; }
+
+    [Parameter] public string? Description { get; set; }
+
+    [JsonConverter(typeof(JsonCamelStringEnumConverter))]
+    [Parameter] public PopoverSide Side { get; set; }
+
+    [JsonConverter(typeof(JsonCamelStringEnumConverter))]
+    [Parameter] public PopoverAlign Align { get; set; }
+
+    [Parameter] public string? PopoverClass { get; set; }
+
+    /// <summary>
+    /// Array of buttons to show in the popover.
+    /// When highlighting a single element, there
+    /// are no buttons by default. When showing
+    /// a tour, the default buttons are "next",
+    /// "previous" and "close".
+    /// </summary>
+    [Parameter]
+    [JsonIgnore]
+    public PopoverButton[]? ShowButtons { get; set; }
+
+    /// <summary>
+    /// An array of buttons to disable. This is
+    /// useful when you want to show some of the
+    /// buttons, but disable some of them.
+    /// </summary>
+    [JsonIgnore]
+    [Parameter]
+    public PopoverButton[]? DisableButtons { get; set; }
+
+    [Parameter]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public string? NextBtnText { get; set; }
+
+    [Parameter]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public string? PrevBtnText { get; set; }
+
+    [Parameter]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public string? DoneBtnText { get; set; }
+
+    [JsonPropertyName("showButtons")]
+    public string[]? ShowButtonsInternal =>
+        ShowButtons?.Select(button => button.ToString().ToLowerInvariant()).ToArray();
+
+    [JsonPropertyName("disableButtons")]
+    public string[]? DisableButtonsInternal =>
+        DisableButtons?.Select(button => button.ToString().ToLowerInvariant()).ToArray();
 }
 
 public enum PopoverSide
@@ -59,4 +95,22 @@ public enum PopoverAlign
     Start,
     Center,
     End
+}
+
+public enum PopoverButton
+{
+    /// <summary>
+    /// The next button.
+    /// </summary>
+    Next,
+
+    /// <summary>
+    /// The previous button.
+    /// </summary>
+    Previous,
+
+    /// <summary>
+    /// The close icon.
+    /// </summary>
+    Close
 }

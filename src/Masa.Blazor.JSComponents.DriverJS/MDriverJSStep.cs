@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.JSComponents.DriverJS;
+﻿using Masa.Blazor.Attributes;
+using Masa.Blazor.JSComponents.DriverJS;
 using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor;
@@ -16,9 +17,19 @@ internal interface IDriverJSStep
     PopoverAlign Align { get; }
 
     string? PopoverClass { get; }
+
+    PopoverButton[] ShowButtons { get; }
+
+    PopoverButton[] DisableButtons { get; }
+
+    string? NextBtnText { get; }
+
+    string? PrevBtnText { get; }
+
+    string? DoneBtnText { get; }
 }
 
-public class MDriverJSStep : IComponent, IDriverJSStep
+public class MDriverJSStep : Popover, IComponent, IDriverJSStep
 {
     [CascadingParameter] public MDriverJS? DriverJS { get; set; }
 
@@ -27,16 +38,6 @@ public class MDriverJSStep : IComponent, IDriverJSStep
     /// If not specified, the popover will be displayed in the center of the screen.
     /// </summary>
     [Parameter] public string? Element { get; set; }
-
-    [Parameter] public string? Title { get; set; }
-
-    [Parameter] public string? Description { get; set; }
-
-    [Parameter] public PopoverSide Side { get; set; }
-
-    [Parameter] public PopoverAlign Align { get; set; }
-
-    [Parameter] public string? PopoverClass { get; set; }
 
     private bool _init;
 
