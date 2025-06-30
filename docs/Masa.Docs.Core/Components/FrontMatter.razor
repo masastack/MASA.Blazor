@@ -1,19 +1,23 @@
 ﻿<div class="d-flex flex-column align-start mb-2 app-heading">
     <h1 class="m-heading text-h3 text-sm-h3" id="@Meta.Title.HashToAnchorString()">@Meta.Title</h1>
-    @if (!string.IsNullOrWhiteSpace(Meta.Tag))
-    {
-        <MChip Class="mt-2 mr-2" Small Color="primary">@Meta.Tag</MChip>
-    }
-    @if (AdditionalTags.Any())
-    {
-        foreach (string item in AdditionalTags)
-        {
-            <MChip Class="mt-2 mr-2" Small Color="primary">@item</MChip>
-        }
-    }
 </div>
 
 <MMarkdownIt Source="@Meta.Description" NoWrapper Scope="desc"></MMarkdownIt>
+
+<div class="@(string.IsNullOrWhiteSpace(Meta.Description) ? "" : "mt-n3") mb-4">
+    @if (!string.IsNullOrWhiteSpace(Meta.Tag))
+    {
+        <MChip Class="mr-2" Small Color="primary">@Meta.Tag</MChip>
+    }
+
+    @if (AdditionalTags.Any())
+    {
+        foreach (var item in AdditionalTags)
+        {
+            <MChip Class="mr-2" Small Color="primary">@item</MChip>
+        }
+    }
+</div>
 
 @ChildContent
 
