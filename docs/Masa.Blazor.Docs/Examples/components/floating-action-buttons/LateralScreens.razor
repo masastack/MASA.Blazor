@@ -1,6 +1,5 @@
 ﻿<MCard Id="lateral">
-    <MToolbar Dark
-              Flat
+    <MToolbar Flat
               Color="indigo">
         <ChildContent>
             <MAppBarNavIcon></MAppBarNavIcon>
@@ -39,7 +38,7 @@
         </MTabsItems>
     </MCardText>
     <FabTransition Mode="@TransitionMode.OutIn">
-        <MButton Color="@GetActiveFabColor()" Fab Large Dark Bottom Left Class="m-btn--example" Key="@GetActiveFabIcon()">
+        <MButton Color="@GetActiveFabColor()" Fab Large Bottom Left Class="m-btn--example" Key="@GetActiveFabIcon()">
             <MIcon> @GetActiveFabIcon() </MIcon>
         </MButton>
     </FabTransition>
@@ -84,4 +83,5 @@
         var activeFab = ComputedActiveFab();
         return activeFab.Icon;
     }
+
 }
