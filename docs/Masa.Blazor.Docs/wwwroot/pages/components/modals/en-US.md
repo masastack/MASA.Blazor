@@ -24,7 +24,11 @@ related:
 
 <masa-example file="Examples.components.modals.Actions"></masa-example>
 
-#### FormModel
+#### FormModel {updated-in=v1.10.0}
+
+`FormModel` property is similar to the `Model` property of the [MForm](/blazor/components/forms) component,
+allowing built-in form validation functionality within the modal. The `OnSave` event is triggered after the form validation passes,
+and the `OnValidating` event provides access to the validation results.
 
 <masa-example file="Examples.components.modals.FormModel"></masa-example>
 

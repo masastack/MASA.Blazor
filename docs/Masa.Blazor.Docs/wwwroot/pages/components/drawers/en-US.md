@@ -4,8 +4,8 @@ desc: ""
 tag: "Preset"
 related:
   - /blazor/components/dialogs
-  - /blazor/components/buttons
-  - /blazor/components/icons
+  - /blazor/components/popup-service
+  - /blazor/components/modals
 ---
 
 ## Usage
@@ -24,11 +24,15 @@ related:
 
 <masa-example file="Examples.components.drawers.Actions"></masa-example>
 
-#### FormModel
+#### FormModel {updated-in=v1.10.0}
+
+`FormModel` property is similar to the `Model` property of the [MForm](/blazor/components/forms) component,
+allowing built-in form validation functionality within the drawer. The `OnSave` event is triggered after the form validation passes,
+and the `OnValidating` event provides access to the validation results.
 
 <masa-example file="Examples.components.drawers.FormModel"></masa-example>
 
-#### Drawer
+#### Left
 
 <masa-example file="Examples.components.drawers.Left"></masa-example>
 
