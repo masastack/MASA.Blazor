@@ -39,7 +39,7 @@ public partial class MWindow : MItemGroup
     private ModifierBuilder _containerModifierBuilder = _block.Element("container").CreateModifierBuilder();
 
     private bool _prevTouchless;
-    private int _useTouchId;
+    private int? _useTouchId;
     private IJSObjectReference? _module;
     private DotNetObjectReference<MWindow>? _dotNetObjectReference;
 
@@ -144,7 +144,7 @@ public partial class MWindow : MItemGroup
     private async Task UseTouchAsync()
     {
         _module = await Js.InvokeAsync<IJSObjectReference>("import", $"./_content/Masa.Blazor/js/{JSManifest.WindowTouchJs}");
-        _useTouchId = await _module.InvokeAsync<int>("useTouch", Ref, new TouchValue(
+        _useTouchId = await _module.InvokeAsync<int?>("useTouch", Ref, new TouchValue(
             new Dictionary<string, AddEventListenerOptions>
             {
                 { "touchstart", new AddEventListenerOptions { Passive = true, StopPropagation = true } }
@@ -285,7 +285,11 @@ public partial class MWindow : MItemGroup
     {
         if (_module is null) return;
 
-        await _module.InvokeVoidAsync("cleanupTouch", Ref, _useTouchId);
+        if (_useTouchId.HasValue)
+        {
+            await _module.InvokeVoidAsync("cleanupTouch", Ref, _useTouchId.Value);
+        }
+
         await _module.DisposeAsync();
         _module = null;
     }

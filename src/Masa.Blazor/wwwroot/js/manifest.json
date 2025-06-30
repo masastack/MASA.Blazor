@@ -6,7 +6,7 @@
   "components/page-stack/touch.js": "components/page-stack/touch-ecbec91c.js",
   "components/scroll-to-target/index.js": "components/scroll-to-target/index-1c14c8ac.js",
   "components/transition/index.js": "components/transition/index-339f8848.js",
-  "components/window/touch.js": "components/window/touch-85990b11.js",
+  "components/window/touch.js": "components/window/touch-f9d2ba92.js",
   "mixins/activatable/index.js": "mixins/activatable/index-82cb7376.js",
   "mixins/intersect/index.js": "mixins/intersect/index-f360c115.js",
   "mixins/outside-click/index.js": "mixins/outside-click/index-47d0ce8d.js",
