@@ -565,7 +565,7 @@
     "services": "Services",
     "misc": "Miscellaneous"
   },
-  "nav-component-group-by-type": "Components grouped by type",
+  "nav-component-group-by-type": "Grouped by type",
   "nav-component-group-by-type-desc": "Group the components in the left navigation by type"
 }
 

@@ -14,9 +14,9 @@ public partial class BaseLayout
     private Project? _projectInfo;
     private CultureInfo? _culture;
     private Dictionary<string, Project> _projectMap = new();
-    private Config? _config;
 
     internal Action? OnAppBarNavIconClick { get; set; }
+    internal Config? Config { get; set; }
 
     protected override void OnInitialized()
     {
@@ -89,7 +89,8 @@ public partial class BaseLayout
 
     private async Task InitConfig()
     {
-        _config = await LocalStorage.GetItemAsync<Config>("masablazor@config");
+        Config = await LocalStorage.GetItemAsync<Config>("masablazor@config")
+                 ?? new Config(false);
     }
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -168,6 +169,12 @@ public partial class BaseLayout
 
         _hideAppBarNavIcon = false;
         StateHasChanged();
+    }
+
+    internal void OnConfigChanged(Config? config)
+    {
+        Config = config;
+        _ = LocalStorage.SetItemAsync("masablazor@config", Config);
     }
 
     private void SetEnv()

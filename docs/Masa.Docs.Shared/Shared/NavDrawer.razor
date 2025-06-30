@@ -1,8 +1,8 @@
 ﻿@inject DocService DocService
-@inject MasaBlazor MasaBlazor
 @inherits NextTickComponentBase
 @implements INavDrawer
 @inject IJSRuntime JSRuntime
+@inject I18n I18n
 
 <MNavigationDrawer Value="Value"
                    ValueChanged="ValueChanged"
@@ -16,11 +16,22 @@
         <CascadingValue Value="this" IsFixed>
             <DefaultList Class="doc-list-nav"
                          Routable
-                         Items="Navs"/>
+                         Items="Navs">
+                <GroupContent>
+                    @if (context == "ui-components")
+                    {
+                        <div class="d-flex align-center justify-space-between"
+                             style="margin-left: 72px; margin-right: 16px; margin-bottom: 8px;">
+                            <span class="text--secondary text-caption">@I18n.T("nav-component-group-by-type")</span>
+                            <NavComponentsTypeSwitch Config="@Config" ConfigChanged="@ConfigChanged" Dense/>
+                        </div>
+                    }
+                </GroupContent>
+            </DefaultList>
         </CascadingValue>
     </ChildContent>
     <AppendContent>
-        <NavDrawerAppend />
+        <NavDrawerAppend/>
     </AppendContent>
 </MNavigationDrawer>
 
@@ -40,6 +51,12 @@
 
     [Parameter]
     public EventCallback<bool?> ValueChanged { get; set; }
+
+    [Parameter]
+    public Config? Config { get; set; }
+
+    [Parameter]
+    public EventCallback<Config?> ConfigChanged { get; set; }
 
     private string? _lastProject;
     private List<NavItem> Navs { get; set; } = new();
@@ -61,14 +78,24 @@
 
             Navs = await DocService.ReadNavsAsync(Project);
 
-            // delay 500ms in docs.js
-            NextTick(() => ScrollIntoView("#nav-drawer"));
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(500);
+                await ScrollIntoView("#nav-drawer");
+            });
         }
     }
 
     private async Task ScrollIntoView(string ancestorSelector)
     {
-        await JSRuntime.InvokeVoidAsync("activeNavItemScrollIntoView", ancestorSelector);
+        var target = $"{ancestorSelector} .m-list-item--active:not(.m-list-group__header)";
+        var container = $"{ancestorSelector} .m-navigation-drawer__content";
+        await JSRuntime.InvokeVoidAsync(
+            JsInteropConstants.ScrollToTarget,
+            target,
+            container,
+            Config?.NavComponentsGroupByType is true ? 48 : 0,
+            "smooth");
     }
 
 }

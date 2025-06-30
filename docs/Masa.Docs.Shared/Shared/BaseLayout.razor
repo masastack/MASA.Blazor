@@ -23,18 +23,17 @@
                                 OnDotClick="@HandleOnDotClick"
                                 OnSettingsClick="@HandleSettingsClick"
                                 HideAppBarNavIcon="@_hideAppBarNavIcon"
-                                ProjectInfo="@_projectInfo"
-                                Config="@_config"/>
+                                ProjectInfo="@_projectInfo"/>
                     </CascadingValue>
 
                     <CascadingValue Value="this" IsFixed>
-                        <CascadingValue Value="@(_config?.NavComponentsGroupByType ?? true)"
+                        <CascadingValue Value="@(Config?.NavComponentsGroupByType ?? true)"
                                         Name="ComponentsGroupByType">
                             @Body
                         </CascadingValue>
                     </CascadingValue>
 
-                    <Settings @bind-Value="_showSettings" @bind-Config="@_config"/>
+                    <Settings @bind-Value="_showSettings" Config="@Config" ConfigChanged="@OnConfigChanged"/>
 
                     <MobileMenuList @bind-Value="_showMobileMenuList"/>
                 </ChildContent>
