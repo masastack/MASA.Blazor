@@ -6,7 +6,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 
 export default defineConfig({
-  input: "./src/proxies/gridstack/index.ts",
+  input: "./src/wrappers/gridstack/index.ts",
   output: [
     {
       file: "../Masa.Blazor.JSComponents.Gridstack/wwwroot/gridstack-interop.js",

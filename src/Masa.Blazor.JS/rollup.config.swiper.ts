@@ -4,7 +4,7 @@ import { terser } from "rollup-plugin-terser";
 import typescript from "@rollup/plugin-typescript";
 
 export default defineConfig({
-  input: "./src/proxies/swiper/index.ts",
+  input: "./src/wrappers/swiper/index.ts",
   output: [
     {
       file: "../MASA.Blazor.JSComponents.Swiper/wwwroot/swiper.js",

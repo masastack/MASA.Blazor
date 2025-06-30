@@ -8,7 +8,7 @@ import typescript from "@rollup/plugin-typescript";
 
 export default defineConfig([
   {
-    input: "./src/proxies/xgplayer/index.ts",
+    input: "./src/wrappers/xgplayer/index.ts",
     output: [
       {
         file: "../MASA.Blazor.JSComponents.Xgplayer/wwwroot/xgplayer.js",

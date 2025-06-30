@@ -2,7 +2,7 @@
 
 public class DrawflowJSModule : JSModule
 {
-    public DrawflowJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/proxies/drawflow-proxy.js")
+    public DrawflowJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/wrappers/drawflow-proxy.js")
     {
     }
 

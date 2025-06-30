@@ -79,7 +79,7 @@ public class MMarkdown : Container
     {
         _objRef = DotNetObjectReference.Create(this);
         _vditorHelper =
-            await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/proxies/vditor/vditor-helper.js");
+            await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor/js/wrappers/vditor/vditor-helper.js");
         await _vditorHelper.InvokeVoidAsync("init", Ref, _objRef, Value, Options, BeforeAllUpload.HasDelegate);
     }
 
