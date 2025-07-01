@@ -133,7 +133,7 @@ export function useTouch(
   const target = value?.parent ? el.parentElement : el;
   const options = value?.options ?? {};
 
-  if (!target) return;
+  if (!target) return null;
 
   const handlers = createHandlers(options, dotnetHelper);
 
