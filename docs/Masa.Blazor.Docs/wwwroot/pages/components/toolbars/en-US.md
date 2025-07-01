@@ -91,9 +91,3 @@ It is possible to update the appearance of a toolbar in response to changes in a
 In this example we offset our card onto the extended content area of a toolbar using the extended prop.
 
 <masa-example file="Examples.components.toolbars.FlexibleAndCardToolbar"></masa-example>
-
-#### Variations
-
-A **MToolbar** has multiple variations that can be applied with themes and helper classes. These range from light and dark themes, colored and transparent.
-
-<masa-example file="Examples.components.toolbars.Variations"></masa-example>

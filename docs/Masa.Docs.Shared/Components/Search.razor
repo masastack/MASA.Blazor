@@ -3,16 +3,15 @@
 @inject IJSRuntime Js
 @inject I18n I18n
 
-<div id="docsearch" style="@Style" class="@Class"></div>
+<div id="docsearch" class="mr-2 @Display"></div>
 
 @code {
 
-
-    [CascadingParameter(Name = "project")]
-    public string? Project { get; set; }
-
     [CascadingParameter(Name = "Env")]
     public string? Env { get; set; }
+
+    [Parameter]
+    public Project? Project { get; set; }
 
     [Parameter]
     public string? Class { get; set; }
@@ -20,11 +19,22 @@
     [Parameter]
     public string? Style { get; set; }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    private Project? _prevProject;
+
+    private string Display => Project?.IsValid is not true ? "d-none" : string.Empty;
+
+    protected override void OnParametersSet()
     {
-        if (firstRender)
+        base.OnParametersSet();
+
+        if (_prevProject != Project)
         {
-            await InitDocSearchAsync();
+            _prevProject = Project;
+
+            if (Project?.IsValid is true)
+            {
+                _ = InitDocSearchAsync();
+            }
         }
     }
 
@@ -32,9 +42,9 @@
     {
         try
         {
-            if (Project is null) return;
+            if (Project?.IsValid is not true) return;
             var currentLanguage = I18n!.Culture.TwoLetterISOLanguageName;
-            var indexName = Env + I18n.Culture.TwoLetterISOLanguageName + "_" + Project;
+            var indexName = Env + I18n.Culture.TwoLetterISOLanguageName + "_" + Project.Key;
             await Js.InvokeVoidAsync("addDocSearch", indexName, currentLanguage, I18n.T("Search"));
         }
         catch
@@ -42,4 +52,5 @@
             // ignored
         }
     }
+
 }

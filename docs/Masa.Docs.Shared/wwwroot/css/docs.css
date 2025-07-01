@@ -627,3 +627,18 @@ app-alert p {
     background-color: rgba(var(--m-theme-surface-container));
     border-color: rgba(var(--m-theme-surface-container));
 }
+
+.typed-list-header {
+  padding-left: 48px;
+  position: sticky;
+  top: 0; 
+  z-index: 1;
+  background-color: rgba(var(--m-theme-surface-container));
+  color: rgba(var(--m-theme-on-surface));
+}
+
+.theme--dark .typed-list-header,
+.theme--light .typed-list-header {
+  background-color: rgba(var(--m-theme-surface));
+  color: rgba(var(--m-theme-on-surface));
+}

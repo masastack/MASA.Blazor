@@ -18,7 +18,7 @@
         }
         else if (item.HasChildren())
         {
-            <DefaultListGroup Item="item"/>
+            <DefaultListGroup Item="item" GroupContent="@GroupContent"/>
         }
         else if (ItemContent != null)
         {
@@ -34,8 +34,6 @@
 
 @code {
 
-    [Inject] private IJSRuntime JS { get; set; } = null!;
-
     [Parameter] public List<TItem> Items { get; set; } = new();
 
     [Parameter] public RenderFragment<TItem>? ItemContent { get; set; }
@@ -43,4 +41,6 @@
     [Parameter] public bool Routable { get; set; }
 
     [Parameter] public string? Class { get; set; }
+
+    [Parameter] public RenderFragment<string?>? GroupContent { get; set; }
 }

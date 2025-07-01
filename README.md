@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://blazor.masastack.com" target="_blank">
+  <a href="https://docs.masastack.com/blazor/getting-started/installation" target="_blank">
     <img alt="MASA Blazor Logo" width="150" src="./imgs/logo.png">
   </a>
 </p>

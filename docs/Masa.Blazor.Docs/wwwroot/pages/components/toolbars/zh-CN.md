@@ -87,9 +87,3 @@ related:
 在本例中，我们使用 `Extended` 属性将卡片偏移到工具栏的扩展内容区域。
 
 <masa-example file="Examples.components.toolbars.FlexibleAndCardToolbar"></masa-example>
-
-#### 变量
-
-**MToolbar** 有多个变量，可以应用主题和辅助类。 这些主题包括浅色和深色的主题、彩色和透明。
-
-<masa-example file="Examples.components.toolbars.Variations"></masa-example>

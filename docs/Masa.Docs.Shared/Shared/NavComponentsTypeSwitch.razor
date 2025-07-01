@@ -1,0 +1,29 @@
+﻿<MSwitch Inset
+         HideDetails="@true"
+         Value="@(Config?.NavComponentsGroupByType ?? false)"
+         ValueChanged="@OnGroupByTypeChange"
+         TValue="bool"
+         Class="mt-0"
+         Dense="@Dense"
+></MSwitch>
+
+@code {
+
+    [Parameter]
+    public bool Dense { get; set; }
+
+    [Parameter]
+    public Config? Config { get; set; }
+
+    [Parameter]
+    public EventCallback<Config?> ConfigChanged { get; set; }
+
+    private async Task OnGroupByTypeChange(bool value)
+    {
+        var newConfig = Config is null
+            ? new Config(value)
+            : Config with { NavComponentsGroupByType = value };
+        await ConfigChanged.InvokeAsync(newConfig);
+    }
+
+}

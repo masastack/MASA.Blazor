@@ -14,10 +14,7 @@
         <MSpacer/>
     }
 
-    @if (ProjectInfo != null)
-    {
-        <Search @ref="_algoliaSearch" Class="mr-2"/>
-    }
+    <Search @ref="_algoliaSearch" Project="@ProjectInfo"/>
 
     <LanguageMenu OnCultureChanged="OnCultureChangedLocal"/>
 
