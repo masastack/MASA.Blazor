@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Presets;
+﻿using Masa.Blazor.Components.Form;
+
+namespace Masa.Blazor.Presets;
 
 public partial class ModalBase
 {
@@ -109,6 +111,14 @@ public partial class ModalBase
     [Parameter]
     public string? DeleteText { get; set; }
 
+    /// <summary>
+    /// Occurs when the form is validating before saving.
+    /// You can get the validation results and handle them as needed.
+    /// </summary>
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.10.0")]
+    public Action<List<FieldValidationResult>?>? OnValidating { get; set; }
+
     [Parameter]
     public EventCallback<ModalActionEventArgs> OnSave { get; set; }
 
@@ -154,7 +164,7 @@ public partial class ModalBase
 
     protected ModalButtonProps? ComputedDeleteButtonProps { get; set; }
 
-    protected virtual string? StaticClass { get; }
+    protected virtual string? StaticClass => null;
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
@@ -221,7 +231,11 @@ public partial class ModalBase
     {
         if (Form != null)
         {
-            if (Form.Validate())
+            var valid = Form.Validate(out var results);
+
+            OnValidating?.Invoke(results);
+
+            if (valid)
             {
                 await _debounceHandleOnSave!(args);
             }
