@@ -45,7 +45,6 @@
             if (Project?.IsValid is not true) return;
             var currentLanguage = I18n!.Culture.TwoLetterISOLanguageName;
             var indexName = Env + I18n.Culture.TwoLetterISOLanguageName + "_" + Project.Key;
-            Console.Out.WriteLine("indexName: " + indexName);
             await Js.InvokeVoidAsync("addDocSearch", indexName, currentLanguage, I18n.T("Search"));
         }
         catch
