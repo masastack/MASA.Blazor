@@ -5,10 +5,10 @@ import resolve from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
 import typescript from "@rollup/plugin-typescript";
 export default defineConfig({
-  input: "./js-module/main.ts",
+  input: "./src/wrappers/driverjs/index.ts",
   output: [
     {
-      file: "wwwroot/MDriverJS.js",
+      file: "../MASA.Blazor.JSComponents.DriverJS/wwwroot/MDriverJS.js",
       format: "esm",
     },
   ],
@@ -17,7 +17,7 @@ export default defineConfig({
     resolve(),
     terser(),
     css({
-      output: "wwwroot/driver.css",
+      output: "driver.css",
     }),
   ],
 });

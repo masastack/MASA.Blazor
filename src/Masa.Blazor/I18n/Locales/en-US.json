@@ -104,7 +104,7 @@
         "year": "Per year"
       },
       "fromTo": "Period start from {0}{2} to {1}{2}",
-      "startFromAndExec":"Start at {0}{2} and execute every {1}{2}",
+      "startFromAndExec": "Start at {0}{2} and execute every {1}{2}",
       "weekDayOfWeek": "The {1} of the {0} week",
       "nearestWorkDayPerMonth": "The nearest working day on the {0} of per month",
       "lastDayOfPerMonth": "The last day of per month",
@@ -161,6 +161,11 @@
       "errorText": "Failed to load",
       "loadingText": "Loading...",
       "loadMoreText": "Load more"
+    },
+    "driverjs": {
+      "next": "Next →",
+      "prev": "← Previous",
+      "done": "Done"
     }
   }
 }

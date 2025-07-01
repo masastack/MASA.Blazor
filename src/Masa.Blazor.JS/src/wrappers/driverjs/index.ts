@@ -17,5 +17,18 @@ export function drive(config: Config, stepIndex?: number) {
 }
 
 export function highlight(config: Config, step: DriveStep) {
-  driver(config).highlight(step);
+  console.log("highlight step", step);
+  const { popover, ...args } = step;
+  driver(config).highlight({
+    ...args,
+    popover: {
+      onNextClick: (el, step, opts) => {
+        opts.driver.destroy();
+      },
+      onCloseClick: (el, step, opts) => {
+        opts.driver.destroy();
+      },
+      ...popover,
+    },
+  });
 }
