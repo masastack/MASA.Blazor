@@ -1,9 +1,13 @@
 import {
   GridItemHTMLElement,
-  GridStack,
+  GridStack as GridStackClass,
   GridStackElement,
   GridStackOptions,
 } from "gridstack";
+
+declare const GridStack: {
+  init(options: GridStackOptions, elOrString: GridStackElement): GridStackClass;
+};
 
 function init(
   options: GridStackOptions = {},
