@@ -7,35 +7,15 @@
      @ref="@Ref"
      @attributes="@Attributes">
     @{
-        var media = MediaContent is not null;
         var image = !string.IsNullOrWhiteSpace(Image);
         var icon = !string.IsNullOrWhiteSpace(Icon);
     }
-    @if (media || image || icon)
+    @if (Media || image || icon)
     {
         <div class="@_block.Element("media")">
-            @if (media)
+            @if (Media)
             {
-                var defaults = new Dictionary<string, IDictionary<string, object?>?>
-                {
-                    {
-                        nameof(MImage), new Dictionary<string, object?>()
-                        {
-                            { nameof(MImage.Src), Image },
-                            { nameof(MImage.Height), ComputedSize },
-                            { nameof(MImage.Contain), true }
-                        }
-                    },
-                    {
-                        nameof(MIcon), new Dictionary<string, object?>()
-                        {
-                            { nameof(MIcon.Icon), new Icon(Icon) },
-                            { nameof(MIcon.Size), ComputedSize }
-                        }
-                    }
-                };
-
-                <MDefaultsProvider Defaults="@defaults">
+                <MDefaultsProvider Defaults="@_defaults">
                     @MediaContent
                 </MDefaultsProvider>
             }
@@ -67,8 +47,8 @@
                 {
                     { nameof(MButton.Class), _block.Element("action-btn").Name },
                     { nameof(MButton.ChildContent), (RenderFragment)(b => b.AddContent(0, ActionText)) },
-                    { nameof(MButton.Color), Color ?? "inverse-surface" }, 
-                    { nameof(MButton.Href), Href } 
+                    { nameof(MButton.Color), Color ?? "inverse-surface" },
+                    { nameof(MButton.Href), Href }
                 }
             }
         };

@@ -21,15 +21,17 @@
                       ReferenceCaptureAction="element => Ref = element"
                       data-booted="true"
                       @attributes="@Attributes"
-                      @onmouseenter="HandleOnMouseEnterAsync"
-                      @onmouseleave="HandleOnMouseLeaveAsync"
+                      @onmouseenter="@HandleOnMouseEnterAsync"
+                      @onmouseleave="@HandleOnMouseLeaveAsync"
                       @onclick="HandleOnClickAsync">
                 @GenBackground()
 
                 @GenPosition("prepend")
 
                 <div class="@_block.Element("content")">
-                    @ChildContent
+                    <MDefaultsProvider Defaults="@_defaults">
+                        @ChildContent
+                    </MDefaultsProvider>
                 </div>
 
                 @GenPosition("append")

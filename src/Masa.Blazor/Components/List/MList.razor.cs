@@ -125,6 +125,10 @@ public partial class MList : ThemeComponentBase, ITransitionIf, IAncestorRoutabl
     [MasaApiParameter(ReleasedIn = "v1.9.0")]
     public bool Slim { get; set; }
 
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.10.0")]
+    public string? BackgroundColor { get; set; }
+
     protected List<MListGroup> Groups { get; } = new();
 
     protected override void OnInitialized()
@@ -169,6 +173,7 @@ public partial class MList : ThemeComponentBase, ITransitionIf, IAncestorRoutabl
                 TwoLine)
             .Add(ThreeLine)
             .Add(Slim)
+            .AddBackgroundColor(BackgroundColor)
             .Build();
     }
 
@@ -181,6 +186,7 @@ public partial class MList : ThemeComponentBase, ITransitionIf, IAncestorRoutabl
             .AddMaxWidth(MaxWidth)
             .AddMinHeight(MinHeight)
             .AddMaxHeight(MaxHeight)
+            .AddBackgroundColor(BackgroundColor)
             .GenerateCssStyles();
     }
 }

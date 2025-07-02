@@ -47,7 +47,7 @@ public abstract class MasaComponentBase : NextTickComponentBase, IHandleEvent
 
     private ForwardRef? _refBack;
     private bool _shouldRender = true;
-    private string[] _dirtyParameters = Array.Empty<string>();
+    private HashSet<string> _dirtyParameters = new();
 
     private ElementReference _ref;
     private ElementReference? _prevRef;
@@ -205,16 +205,19 @@ public abstract class MasaComponentBase : NextTickComponentBase, IHandleEvent
 
     public override async Task SetParametersAsync(ParameterView parameters)
     {
-        _dirtyParameters = parameters.ToDictionary().Keys.ToArray();
+        _dirtyParameters.Clear();
+        foreach (var parameter in parameters)
+        {
+            _dirtyParameters.Add(parameter.Name);
+        }
 
-        var disableDefaultsExists =
-            parameters.TryGetValue<bool>(nameof(DisableDefaultsProvider), out var disableDefaults);
-
-        if ((!disableDefaultsExists || (disableDefaultsExists && !disableDefaults))
-            && parameters.TryGetValue<IDefaultsProvider>(nameof(DefaultsProvider), out var defaultsProvider)
-            && defaultsProvider.Defaults is not null
-            && defaultsProvider.Defaults.TryGetValue(ComponentName, out var dictionary)
-            && dictionary is not null)
+        if (parameters.TryGetValue<bool>(nameof(DisableDefaultsProvider), out var disableDefaults) && disableDefaults)
+        {
+            // DefaultsProvider is disabled
+        }
+        else if (parameters.TryGetValue<IDefaultsProvider>(nameof(DefaultsProvider), out var defaultsProvider)
+                 && defaultsProvider.Defaults?.TryGetValue(ComponentName, out var dictionary) == true
+                 && dictionary is not null)
         {
             var defaults = ParameterView.FromDictionary(dictionary);
             defaults.SetParameterProperties(this);

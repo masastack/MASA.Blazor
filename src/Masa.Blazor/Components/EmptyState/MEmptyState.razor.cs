@@ -36,6 +36,15 @@ public partial class MEmptyState : ThemeComponentBase
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private EmptyStateActionContext _actionContext = null!;
 
+    private readonly Dictionary<string, IDictionary<string, object?>> _defaults
+        = new()
+        {
+            [nameof(MImage)] = new Dictionary<string, object?>(),
+            [nameof(MIcon)] = new Dictionary<string, object?>(),
+        };
+
+    private bool Media => MediaContent is not null;
+
     private bool HasActions => ActionsContent is not null || !string.IsNullOrWhiteSpace(ActionText);
     private StringNumber ComputedSize => Size ?? (string.IsNullOrEmpty(Image) ? 96 : 200);
 
@@ -44,6 +53,20 @@ public partial class MEmptyState : ThemeComponentBase
         base.OnInitialized();
 
         _actionContext = new EmptyStateActionContext(HandleOnActionClick);
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (Media)
+        {
+            _defaults[nameof(MImage)][nameof(MImage.Src)] = Image;
+            _defaults[nameof(MImage)][nameof(MImage.Height)] = ComputedSize;
+            _defaults[nameof(MImage)][nameof(MImage.Contain)] = true;
+            _defaults[nameof(MIcon)][nameof(MIcon.Icon)] = Icon;
+            _defaults[nameof(MIcon)][nameof(MIcon.Size)] = ComputedSize;
+        }
     }
 
     protected override IEnumerable<string?> BuildComponentClass()

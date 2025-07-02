@@ -52,6 +52,9 @@ public partial class MListGroup : MasaComponentBase
 
     [Parameter] public bool Eager { get; set; }
 
+    private readonly Dictionary<string, IDictionary<string, object?>> _defaults
+        = new() { [nameof(MListItem)] = new Dictionary<string, object?>() };
+
     private bool _value;
     private string? _previousAbsolutePath;
 
@@ -80,13 +83,7 @@ public partial class MListGroup : MasaComponentBase
             .Add(Disabled)
             .Add(NoAction)
             .Add(SubGroup)
-            .AddTextColor(Color)
             .Build();
-    }
-
-    protected override IEnumerable<string> BuildComponentStyle()
-    {
-        return StyleBuilder.Create().AddTextColor(Color).GenerateCssStyles();
     }
 
     protected override void OnParametersSet()
@@ -94,6 +91,8 @@ public partial class MListGroup : MasaComponentBase
         base.OnParametersSet();
 
         EnsureBooted();
+        
+        _defaults[nameof(MListItem)][nameof(MListItem.ActiveColor)] = Color;
 
         if (SubGroup)
         {

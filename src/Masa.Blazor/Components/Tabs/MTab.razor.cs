@@ -33,8 +33,14 @@ public partial class MTab : MRoutableGroupItem<MItemGroupBase>
     {
         yield return _modifierBuilder.Add(Disabled)
             .Add("active", InternalIsActive)
+            .AddTextColor(Tabs?.Color, InternalIsActive)
             .AddClass(ComputedActiveClass, InternalIsActive)
             .Build();
+    }
+
+    protected override IEnumerable<string?> BuildComponentStyle()
+    {
+        yield return CssStyleUtils.GetTextColor(Tabs?.Color, InternalIsActive);
     }
 
     private async Task HandleOnClick(MouseEventArgs args)

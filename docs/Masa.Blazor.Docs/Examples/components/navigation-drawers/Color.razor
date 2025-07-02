@@ -1,12 +1,12 @@
 ﻿<MCard Class="mx-auto" Height="400" Width="256">
-    <MNavigationDrawer Class="deep-purple accent-4" Dark Permanent>
+    <MNavigationDrawer Class="deep-purple accent-4" Permanent>
         <ChildContent>
             <MList>
                 @foreach (var item in _items)
                 {
-                    <MListItem Link Dark>
+                    <MListItem Link>
                         <MListItemIcon>
-                            <MIcon Dark>@item.Icon</MIcon>
+                            <MIcon>@item.Icon</MIcon>
                         </MListItemIcon>
 
                         <MListItemContent>
@@ -19,7 +19,7 @@
 
         <AppendContent>
             <div class="pa-2">
-                <MButton Block Dark>LogOut</MButton>
+                <MButton Block>LogOut</MButton>
             </div>
         </AppendContent>
     </MNavigationDrawer>
