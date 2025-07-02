@@ -178,7 +178,7 @@ await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"{builder.HostEnviro
 
 支持下列语言：
 
-* **af-AZ** - Afrikaans (Afrikaans)
+* **af-ZA** - Afrikaans (Afrikaans)
 * **ar-EG** - Arabic (اللغة العربية)
 * **az** - Azerbaijani (Azərbaycan)
 * **bg-BG** - Bulgarian (български)
@@ -218,6 +218,6 @@ await builder.Services.AddMasaBlazor().AddI18nForWasmAsync($"{builder.HostEnviro
 * **th-TH** - Thai (ไทย)
 * **tr-TR** - Turkish (Türkçe)
 * **uk-UA** - Ukrainian (Українська)
-* **vi-CN** - Vietnamese (Tiếng Việt)
+* **vi-VN** - Vietnamese (Tiếng Việt)
 * **zh-CN** - Chinese (简体中文)
 * **zh-TW** - Chinese (正體中文)
