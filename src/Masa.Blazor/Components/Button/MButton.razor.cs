@@ -101,6 +101,10 @@ namespace Masa.Blazor
         [MasaApiParameter(ReleasedIn = "v1.5.0")]
         public string? RightIconName { get; set; }
 
+        [Parameter]
+        [MasaApiParameter(ReleasedIn = "v1.10.0")]
+        public string? ActiveColor { get; set; }
+
         /// <summary>
         /// Determine whether rendering a loader component
         /// </summary>
@@ -156,6 +160,7 @@ namespace Masa.Blazor
                 .AddTheme(ComputedTheme)
                 .AddBackgroundColor(Color, HasBackground)
                 .AddTextColor(Color, !HasBackground)
+                .AddTextColor(ActiveColor, InternalIsActive)
                 .AddElevation(Elevation)
                 .Build();
         }

@@ -7,37 +7,39 @@
          id="@Id"
          @ref="Ref"
          @attributes="@Attributes">
-        <MListItem OnClick="@HandleOnClick"
-                   IsActive="@IsActive"
-                   Link
-                   Dark="@Dark"
-                   Class="@_headerModifierBuilder.AddClass(ActiveClass, IsActive).Build()"
-                   role="button"
-                   aria-expanded="@IsActive">
-            @if (PrependIcon is not null || PrependIconContent != default)
+        <MDefaultsProvider Defaults="@_defaults">
+            <MListItem OnClick="@HandleOnClick"
+                       IsActive="@IsActive"
+                       Link
+                       Dark="@Dark"
+                       Class="@_headerModifierBuilder.AddClass(ActiveClass, IsActive).Build()"
+                       role="button"
+                       aria-expanded="@IsActive">
+                @if (PrependIcon is not null || PrependIconContent != default)
+                {
+                    @GenIcon("prepend")
+                }
+
+                @ActivatorContent
+
+                @if (AppendIcon is not null || AppendIconContent != default)
+                {
+                    @GenIcon("append")
+                }
+            </MListItem>
+
+            @if (IsBooted)
             {
-                @GenIcon("prepend")
+                <ExpandTransition>
+                    <ShowTransitionElement Value="IsActive"
+                                           Class="@_block.Element("items").Name">
+                        <MShouldRender Value="@IsActive">
+                            @ChildContent
+                        </MShouldRender>
+                    </ShowTransitionElement>
+                </ExpandTransition>
             }
-
-            @ActivatorContent
-
-            @if (AppendIcon is not null || AppendIconContent != default)
-            {
-                @GenIcon("append")
-            }
-        </MListItem>
-
-        @if (IsBooted)
-        {
-            <ExpandTransition>
-                <ShowTransitionElement Value="IsActive"
-                                       Class="@_block.Element("items").Name">
-                    <MShouldRender Value="@IsActive">
-                        @ChildContent
-                    </MShouldRender>
-                </ShowTransitionElement>
-            </ExpandTransition>
-        }
+        </MDefaultsProvider>
     </div>
 </CascadingValue>
 
