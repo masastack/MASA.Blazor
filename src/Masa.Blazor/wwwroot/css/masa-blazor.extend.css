@@ -1592,6 +1592,7 @@ input[type=number] {
 }
 
 .m-divider__content {
+    background-color: inherit;
     padding: 0 1rem;
     position: absolute;
     top: 50%;
@@ -1613,10 +1614,6 @@ input[type=number] {
     left: unset;
     right: var(--m-divider-content-offset, 3%);
     transform: translateY(-50%);
-}
-
-.m-divider__content {
-    background-color: inherit;
 }
 
 /* enqueued-snackbars */
