@@ -49,7 +49,7 @@ public static class ThemeCssBuilder
         foreach (var kv in options.UserDefined)
         {
             lstCss.Add(BuildTextCssClass(combinePrefix, kv.Key));
-            lstCss.Add(BuildBgCssClass(combinePrefix, kv.Key, kv.Key));
+            lstCss.Add(BuildBgCssClass(combinePrefix, kv.Key, "on-" + kv.Key));
         }
 
         return string.Concat(lstCss);
