@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor;
+﻿using Element = BemIt.Element;
+
+namespace Masa.Blazor;
 
 public partial class MEmptyState : ThemeComponentBase
 {
@@ -36,11 +38,20 @@ public partial class MEmptyState : ThemeComponentBase
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
     private EmptyStateActionContext _actionContext = null!;
 
-    private readonly Dictionary<string, IDictionary<string, object?>> _defaults
+    private readonly Dictionary<string, IDictionary<string, object?>> _mediaDefaults
         = new()
         {
             [nameof(MImage)] = new Dictionary<string, object?>(),
             [nameof(MIcon)] = new Dictionary<string, object?>(),
+        };
+
+    private readonly Dictionary<string, IDictionary<string, object?>> _actionsDefaults
+        = new()
+        {
+            [nameof(MButton)] = new Dictionary<string, object?>()
+            {
+                [nameof(MButton.Class)] = _block.Element("action-btn").Name
+            }
         };
 
     private bool Media => MediaContent is not null;
@@ -61,11 +72,19 @@ public partial class MEmptyState : ThemeComponentBase
 
         if (Media)
         {
-            _defaults[nameof(MImage)][nameof(MImage.Src)] = Image;
-            _defaults[nameof(MImage)][nameof(MImage.Height)] = ComputedSize;
-            _defaults[nameof(MImage)][nameof(MImage.Contain)] = true;
-            _defaults[nameof(MIcon)][nameof(MIcon.Icon)] = Icon;
-            _defaults[nameof(MIcon)][nameof(MIcon.Size)] = ComputedSize;
+            _mediaDefaults[nameof(MImage)][nameof(MImage.Src)] = Image;
+            _mediaDefaults[nameof(MImage)][nameof(MImage.Height)] = ComputedSize;
+            _mediaDefaults[nameof(MImage)][nameof(MImage.Contain)] = true;
+            _mediaDefaults[nameof(MIcon)][nameof(MIcon.Icon)] = (Icon)Icon;
+            _mediaDefaults[nameof(MIcon)][nameof(MIcon.Size)] = ComputedSize;
+        }
+
+        if (HasActions)
+        {
+            _actionsDefaults[nameof(MButton)][nameof(MButton.ChildContent)] =
+                (RenderFragment)(b => b.AddContent(0, ActionText));
+            _actionsDefaults[nameof(MButton)][nameof(MButton.Color)] = Color ?? "inverse-surface";
+            _actionsDefaults[nameof(MButton)][nameof(MButton.Href)] = Href;
         }
     }
 

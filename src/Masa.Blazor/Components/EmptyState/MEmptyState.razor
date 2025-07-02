@@ -15,7 +15,7 @@
         <div class="@_block.Element("media")">
             @if (Media)
             {
-                <MDefaultsProvider Defaults="@_defaults">
+                <MDefaultsProvider Defaults="@_mediaDefaults">
                     @MediaContent
                 </MDefaultsProvider>
             }
@@ -40,21 +40,8 @@
 
     @if (HasActions)
     {
-        var defaults = new Dictionary<string, IDictionary<string, object?>?>
-        {
-            {
-                nameof(MButton), new Dictionary<string, object?>()
-                {
-                    { nameof(MButton.Class), _block.Element("action-btn").Name },
-                    { nameof(MButton.ChildContent), (RenderFragment)(b => b.AddContent(0, ActionText)) },
-                    { nameof(MButton.Color), Color ?? "inverse-surface" },
-                    { nameof(MButton.Href), Href }
-                }
-            }
-        };
-
         <div class="@_block.Element("actions")">
-            <MDefaultsProvider Defaults="@defaults">
+            <MDefaultsProvider Defaults="@_actionsDefaults">
                 @if (ActionsContent is not null)
                 {
                     @ActionsContent.Invoke(_actionContext)
