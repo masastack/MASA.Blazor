@@ -2,6 +2,7 @@
 @inherits LayoutComponentBase
 @implements IAsyncDisposable
 @using Masa.Blazor.Extensions
+@inject I18n I18n
 
 <NavDrawer @bind-Value="_showDrawer"
            RTL="MasaBlazor.RTL"
@@ -19,14 +20,29 @@
          ActiveItem="@context.ActiveTarget"/>
 </MScrollToTarget>
 
+<MButton Show="@(BaseLayout.Project == "blazor")"
+         Large
+         Fab
+         Fixed
+         Bottom
+         Right
+         Class="transition-swing"
+         Color="accent"
+         OnClick="@OpenAIAssistantAsync">
+    <MIcon>mdi-assistant</MIcon>
+    <MTooltip Activator="parent" Left>
+        <ChildContent>@I18n.T("ai-assistant")</ChildContent>
+    </MTooltip>
+</MButton>
+
 <FabTransition>
     <MButton Show="_showBackTop"
              Large
              Fab
              Fixed
-             Bottom
              Right
              Class="transition-swing"
+             Style="bottom: 96px"
              Color="primary"
              OnClick="@ToTopAsync">
         <MIcon>mdi-chevron-up</MIcon>
@@ -82,6 +98,11 @@
     private async Task ToTopAsync()
     {
         await Js.InvokeVoidAsync("backTop");
+    }
+
+    private async Task OpenAIAssistantAsync()
+    {
+        await Js.InvokeVoidAsync("openAIAssistant");
     }
 
     public async ValueTask DisposeAsync()
