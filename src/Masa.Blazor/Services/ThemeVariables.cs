@@ -16,7 +16,7 @@ public class ThemeVariables
     public override string ToString()
     {
         return $"""
-                --m-border-opacity: {BorderOpacity.ToString(CultureInfo.InvariantCulture)};
+                  --m-border-opacity: {BorderOpacity.ToString(CultureInfo.InvariantCulture)};
                   --m-idle-opacity: {IdleOpacity.ToString(CultureInfo.InvariantCulture)};
                   --m-hover-opacity: {HoverOpacity.ToString(CultureInfo.InvariantCulture)};
                   --m-focus-opacity: {FocusOpacity.ToString(CultureInfo.InvariantCulture)};
