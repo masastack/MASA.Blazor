@@ -17,6 +17,7 @@ public partial class BaseLayout
 
     internal Action? OnAppBarNavIconClick { get; set; }
     internal Config? Config { get; set; }
+    internal string? Project => _project;
 
     protected override void OnInitialized()
     {

@@ -642,3 +642,7 @@ app-alert p {
   background-color: rgba(var(--m-theme-surface));
   color: rgba(var(--m-theme-on-surface));
 }
+
+.koala-floating-button {
+  display: none !important;
+}

@@ -655,5 +655,6 @@
     "misc": "其他"
   },
   "nav-component-group-by-type": "按类型分组",
-  "nav-component-group-by-type-desc": "左侧导航的组件列表按类型分组"
+  "nav-component-group-by-type-desc": "左侧导航的组件列表按类型分组",
+  "ai-assistant": "AI 助手"
 }

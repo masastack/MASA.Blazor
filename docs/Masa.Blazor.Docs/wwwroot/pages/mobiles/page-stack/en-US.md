@@ -113,66 +113,68 @@ The `a` tag has an unavoidable problem: continuous clicks will cause multiple tr
 
 ### PPageStackTab {released-on=v1.10.0}
 
-**PPageStackTab** component provides two features:
+**PPageStackTab** component provides three features:
 
-- The default `a` tag or component navigation behavior adds a record to the browser history, which increases the history when switching tabs.
-  In a MAUI Blazor Hybrid app, it is challenging to implement the back button on the tab page to exit the application.
-  Wrapping the `a` tag or component with the **PPageStackTab** component changes the default navigation behavior to replace the current page with the `replace` method, thus not increasing the history.
+1. The default `a` tag or component navigation behavior adds a record to the browser history, which increases the history when switching tabs.
+   In a MAUI Blazor Hybrid app, it is challenging to implement the back button on the tab page to exit the application.
+   Wrapping the `a` tag or component with the **PPageStackTab** component changes the default navigation behavior to replace the current page with the `replace` method, thus not increasing the history.
 
-  ```razor PageStackLayout.razor
-  @using Masa.Blazor.Presets.PageStack
-  
-  <PPageStackTab href="/tab-1" TabRule="@TabRule1">
-      <MButton @attributes="@context.Attrs">Stack page</MButton>
-  </PPageStackTab>
-  
-  @code {
-      internal static TabRule TabRule1 = new("/tab-1$");
-  }
-  ```
+   ```razor PageStackLayout.razor
+   @using Masa.Blazor.Presets.PageStack
+   
+   <PPageStackTab href="/tab-1" TabRule="@TabRule1">
+       <MButton @attributes="@context.Attrs">Stack page</MButton>
+   </PPageStackTab>
+   
+   @code {
+       internal static TabRule TabRule1 = new("/tab-1$");
+   }
+   ```
 
-- When the activated tab is clicked again, it will trigger the `TabRefreshRequested` event. When used with the [Pull to refresh component](/blazor/mobiles/pull-refresh), it can achieve a pull-to-refresh effect.
+2. When the activated tab is clicked again, it will trigger the `TabRefreshRequested` event. When used with the [Pull to refresh component](/blazor/mobiles/pull-refresh), it can achieve a pull-to-refresh effect.
 
-  ```razor Tab1.razor
-  @using Masa.Blazor.Presets.PageStack.NavController
-  @inject PageStackNavController NavController
-  @implements IDisposable
-  
-  <MPullRefresh @ref="_pullRefresh" OnRefresh="...">
-      ...
-  </MPullRefresh>
-  
-  @code {
-      private MPullRefresh? _pullRefresh;
-  
-      protected override void OnInitialized()
-      {
-          base.OnInitialized();
-
-          NavController.TabRefreshRequested += NavControllerOnTabRefreshRequested;
-      }
-  
-      private async void NavControllerOnTabRefreshRequested(object? sender, PageStackTabRefreshRequestedEventArgs e)
-      {
-          if (_pullRefresh is null)
-          {
-              return;
-          }
-
-          if (e.TargetTab != PageStackLayout.TabRule1)
-          {
-              return;
-          }
-
-          await _pullRefresh.SimulateRefreshAsync();
-      }
-  
-      public void Dispose()
-      {
-          NavController.TabRefreshRequested -= NavControllerOnTabRefreshRequested;
-      }
-  }
-  ```
+   ```razor Tab1.razor
+   @using Masa.Blazor.Presets.PageStack.NavController
+   @inject PageStackNavController NavController
+   @implements IDisposable
+   
+   <MPullRefresh @ref="_pullRefresh" OnRefresh="...">
+       ...
+   </MPullRefresh>
+   
+   @code {
+       private MPullRefresh? _pullRefresh;
+   
+       protected override void OnInitialized()
+       {
+           base.OnInitialized();
+ 
+           NavController.TabRefreshRequested += NavControllerOnTabRefreshRequested;
+       }
+   
+       private async void NavControllerOnTabRefreshRequested(object? sender, PageStackTabRefreshRequestedEventArgs e)
+       {
+           if (_pullRefresh is null)
+           {
+               return;
+           }
+ 
+           if (e.TargetTab != PageStackLayout.TabRule1)
+           {
+               return;
+           }
+ 
+           await _pullRefresh.SimulateRefreshAsync();
+       }
+   
+       public void Dispose()
+       {
+           NavController.TabRefreshRequested -= NavControllerOnTabRefreshRequested;
+       }
+   }
+   ```
+3. The `InitialBadge` property can set the initial badge, usually used for new message notifications.
+   The injected **PageStackNavController** provides `RequestTabBadgeUpdate` and `RequestTabBadgeClear` events to update or clear the badge.
 
 ### PStackPageBar {released-on=v1.10.0}
 
