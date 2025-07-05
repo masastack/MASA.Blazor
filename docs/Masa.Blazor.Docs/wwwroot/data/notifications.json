@@ -57,5 +57,16 @@
     "href": "/blazor/getting-started/release-notes?v=v1.9.0",
     "upgradeGuide": "/blazor/getting-started/upgrade-guide#upgrading-from-v1-8-x-to-v1-9-0",
     "createdAt": "2025-04-07"
+  },
+  {
+    "title": "v1.10.0",
+    "content": {
+      "en": "Highlights:\r\n- [Theming](/blazor/features/theme#specification) System Upgrade: To support multiple themes, the theming system has been adapted to the core color specification of Material Design 3 (MD3) and now fully utilizes CSS variables. This simplifies the process of theme customization and switching. Additionally, the default theme color has been updated to align with brand visuals, and a \"memorial mode\" toggle has been added.\r\n- **Dependency Optimization**: To reduce the main library size, mobile-only components, as well as components like Swiper, Gridstack, MarkdownIt, SyntaxHighlight, and Xgplayer, have been migrated to separate packages.\r\n- **PageStack Feature Enhancement**: Optimized the UI transition animations for page stack push and pop operations. Added the [PageStackTab](/blazor/mobiles/page-stack#ppagestacktab) component to improve tab navigation behavior, with added refresh and badge functionalities.\r\n- [Combobox](/blazor/components/combobox): An Autocomplete-like component that allows users to input and submit custom content.\r\n- [EmptyState](/blazor/components/empty-states): Used to display scenarios of an empty list or no search results.",
+      "zh": "亮点:\r\n- [主题](/blazor/features/theme#specification)系统升级：为支持多主题，主题系统已适配Material Design 3 (MD3) 的核心颜色规范，并全面采用CSS变量。此举简化了主题定制与切换流程。此外，默认主题色已更新，以符合品牌视觉，并新增了“追悼模式”切换功能。\r\n- **依赖项优化**：为减小主库体积，仅用于移动端的组件以及Swiper、Gridstack、MarkdownIt、SyntaxHighlight、Xgplayer等组件均已迁移至独立的包。\r\n- **PageStack功能增强**：优化了页面堆栈的出入栈UI过渡动画。新增[PageStackTab组件](/blazor/mobiles/page-stack#ppagestacktab)，用于改善标签页的导航行为，并添加了刷新和徽章功能。\r\n- [Combobox](/blazor/components/combobox)：一个功能类似于Autocomplete的组件，允许用户输入并提交自定义内容。\r\n- [EmptyState](/blazor/components/empty-states)：用于展示列表空状态或搜索无结果的场景。"
+    },
+    "type": 0,
+    "href": "/blazor/getting-started/release-notes?v=v1.10.0",
+    "upgradeGuide": "/blazor/getting-started/upgrade-guide#upgrading-from-v1-9-x-to-v1-10-0",
+    "createdAt": "2025-07-07"
   }
 ]
