@@ -34,6 +34,18 @@
 - CSS 为了适配 **Material Design 3** 的颜色规则系统进行了微调，可能出现前后版本颜色不一致的情况。
   如有遇到问题请联系我们。
 
+#### Icon fonts {#v1-10-0-icon-fonts}
+
+删除了自定义图标集中标记为过时的 `Custom` 属性，请改为使用 `CssFormatter` 属性。
+
+```diff
+  var iconfontAliases = new MaterialDesignIconsAliases()
+  {
+-     Custom = icon => icon.StartsWith("mdi") ? $"mdi {icon}" : $"iconfont {icon}";
++     CssFormatter = icon => icon.StartsWith("mdi") ? $"mdi {icon}" : $"iconfont {icon}"
+  };
+```
+
 ### 组件 {#v1-10-0-components}
 
 #### 移动端组件 {#mobile-components}

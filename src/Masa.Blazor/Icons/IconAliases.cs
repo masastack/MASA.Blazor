@@ -215,20 +215,6 @@ public class IconAliases
     public Dictionary<string, Icon?> UserDefined { get; set; } = new();
 
     /// <summary>
-    /// The formatter for icon class name. 
-    /// </summary>
-    [Obsolete("Use CssFormatter instead.")]
-    public Func<string, string>? Custom
-    {
-        get => _custom;
-        set
-        {
-            _custom = value;
-            CssFormatter ??= value;
-        }
-    }
-
-    /// <summary>
     /// The formatter for icon class name.
     /// </summary>
     public Func<string, string>? CssFormatter { get; set; }
