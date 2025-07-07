@@ -174,7 +174,7 @@ To optimize performance, you can extract frequently updated UI parts into separa
 
 ## Common Issues and Solutions {#common-issues}
 
-### Issue: `StateHasChanged` does not work as expected in some scenarios. {#not-working}
+### Issue: StateHasChanged does not work as expected in some scenarios. {#not-working}
 
 **Issue**: In some scenarios, such as real-time data streams, WebSocket messages, high-frequency sensor data, 
 or download progress, external events trigger very frequently, 

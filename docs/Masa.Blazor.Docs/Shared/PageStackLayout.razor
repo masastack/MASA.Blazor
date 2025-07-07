@@ -13,15 +13,17 @@
     </MMain>
 
     <MBottomNavigation App Routable Color="primary">
-        <PPageStackTab Href="/blazor/examples/page-stack/tab1">
+        <PPageStackTab Href="/blazor/examples/page-stack/tab1"
+                       TabRule="@TabRule1">
             <MButton @attributes="@context.Attrs">Tab 1</MButton>
         </PPageStackTab>
-        <PPageStackTab Href="/blazor/examples/page-stack/tab2/Today">
-            <MButton MatchPattern="@("^/blazor/examples/page-stack/tab2/*")"
-                     @attributes="@context.Attrs">Tab 2
-            </MButton>
+        <PPageStackTab Href="/blazor/examples/page-stack/tab2/Today"
+                       TabRule="@TabRule2">
+            <MButton @attributes="@context.Attrs">Tab 2</MButton>
         </PPageStackTab>
-        <PPageStackTab Href="/blazor/examples/page-stack/tab3">
+        <PPageStackTab Href="/blazor/examples/page-stack/tab3"
+                       TabRule="@TabRule3"
+                       InitialBadge="_initialBadge">
             <MButton @attributes="@context.Attrs">
                 @context.GenBadgeContent("Tab 3")
             </MButton>
@@ -31,11 +33,27 @@
 
 @code {
 
-    private readonly HashSet<TabRule> _tabRules =
-    [
-        new("^/blazor/examples/page-stack/tab1$", Persistent: false),
-        new("^/blazor/examples/page-stack/tab2/*", Self: true),
-        new("^/blazor/examples/page-stack/tab3$")
-    ];
+    internal static TabRule TabRule1 = new("^/blazor/examples/page-stack/tab1$", Persistent: false);
+    internal static TabRule TabRule2 = new("^/blazor/examples/page-stack/tab2/*", Self: true);
+    internal static TabRule TabRule3 = new("^/blazor/examples/page-stack/tab3$");
+
+    private HashSet<TabRule> _tabRules = [TabRule1, TabRule2, TabRule3];
+
+    private PageStackTabBadgeProps? _initialBadge;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await SimulateSetBadgeAsync();
+            StateHasChanged();
+        }
+    }
+
+    private async Task SimulateSetBadgeAsync()
+    {
+        await Task.Delay(1000);
+        _initialBadge = new PageStackTabBadgeProps(true);
+    }
 
 }

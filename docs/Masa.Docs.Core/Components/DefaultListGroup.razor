@@ -16,6 +16,7 @@
         <NavItemContent Item="Item"/>
     </ActivatorContent>
     <ChildContent>
+        @GroupContent?.Invoke(Item?.Title)
         @if (Item?.Title == "ui-components" && ComponentsGroupByType)
         {
             <TypedList Items="@Item.Children"/>
@@ -58,6 +59,9 @@
 
     [Parameter]
     public bool SubGroup { get; set; }
+    
+    [Parameter] 
+    public RenderFragment<string?>? GroupContent { get; set; }
 
     private List<string?> _group = new();
 

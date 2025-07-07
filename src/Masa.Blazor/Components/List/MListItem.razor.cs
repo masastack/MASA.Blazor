@@ -90,6 +90,10 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
     [Parameter]
     [MasaApiParameter(ReleasedIn = "v1.9.0")]
     public bool Slim { get; set; }
+    
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.10.0")]
+    public string? ActiveColor { get; set; }
 
     private bool ComputedRipple => IsDirtyParameter(nameof(Ripple)) ? Ripple : (!Disabled && IsClickable);
 
@@ -182,9 +186,9 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
             .Add(Highlighted)
             .Add("active", InternalIsActive)
             .AddClass(ComputedActiveClass, InternalIsActive)
+            .AddTextColor(ActiveColor, InternalIsActive)
             .AddTextColor(Color)
             .AddTheme(ComputedTheme)
-            .AddClass("")
             .Build();
     }
 }

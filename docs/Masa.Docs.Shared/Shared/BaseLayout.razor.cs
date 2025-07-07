@@ -14,9 +14,10 @@ public partial class BaseLayout
     private Project? _projectInfo;
     private CultureInfo? _culture;
     private Dictionary<string, Project> _projectMap = new();
-    private Config? _config;
 
     internal Action? OnAppBarNavIconClick { get; set; }
+    internal Config? Config { get; set; }
+    internal string? Project => _project;
 
     protected override void OnInitialized()
     {
@@ -89,7 +90,8 @@ public partial class BaseLayout
 
     private async Task InitConfig()
     {
-        _config = await LocalStorage.GetItemAsync<Config>("masablazor@config");
+        Config = await LocalStorage.GetItemAsync<Config>("masablazor@config")
+                 ?? new Config(false);
     }
 
     private void NavigationManagerOnLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -109,7 +111,8 @@ public partial class BaseLayout
         if (_project is not null && _projectMap.TryGetValue(_project, out _projectInfo)) return;
 
         _projectInfo = new Project(
-            "MASA Stack",
+            Key: null,
+            "MASA Docs",
             null,
             "https://cdn.masastack.com/stack/images/logo/MASAStack/logo.png?x-oss-process=image/resize,h_24,m_lfit",
             "https://github.com/masastack");
@@ -169,14 +172,19 @@ public partial class BaseLayout
         StateHasChanged();
     }
 
+    internal void OnConfigChanged(Config? config)
+    {
+        Config = config;
+        _ = LocalStorage.SetItemAsync("masablazor@config", Config);
+    }
+
     private void SetEnv()
     {
         var uri = NavigationManager.BaseUri.Replace("http://", "").Replace("https://", "").TrimEnd('/');
         _env = uri switch
         {
-            "docs.masastack.com" or "blazor.masastack.com"         => "prd_",
-            "blazor-dev.masastack.com" or "docs-dev.masastack.com" => "dev_",
-            _                                                      => "local_"
+            "docs.masastack.com" => "prd_",
+            _ => "local_"
         };
     }
 

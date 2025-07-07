@@ -16,16 +16,16 @@ public class ThemeVariables
     public override string ToString()
     {
         return $"""
-                --m-border-opacity: {BorderOpacity};
-                  --m-idle-opacity: {IdleOpacity};
-                  --m-hover-opacity: {HoverOpacity};
-                  --m-focus-opacity: {FocusOpacity};
-                  --m-disabled-opacity: {DisabledOpacity};
-                  --m-activated-opacity: {ActivatedOpacity};
-                  --m-highlight-opacity: {HighlightOpacity};
-                  --m-high-emphasis-opacity: {HighEmphasisOpacity};
-                  --m-medium-emphasis-opacity: {MediumEmphasisOpacity};
-                  --m-low-emphasis-opacity: {LowEmphasisOpacity};
+                  --m-border-opacity: {BorderOpacity.ToString(CultureInfo.InvariantCulture)};
+                  --m-idle-opacity: {IdleOpacity.ToString(CultureInfo.InvariantCulture)};
+                  --m-hover-opacity: {HoverOpacity.ToString(CultureInfo.InvariantCulture)};
+                  --m-focus-opacity: {FocusOpacity.ToString(CultureInfo.InvariantCulture)};
+                  --m-disabled-opacity: {DisabledOpacity.ToString(CultureInfo.InvariantCulture)};
+                  --m-activated-opacity: {ActivatedOpacity.ToString(CultureInfo.InvariantCulture)};
+                  --m-highlight-opacity: {HighlightOpacity.ToString(CultureInfo.InvariantCulture)};
+                  --m-high-emphasis-opacity: {HighEmphasisOpacity.ToString(CultureInfo.InvariantCulture)};
+                  --m-medium-emphasis-opacity: {MediumEmphasisOpacity.ToString(CultureInfo.InvariantCulture)};
+                  --m-low-emphasis-opacity: {LowEmphasisOpacity.ToString(CultureInfo.InvariantCulture)};
                 """;
     }
 }

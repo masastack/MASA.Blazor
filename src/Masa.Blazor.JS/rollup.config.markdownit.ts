@@ -7,13 +7,13 @@ import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 
 export default defineConfig({
-  input: "./src/proxies/markdown-it/index.ts",
+  input: "./src/wrappers/markdown-it/index.ts",
   output: [
     {
       file: "../Masa.Blazor.JSComponents.MarkdownIt/wwwroot/markdown-it.js",
       format: "esm",
       sourcemap: true,
-    }
+    },
   ],
   plugins: [typescript(), json(), resolve(), commonjs(), terser()],
 });

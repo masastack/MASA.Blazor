@@ -81,8 +81,6 @@ builder.Services
 | `RequestTabBadgeUpdate` | 选项卡徽章更新请求。                    | 新消息通知                                     |
 | `RequestTabBadgeClear` | 选项卡徽章清除请求。                    |                                           |
 
-```razor
-
 ### data-page-stack-strategy（不推荐） {#data-page-stack-strategy}
 
 <app-alert type="warning" content="建议使用 `PPageStackLink` 组件，以避免连续点击导致多次触发。"></app-alert>
@@ -113,59 +111,68 @@ builder.Services
 
 ### PPageStackTab {released-on=v1.10.0}
 
-**PPageStackTab** 组件提供两个功能：
+**PPageStackTab** 组件提供三个功能：
 
-- 默认的 `a` 标签或组件的导航行为会往浏览器历史记录中添加一条记录，标签页切换时会导致历史记录的增加。 
-  在 MAUI Blazor Hybrid app 上想实现在标签页上点击返回按钮退出应用程序就比较麻烦。
-  使用 **PPageStackTab** 组件包裹 `a` 标签或组件，会将默认导航行为改为 `replace` 方法替换当前页面，从而不会增加历史记录。
+1. 默认的 `a` 标签或组件的导航行为会往浏览器历史记录中添加一条记录，标签页切换时会导致历史记录的增加。 
+   在 MAUI Blazor Hybrid app 上想实现在标签页上点击返回按钮退出应用程序就比较麻烦。
+   使用 **PPageStackTab** 组件包裹 `a` 标签或组件，会将默认导航行为改为 `replace` 方法替换当前页面，从而不会增加历史记录。
 
-  ```razor
-  <PPagStackTab href="/tab-1">
-      <a @attributes="@context.Attrs">Stack page</a>
-  </PPagStackTab>
-  ```
+   ```razor PageStackLayout.razor
+   @using Masa.Blazor.Presets.PageStack
+   
+   <PPageStackTab href="/tab-1" TabRule="@TabRule1">
+       <MButton @attributes="@context.Attrs">Stack page</MButton>
+   </PPageStackTab>
+   
+   @code {
+       internal static TabRule TabRule1 = new("/tab-1$");
+   }
+   ```
 
-- 在激活标签页下再次点击导航链接时，会触发 `TabRefreshRequested` 事件，配合 [下拉刷新组件](/blazor/mobiles/pull-refresh) 使用，可以实现下拉刷新的效果。
+2. 在激活标签页下再次点击导航链接时，会触发 `TabRefreshRequested` 事件，配合 [下拉刷新组件](/blazor/mobiles/pull-refresh) 使用，可以实现下拉刷新的效果。
 
-  ```razor
-  @inject PageStackNavController NavController
-  @implements IDisposable
-  
-  <MPullRefresh @ref="_pullRefresh" OnRefresh="...">
-      ...
-  </MPullRefresh>
-  
-  @code {
-      private MPullRefresh? _pullRefresh;
-  
-      protected override void OnInitialized()
-      {
-          base.OnInitialized();
-
-          NavController.TabRefreshRequested += NavControllerOnTabRefreshRequested;
-      }
-  
-      private async void NavControllerOnTabRefreshRequested(object? sender, PageStackTabRefreshRequestedEventArgs e)
-      {
-          if (_pullRefresh is null)
-          {
-              return;
-          }
-
-          if (e.TargetHref?.Equals("/tab-1", StringComparison.OrdinalIgnoreCase) is not true)
-          {
-              return;
-          }
-
-          await _pullRefresh.SimulateRefreshAsync();
-      }
-  
-      public void Dispose()
-      {
-          NavController.TabRefreshRequested -= NavControllerOnTabRefreshRequested;
-      }
-  }
-  ```
+   ```razor Tab1.razor
+   @using Masa.Blazor.Presets.PageStack.NavController
+   @inject PageStackNavController NavController
+   @implements IDisposable
+   
+   <MPullRefresh @ref="_pullRefresh" OnRefresh="...">
+       ...
+   </MPullRefresh>
+   
+   @code {
+       private MPullRefresh? _pullRefresh;
+   
+       protected override void OnInitialized()
+       {
+           base.OnInitialized();
+ 
+           NavController.TabRefreshRequested += NavControllerOnTabRefreshRequested;
+       }
+   
+       private async void NavControllerOnTabRefreshRequested(object? sender, PageStackTabRefreshRequestedEventArgs e)
+       {
+           if (_pullRefresh is null)
+           {
+               return;
+           }
+ 
+           if (e.TargetTab != PageStackLayout.TabRule1)
+           {
+               return;
+           }
+ 
+           await _pullRefresh.SimulateRefreshAsync();
+       }
+   
+       public void Dispose()
+       {
+           NavController.TabRefreshRequested -= NavControllerOnTabRefreshRequested;
+       }
+   }
+   ```
+3. 通过 `InitialBadge` 属性可以设置初始的徽章，通常用于新消息通知。
+   通过注入的 **PageStackNavController** 的 `RequestTabBadgeUpdate` 和 `RequestTabBadgeClear` 事件可以更新或清除徽章。
 
 ### PStackPageBar {released-on=v1.10.0}
 

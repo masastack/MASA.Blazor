@@ -75,13 +75,15 @@ public abstract class MRoutableGroupItem<TGroup> : MGroupItem<TGroup>, IRoutable
         var matched = Router.MatchRoute();
 
         await SetInternalIsActive(matched, true);
+        
+        var changed = matched != isActive;
 
-        if (matched && ItemGroup is not null && !isActive)
+        if (changed && ItemGroup is not null)
         {
             await ItemGroup.ToggleAsync(Value);
         }
 
-        return isActive != matched;
+        return changed;
     }
 
     protected override ValueTask DisposeAsyncCore()

@@ -2,45 +2,67 @@
 
 public class PageStackTabBadgeUpdateRequestedEventArgs : EventArgs
 {
-    public PageStackTabBadgeUpdateRequestedEventArgs(string targetHref, bool dot, bool overLap = false)
+    /// <summary>
+    /// Creates an event args to update the badge with a dot for a specific tab.
+    /// </summary>
+    /// <param name="targetTab"></param>
+    /// <param name="dot"></param>
+    /// <param name="overLap"></param>
+    /// <param name="color"></param>
+    public PageStackTabBadgeUpdateRequestedEventArgs(TabRule targetTab, bool dot, bool overLap = false,
+        string color = "red")
     {
         Value = true;
-        TargetHref = targetHref;
+        TargetTab = targetTab;
         Dot = dot;
         OverLap = overLap;
-    }
-
-    public PageStackTabBadgeUpdateRequestedEventArgs(string targetHref, StringNumber content, bool overLap = false)
-    {
-        Value = true;
-        TargetHref = targetHref;
-        Content = content;
-        OverLap = overLap;
-    }
-
-    private PageStackTabBadgeUpdateRequestedEventArgs(string targetHref, bool value)
-    {
-        TargetHref = targetHref;
-        Value = value;
+        Color = color;
     }
 
     /// <summary>
-    /// Creates an event args to clear the badge for a specific target href.
+    /// Creates an event args to update the badge with a text or number for a specific tab.
     /// </summary>
-    /// <param name="targetHref"></param>
-    /// <returns></returns>
-    internal static PageStackTabBadgeUpdateRequestedEventArgs CreateClearEventArgs(string targetHref)
+    /// <param name="targetTab"></param>
+    /// <param name="badge"></param>
+    /// <param name="overLap"></param>
+    /// <param name="color"></param>
+    public PageStackTabBadgeUpdateRequestedEventArgs(TabRule targetTab, StringNumber badge, bool overLap = false,
+        string color = "red")
     {
-        return new PageStackTabBadgeUpdateRequestedEventArgs(targetHref, false);
+        Value = true;
+        TargetTab = targetTab;
+        Badge = badge;
+        OverLap = overLap;
+        Color = color;
     }
-    
-    public string? TargetHref { get; set; }
+
+    /// <summary>
+    /// Creates an event args to clear the badge for a specific tab.
+    /// </summary>
+    /// <param name="targetTab"></param>
+    private PageStackTabBadgeUpdateRequestedEventArgs(TabRule targetTab)
+    {
+        Value = false;
+        TargetTab = targetTab;
+    }
+
+    /// <summary>
+    /// Creates an event args to clear the badge for a specific tab.
+    /// </summary>
+    /// <param name="targetTab"></param>
+    /// <returns></returns>
+    internal static PageStackTabBadgeUpdateRequestedEventArgs CreateClearEventArgs(TabRule targetTab)
+    {
+        return new PageStackTabBadgeUpdateRequestedEventArgs(targetTab);
+    }
+
+    public TabRule TargetTab { get; }
 
     public bool Dot { get; set; }
 
-    public StringNumber? Content { get; set; }
+    public StringNumber? Badge { get; set; }
 
-    public string? Color { get; set; } = "red";
+    public string? Color { get; set; }
 
     public bool OverLap { get; set; }
 

@@ -37,3 +37,9 @@ dotnet add package Masa.Blazor.JSComponents.DriverJS
 #### 不指定元素 {#no-element}
 
 <masa-example file="Examples.components.driverjs.NoElement"></masa-example>
+
+#### 点击遮罩 {#click-overlay}
+
+默认情况下，点击遮罩会关闭引导。设置 `OverlayClickBehavior` 为 `OverlayClickBehavior.NextStep` 可以在点击遮罩时跳转到下一个步骤。
+
+<masa-example file="Examples.components.driverjs.ClickOverlay"></masa-example>

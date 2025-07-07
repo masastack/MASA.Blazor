@@ -171,7 +171,7 @@
 
 ## 常见问题与解决方案 {#common-issues}
 
-### 问题：`StateHasChanged` 在某些情况下不起作用 {#not-working}
+### 问题：StateHasChanged 在某些情况下不起作用 {#not-working}
 
 **问题描述**：在某些场景中，如实时数据流、WebSocket消息、高频传感器数据，下载进度等，外部事件触发非常频繁，导致手动调用StateHasChanged无法正常更新UI或造成严重性能问题。
 

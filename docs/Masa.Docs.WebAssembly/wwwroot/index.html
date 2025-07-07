@@ -122,7 +122,7 @@
     <script src="js/sw.js"></script>
     <script src="_framework/blazor.webassembly.js" autostart="false"></script>
     <script src="_content/Masa.Blazor/js/masa-blazor.js?version="></script>
-    <script src="_content/Masa.Docs.Shared/js/docs.js"></script>
+    <script src="_content/Masa.Docs.Shared/js/docs.js?version="></script>
     <script src="_content/Masa.Docs.Shared/js/markdown-it-emoji.min.js"></script>
     <script src="_content/Masa.Docs.Shared/js/markdown-parser.js"></script>
     <script src="https://cdn.masastack.com/npm/gridstack.js/12.2.1/gridstack-all.min.js"></script>
@@ -145,6 +145,21 @@
     <script src="https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs/loader.js"></script>
     <script src="https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs/editor/editor.main.nls.js"></script>
     <script src="https://cdn.masastack.com/npm/monaco-editor/0.34.1/min/vs/editor/editor.main.js"></script>
+    <script src="https://opendeep.wiki/koala-chat-widget.js"></script>
+    <script>
+      KoalaChatWidget.init({
+        appId: 'app_mcn5ubhc_z8w4uj',
+        title: 'masa-blazor-chat',
+        theme: 'light', // 或 'dark'
+        // 其他可选配置...
+        onError: (error) => {
+          console.error('Chat widget error:', error);
+        },
+        onValidationFailed: (domain) => {
+          console.error('Domain validation failed:', domain);
+        }
+      });
+    </script>
     <script type="module">
         import { BrotliDecode } from './js/decode.min.js';
         Blazor.start({

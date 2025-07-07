@@ -1571,7 +1571,8 @@ input[type=number] {
 /* support childContent in Divider */
 
 .m-divider__wrapper {
-    line-height: 1px;
+    position: relative;
+    background-color: inherit;
 }
 
 .m-divider__wrapper.m-divider__wrapper--has-content {
@@ -1591,24 +1592,28 @@ input[type=number] {
 }
 
 .m-divider__content {
+    background-color: inherit;
     padding: 0 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .m-divider__wrapper--left .m-divider__content {
-    margin-left: 3%;
+    left: var(--m-divider-content-offset, 3%);
+    transform: translateY(-50%);
 }
 
 .m-divider__wrapper--left .m-divider__content.m-divider--inset {
-    margin-left: calc(3% + 72px);
+    left: calc(3% + 72px);
+    transform: translateY(-50%);
 }
 
 .m-divider__wrapper--right .m-divider__content {
-    margin-right: 3%;
-}
-
-.m-divider__content {
-    background-color: rgba(var(--m-theme-surface));
-    color: rgba(var(--m-theme-on-surface));
+    left: unset;
+    right: var(--m-divider-content-offset, 3%);
+    transform: translateY(-50%);
 }
 
 /* enqueued-snackbars */

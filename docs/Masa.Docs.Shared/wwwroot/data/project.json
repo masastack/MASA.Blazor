@@ -1,5 +1,6 @@
 ﻿{
   "blazor": {
+    "key": "blazor",
     "name": "MASA Blazor",
     "path": "Masa.Blazor.Docs",
     "repo": "Masa.Blazor",
@@ -7,6 +8,7 @@
     "repoUrl": "https://github.com/masastack/MASA.Blazor"
   },
   "framework": {
+    "key": "framework",
     "name": "MASA Framework",
     "path": "Masa.Framework.Docs",
     "repo": "Masa.Framework",
@@ -14,6 +16,7 @@
     "repoUrl": "https://github.com/masastack/MASA.Framework"
   },
   "stack": {
+    "key": "stack",
     "name": "MASA Stack",
     "path": "Masa.Stack.Docs",
     "repo": "Masa.Stack",

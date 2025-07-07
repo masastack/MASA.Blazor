@@ -8,10 +8,10 @@ import typescript from "@rollup/plugin-typescript";
 
 export default defineConfig([
   {
-    input: "./src/proxies/sortable/index.ts",
+    input: "./src/wrappers/sortable/index.ts",
     output: [
       {
-        file: "../MASA.Blazor/wwwroot/js/proxies/sortable-proxy.js",
+        file: "../MASA.Blazor/wwwroot/js/wrappers/sortable.js",
         format: "esm",
         sourcemap: true,
       },

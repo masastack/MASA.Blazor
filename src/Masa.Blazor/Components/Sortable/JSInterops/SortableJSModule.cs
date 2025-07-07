@@ -2,7 +2,7 @@
 
 public class SortableJSModule : JSModule
 {
-    public SortableJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/proxies/sortable-proxy.js")
+    public SortableJSModule(IJSRuntime js) : base(js, "./_content/Masa.Blazor/js/wrappers/sortable.js")
     {
     }
 

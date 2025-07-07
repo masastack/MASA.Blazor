@@ -170,6 +170,11 @@
       "errorText": "加载失败",
       "loadingText": "加载中...",
       "loadMoreText": "加载更多"
+    },
+    "driverjs": {
+      "next": "下一步",
+      "prev": "上一步",
+      "done": "完成"
     }
   }
 }

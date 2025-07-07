@@ -18,7 +18,6 @@ public class MTabsBar : MSlideGroup
     {
         return base.BuildComponentClass().Concat(new[]{
             _modifierBuilder.Add(IsMobile)
-                .AddTextColor(Color)
                 .AddBackgroundColor(BackgroundColor)
                 .Build()
         });
@@ -28,7 +27,6 @@ public class MTabsBar : MSlideGroup
     {
         return base.BuildComponentStyle().Concat(
             StyleBuilder.Create()
-                .AddTextColor(Color)
                 .AddBackgroundColor(BackgroundColor)
                 .GenerateCssStyles()
         );

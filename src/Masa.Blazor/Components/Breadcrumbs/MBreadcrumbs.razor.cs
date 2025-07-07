@@ -18,6 +18,9 @@ public partial class MBreadcrumbs : ThemeComponentBase
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.10.0")]
+    public string? Color { get; set; }
+
     #region When using razor definition without Items parameter
 
     internal List<MBreadcrumbsItem> SubBreadcrumbsItems { get; } = new();
@@ -39,7 +42,13 @@ public partial class MBreadcrumbs : ThemeComponentBase
     {
         yield return _modifierBuilder
             .Add(Large)
+            .AddTextColor(Color)
             .AddTheme(ComputedTheme)
             .Build();
+    }
+
+    protected override IEnumerable<string?> BuildComponentStyle()
+    {
+        yield return CssStyleUtils.GetTextColor(Color);
     }
 }

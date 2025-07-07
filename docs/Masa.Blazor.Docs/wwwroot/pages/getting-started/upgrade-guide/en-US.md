@@ -34,6 +34,18 @@ please update the Masa.Blazor CSS and JS references in the `_Host.cshtml` or `in
 - CSS has been slightly adjusted to adapt to the color system of **Material Design 3**, which may cause color inconsistencies between versions.
   If you encounter any issues, please contact us.
 
+#### Icon fonts {#v1-10-0-icon-fonts}
+
+Removed the deprecated `Custom` property in the custom icon set, please use the `CssFormatter` property instead.
+
+```diff
+  var iconfontAliases = new MaterialDesignIconsAliases()
+  {
+-     Custom = icon => icon.StartsWith("mdi") ? $"mdi {icon}" : $"iconfont {icon}";
++     CssFormatter = icon => icon.StartsWith("mdi") ? $"mdi {icon}" : $"iconfont {icon}"
+  };
+```
+
 ### Components {#v1-10-0-components}
 
 #### Mobile components {#mobile-components}
@@ -60,6 +72,7 @@ dotnet add package MASA.Blazor.MobileComponents
     +     .AddMobileComponents();
      ```
   - **PageStackBarInit** component has been deprecated, use **PPageStackBar** instead. No longer need to force re-render by setting `RerenderKey`.
+  - The latest recommended usage can be found in the [example source code](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Shared/PageStackLayout.razor).
 
 #### Swiper
 

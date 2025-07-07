@@ -34,6 +34,18 @@
 - CSS 为了适配 **Material Design 3** 的颜色规则系统进行了微调，可能出现前后版本颜色不一致的情况。
   如有遇到问题请联系我们。
 
+#### Icon fonts {#v1-10-0-icon-fonts}
+
+删除了自定义图标集中标记为过时的 `Custom` 属性，请改为使用 `CssFormatter` 属性。
+
+```diff
+  var iconfontAliases = new MaterialDesignIconsAliases()
+  {
+-     Custom = icon => icon.StartsWith("mdi") ? $"mdi {icon}" : $"iconfont {icon}";
++     CssFormatter = icon => icon.StartsWith("mdi") ? $"mdi {icon}" : $"iconfont {icon}"
+  };
+```
+
 ### 组件 {#v1-10-0-components}
 
 #### 移动端组件 {#mobile-components}
@@ -50,16 +62,17 @@ dotnet add package Masa.Blazor.MobileComponents
 - [PMobilePicker](/blazor/mobiles/mobile-pickers)
 - [MMobilePickerView](/blazor/mobiles/mobile-picker-views)
 - [PMobileTimePicker](/blazor/mobiles/mobile-time-pickers)
-- [PPageStack](/blazor/mobiles/page-stack)
 - [MPdfMobileViewer](/blazor/mobiles/pdf-mobile-viewer)
 - [MPullRefresh](/blazor/mobiles/pull-refresh)
+- [PPageStack](/blazor/mobiles/page-stack)
   - 需要在注入 MasaBlazor 服务时添加 `AddMobileComponents` 扩展方法。
     ```diff
       builder.Services
           .AddMasaBlazor()
     +     .AddMobileComponents();
      ```
-  - **PStackPageBarInit** 组件已废弃，使用 **PPageStackBar** 代替。不再需要通过设置 `RerenderKey` 强制重新渲染。 
+  - **PStackPageBarInit** 组件已废弃，使用 **PPageStackBar** 代替。不再需要通过设置 `RerenderKey` 强制重新渲染。
+  - 最新的推荐用法请参考[示例源码](https://github.com/masastack/MASA.Blazor/blob/main/docs/Masa.Blazor.Docs/Shared/PageStackLayout.razor)。
 
 #### Swiper
 

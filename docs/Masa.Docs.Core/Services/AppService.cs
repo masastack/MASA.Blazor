@@ -32,7 +32,7 @@ public class AppService
         if (project == "blazor")
         {
             list.Add(new("getting-started", "/blazor/getting-started/installation", "/blazor/getting-started"));
-            list.Add(new("ui-components", "/blazor/components/all", "/blazor/components"));
+            list.Add(new("ui-components", "/blazor/components/application", "/blazor/[components|mobiles]"));
         }
 
         list.Add(new("annual-service", "/annual-service", "pricing", "red"));

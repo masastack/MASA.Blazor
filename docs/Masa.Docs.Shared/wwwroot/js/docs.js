@@ -126,3 +126,12 @@ window.addDocSearch = function (index, currentLanguage, placeholder) {
 window.isDarkPreferColor = function() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches
 }
+
+window.openAIAssistant = function() {
+  const el = document.querySelector(".koala-floating-button");
+  if (el) {
+    el.click();
+  } else {
+    console.warn("Koala floating button not found.");
+  }
+} 

@@ -228,7 +228,7 @@ Taking Remix icon and iconfont as examples:
 // This example uses MaterialDesignIcons as the built-in icon set unchanged
 var remixIconAlias = new MaterialDesignIconsAliases()
 {
-  CssFormatter = icon => icon.StartsWith("mdi") ? $"mdi {icon}" : icon;
+  CssFormatter = icon => icon.StartsWith("mdi") ? $"mdi {icon}" : icon
 };
 
 builder.Services.AddMasaBlazor(options => {
@@ -245,7 +245,7 @@ builder.Services.AddMasaBlazor(options => {
 ```csharp
 var iconfontAliases = new MaterialDesignIconsAliases()
 {
-    Custom = icon => icon.StartsWith("mdi") ? $"mdi {icon}" : $"iconfont {icon}";
+    CssFormatter = icon => icon.StartsWith("mdi") ? $"mdi {icon}" : $"iconfont {icon}"
 };
 
 builder.Services.AddMasaBlazor(options => {

@@ -1,5 +1,7 @@
 ﻿@using Masa.Blazor.Presets
 @using System.ComponentModel.DataAnnotations
+@using Masa.Blazor.Components.Form
+@inject IPopupService PopupService
 
 <MSwitch @bind-Value="throwException" Label="throw exception when calling OnSave"></MSwitch>
 
@@ -17,22 +19,23 @@
          Persistent
          Title="Title"
          Width="500"
-         OnSave="HandleOnSave"
-         OnCancel="HandleOnCancel">
+         OnValidating="@OnValidating"
+         OnSave="@HandleOnSave"
+         OnCancel="@HandleOnCancel">
     <MRow>
         <MCol Cols="12">
             <MTextField @bind-Value="userModel.UserName"
                         Label="UserName"
                         Dense
                         Outlined
-                        HideDetails="@("auto")" />
+                        HideDetails="@("auto")"/>
         </MCol>
         <MCol Cols="12">
             <MTextField @bind-Value="userModel.City"
                         Label="City"
                         Dense
                         Outlined
-                        HideDetails="@("auto")" />
+                        HideDetails="@("auto")"/>
         </MCol>
         <MCol Cols="12">
             <MRadioGroup @bind-Value="userModel.Gender"
@@ -75,7 +78,7 @@
 
     private bool value;
     private bool throwException;
-    private Exception exception;
+    private Exception? exception;
 
     private void ShowModal()
     {
@@ -89,13 +92,24 @@
         value = true;
     }
 
+    private void OnValidating(List<FieldValidationResult> results)
+    {
+        // Get the validation results when clicking the save button
+        var result = results.FirstOrDefault();
+        if (result is not null)
+        {
+            _ = PopupService.EnqueueSnackbarAsync($"Validation failed: {result.ErrorMessages.First()}", AlertTypes.Error);
+        }
+    }
+
     private async Task HandleOnSave(ModalActionEventArgs args)
     {
         try
         {
-            // logic in real world here
+            // Simulate a delay to mimic an async operation
             await Task.Delay(1000);
 
+            // Simulate an exception and catch it to test the cancel action
             if (throwException)
             {
                 throw new Exception("Something wrong here!");
@@ -140,7 +154,7 @@
         }
     }
 
-    public interface IShallowCopy<T> where T : new() 
+    public interface IShallowCopy<T> where T : new()
     {
         T ShallowCopy();
     }

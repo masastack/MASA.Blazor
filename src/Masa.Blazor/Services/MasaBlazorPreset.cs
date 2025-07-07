@@ -7,9 +7,9 @@ internal static class MasaBlazorPreset
         IsDarkScheme = false,
         CombinePrefix = ".m-application",
         Primary = "#4318ff",
-        Secondary = "#424242",
-        Accent = "#82B1FF",
-        Error = "#FF5252",
+        Secondary = "#5c5a85",
+        Accent = "#8f456f",
+        Error = "#FF5449",
         Info = "#2196F3",
         Success = "#4CAF50",
         Warning = "#FB8C00",
@@ -29,26 +29,26 @@ internal static class MasaBlazorPreset
         SurfaceContainer = "#FFFFFF",
         SurfaceContainerHigh = "#f5f5f5",
         SurfaceContainerHighest = "#e0e0e0",
-        InverseSurface = "#424242",
-        InverseOnSurface = "#EEEEEE",
-        InversePrimary = "#2196F3"
+        InverseSurface = "#302f3b",
+        InverseOnSurface = "#f3eeff",
+        InversePrimary = "#c5c0ff"
     };
 
     internal static ThemeOptions GetDarkTheme() => new()
     {
         IsDarkScheme = true,
         CombinePrefix = ".m-application",
-        Primary = "#C5C0FF",
-        Secondary = "#424242",
-        Accent = "#FF4081",
-        Error = "#FF5252",
+        Primary = "#c5c0ff",
+        Secondary = "#928F9F",
+        Accent = "#A98897",
+        Error = "#ffb4ab",
         Info = "#2196F3",
         Success = "#4CAF50",
         Warning = "#FB8C00",
-        OnPrimary = "#000000",
-        OnSecondary = "#FFFFFF",
-        OnAccent = "#FFFFFF",
-        OnError = "#FFFFFF",
+        OnPrimary = "#2400a2",
+        OnSecondary = "#302f3c",
+        OnAccent = "#412935",
+        OnError = "#690005",
         OnInfo = "#FFFFFF",
         OnSuccess = "#FFFFFF",
         OnWarning = "#FFFFFF",
@@ -61,8 +61,8 @@ internal static class MasaBlazorPreset
         SurfaceContainer = "#2B2B2B",
         SurfaceContainerHigh = "#383838",
         SurfaceContainerHighest = "#454545",
-        InverseSurface = "#c8c8c8",
-        InverseOnSurface = "#000000",
+        InverseSurface = "#e4e0f0",
+        InverseOnSurface = "#302f3b",
         InversePrimary = "#4f33ff"
     };
 
