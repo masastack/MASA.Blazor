@@ -69,6 +69,10 @@
   border-bottom: 1px solid rgba(var(--m-theme-outline-variant)) !important;
 }
 
+.masa-table-viewer__header-column.handle {
+  cursor: move;
+}
+
 .masa-table-viewer__header-column.rowselect {
   width: 56px;
 }

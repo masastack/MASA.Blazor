@@ -1,0 +1,113 @@
+﻿@page "/"
+
+@using System.Text.Json
+@using Masa.Blazor.Components.TemplateTable
+@using Masa.Blazor.Components.TemplateTable.Contracts
+@using TemplateTableSample.UI.Services
+@inject IJSRuntime JSRuntime
+@inject SheetService SheetService
+@inject IPopupService PopupService
+
+<h1>
+    <MButton IconName="mdi-arrow-left" OnClick="@(() => JSRuntime.InvokeVoidAsync("history.back"))"></MButton>
+    HotChocolate
+</h1>
+
+<MButtonGroup Value="(int)_role"
+              ValueChanged="v => _role = (Role)v.ToInt32()"
+              Mandatory
+              Class="mb-4">
+    <MButton Value="(int)Role.Manager">Manager</MButton>
+    <MButton Value="(int)Role.User">User</MButton>
+</MButtonGroup>
+
+<MTemplateTable Sheet="_sheet"
+                UserViews="_userViews"
+                DefaultPageSize="4"
+                OnUserViewAdd="@OnUserViewAdd"
+                OnUserViewUpdate="@OnUserViewUpdate"
+                OnUserViewDelete="@OnUserViewDelete"
+                Role="@_role"
+                OnSave="@Save"
+                CheckboxColor="primary"
+                OnRemove="@Remove">
+    <ViewActionsContent>
+        <MButton OnClick="@(() => OnExport(context))" Color="primary">Export</MButton>
+    </ViewActionsContent>
+    <RowActionsContent>
+        <MButton IconName="mdi-delete-variant" OnClick="@(() => OnDelete(context))"></MButton>
+    </RowActionsContent>
+    @* <RowActionsContent> *@
+    @*     <RowDetailAction Icon="mdi-eye" Text="详情" /> *@
+    @*     <RowAction Icon="mdi-star" Text="Custom Action !" OnClick="OnCustomAction"/> *@
+    @*     <RowAction Icon="mdi-delete-variant" Text="删除" Index="3" Menu OnClick="OnDelete"/> *@
+    @* </RowActionsContent> *@
+</MTemplateTable>
+
+@code {
+    private Role _role;
+
+    private Sheet? _sheet;
+    
+    private IList<View> _userViews = [];
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _sheet = await SheetService.GetSheetAsync();
+            _userViews = await SheetService.GetUserViewsAsync("cyx");
+            StateHasChanged();
+        }
+    }
+
+    private async Task OnUserViewAdd(View view)
+    {
+        await SheetService.AddUserViewAsync("cyx", view);
+    }
+
+    private async Task OnUserViewDelete(View view)
+    {
+        await SheetService.UserViewDeleteAsync("cyx", view);
+    }
+
+    private async Task OnUserViewUpdate(View view)
+    {
+    }
+
+    private void OnCustomAction(IReadOnlyDictionary<string, JsonElement> data)
+    {
+        Console.Out.WriteLine($"Custom Action Clicked {data["name"].GetString()}");
+    }
+    
+    private async Task Save(Sheet sheet)
+    {
+        await SheetService.SaveAsync(sheet);
+    }
+
+    private async Task OnDelete(IReadOnlyDictionary<string, JsonElement> data)
+    {
+        await PopupService.ConfirmAsync("Are you sure to delete this item?", data["name"].GetString(), AlertTypes.Warning, async _ =>
+        {
+            await Task.Delay(1000);
+            Console.Out.WriteLine("Deleted");
+        });
+    }
+
+    private async Task Remove(ICollection<Row> items)
+    {
+        var keyString = string.Join(", ", items.Select(u => u.Key));
+        var message = $"Are you sure to delete {items.Count()} items({keyString})?";
+        var confirmed = await PopupService.ConfirmAsync(message, AlertTypes.Warning);
+        if (confirmed)
+        {
+            Console.Out.WriteLine("Deleted");
+        }
+    }
+
+    private async Task OnExport(ICollection<Row> items)
+    {
+        Console.Out.WriteLine("Export: " + string.Join(',', items.Select(u => u.Key)));
+    }
+
+}

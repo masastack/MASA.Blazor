@@ -1,8 +1,6 @@
 ﻿@if (OnlyCanSaveAsNewView)
 {
-    <MButton Text
-             Color="primary"
-             Small
+    <MButton Color="primary"
              OnClick="@OnSaveAsNewView">
         @AsNewViewText
     </MButton>
@@ -13,10 +11,8 @@ else
            MinWidth="200"
            ContentClass="px-2">
         <ActivatorContent>
-            <MButton Text
-                     Color="primary"
+            <MButton Color="primary"
                      Loading="@Loading"
-                     Small
                      @attributes="@context.Attrs">
                 视图操作
             </MButton>

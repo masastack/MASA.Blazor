@@ -5,13 +5,9 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor", "src\Masa.Blazor\Masa.Blazor.csproj", "{729665A4-B387-4E03-A27D-0D72BF1E3169}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Playground", "src\Masa.Blazor.Playground\Masa.Blazor.Playground.csproj", "{ADDB84AB-BE62-4D6F-BBFE-20057C04B6F3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.SourceGenerator", "src\Masa.Blazor.SourceGenerator\Masa.Blazor.SourceGenerator.csproj", "{D6A1F4BF-6120-4AFC-9A61-4DD0BFECDD91}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.TemplateTable", "src\TemplateTable\src\Masa.Blazor.Components.TemplateTable\Masa.Blazor.Components.TemplateTable.csproj", "{AEE9B18A-DA62-48D8-BFFD-7BF444992858}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.TemplateTable.Core", "src\TemplateTable\src\Masa.Blazor.Components.TemplateTable.Core\Masa.Blazor.Components.TemplateTable.Core.csproj", "{88B07E96-F5F0-4729-B06E-B5584AE87F70}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL", "src\TemplateTable\src\Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL\Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL.csproj", "{51F63571-5A3C-4F83-BD2F-AA34BA270C38}"
 EndProject
@@ -23,6 +19,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotChocolateDemo", "src\Tem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.TemplateTable.Contracts", "src\TemplateTable\src\Masa.Blazor.Components.TemplateTable.Contracts\Masa.Blazor.Components.TemplateTable.Contracts.csproj", "{1F855A75-5836-4D4A-92F7-C64BDF8290D1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{12948857-9047-4D82-B1B6-29FC9A963E56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateTableSample.AppHost", "src\TemplateTable\samples\TemplateTableSample.AppHost\TemplateTableSample.AppHost.csproj", "{64FDC99A-D86A-482F-B1D4-B1A98495D6B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateTableSample.ServiceDefaults", "src\TemplateTable\samples\TemplateTableSample.ServiceDefaults\TemplateTableSample.ServiceDefaults.csproj", "{D5517A9F-1A48-4E7D-9398-B4AF0B12C784}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Masa.Blazor.Components.TemplateTable.Abstractions", "src\TemplateTable\src\Masa.Blazor.Components.TemplateTable.Abstractions\Masa.Blazor.Components.TemplateTable.Abstractions.csproj", "{5B824726-C6F7-4E6F-A6D9-FAA2252C4BDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateTableSample.UI", "src\TemplateTable\samples\TemplateTableSample.UI\TemplateTableSample.UI.csproj", "{C528E18F-BCF9-4DA7-8267-BD1E2B513995}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +39,6 @@ Global
 		{729665A4-B387-4E03-A27D-0D72BF1E3169}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{729665A4-B387-4E03-A27D-0D72BF1E3169}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{729665A4-B387-4E03-A27D-0D72BF1E3169}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ADDB84AB-BE62-4D6F-BBFE-20057C04B6F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ADDB84AB-BE62-4D6F-BBFE-20057C04B6F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ADDB84AB-BE62-4D6F-BBFE-20057C04B6F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ADDB84AB-BE62-4D6F-BBFE-20057C04B6F3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6A1F4BF-6120-4AFC-9A61-4DD0BFECDD91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D6A1F4BF-6120-4AFC-9A61-4DD0BFECDD91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6A1F4BF-6120-4AFC-9A61-4DD0BFECDD91}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,10 +47,6 @@ Global
 		{AEE9B18A-DA62-48D8-BFFD-7BF444992858}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEE9B18A-DA62-48D8-BFFD-7BF444992858}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEE9B18A-DA62-48D8-BFFD-7BF444992858}.Release|Any CPU.Build.0 = Release|Any CPU
-		{88B07E96-F5F0-4729-B06E-B5584AE87F70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88B07E96-F5F0-4729-B06E-B5584AE87F70}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{88B07E96-F5F0-4729-B06E-B5584AE87F70}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{88B07E96-F5F0-4729-B06E-B5584AE87F70}.Release|Any CPU.Build.0 = Release|Any CPU
 		{51F63571-5A3C-4F83-BD2F-AA34BA270C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{51F63571-5A3C-4F83-BD2F-AA34BA270C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51F63571-5A3C-4F83-BD2F-AA34BA270C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,10 +67,30 @@ Global
 		{1F855A75-5836-4D4A-92F7-C64BDF8290D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F855A75-5836-4D4A-92F7-C64BDF8290D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F855A75-5836-4D4A-92F7-C64BDF8290D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64FDC99A-D86A-482F-B1D4-B1A98495D6B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64FDC99A-D86A-482F-B1D4-B1A98495D6B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64FDC99A-D86A-482F-B1D4-B1A98495D6B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64FDC99A-D86A-482F-B1D4-B1A98495D6B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5517A9F-1A48-4E7D-9398-B4AF0B12C784}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5517A9F-1A48-4E7D-9398-B4AF0B12C784}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5517A9F-1A48-4E7D-9398-B4AF0B12C784}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5517A9F-1A48-4E7D-9398-B4AF0B12C784}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B824726-C6F7-4E6F-A6D9-FAA2252C4BDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B824726-C6F7-4E6F-A6D9-FAA2252C4BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B824726-C6F7-4E6F-A6D9-FAA2252C4BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B824726-C6F7-4E6F-A6D9-FAA2252C4BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C528E18F-BCF9-4DA7-8267-BD1E2B513995}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C528E18F-BCF9-4DA7-8267-BD1E2B513995}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C528E18F-BCF9-4DA7-8267-BD1E2B513995}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C528E18F-BCF9-4DA7-8267-BD1E2B513995}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{4058B35F-7D0E-4187-B08A-0B58A972D7DC} = {12948857-9047-4D82-B1B6-29FC9A963E56}
+		{64FDC99A-D86A-482F-B1D4-B1A98495D6B8} = {12948857-9047-4D82-B1B6-29FC9A963E56}
+		{D5517A9F-1A48-4E7D-9398-B4AF0B12C784} = {12948857-9047-4D82-B1B6-29FC9A963E56}
+		{C528E18F-BCF9-4DA7-8267-BD1E2B513995} = {12948857-9047-4D82-B1B6-29FC9A963E56}
 	EndGlobalSection
 EndGlobal

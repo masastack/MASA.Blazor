@@ -8,7 +8,7 @@ export default defineConfig([
     input: "./src/components/configurable-table/index.ts",
     output: [
       {
-        file: "../Masa.Blazor.Components.TemplateTable/MTemplateTable.razor.js",
+        file: "../TemplateTable/src/Masa.Blazor.Components.TemplateTable/MTemplateTable.razor.js",
         format: "esm",
         sourcemap: true,
       },

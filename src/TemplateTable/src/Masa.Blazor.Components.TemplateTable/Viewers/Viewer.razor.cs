@@ -144,12 +144,11 @@ public partial class Viewer : IAsyncDisposable
 
         if (firstRender)
         {
-            // TODO: dispose
-
-            _tableJSObjectReference = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
+            var importJSObjectReference = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
                 "./_content/Masa.Blazor.Components.TemplateTable/MTemplateTable.razor.js");
-            await _tableJSObjectReference.InvokeVoidAsync("init", _simpleTable?.Ref,
-                _dotNetObjectReference);
+            _tableJSObjectReference = await importJSObjectReference.InvokeAsync<IJSObjectReference>("init",
+                _simpleTable?.Ref, _dotNetObjectReference);
+            await importJSObjectReference.DisposeAsync();
 
             _sized = true;
             StateHasChanged();

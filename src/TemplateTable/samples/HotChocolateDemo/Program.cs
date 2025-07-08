@@ -5,6 +5,8 @@ using Path = System.IO.Path;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 builder.Services.AddGraphQLServer()
     .AddQueryType<Query>()
     .AddFiltering()
