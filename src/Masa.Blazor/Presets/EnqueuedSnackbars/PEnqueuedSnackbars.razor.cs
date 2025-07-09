@@ -136,7 +136,6 @@ namespace Masa.Blazor.Presets
             {
                 if (IsDuplicateMessage(config))
                 {
-                    _semaphore.Release();
                     return;
                 }
 
