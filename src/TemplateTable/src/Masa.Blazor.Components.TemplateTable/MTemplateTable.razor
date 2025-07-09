@@ -12,7 +12,6 @@
 @namespace Masa.Blazor
 @inject IJSRuntime JSRuntime
 @inject IPopupService PopupService
-@implements IDisposable
 
 @if (_sheet is not null)
 {
@@ -28,7 +27,6 @@
                  RowHeightChanged="@HandleOnRowHeightChanged"
                  PageSizeOptions="@_sheet.Pagination.PageSizeOptions"
                  PageSizeOptionsChanged="@HandleOnPageSizeOptionsChanged"
-                 @bind-ShowDetail="@_sheet.ActiveView.Value.ShowDetail"
                  @bind-ShowBulkDelete="@_sheet.ActiveView.Value.ShowBulkDelete"
                  Views="_sheet.Views"
                  Columns="_allColumns"
@@ -70,18 +68,14 @@
                 OnColumnEditClick="@OpenColumnEditDialog"
                 OnColumnResize="@ResizeColumn"
                 OnImagePreview="@OpenImageViewer"
-                ShowDetail="@(_sheet.ActiveView.Value.ShowDetail)"
                 OnDetail="@OpenDetailDialog"
                 CheckboxColor="@CheckboxColor"
                 SelectedKeys="@SelectedKeys"
                 OnSelect="@HandleOnSelect"
                 OnSelectAll="@HandleOnSelectAll"
-                RowActionsContext="@_rowActionsContext"
                 HasCustomRowActions="@HasCustomRowActions"
+                RowActionsContent="@RowActionsContent"
                 @ref="_viewer">
-            <TopContent>
-                
-            </TopContent>
         </Viewer>
 
         @{
@@ -122,10 +116,6 @@
     </div>
 }
 
-<CascadingValue Value="@_rowActionsContext" IsFixed>
-    @RowActionsContent
-</CascadingValue>
-
 @code {
 
     private RowHeight _rowHeight;
@@ -138,8 +128,6 @@
     private SortDialog? _sortDialog;
     private DetailDialog? _detailDialog;
     private ImageViewer? _imageViewer;
-
-    private RowActionsContext _rowActionsContext = new();
 
     private bool HasCustomRowActions => RowActionsContent is not null;
 
@@ -169,20 +157,6 @@
 
             return !_defaultColumnIds.SequenceEqual(columnIds);
         }
-    }
-
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-
-        _rowActionsContext.StateChanged += OnRowActionsInitialized;
-    }
-
-    private void OnRowActionsInitialized()
-    {
-        EnsureActiveViewActionsColumnWidthCorrectly();
-
-        StateHasChanged();
     }
 
     private void EnsureActiveViewActionsColumnWidthCorrectly()
@@ -506,10 +480,4 @@
 
         await OnSave.InvokeAsync(sheet);
     }
-
-    public void Dispose()
-    {
-        _rowActionsContext.StateChanged -= OnRowActionsInitialized;
-    }
-
 }

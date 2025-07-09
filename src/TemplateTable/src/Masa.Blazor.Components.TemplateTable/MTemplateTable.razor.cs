@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Masa.Blazor.Components.TemplateTable.Actions;
+using Microsoft.Extensions.Logging;
 
 namespace Masa.Blazor;
 
@@ -26,68 +27,14 @@ public partial class MTemplateTable
 
     [Parameter] public StringNumber? Height { get; set; }
 
-    [Parameter] public RenderFragment<IReadOnlyDictionary<string, JsonElement>>? RowActionsContent { get; set; }
+    [Parameter] public RenderFragment<RowActionsContext>? RowActionsContent { get; set; }
 
     [Parameter] public RenderFragment<ICollection<Row>>? ViewActionsContent { get; set; }
 
     [Parameter] public Role Role { get; set; }
 
     [Parameter] public int DefaultPageSize { get; set; } = 10;
-
-    // TODO: Sheet请求服务不一定是GraphQL的，需要支持普通的HTTP请求
-    private const string SheetQuery =
-        """
-        query {
-          sheet {
-            views {
-              showActions
-              showSelect
-              showDetail
-              showBulkDelete
-              id
-              name
-              rowHeight
-              type
-              columns {
-                columnId
-                hidden
-                width
-              }
-              filter {
-                options {
-                  columnId
-                  func
-                  expected
-                  type
-                }
-                operator
-                search
-              }
-              sort {
-                options {
-                  columnId
-                  orderBy
-                  index
-                }
-              }
-            }
-            columns {
-              config
-              id
-              name
-              type
-              searchable
-            }
-            activeViewId
-            defaultViewId
-            itemKeyName
-            pagination {
-              pageSizeOptions
-            }
-          }
-        }
-        """;
-
+    
     private SheetInfo? _sheet = null;
     private bool _init;
 

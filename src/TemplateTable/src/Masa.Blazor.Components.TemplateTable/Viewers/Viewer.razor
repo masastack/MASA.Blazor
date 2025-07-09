@@ -1,6 +1,7 @@
 ﻿@using System.Globalization
 @using BemIt
 @using GraphQL.Client.Abstractions.Utilities
+@using Masa.Blazor.Components.TemplateTable.Actions
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 
 <MSimpleTable FixedHeader
@@ -81,7 +82,9 @@
                             <div class="masa-table-viewer__cell-content">
                                 @if (template.Column.Type == ColumnType.Actions)
                                 {
-                                    @GenActionsCell(item.Data)
+                                    <MDefaultsProvider Defaults="@_actionsDefautls">
+                                        @GenActionsCell(item.Data)
+                                    </MDefaultsProvider>
                                 }
                                 else if (template.Column.Type == ColumnType.RowSelect)
                                 {
@@ -370,64 +373,14 @@
     {
         Action detailAction = () => OnDetail.InvokeAsync(item);
 
-        // TODO: RowActionsContext
-
-        if (HasCustomRowActions)
+        if (RowActionsContent is null)
         {
-            foreach (var action in RowActionsContext.DisplayActions.OrderBy(u => u.Index))
-            {
-                var click = action.InternalId == RowDetailAction.DefaultId ? detailAction : () => action.OnClick.InvokeAsync(item);
-
-                <MTooltip Top Disabled="@(action.Text is null)">
-                    <ActivatorContent>
-                        <MButton IconName="@action.Icon"
-                                 Small
-                                 OnClick="@click"
-                                 @attributes="@context.Attrs">
-                        </MButton>
-                    </ActivatorContent>
-                    <ChildContent>
-                        @action.Text
-                    </ChildContent>
-                </MTooltip>
-            }
-
-            if (RowActionsContext.MenuActions.Count > 0)
-            {
-                <MMenu OffsetY Left>
-                    <ActivatorContent>
-                        <MButton IconName="mdi-dots-horizontal"
-                                 Small
-                                 @attributes="@context.Attrs"/>
-                    </ActivatorContent>
-                    <ChildContent>
-                        <MList Dense Slim>
-                            @foreach (var action in RowActionsContext.MenuActions.OrderBy(u => u.Index))
-                            {
-                                var click = action.InternalId == RowDetailAction.DefaultId ? detailAction : () => action.OnClick.InvokeAsync(item);
-
-                                <MListItem Title="@action.Text"
-                                           OnClick="@click"/>
-                            }
-                        </MList>
-                    </ChildContent>
-                </MMenu>
-            }
+            <MButton OnClick="@detailAction" Color="primary" Text Small>详情</MButton>
         }
-        else if (ShowDetail)
+        else
         {
-            <MTooltip Top>
-                <ActivatorContent>
-                    <MButton IconName="@RowDetailAction.DefaultIcon"
-                             Small
-                             OnClick="@detailAction"
-                             @attributes="@context.Attrs">
-                    </MButton>
-                </ActivatorContent>
-                <ChildContent>
-                    @RowDetailAction.DefaultText
-                </ChildContent>
-            </MTooltip>
+            RowActionsContext context = new(detailAction, item);
+            @RowActionsContent?.Invoke(context)
         }
     };
 

@@ -55,8 +55,6 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public string? CheckboxColor { get; set; }
 
-    [Parameter] public bool ShowDetail { get; set; }
-
     [Parameter] public EventCallback<Column> OnColumnEditClick { get; set; }
 
     [Parameter] public EventCallback<string> OnColumnToggle { get; set; }
@@ -71,6 +69,8 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public bool HasCustomRowActions { get; set; }
 
+    [Parameter] public RenderFragment<RowActionsContext>? RowActionsContent { get; set; }
+
     [Parameter] public List<string> SelectedKeys { get; set; } = [];
 
     // [Parameter] public List<string> SelectableKeys { get; set; } = [];
@@ -78,6 +78,15 @@ public partial class Viewer : IAsyncDisposable
     [Parameter] public Action<(Row Item, bool Selected)> OnSelect { get; set; } = default!;
 
     [Parameter] public Action<bool> OnSelectAll { get; set; } = default!;
+
+    private IDictionary<string, IDictionary<string, object?>> _actionsDefautls =
+        new Dictionary<string, IDictionary<string, object?>>
+        {
+            [nameof(MButton)] = new Dictionary<string, object?>
+            {
+                [nameof(MButton.Small)] = true
+            }
+        };
 
     // ReSharper disable once StaticMemberInGenericType
     private static Block _block = new("masa-table-viewer");

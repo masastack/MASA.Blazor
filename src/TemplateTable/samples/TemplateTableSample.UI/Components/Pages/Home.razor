@@ -35,20 +35,19 @@
         <MButton OnClick="@(() => OnExport(context))" Color="primary">Export</MButton>
     </ViewActionsContent>
     <RowActionsContent>
-        <MButton IconName="mdi-delete-variant" OnClick="@(() => OnDelete(context))"></MButton>
+        <div class="d-flex">
+            <MButton IconName="mdi-eye" OnClick="@context.ShowDetail"/>
+            <MButton IconName="mdi-star"/>
+            <MButton IconName="mdi-delete-variant"/>
+        </div>
     </RowActionsContent>
-    @* <RowActionsContent> *@
-    @*     <RowDetailAction Icon="mdi-eye" Text="详情" /> *@
-    @*     <RowAction Icon="mdi-star" Text="Custom Action !" OnClick="OnCustomAction"/> *@
-    @*     <RowAction Icon="mdi-delete-variant" Text="删除" Index="3" Menu OnClick="OnDelete"/> *@
-    @* </RowActionsContent> *@
 </MTemplateTable>
 
 @code {
     private Role _role;
 
     private Sheet? _sheet;
-    
+
     private IList<View> _userViews = [];
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -79,7 +78,7 @@
     {
         Console.Out.WriteLine($"Custom Action Clicked {data["name"].GetString()}");
     }
-    
+
     private async Task Save(Sheet sheet)
     {
         await SheetService.SaveAsync(sheet);
