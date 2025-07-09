@@ -226,7 +226,7 @@
       },
       {
         "title": "expansion-panels",
-        "type": "selection"
+        "type": "containment"
       },
       {
         "title": "floating-action-buttons",
