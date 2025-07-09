@@ -18971,14 +18971,7 @@ html.overflow-y-hidden {
     color: inherit;
 }
 .m-btn.m-btn--disabled {
-    color: rgba(var(--m-theme-on-surface), var(--m-disabled-opacity)) !important;
-}
-.m-btn.m-btn--disabled .m-icon,
-.m-btn.m-btn--disabled .m-btn__loading {
-    color: rgba(var(--m-theme-on-surface), var(--m-disabled-opacity)) !important;
-}
-.m-btn.m-btn--disabled.m-btn--has-bg {
-    background-color: rgba(var(--m-theme-on-surface), calc(var(--m-disabled-opacity, .36) / 3)) !important;
+    opacity: var(--m-disabled-opacity) !important;
 }
 .m-btn.m-btn--has-bg {
     background-color: rgba(var(--m-theme-surface-container-low));
@@ -20657,9 +20650,6 @@ html.overflow-y-hidden {
 .m-list {
     background: rgba(var(--m-theme-surface-container-low));
     color: rgba(var(--m-theme-on-surface), var(--m-high-emphasis-opacity));
-}
-.m-list .m-list--disabled {
-    color: rgba(var(--m-theme-on-surface), var(--m-disabled-opacity));
 }
 
 .m-sheet.m-list {
