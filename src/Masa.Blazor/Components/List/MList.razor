@@ -10,8 +10,28 @@
                                  ReferenceCaptureAction="@((r) => Ref = r)"
                                  Value="If"
                                  @attributes="Attributes">
-                @ChildContent
+                <MDefaultsProvider Defaults="@_defaults">
+                    @ChildContent
+                </MDefaultsProvider>
             </IfTransitionElement>
         </CascadingValue>
     </CascadingValue>
 </CascadingValue>
+
+@code {
+
+    private readonly IDictionary<string, IDictionary<string, object>> _defaults = new Dictionary<string, IDictionary<string, object>>()
+    {
+        [nameof(MListItem)] = new Dictionary<string, object>()
+    };
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        
+        _defaults[nameof(MListItem)][nameof(MListItem.Disabled)] = Disabled;
+        _defaults[nameof(MListItem)][nameof(MListItem.Dense)] = Dense;
+        _defaults[nameof(MListItem)][nameof(MListItem.Slim)] = Slim;
+    }
+
+}
