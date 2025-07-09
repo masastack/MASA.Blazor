@@ -26624,6 +26624,7 @@ html.overflow-y-hidden {
 
 .m-navigation-drawer {
     background-color: rgba(var(--m-theme-surface-container));
+    color: rgba(var(--m-theme-on-surface));
 }
 .m-navigation-drawer:not(.m-navigation-drawer--floating) .m-navigation-drawer__border {
     border-right-width: thin;
