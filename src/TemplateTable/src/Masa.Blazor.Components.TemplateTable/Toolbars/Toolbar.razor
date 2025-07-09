@@ -89,93 +89,93 @@
         }
     </MRow>
     <MDivider Class="mt-2"/>
-    <MDefaultsProvider Defaults="@_defaults">
-        <MRow Class="masa-table__toolbar-actions"
-              NoGutters>
-            <MCol Cols="12" Md="6" Align="AlignTypes.Center">
-                @if (Editable)
-                {
-                    <MButton LeftIconName="mdi-cog-outline" Text OnClick="@(() => _configDialog = true)">
-                        <MBadge Value="@HasCustom" Dot Color="red">
-                            表格配置
-                        </MBadge>
+    <MRow Class="masa-table__toolbar-actions"
+          NoGutters>
+        <MCol Cols="12" Md="6" Align="AlignTypes.Center">
+            @if (Editable)
+            {
+                <MButton LeftIconName="mdi-cog-outline" Text Small OnClick="@(() => _configDialog = true)">
+                    <MBadge Value="@HasCustom" Dot Color="red">
+                        表格配置
+                    </MBadge>
+                </MButton>
+                <MDivider Vertical Style="height: 1rem"/>
+            }
+            <MButton LeftIconName="mdi-filter-variant" Text Small OnClick="@OnFilterClick">
+                <MBadge Value="@HasFilter" Dot Color="red">
+                    筛选
+                </MBadge>
+            </MButton>
+            <MDivider Vertical Style="height: 1rem"/>
+            <MButton LeftIconName="mdi-sort" Text Small OnClick="@OnSortClick">
+                <MBadge Value="@HasSort" Dot Color="red">
+                    排序
+                </MBadge>
+            </MButton>
+            <MDivider Vertical Style="height: 1rem"/>
+            <MMenu MinWidth="160">
+                <ActivatorContent>
+                    <MButton LeftIconName="mdi-format-line-spacing"
+                             Text Small
+                             @attributes="@context.Attrs">
+                        行高
                     </MButton>
-                    <MDivider Vertical Style="height: 1rem"/>
-                }
-                <MButton LeftIconName="mdi-filter-variant" Text OnClick="@OnFilterClick">
-                    <MBadge Value="@HasFilter" Dot Color="red">
-                        筛选
-                    </MBadge>
-                </MButton>
-                <MDivider Vertical Style="height: 1rem"/>
-                <MButton LeftIconName="mdi-sort" Text OnClick="@OnSortClick">
-                    <MBadge Value="@HasSort" Dot Color="red">
-                        排序
-                    </MBadge>
-                </MButton>
-                <MDivider Vertical Style="height: 1rem"/>
-                <MMenu MinWidth="160">
-                    <ActivatorContent>
-                        <MButton LeftIconName="mdi-format-line-spacing"
-                                 Text
-                                 @attributes="@context.Attrs">
-                            行高
-                        </MButton>
-                    </ActivatorContent>
-                    <ChildContent>
-                        <MList Slim Dense>
-                            <MListItemGroup Value="@((int)RowHeight)"
-                                            ValueChanged="@((val) => RowHeightChanged.InvokeAsync((RowHeight)val.AsT1))"
-                                            Mandatory
-                                            Color="primary">
-                                <MListItem Value="0">
-                                    <ItemContent>
-                                        <MListItemAction>
-                                            <FadeTransition>
-                                                <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
-                                            </FadeTransition>
-                                        </MListItemAction>
-                                        <MListItemContent>
-                                            <MListItemTitle>
-                                                低
-                                            </MListItemTitle>
-                                        </MListItemContent>
-                                    </ItemContent>
-                                </MListItem>
-                                <MListItem Value="1">
-                                    <ItemContent>
-                                        <MListItemAction>
-                                            <FadeTransition>
-                                                <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
-                                            </FadeTransition>
-                                        </MListItemAction>
-                                        <MListItemContent>
-                                            <MListItemTitle>
-                                                中
-                                            </MListItemTitle>
-                                        </MListItemContent>
-                                    </ItemContent>
-                                </MListItem>
-                                <MListItem Value="2">
-                                    <ItemContent>
-                                        <MListItemAction>
-                                            <FadeTransition>
-                                                <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
-                                            </FadeTransition>
-                                        </MListItemAction>
-                                        <MListItemContent>
-                                            <MListItemTitle>
-                                                高
-                                            </MListItemTitle>
-                                        </MListItemContent>
-                                    </ItemContent>
-                                </MListItem>
-                            </MListItemGroup>
-                        </MList>
-                    </ChildContent>
-                </MMenu>
-            </MCol>
-            <MCol Cols="12" Md="6" Class="m-template-table__toolbar-actions">
+                </ActivatorContent>
+                <ChildContent>
+                    <MList Slim Dense>
+                        <MListItemGroup Value="@((int)RowHeight)"
+                                        ValueChanged="@((val) => RowHeightChanged.InvokeAsync((RowHeight)val.AsT1))"
+                                        Mandatory
+                                        Color="primary">
+                            <MListItem Value="0">
+                                <ItemContent>
+                                    <MListItemAction>
+                                        <FadeTransition>
+                                            <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
+                                        </FadeTransition>
+                                    </MListItemAction>
+                                    <MListItemContent>
+                                        <MListItemTitle>
+                                            低
+                                        </MListItemTitle>
+                                    </MListItemContent>
+                                </ItemContent>
+                            </MListItem>
+                            <MListItem Value="1">
+                                <ItemContent>
+                                    <MListItemAction>
+                                        <FadeTransition>
+                                            <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
+                                        </FadeTransition>
+                                    </MListItemAction>
+                                    <MListItemContent>
+                                        <MListItemTitle>
+                                            中
+                                        </MListItemTitle>
+                                    </MListItemContent>
+                                </ItemContent>
+                            </MListItem>
+                            <MListItem Value="2">
+                                <ItemContent>
+                                    <MListItemAction>
+                                        <FadeTransition>
+                                            <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
+                                        </FadeTransition>
+                                    </MListItemAction>
+                                    <MListItemContent>
+                                        <MListItemTitle>
+                                            高
+                                        </MListItemTitle>
+                                    </MListItemContent>
+                                </ItemContent>
+                            </MListItem>
+                        </MListItemGroup>
+                    </MList>
+                </ChildContent>
+            </MMenu>
+        </MCol>
+        <MCol Cols="12" Md="6" Class="m-template-table__toolbar-actions">
+            <MDefaultsProvider Defaults="@_defaults">
                 @ViewActionsContent
                 @if (ShowBulkDelete && HasSelect)
                 {
@@ -192,9 +192,9 @@
                          OnClick="@ResetView">
                     重置
                 </MButton>
-            </MCol>
-        </MRow>
-    </MDefaultsProvider>
+            </MDefaultsProvider>
+        </MCol>
+    </MRow>
 </div>
 
 <PDrawer @bind-Value="_configDialog"
@@ -324,6 +324,8 @@
     {
         [nameof(MButton)] = new Dictionary<string, object?>
         {
+            [nameof(MButton.Class)] = "text-none",
+            [nameof(MButton.Outlined)] = true,
             [nameof(MButton.Small)] = true
         }
     };

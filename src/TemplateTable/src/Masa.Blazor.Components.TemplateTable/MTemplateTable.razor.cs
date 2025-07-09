@@ -21,7 +21,7 @@ public partial class MTemplateTable
 
     [Parameter] public string? CheckboxColor { get; set; }
 
-    [Parameter] public EventCallback<ICollection<Row>> OnRemove { get; set; }
+    [Parameter] public EventCallback<IReadOnlyCollection<Row>> OnRemove { get; set; }
 
     [Parameter] public EventCallback<Sheet> OnSave { get; set; }
 
@@ -29,7 +29,7 @@ public partial class MTemplateTable
 
     [Parameter] public RenderFragment<RowActionsContext>? RowActionsContent { get; set; }
 
-    [Parameter] public RenderFragment<ICollection<Row>>? ViewActionsContent { get; set; }
+    [Parameter] public RenderFragment<ViewActionsContext>? ViewActionsContent { get; set; }
 
     [Parameter] public Role Role { get; set; }
 
@@ -37,6 +37,7 @@ public partial class MTemplateTable
     
     private SheetInfo? _sheet = null;
     private bool _init;
+    private ViewActionsContext _viewActionsContext = new();
 
     /// <summary>
     /// All columns including the select and actions columns.
@@ -47,8 +48,6 @@ public partial class MTemplateTable
 
     private long _totalCount;
     private bool _loading;
-
-    private IList<View>? _prevUserViews;
 
     private Sheet? _prevSheet;
 

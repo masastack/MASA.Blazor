@@ -32,12 +32,12 @@
                 CheckboxColor="primary"
                 OnRemove="@Remove">
     <ViewActionsContent>
-        <MButton OnClick="@(() => OnExport(context))" Color="primary">Export</MButton>
+        <MButton OnClick="@(() => OnExport(context.SelectedRows))" Color="primary">Export @context.SelectedKeys.Count</MButton>
     </ViewActionsContent>
     <RowActionsContent>
         <div class="d-flex">
             <MButton IconName="mdi-eye" OnClick="@context.ShowDetail"/>
-            <MButton IconName="mdi-star"/>
+            <MButton IconName="mdi-star" />
             <MButton IconName="mdi-delete-variant"/>
         </div>
     </RowActionsContent>
@@ -93,7 +93,7 @@
         });
     }
 
-    private async Task Remove(ICollection<Row> items)
+    private async Task Remove(IReadOnlyCollection<Row> items)
     {
         var keyString = string.Join(", ", items.Select(u => u.Key));
         var message = $"Are you sure to delete {items.Count()} items({keyString})?";
@@ -104,7 +104,7 @@
         }
     }
 
-    private async Task OnExport(ICollection<Row> items)
+    private async Task OnExport(IReadOnlyCollection<Row> items)
     {
         Console.Out.WriteLine("Export: " + string.Join(',', items.Select(u => u.Key)));
     }

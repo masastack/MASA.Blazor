@@ -1,4 +1,6 @@
-﻿namespace Masa.Blazor.Components.TemplateTable.Toolbars;
+﻿using Masa.Blazor.Components.TemplateTable.Actions;
+
+namespace Masa.Blazor.Components.TemplateTable.Toolbars;
 
 public partial class Toolbar
 {

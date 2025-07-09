@@ -31,7 +31,7 @@
                  Views="_sheet.Views"
                  Columns="_allColumns"
                  HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
-                 ViewActionsContent="@(ViewActionsContent?.Invoke(SelectedItems.ToArray()))"
+                 ViewActionsContent="@ViewActionsContent?.Invoke(_viewActionsContext)"
                  OnViewAdd="@AddNewView"
                  OnViewReset="@ResetView"
                  OnViewRename="@RenameView"
@@ -39,7 +39,7 @@
                  OnViewSave="@SaveView"
                  OnColumnEditClick="@OpenColumnEditDialog"
                  OnColumnToggle="@ToggleColumn"
-                 HasSelectedKeys="@(SelectedKeys.Count > 0)"
+                 HasSelectedKeys="@(_viewActionsContext.HasSelectedRows)"
                  HasActions="@_sheet.ActiveView.Value.ShowActions"
                  HasSelect="@_sheet.ActiveView.Value.ShowSelect"
                  HasCustom="@HasCustomConfiguration"
@@ -70,7 +70,7 @@
                 OnImagePreview="@OpenImageViewer"
                 OnDetail="@OpenDetailDialog"
                 CheckboxColor="@CheckboxColor"
-                SelectedKeys="@SelectedKeys"
+                SelectedKeys="@_viewActionsContext.SelectedKeys"
                 OnSelect="@HandleOnSelect"
                 OnSelectAll="@HandleOnSelectAll"
                 HasCustomRowActions="@HasCustomRowActions"
@@ -275,6 +275,8 @@
     private async Task HandleOnActiveViewChanged(Guid viewId)
     {
         _sheet!.SetActiveView(viewId);
+        
+        _viewActionsContext = new ViewActionsContext();
 
         ResetSheet();
 
@@ -385,15 +387,13 @@
         _imageViewer?.Open(images);
     }
 
-    private IEnumerable<Row> SelectedItems => _sheet?.ActiveView.Selection.Where(u => u.Value).Select(u => u.Key) ?? [];
-
-    private List<string> SelectedKeys => SelectedItems.Select(u => u.Key).ToList();
-
     private void HandleOnSelect((Row, bool) args)
     {
         var (item, selected) = args;
 
         _sheet!.ActiveView.Selection[item] = selected;
+
+        _viewActionsContext = new ViewActionsContext(_sheet.ActiveView.Selection);
 
         StateHasChanged();
     }
@@ -409,7 +409,9 @@
         {
             _sheet.ActiveView.Selection[item] = selected;
         }
-
+        
+        _viewActionsContext = new ViewActionsContext(_sheet.ActiveView.Selection);
+        
         StateHasChanged();
     }
 
@@ -450,7 +452,7 @@
 
     private async Task Remove()
     {
-        await OnRemove.InvokeAsync(SelectedItems.ToArray());
+        await OnRemove.InvokeAsync(_viewActionsContext.SelectedRows);
     }
 
     private void ResizeColumn((string ColumnId, double Width) args)
