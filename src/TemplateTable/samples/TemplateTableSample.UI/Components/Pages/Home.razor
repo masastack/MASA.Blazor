@@ -4,14 +4,8 @@
 @using Masa.Blazor.Components.TemplateTable
 @using Masa.Blazor.Components.TemplateTable.Contracts
 @using TemplateTableSample.UI.Services
-@inject IJSRuntime JSRuntime
 @inject SheetService SheetService
 @inject IPopupService PopupService
-
-<h1>
-    <MButton IconName="mdi-arrow-left" OnClick="@(() => JSRuntime.InvokeVoidAsync("history.back"))"></MButton>
-    HotChocolate
-</h1>
 
 <MButtonGroup Value="(int)_role"
               ValueChanged="v => _role = (Role)v.ToInt32()"
@@ -32,7 +26,8 @@
                 CheckboxColor="primary"
                 OnRemove="@Remove">
     <ViewActionsContent>
-        <MButton OnClick="@(() => OnExport(context.SelectedRows))" Color="primary">Export @context.SelectedKeys.Count</MButton>
+        <MButton OnClick="@(() => OnExport(context.SelectedRows))" Color="primary">
+            Export @context.SelectedKeys.Count</MButton>
     </ViewActionsContent>
     <RowActionsContent>
         <div class="d-flex">
@@ -81,8 +76,7 @@
 
     private async Task Save(Sheet sheet)
     {
-        Console.Out.WriteLine(System.Text.Json.JsonSerializer.Serialize(sheet, new JsonSerializerOptions { WriteIndented = true }));
-        // await SheetService.SaveAsync(sheet);
+        await SheetService.SaveAsync(sheet);
     }
 
     private async Task OnDelete(IReadOnlyDictionary<string, JsonElement> data)
