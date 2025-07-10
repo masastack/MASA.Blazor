@@ -1,0 +1,27 @@
+name: Push TemplateTable manually
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version of the package, no "v" prefix'
+        required: true
+        default: '1.0.0'
+
+jobs:
+  push-nuget-manually:
+    runs-on: ubuntu-latest
+    steps:
+    - name: git pull
+      uses: actions/checkout@v3
+    - name: setting dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: |
+          8.0.x
+        include-prerelease: true
+    - name: build
+      run: dotnet build Masa.Blazor.TemplateTable.slnx -c Release /p:ContinuousIntegrationBuild=true
+    - name: pack
+      run: dotnet pack Masa.Blazor.TemplateTable.slnx --no-build --include-symbols -c Release -p:PackageVersion=${{github.event.inputs.version}}
+    - name: package push
+      run: dotnet nuget push "**/Masa.Blazor.Components.TemplateTable*.symbols.nupkg" --skip-duplicate -k ${{secrets.NUGET_TOKEN}}  -s https://api.nuget.org/v3/index.json
