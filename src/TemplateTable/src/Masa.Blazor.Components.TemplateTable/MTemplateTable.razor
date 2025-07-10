@@ -43,7 +43,7 @@
                  HasActions="@_sheet.ActiveView.Value.ShowActions"
                  HasSelect="@_sheet.ActiveView.Value.ShowSelect"
                  HasCustom="@HasCustomConfiguration"
-                 HasFilter="@(_sheet.ActiveView.Value.Filter?.Options.Count > 0)"
+                 HasFilter="@(_sheet.ActiveView.Value.Filter.Options.Count > 0)"
                  HasSort="@(_sheet.ActiveView.Value.Sort?.Options.Count > 0)"
                  OnFilterClick="@(() => _filterDialog?.Open())"
                  OnSortClick="@(() => _sortDialog?.Open())"
@@ -203,7 +203,7 @@
 
         _sheet.ActiveView.Order = [];
         _sheet.ActiveView.Value.Filter = new();
-        _sheet.ActiveView.Value.Sort = null;
+        _sheet.ActiveView.Value.Sort = new();
         _sheet.ActiveView.PageIndex = 1;
         await RefreshItemsAsync(GetItemsProviderRequest());
     }

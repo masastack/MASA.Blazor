@@ -157,29 +157,26 @@
             _prevHiddenColumnIds = HiddenColumnIds;
             _computedColumns = Columns.Where(u => !HiddenColumnIds.Contains(u.Id)).Where(u => u.Type != ColumnType.Actions).ToList();
 
-            if (ActiveView.Filter is not null)
+            _filters.Clear();
+            foreach (var option in ActiveView.Filter.Options)
             {
-                _filters.Clear();
-                foreach (var option in ActiveView.Filter.Options)
+                var column = Columns.FirstOrDefault(u => u.Id == option.ColumnId);
+                if (column is null)
                 {
-                    var column = Columns.FirstOrDefault(u => u.Id == option.ColumnId);
-                    if (column is null)
-                    {
-                        continue;
-                    }
-
-                    var filterOption = new FilterModel(column)
-                    {
-                        Func = option.Func,
-                        Expected = option.Expected,
-                        Persistent = option.Persistent
-                    };
-
-                    _filters.Add(filterOption);
+                    continue;
                 }
 
-                _operator = ActiveView.Filter.Operator == FilterOperator.And ? "and" : "or";
+                var filterOption = new FilterModel(column)
+                {
+                    Func = option.Func,
+                    Expected = option.Expected,
+                    Persistent = option.Persistent
+                };
+
+                _filters.Add(filterOption);
             }
+
+            _operator = ActiveView.Filter.Operator == FilterOperator.And ? "and" : "or";
         }
     }
 

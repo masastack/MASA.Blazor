@@ -23,7 +23,7 @@
 
 <MTemplateTable Sheet="_sheet"
                 UserViews="_userViews"
-                DefaultPageSize="4"
+                DefaultPageSize="5"
                 OnUserViewAdd="@OnUserViewAdd"
                 OnUserViewUpdate="@OnUserViewUpdate"
                 OnUserViewDelete="@OnUserViewDelete"
@@ -37,7 +37,7 @@
     <RowActionsContent>
         <div class="d-flex">
             <MButton IconName="mdi-eye" OnClick="@context.ShowDetail"/>
-            <MButton IconName="mdi-star" />
+            <MButton IconName="mdi-star"/>
             <MButton IconName="mdi-delete-variant"/>
         </div>
     </RowActionsContent>
@@ -81,7 +81,8 @@
 
     private async Task Save(Sheet sheet)
     {
-        await SheetService.SaveAsync(sheet);
+        Console.Out.WriteLine(System.Text.Json.JsonSerializer.Serialize(sheet, new JsonSerializerOptions { WriteIndented = true }));
+        // await SheetService.SaveAsync(sheet);
     }
 
     private async Task OnDelete(IReadOnlyDictionary<string, JsonElement> data)

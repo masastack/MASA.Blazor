@@ -84,12 +84,6 @@
     {
         _computedColumns = Columns.Where(u => !HiddenColumnIds.Contains(u.Id)).Where(u => u.Type != ColumnType.Actions).ToList();
 
-        if (ActiveView.Sort is null)
-        {
-            _sorts = [];
-            return;
-        }
-
         _sorts.Clear();
 
         foreach (var option in ActiveView.Sort.Options.OrderBy(u => u.Index))

@@ -8,16 +8,27 @@ public abstract class ConfigInputBase<TConfig> : ComponentBase where TConfig : n
 
     protected TConfig Config { get; set; } = new();
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
+    private string? _prevValue;
 
-        if (Value is not null)
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (_prevValue != Value)
         {
-            var result = JsonSerializer.Deserialize<TConfig>(Value);
-            if (result is not null)
+            _prevValue = Value;
+
+            if (Value is null)
             {
-                Config = result;
+                Config = new();
+            }
+            else
+            {
+                var result = JsonSerializer.Deserialize<TConfig>(Value);
+                if (result is not null)
+                {
+                    Config = result;
+                }
             }
         }
     }

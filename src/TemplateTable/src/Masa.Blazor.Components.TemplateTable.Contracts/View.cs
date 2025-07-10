@@ -13,7 +13,7 @@ public class View
     public View()
     {
     }
-    
+
     public Guid Id { get; set; } = Guid.NewGuid();
 
     public string? Name { get; set; }
@@ -32,11 +32,9 @@ public class View
 
     public bool ShowBulkDelete { get; set; } = true;
 
-    public bool ShowDetail { get; set; } = true;
+    public Filter Filter { get; set; } = new();
 
-    public Filter? Filter { get; set; }
-
-    public Sort? Sort { get; set; }
+    public Sort Sort { get; set; } = new();
 }
 
 public enum RowHeight

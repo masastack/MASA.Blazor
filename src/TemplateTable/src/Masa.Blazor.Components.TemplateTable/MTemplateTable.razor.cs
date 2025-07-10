@@ -34,7 +34,7 @@ public partial class MTemplateTable
     [Parameter] public Role Role { get; set; }
 
     [Parameter] public int DefaultPageSize { get; set; } = 10;
-    
+
     private SheetInfo? _sheet = null;
     private bool _init;
     private ViewActionsContext _viewActionsContext = new();
@@ -168,14 +168,12 @@ public partial class MTemplateTable
 
     private QueryRequest GetItemsProviderRequest()
     {
-        var filterRequest = _sheet!.ActiveView.Value.Filter is null
-            ? null
-            : new Filter()
-            {
-                Operator = _sheet.ActiveView.Value.Filter.Operator,
-                Search = _sheet.ActiveView.Value.Filter.Search,
-                Options = [.._sheet.ActiveView.Value.Filter.Options]
-            };
+        var filterRequest = new Filter()
+        {
+            Operator = _sheet!.ActiveView.Value.Filter.Operator,
+            Search = _sheet.ActiveView.Value.Filter.Search,
+            Options = [.._sheet.ActiveView.Value.Filter.Options]
+        };
 
         return new QueryRequest(_sheet.QueryBody, _sheet.CountField, filterRequest,
             _sheet.ActiveView.Value.Sort,

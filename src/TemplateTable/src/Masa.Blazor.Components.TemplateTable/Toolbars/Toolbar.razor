@@ -12,7 +12,7 @@
                      Items="@Views"
                      ItemText="v => v.Value.Name"
                      ItemValue="v => v.Value.Id"
-                     Class="m-template-table__view-select"
+                     Class="m-template-table__view-select mr-2"
                      Label="View"
                      Dense
                      Outlined
@@ -34,8 +34,6 @@
                     </div>
                 </ItemContent>
             </MSelect>
-
-            <MSpacer/>
 
             @if (_activeViewInfo is not null)
             {
