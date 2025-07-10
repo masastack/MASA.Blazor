@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Samples/">
+    <Project Path="src/TemplateTable/samples/HotChocolateDemo/HotChocolateDemo.csproj" />
+    <Project Path="src/TemplateTable/samples/TemplateTableSample.AppHost/TemplateTableSample.AppHost.csproj" />
+    <Project Path="src/TemplateTable/samples/TemplateTableSample.ServiceDefaults/TemplateTableSample.ServiceDefaults.csproj" />
+    <Project Path="src/TemplateTable/samples/TemplateTableSample.UI/TemplateTableSample.UI.csproj" />
+  </Folder>
+  <Project Path="src/Masa.Blazor.SourceGenerator/Masa.Blazor.SourceGenerator.csproj" />
+  <Project Path="src/Masa.Blazor/Masa.Blazor.csproj" />
+  <Project Path="src/TemplateTable/src/Masa.Blazor.Components.TemplateTable.Abstractions/Masa.Blazor.Components.TemplateTable.Abstractions.csproj" />
+  <Project Path="src/TemplateTable/src/Masa.Blazor.Components.TemplateTable.Contracts/Masa.Blazor.Components.TemplateTable.Contracts.csproj" />
+  <Project Path="src/TemplateTable/src/Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL/Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL.csproj" />
+  <Project Path="src/TemplateTable/src/Masa.Blazor.Components.TemplateTable.HotChocolate/Masa.Blazor.Components.TemplateTable.HotChocolate.csproj" />
+  <Project Path="src/TemplateTable/src/Masa.Blazor.Components.TemplateTable/Masa.Blazor.Components.TemplateTable.csproj" />
+  <Project Path="src/TemplateTable/test/Masa.Blazor.Components.TemplateTable.Test/Masa.Blazor.Components.TemplateTable.Test.csproj" />
+</Solution>
