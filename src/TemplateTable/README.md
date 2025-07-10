@@ -5,8 +5,8 @@
 ## 项目结构
 
 - **Masa.Blazor.Components.TemplateTable**: `TemplateTable` 组件的核心，必须引用
-- **Masa.Blazor.Components.TemplateTable.Abstractions**: 当您需要扩展其他 GraphQL 提供程序时，需要依赖此项目
 - **Masa.Blazor.Components.TemplateTable.Contracts**: 提供必要的类，用于将特定数据传递给 `TemplateTable` 组件
+- **Masa.Blazor.Components.TemplateTable.Abstractions**: 当您需要扩展其他 GraphQL 提供程序时，需要依赖此项目
 - **Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL**: `Cubejs.GraphQL` 的实现
 - **Masa.Blazor.Components.TemplateTable.HotChocolate**: `HotChocolate` 的实现
 
@@ -33,7 +33,7 @@
 2. 在 `Program.cs` 中配置服务：
    ```csharp
    builder.Services.AddMasaBlazor()
-       .AddGraphQLClientForTemplateTable("http://localhost:5297/graphql")
+       .AddGraphQLClientForTemplateTable("http://your-server/graphql")
        .WithHotChocolate(); // 或 .WithCubejs()
    ```
 
@@ -48,26 +48,16 @@
 ```razor
 <MTemplateTable Sheet="_sheet"
                 UserViews="_userViews"
-                DefaultPageSize="5"
                 OnUserViewAdd="@OnUserViewAdd"
                 OnUserViewUpdate="@OnUserViewUpdate"
                 OnUserViewDelete="@OnUserViewDelete"
-                Role="@_role"
                 OnSave="@Save"
-                CheckboxColor="primary"
-                OnRemove="@Remove">
-    <ViewActionsContent>
-        <MButton OnClick="@(() => OnExport(context))" Color="primary">Export</MButton>
-    </ViewActionsContent>
-    <RowActionsContent>
-        <MButton IconName="mdi-delete-variant" OnClick="@(() => OnDelete(context))"></MButton>
-    </RowActionsContent>
+                CheckboxColor="primary">
 </MTemplateTable>
 ```
 
 ```csharp
 @code {
-    private Role _role;
     private Sheet? _sheet;
     private IList<View> _userViews = [];
 
@@ -99,21 +89,6 @@
 }
 ```
 
-## 主要参数
-
-| 参数 | 类型 | 描述 |
-|------|------|------|
-| `Sheet` | `Sheet?` | 表格的配置信息，包含列定义和数据源配置 |
-| `UserViews` | `IList<View>` | 用户自定义的视图列表 |
-| `DefaultPageSize` | `int` | 默认每页显示的行数 |
-| `Role` | `Role` | 用户角色，影响可用功能（Manager/User） |
-| `CheckboxColor` | `string` | 复选框颜色 |
-| `OnUserViewAdd` | `EventCallback<View>` | 添加用户视图时的回调 |
-| `OnUserViewUpdate` | `EventCallback<View>` | 更新用户视图时的回调 |
-| `OnUserViewDelete` | `EventCallback<View>` | 删除用户视图时的回调 |
-| `OnSave` | `EventCallback` | 保存数据时的回调 |
-| `OnRemove` | `EventCallback` | 删除数据时的回调 |
-
 ## 插槽内容
 
 - **ViewActionsContent**: 视图操作区域的自定义内容
@@ -138,7 +113,3 @@
 - **HotChocolateDemo**: 演示如何与 HotChocolate GraphQL 服务器集成
 - **TemplateTableSample.UI**: 完整的示例应用程序
 - **TemplateTableSample.AppHost**: 用于运行演示的主机项目
-
-## 许可证
-
-请参考项目根目录的 LICENSE 文件。
