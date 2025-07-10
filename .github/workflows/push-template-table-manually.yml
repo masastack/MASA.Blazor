@@ -20,10 +20,10 @@ jobs:
           9.0.x
           8.0.x
         include-prerelease: true
-    - name: test
-      run: dotnet test Masa.Blazor.TemplateTable.slnx --no-build --verbosity normal
     - name: build
       run: dotnet build Masa.Blazor.TemplateTable.slnx -c Release /p:ContinuousIntegrationBuild=true
+    - name: test
+      run: dotnet test Masa.Blazor.TemplateTable.slnx --no-build --verbosity normal
     - name: pack
       run: dotnet pack Masa.Blazor.TemplateTable.slnx --no-build --include-symbols -c Release -p:PackageVersion=${{github.event.inputs.version}}
     - name: package push
