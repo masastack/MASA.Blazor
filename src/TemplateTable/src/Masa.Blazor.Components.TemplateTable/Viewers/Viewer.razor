@@ -1,0 +1,396 @@
+﻿@using System.Globalization
+@using BemIt
+@using GraphQL.Client.Abstractions.Utilities
+@using Masa.Blazor.Components.TemplateTable.Actions
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+
+<MSimpleTable FixedHeader
+              Class="@_modifierBuilder.Add(RowHeight.ToString()).Add(_sized).Build()"
+              Style="@($"--mt-row-height: {RowHeightValue}")"
+              Height="@Height"
+              @ref="_simpleTable">
+    <thead>
+    <tr @ref="_headerTrRef">
+        <MSortableProvider Items="ViewColumns"
+                           ItemKey="@(u => u.ColumnId)"
+                           GhostClass="accent"
+                           ContainerRef="@_headerTrRef"
+                           ForceFallback
+                           Ignore=".ignore-elements"
+                           Order="@ColumnOrder"
+                           OrderChanged="@ColumnOrderChanged">
+            <ItemContent Context="context">
+                @{
+                    var (hidden, css, style) = GetHeaderColCss(context.Item);
+                }
+
+                <th class="@css"
+                    style="@style"
+                    @key="@(context.Item.Column.Id)"
+                    @attributes="@context.Attrs">
+                    @if (!hidden)
+                    {
+                        <ColumnName Data="@context.Item.Column"
+                                    Editable="@Editable"
+                                    Sort="@Sort"
+                                    OnClick="@OnSortUpdate"
+                                    OnColumnToggle="@OnColumnToggle"
+                                    OnColumnEditClick="@OnColumnEditClick"
+                                    IsIndeterminate="@SelectionState.Indeterminate"
+                                    IsSelectedAll="@SelectionState.AllSelected"
+                                    OnSelectAll="@OnSelectAll"
+                                    CheckboxColor="@CheckboxColor"/>
+                    }
+                </th>
+            </ItemContent>
+        </MSortableProvider>
+    </tr>
+    </thead>
+
+    @if (Loading)
+    {
+        <thead>
+        <tr class="m-data-table__progress">
+            <th class="column" colspan="1000">
+                @*TODO: 设置为正常的colspan*@
+                <MProgressLinear Absolute Indeterminate Color="primary"></MProgressLinear>
+            </th>
+        </tr>
+        </thead>
+    }
+
+    <tbody>
+    <Virtualize Items="Rows"
+                Context="item"
+                ItemSize="RowHeightValue"
+                OverscanCount="1">
+        @{
+            var isSelected = SelectedKeys.Contains(item.Key);
+        }
+
+        <tr class="@_rowModifierBuilder.AddClass("m-data-table__selected", isSelected)">
+            @foreach (var template in _orderedViewColumns)
+            {
+                var (hidden, css, style) = GetCss(template);
+
+                <td class="@css"
+                    style="@style"
+                    @key="template.Column.Id">
+                    @if (!hidden)
+                    {
+                        <div class="masa-table-viewer__cell">
+                            <div class="masa-table-viewer__cell-content">
+                                @if (template.Column.Type == ColumnType.Actions)
+                                {
+                                    <MDefaultsProvider Defaults="@_actionsDefautls">
+                                        @GenActionsCell(item.Data)
+                                    </MDefaultsProvider>
+                                }
+                                else if (template.Column.Type == ColumnType.RowSelect)
+                                {
+                                    @GenRowSelectCell(item, isSelected)
+                                }
+                                else
+                                {
+                                    JsonElement? value = null;
+
+                                    if (template.Column.IsNested)
+                                    {
+                                        var tree = template.Column.Id.Split('.');
+                                        var firstKey = tree[0];
+                                        var key = item.Data.Keys.FirstOrDefault(u => string.Equals(u, firstKey, StringComparison.OrdinalIgnoreCase));
+                                        if (key is not null)
+                                        {
+                                            value = item.Data[key];
+                                            for (var i = 1; i < tree.Length; i++)
+                                            {
+                                                // 默认使用驼峰命名法
+                                                value = value.Value.GetProperty(tree[i].ToCamelCase());
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        var key = item.Data.Keys.FirstOrDefault(u => string.Equals(u, template.ColumnId, StringComparison.OrdinalIgnoreCase));
+                                        if (key is not null)
+                                        {
+                                            value = item.Data[key];
+                                        }
+                                    }
+
+                                    if (value is null)
+                                    {
+                                        @GenNotNull(template.Column)
+                                    }
+                                    else
+                                    {
+                                        @GenCell(template.Column, value.Value)
+                                    }
+                                }
+                            </div>
+                        </div>
+                    }
+                </td>
+            }
+        </tr>
+    </Virtualize>
+    </tbody>
+</MSimpleTable>
+
+@code {
+
+    internal static RenderFragment GenStaticCell(ColumnInfo column, JsonElement value) => __builder =>
+    {
+        switch (column.Type)
+        {
+            case ColumnType.Checkbox:
+                @GenCheckboxCell(value)
+                break;
+            case ColumnType.Switch:
+                @GenSwitchCell(value)
+                break;
+            case ColumnType.Text:
+                @GenTextCell(value)
+                break;
+            case ColumnType.Email:
+                @GenEmailCell(value)
+                break;
+            case ColumnType.Link:
+                @GenLinkCell(column.ConfigObject, value)
+                break;
+            case ColumnType.Phone:
+                @GenPhoneCell(value)
+                break;
+            case ColumnType.Select:
+                @GenSelectCell(column.ConfigObject, value)
+                break;
+            case ColumnType.Date:
+                @GenDateCell(column.ConfigObject, value)
+                break;
+            case ColumnType.Number:
+                @GenNumberCell(column.ConfigObject, value)
+                break;
+            case ColumnType.Progress:
+                @GenProgressCell(column.ConfigObject, value)
+                break;
+            case ColumnType.Rating:
+                @GenRatingCell(value)
+                break;
+        }
+    };
+
+    private RenderFragment GenCell(ColumnInfo column, JsonElement value) => __builder =>
+    {
+        if (column.Type == ColumnType.Image)
+        {
+            @GenImageCell(value)
+        }
+        else
+        {
+            @GenStaticCell(column, value)
+        }
+    };
+
+    private RenderFragment GenNotNull(ColumnInfo column) => __builder =>
+    {
+        <span class="error--text">@column.Id not found</span>
+    };
+
+    private static RenderFragment GenCheckboxCell(JsonElement value) => __builder =>
+    {
+        var isChecked = value.GetBoolean();
+        <MIcon Icon="@(isChecked ? "$checkboxOn" : "$checkboxOff")"
+               Color="@(isChecked ? "primary" : "")"/>
+    };
+
+    private static RenderFragment GenSwitchCell(JsonElement value) => __builder =>
+    {
+        var isChecked = value.GetBoolean();
+        <MSwitch Value="@isChecked" Inset Disabled/>
+    };
+
+    private static RenderFragment GenTextCell(JsonElement value) => __builder =>
+    {
+        var str = value.GetString();
+        <span title="@str">@str</span>
+    };
+
+    private static RenderFragment GenEmailCell(JsonElement value) => __builder =>
+    {
+        var email = value.GetString();
+        @if (email is not null)
+        {
+            <a href="mailto:@email">@email</a>
+        }
+    };
+
+    private static RenderFragment GenLinkCell(object? configObject, JsonElement? value) => __builder =>
+    {
+        var href = value.ToString();
+        if (configObject is LinkConfig linkConfig && !string.IsNullOrWhiteSpace(linkConfig.Url))
+        {
+            href = linkConfig.Url.Replace("{query}", value.ToString());
+        }
+
+        <a href="@href" target="_blank">@value</a>
+    };
+
+    private static RenderFragment GenPhoneCell(JsonElement value) => __builder =>
+    {
+        var phone = value.GetString();
+        @if (phone is not null)
+        {
+            <a href="tel:@phone">@phone</a>
+        }
+    };
+
+    private static RenderFragment GenDateCell(object? configObject, JsonElement value) => __builder =>
+    {
+        var format = CultureInfo.CurrentUICulture.DateTimeFormat.FullDateTimePattern;
+        if (configObject is DateConfig dateConfig)
+        {
+            format = dateConfig.Format!;
+        }
+
+        if (value.TryGetDateTimeOffset(out var date))
+        {
+            @date.ToString(format)
+        }
+        else
+        {
+            @value
+        }
+    };
+
+    private static RenderFragment GenSelectCell(object? configObject, JsonElement value) => __builder =>
+    {
+        var text = value.GetString();
+
+        if (configObject is SelectConfig config)
+        {
+            var option = config.Options.FirstOrDefault(u => u.Value == text);
+            if (option is not null)
+            {
+                text = option.Label;
+
+                if (config.Color)
+                {
+                    var isDarken = option.Color?.Contains("darken") is true;
+                    <MChip Label Small Color="@option.Color" Dark="isDarken">@text</MChip>
+                    return;
+                }
+            }
+        }
+
+        @text
+    };
+
+    private static RenderFragment GenProgressCell(object? configObject, JsonElement value) => __builder =>
+    {
+        if (configObject is ProgressConfig config)
+        {
+            if (value.TryGetDouble(out var progress))
+            {
+                <MProgressLinear Value="progress"
+                                 Color="@config.Color"
+                                 Height="8"
+                                 Striped="@config.Striped">
+                </MProgressLinear>
+            }
+            else
+            {
+                @("Invalid progress value: " + value.GetString())
+            }
+
+            return;
+        }
+
+        @value
+    };
+
+    private static RenderFragment GenRatingCell(JsonElement value) => __builder =>
+    {
+        if (value.TryGetDouble(out var rating))
+        {
+            <MRating Value="@rating"
+                     Color="yellow darken-3"
+                     BackgroundColor="grey darken-1"
+                     EmptyIcon="mdi-star"
+                     Small
+                     HalfIncrements
+                     Readonly>
+            </MRating>
+        }
+        else
+        {
+            @value.GetString()
+        }
+    };
+
+    private static RenderFragment GenNumberCell(object? configObject, JsonElement value) => __builder =>
+    {
+        if (configObject is NumberConfig config)
+        {
+            if (value.TryGetDecimal(out var number))
+            {
+                var format = config.Type switch
+                {
+                    NumberType.Currency => "C",
+                    NumberType.Number => "N",
+                    NumberType.Percentage => "P",
+                    _ => ""
+                };
+
+                @number.ToString(format, new CultureInfo("zh-CN"))
+
+                return;
+            }
+        }
+
+        @value.ToString()
+    };
+
+    private RenderFragment GenImageCell(JsonElement value) => __builder =>
+    {
+        var urls = value.ValueKind == JsonValueKind.Array ? value.EnumerateArray().Select(u => u.GetString()).ToList() : [value.GetString()];
+
+        if (urls.Count > 0)
+        {
+            <div class="image-list" @onclick="@(() => OnImagePreview.InvokeAsync(urls))">
+                @foreach (var url in urls)
+                {
+                    <img src="@url" alt=""/>
+                }
+            </div>
+
+            return;
+        }
+
+        @value
+    };
+
+    private RenderFragment GenActionsCell(IReadOnlyDictionary<string, JsonElement> item) => __builder =>
+    {
+        Action detailAction = () => OnDetail.InvokeAsync(item);
+
+        if (RowActionsContent is null)
+        {
+            <MButton OnClick="@detailAction" Color="primary" Text Small>详情</MButton>
+        }
+        else
+        {
+            RowActionsContext context = new(detailAction, item);
+            @RowActionsContent?.Invoke(context)
+        }
+    };
+
+    private RenderFragment GenRowSelectCell(Row item, bool selected) => __builder =>
+    {
+        <MSimpleCheckbox Class="m-data-table__checkbox"
+                         Value="@selected"
+                         ValueChanged="val => OnSelect((item, val))"
+                         Color="@(CheckboxColor)">
+        </MSimpleCheckbox>
+    };
+
+}

@@ -18,6 +18,7 @@
     "build:video-feed": "rollup --config rollup.config.video-feed.ts",
     "build:xgplayer": "rollup --config rollup.config.xgplayer.ts",
     "build:sortable": "rollup --config rollup.config.sortable.ts",
+    "build:templatetable": "rollup --config rollup.config.template-table.ts",
     "build:driverjs": "rollup --config rollup.config.driverjs.ts",
     "format": "prettier --write \"src/**/*.{ts,js,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,js,json}\"",

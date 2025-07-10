@@ -1,0 +1,141 @@
+﻿@using Masa.Blazor.Components.TemplateTable.ColumnConfigs
+@namespace Masa.Blazor.Components.TemplateTable.ColumnDialogs
+
+<PDrawer @bind-Value="_menu"
+         @bind-Value:after="OnDialogChanged"
+         Width="440"
+         FormModel="_column"
+         OnSave="@HandleOnSubmit">
+    <MTextField @bind-Value="@_column.Name"
+                Filled
+                TValue="string"
+                Label="column-name"
+                Required>
+    </MTextField>
+
+    <MSelect @bind-Value="@_column.Type"
+             Items="@_columnTypeMetadata"
+             ItemValue="u => u.Value"
+             ItemText="u => u.Name"
+             Filled
+             Label="column-type"
+             TItem="(string Name, ColumnType Value)"
+             TItemValue="ColumnType"
+             TValue="ColumnType"
+             OnSelect="@HandleOnColumnTypeSelect">
+    </MSelect>
+
+    @if (_column.Type == ColumnType.Text)
+    {
+        <MSwitch @bind-Value="_column.Searchable"
+                 Inset
+                 Label="Searchable"
+                 Class="mt-0 pt-0">
+        </MSwitch>
+    }
+
+    @{
+        var configInput = GenConfigInput();
+        if (configInput is not null)
+        {
+            <div>@configInput</div>
+        }
+    }
+
+    <MDivider Left Class="my-4">视图配置</MDivider>
+
+    <MRadioGroup @bind-Value="_columnFixed"
+                 HideDetails="true"
+                 TValue="ColumnFixed">
+        <MRadio Value="ColumnFixed.None" Label="None"></MRadio>
+        <MRadio Value="ColumnFixed.Left" Label="Left"></MRadio>
+        <MRadio Value="ColumnFixed.Right" Label="Right"></MRadio>
+    </MRadioGroup>
+</PDrawer>
+
+@code {
+
+    private RenderFragment? GenConfigInput()
+    {
+        RenderFragment? input = null;
+
+        switch (_column.Type)
+        {
+            case ColumnType.Date:
+                input = @<DateConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>;
+                break;
+            case ColumnType.Select:
+                input = @<SelectConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>;
+                break;
+            case ColumnType.Progress:
+                input = @<ProgressConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>;
+                break;
+            case ColumnType.Number:
+                input = @<NumberConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>;
+                break;
+            case ColumnType.Link:
+                input = @<LInkConfigInput Value="@_column.Config" OnUpdate="HandleOnConfigUpdate"/>;
+                break;
+        }
+
+        return input;
+    }
+
+    [Parameter] public EventCallback<(ColumnInfo, ColumnFixed)> OnSave { get; set; }
+
+    private bool _menu;
+
+    private ColumnInfo _column = new();
+    private ColumnFixed _columnFixed;
+
+    private static IList<(string Name, ColumnType Value)> _columnTypeMetadata = GetEnumMetadata<ColumnType>();
+
+    private bool HasColumnTypeConfig => _column.Type is ColumnType.Date or ColumnType.Select or ColumnType.Progress or ColumnType.Number;
+
+    private void HandleOnColumnTypeSelect(((string Name, ColumnType Value) Item, bool Selected) item)
+    {
+        _column.Config = null;
+        _column.Searchable = _column.Type == ColumnType.Text;
+    }
+
+    private void HandleOnSubmit()
+    {
+        OnSave.InvokeAsync((_column, _columnFixed));
+        _menu = false;
+    }
+
+    public static IList<(string Name, T Value)> GetEnumMetadata<T>() where T : Enum
+    {
+        var metadataList = new List<(string Name, T Value)>();
+        foreach (var value in Enum.GetValues(typeof(T)))
+        {
+            metadataList.Add((value.ToString(), (T)value));
+        }
+
+        return metadataList;
+    }
+
+    private void HandleOnConfigUpdate(object config)
+    {
+        _column.ConfigObject = config;
+        _column.Config = JsonSerializer.Serialize(config);
+    }
+
+    private void OnDialogChanged()
+    {
+        if (!_menu)
+        {
+            _column.Config = null;
+        }
+    }
+
+    internal void Open(Column column, ColumnFixed @fixed)
+    {
+        _column = new ColumnInfo(column);
+        _columnFixed = @fixed;
+
+        _menu = true;
+        StateHasChanged();
+    }
+
+}

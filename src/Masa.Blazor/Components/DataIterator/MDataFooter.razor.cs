@@ -69,6 +69,9 @@
         [Parameter]
         public Action<IDataFooterParameters>? Parameters { get; set; }
 
+        [Parameter] [MasaApiParameter(Ignored = true)]
+        public bool ShowItemsPerPageOptionsEvenIfOne { get; set; }
+
         public IEnumerable<DataItemsPerPageOption> ComputedDataItemsPerPageOptions
         {
             get

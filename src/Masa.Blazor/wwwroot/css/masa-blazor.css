@@ -23595,13 +23595,17 @@ html.overflow-y-hidden {
     justify-content: flex-end;
     white-space: nowrap;
 }
-.m-application--is-ltr .m-data-footer__select {
+.m-application--is-ltr .m-data-footer > div:first-child {
     margin-left: auto;
+}
+.m-application--is-rtl .m-data-footer > div:first-child {
+    margin-right: auto;
+}
+.m-application--is-ltr .m-data-footer__select {
     margin-right: 14px;
 }
 .m-application--is-rtl .m-data-footer__select {
     margin-left: 14px;
-    margin-right: auto;
 }
 .m-data-footer__select .m-select {
     flex: 0 1 0;

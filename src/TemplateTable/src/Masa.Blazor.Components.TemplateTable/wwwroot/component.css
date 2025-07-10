@@ -1,0 +1,389 @@
+﻿.grey-lighten-5 {
+  background: #FAFAFA !important;
+}
+
+.masa-table__toolbar .masa-table__toolbar-tabs .view-tab.active {
+  background-color: rgba(var(--m-theme-surface-container));
+}
+
+.masa-table__toolbar .masa-table__toolbar-tabs .view-tab {
+  text-transform: none;
+  border-radius: 8px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.masa-table__toolbar .masa-table__toolbar-tabs .view-tab .m-text-field input {
+  font-size: .875rem;
+  letter-spacing: .0892857143em;
+}
+
+.masa-table__toolbar-actions {
+  padding: 12px 12px;
+  background-color: rgba(var(--m-theme-surface-container));
+  border-radius: 4px;
+}
+
+.masa-table-viewer--low {
+  --mt-line-clamp: 1;
+}
+
+.masa-table-viewer--medium {
+  --mt-line-clamp: 2;
+}
+
+.masa-table-viewer--high {
+  --mt-line-clamp: 4;
+}
+
+.masa-table-viewer .m-data-table__wrapper {
+  width: min-content;
+  max-width: 100%;
+}
+
+.masa-table-viewer table {
+  table-layout: fixed;
+  min-width: 100%;
+}
+
+.masa-table-viewer .m-data-table__progress th {
+  z-index: 3 !important;
+}
+
+.masa-table-viewer .m-data-table__progress .m-progress-linear {
+  top: -4px;
+}
+
+.masa-table-viewer__header {
+  display: flex;
+  width: 100%;
+  height: 36px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.masa-table-viewer__header {
+  background: #FFFFFF;
+}
+
+.masa-table-viewer table > thead > tr > th.masa-table-viewer__header-column {
+  border-bottom: 1px solid rgba(var(--m-theme-outline-variant)) !important;
+}
+
+.masa-table-viewer__header-column.handle {
+  cursor: move;
+}
+
+.masa-table-viewer__header-column.rowselect {
+  width: 56px;
+}
+
+.masa-table-viewer__header-column:not(.rowselect) {
+  width: 180px;
+  min-width: 136px;
+}
+
+:root {
+  --m-configurable-table-min-width: 136px;
+}
+
+.masa-table-viewer__header-column.rating {
+  --m-configurable-table-rating-min-width: calc(120px + 32px);
+  width: max(var(--m-configurable-table-rating-min-width), var(--m-configurable-table-min-width));
+  min-width: max(var(--m-configurable-table-rating-min-width), var(--m-configurable-table-min-width));
+}
+
+.masa-table-viewer__header-column.actions {
+  min-width: 61px;
+}
+
+.m-data-table__wrapper.scrolling .m-data-table__column--fixed-right.first-fixed-column,
+.m-data-table__wrapper.scrolled-to-left .m-data-table__column--fixed-right.first-fixed-column {
+  border-left: none;
+}
+
+.masa-table-viewer thead > tr > th,
+.masa-table-viewer tbody > tr > td {
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.masa-table-viewer thead > tr > th:first-child, .masa-table-viewer tbody > tr > td:first-child {
+  border-left: none;
+}
+
+.masa-table-viewer__header-column-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  line-height: 16px;
+}
+
+.masa-table-viewer__header-column-content .menu {
+  position: absolute;
+  right: 0;
+  background: #FFFFFF; /* TODO: supports dark */
+}
+
+.masa-table-viewer__header-column-content .menu:not([aria-expanded]) {
+  opacity: 0;
+}
+
+.masa-table-viewer__header-column-content:hover .menu {
+  color: inherit;
+  opacity: 1;
+}
+
+.masa-table-viewer__header-column-content {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.masa-table-viewer__header-column-content:hover .sort-icon,
+.masa-table-viewer__header-column-content.active .sort-icon {
+  opacity: 1;
+}
+
+.masa-table-viewer__header-column-content:hover,
+.masa-table-viewer__header-column-content.active {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.masa-table-viewer__header-column-content:hover .m-icon,
+.masa-table-viewer__header-column-content.active .m-icon {
+  color: inherit;
+}
+
+.masa-table-viewer__header-column-content .sort-icon {
+  opacity: 0;
+  transition: .3s cubic-bezier(.25,.8,.5,1);
+}
+
+.masa-table-viewer__header-column-content:hover .sort-icon {
+  opacity: 1;
+}
+
+.masa-table-viewer__header-column-content.desc .sort-icon {
+  transform: rotate(-180deg);
+}
+
+.masa-table-viewer__header-column-resize {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  cursor: col-resize;
+  user-select: none;
+  z-index: 1;
+  height: 100%;
+  transition: background-color 0.1s ease-out;
+  transition-delay: 0.05s;
+}
+
+.masa-table-viewer__header-column-resize:hover {
+  background-color: rgba(var(--m-theme-primary));
+}
+
+.masa-table-viewer__row > td {
+  height: calc(20px * calc(1 + var(--mt-row-height)) + 8px) !important;
+}
+
+.masa-table-viewer__cell {
+  height: inherit;
+  padding: 4px 0;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.masa-table-viewer__cell:first-child {
+  border-left: none;
+}
+
+.masa-table-viewer__cell.checkbox {
+  justify-content: center;
+}
+
+.masa-table-viewer__cell.number .masa-table-viewer__cell-content {
+  text-align: right;
+}
+
+.masa-table-viewer__cell-content {
+  width: 100%;
+  margin: auto 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: var(--mt-row-height);
+  -webkit-box-orient: vertical;
+}
+
+.masa-table-viewer__cell.text .masa-table-viewer__cell-content,
+.masa-table-viewer__cell.link .masa-table-viewer__cell-content,
+.masa-table-viewer__cell.date .masa-table-viewer__cell-content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--mt-line-clamp);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.7;
+  max-height: calc(var(--mt-line-clamp) * 1.7em);
+}
+
+td.rowselect .masa-table-viewer__cell .masa-table-viewer__cell-content {
+  overflow: visible;
+}
+
+td.actions .masa-table-viewer__cell-content {
+  justify-content: center;
+}
+
+.masa-table-viewer--low td.rowselect .masa-table-viewer__cell .m-data-table__checkbox {
+  margin-top: -4px; 
+}
+
+.m-application--is-ltr .masa-table__menu-list .m-list-item__action:first-child,
+.m-application--is-ltr .masa-table__menu-list .m-list-item__icon:first-child {
+  margin-right: 16px;
+}
+
+.multiselect .m-chip, .multiselect .option {
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+.multiselect .m-chip:last-child, .multiselect .option:last-child {
+  margin-right: 0;
+}
+
+.multiselect .option:not(:last-child):after {
+  content: ',';
+}
+
+.rating .m-rating .m-icon {
+  padding: 4px;
+}
+
+.image .image-list {
+  display: contents;
+  cursor: zoom-in;
+}
+
+.image .masa-table-viewer__cell-content {
+  height: 100%;
+}
+
+.image img {
+  height: 100%;
+}
+
+.detail-dialog .m-descriptions-item-container {
+  justify-content: space-between;
+}
+
+.detail-dialog .m-descriptions-item-container .multiselect {
+  text-align: right;
+}
+
+.m-dialog.image-viewer {
+  box-shadow: none;
+  outline: none;
+  cursor: zoom-out;
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+.m-dialog.image-viewer .m-image__image--cover {
+  background-size: contain;
+}
+
+.masa-table-dropdown .masa-table-dropdown-item .m-list-item__icon {
+  margin-right: 12px;
+}
+
+/*.masa-table-viewer thead > tr > th.actions, .masa-table-viewer tbody > tr > td.actions {*/
+/*  position: sticky;*/
+/*  z-index: 1;*/
+/*  background: inherit;*/
+/*  right: -1px;*/
+/*}*/
+
+/*.masa-table-viewer thead > tr > th.actions:after, .masa-table-viewer tbody > tr > td.actions:after {*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  bottom: 0;*/
+/*  left: 0;*/
+/*  width: 30px;*/
+/*  transform: translateX(-100%);*/
+/*  transition: box-shadow .3s;*/
+/*  content: '';*/
+/*  pointer-events: none;*/
+/*  box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);*/
+/*}*/
+
+.filter-operator .m-input__slot {
+  height: 52px;
+}
+
+.filter-operator .m-input__append-inner {
+  margin-top: 14px !important;
+}
+
+.m-template-table__view-select.m-select {
+  font-size: 20px;
+  max-width: 380px;
+}
+
+.m-template-table__view-select .m-select__selection {
+  padding: 7px 0;
+  margin: 0 4px 0 0;
+}
+
+.m-template-table__view-select:hover .m-input__slot {
+  background-color: rgba(var(--m-theme-surface-container)) !important;
+}
+
+.m-template-table__view-select-item {
+  width: 100%;
+}
+
+.m-template-table__view-select-item .m-divider {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 0;
+}
+
+.m-template-table__toolbar-actions {
+  display: flex;
+  align-content: center;
+  justify-content: end;
+}
+
+.m-template-table__toolbar-actions > .m-btn:not(:last-child) {
+  margin-right: 4px;
+}
+
+.m-template-table__toolbar-columns .ignore-element {
+  border-width: thin;
+  border-style: dashed;
+}
+
+.m-template-table__toolbar-columns .m-chip {
+  margin: 4px 8px 4px 0;
+}
+
+.m-template-table__toolbar-columns .m-chip.handle {
+  cursor: grab;
+}
+
+.m-template-table__config .m-expansion-panels .m-expansion-panel {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  margin-bottom: 16px;
+}

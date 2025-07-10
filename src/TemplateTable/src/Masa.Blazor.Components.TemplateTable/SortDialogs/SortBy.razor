@@ -1,0 +1,50 @@
+﻿<MMenu @bind-Value="menu"
+       CloseOnContentClick="false"
+       ContentClass="pa-4"
+       MaxWidth="320"
+       Left>
+    <ActivatorContent>
+        <MButton Class="text-capitalize"
+                 Text
+                 LeftIconName="mdi-plus"
+                 Color="primary"
+                 @attributes="@context.Attrs">
+            @ChildContent
+        </MButton>
+    </ActivatorContent>
+    <ChildContent>
+        <MSelect @bind-Value="value"
+                 Items="@Columns"
+                 ItemText="u => u.Name"
+                 ItemValue="u => u.Id"
+                 Dense
+                 Filled
+                 FullWidth
+                 HideDetails="@true"
+                 Label="Sort by"
+                 TItem="ColumnInfo"
+                 TItemValue="string"
+                 TValue="string"
+                 OnSelect="@(t => HandleOnSelect(t.Item))">
+        </MSelect>
+    </ChildContent>
+</MMenu>
+
+@code {
+
+    [Parameter] public IList<ColumnInfo> Columns { get; set; } = [];
+
+    [Parameter] public EventCallback<ColumnInfo> OnSelect { get; set; }
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    private bool menu;
+    private string? value;
+
+    private void HandleOnSelect(ColumnInfo column)
+    {
+        OnSelect.InvokeAsync(column);
+        menu = false;
+    }
+
+}

@@ -72,12 +72,17 @@ public struct StyleBuilder
         yield return _stringBuilder.ToString();
     }
 
-    public string Build()
+    public string? Build()
     {
+        if (_stringBuilder.Length == 0)
+        {
+            return null;
+        }
+
         return _stringBuilder.ToString();
     }
 
-    public override string ToString()
+    public override string? ToString()
     {
         return Build();
     }

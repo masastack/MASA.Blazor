@@ -1,0 +1,348 @@
+@using System.Globalization
+@inject IPopupService PopupService
+
+<div class="masa-table__toolbar">
+    <MRow Dense>
+        <MCol Cols="12" Md="@(Role == Role.Manager ? 12 : 5)" Class="d-flex align-center">
+            @{
+                var firstUserView = Views.FirstOrDefault(u => u.IsUserView);
+            }
+            <MSelect Value="ActiveView"
+                     ValueChanged="ActiveViewChanged"
+                     Items="@Views"
+                     ItemText="v => v.Value.Name"
+                     ItemValue="v => v.Value.Id"
+                     Class="m-template-table__view-select mr-2"
+                     Label="View"
+                     Dense
+                     Outlined
+                     HideDetails="true"
+                     TItem="ViewInfo"
+                     TItemValue="Guid"
+                     TValue="Guid"
+                     OnSelect="@(tuple => OnActiveViewChanged(tuple.Item))">
+                <SelectionContent>
+                    @GenModifiedChip(context.Item)
+                </SelectionContent>
+                <ItemContent>
+                    <div class="m-template-table__view-select-item">
+                        @if (context.Item == firstUserView)
+                        {
+                            <MDivider @key="@context.Item"/>
+                        }
+                        @GenModifiedChip(context.Item)
+                    </div>
+                </ItemContent>
+            </MSelect>
+
+            @if (_activeViewInfo is not null)
+            {
+                <ViewAction Loading="@_viewActionLoading"
+                            Role="@Role"
+                            ViewInfo="@_activeViewInfo"
+                            OnSaveAsNewView="@SaveAsNewView"
+                            OnViewDelete="@HandleOnDelete"
+                            OnViewRename="@UpdateViewName"
+                            OnViewSave="@HandleOnViewSave"/>
+            }
+
+            @if (Role == Role.Manager)
+            {
+                <MTooltip Top>
+                    <ActivatorContent>
+                        <MButton Class="ml-1"
+                                 Color="primary"
+                                 OnClick="@OnSave"
+                                 @attributes="@context.Attrs">
+                            保存
+                        </MButton>
+                    </ActivatorContent>
+                    <ChildContent>
+                        保存所有设置及视图
+                    </ChildContent>
+                </MTooltip>
+            }
+        </MCol>
+        @if (Role == Role.User)
+        {
+            var searchableColumns = _activeViewInfo?.GetSearchableColumn();
+            var hasSearch = searchableColumns?.Count > 0;
+            if (hasSearch)
+            {
+                var placeholder = $"Search for {string.Join(", ", searchableColumns.Select(u => u.Column.Name))}";
+
+                <MCol Cols="12" Md="6" OffsetMd="1" Align="AlignTypes.Center">
+                    <MTextField @bind-Value="_activeViewInfo!.Value.Filter.Search"
+                                Placeholder="@placeholder"
+                                PersistentPlaceholder
+                                Outlined
+                                Clearable
+                                Dense
+                                HideDetails="true"
+                                OnEnter="@OnSearch"
+                                OnClearClick="@OnSearch">
+                    </MTextField>
+                </MCol>
+            }
+        }
+    </MRow>
+    <MDivider Class="mt-2"/>
+    <MRow Class="masa-table__toolbar-actions"
+          NoGutters>
+        <MCol Cols="12" Md="6" Align="AlignTypes.Center">
+            @if (Editable)
+            {
+                <MButton LeftIconName="mdi-cog-outline" Text Small OnClick="@(() => _configDialog = true)">
+                    <MBadge Value="@HasCustom" Dot Color="red">
+                        表格配置
+                    </MBadge>
+                </MButton>
+                <MDivider Vertical Style="height: 1rem"/>
+            }
+            <MButton LeftIconName="mdi-filter-variant" Text Small OnClick="@OnFilterClick">
+                <MBadge Value="@HasFilter" Dot Color="red">
+                    筛选
+                </MBadge>
+            </MButton>
+            <MDivider Vertical Style="height: 1rem"/>
+            <MButton LeftIconName="mdi-sort" Text Small OnClick="@OnSortClick">
+                <MBadge Value="@HasSort" Dot Color="red">
+                    排序
+                </MBadge>
+            </MButton>
+            <MDivider Vertical Style="height: 1rem"/>
+            <MMenu MinWidth="160">
+                <ActivatorContent>
+                    <MButton LeftIconName="mdi-format-line-spacing"
+                             Text Small
+                             @attributes="@context.Attrs">
+                        行高
+                    </MButton>
+                </ActivatorContent>
+                <ChildContent>
+                    <MList Slim Dense>
+                        <MListItemGroup Value="@((int)RowHeight)"
+                                        ValueChanged="@((val) => RowHeightChanged.InvokeAsync((RowHeight)val.AsT1))"
+                                        Mandatory
+                                        Color="primary">
+                            <MListItem Value="0">
+                                <ItemContent>
+                                    <MListItemAction>
+                                        <FadeTransition>
+                                            <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
+                                        </FadeTransition>
+                                    </MListItemAction>
+                                    <MListItemContent>
+                                        <MListItemTitle>
+                                            低
+                                        </MListItemTitle>
+                                    </MListItemContent>
+                                </ItemContent>
+                            </MListItem>
+                            <MListItem Value="1">
+                                <ItemContent>
+                                    <MListItemAction>
+                                        <FadeTransition>
+                                            <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
+                                        </FadeTransition>
+                                    </MListItemAction>
+                                    <MListItemContent>
+                                        <MListItemTitle>
+                                            中
+                                        </MListItemTitle>
+                                    </MListItemContent>
+                                </ItemContent>
+                            </MListItem>
+                            <MListItem Value="2">
+                                <ItemContent>
+                                    <MListItemAction>
+                                        <FadeTransition>
+                                            <MIcon Dense TransitionShow="@context.Active">mdi-check</MIcon>
+                                        </FadeTransition>
+                                    </MListItemAction>
+                                    <MListItemContent>
+                                        <MListItemTitle>
+                                            高
+                                        </MListItemTitle>
+                                    </MListItemContent>
+                                </ItemContent>
+                            </MListItem>
+                        </MListItemGroup>
+                    </MList>
+                </ChildContent>
+            </MMenu>
+        </MCol>
+        <MCol Cols="12" Md="6" Class="m-template-table__toolbar-actions">
+            <MDefaultsProvider Defaults="@_defaults">
+                @ViewActionsContent
+                @if (ShowBulkDelete && HasSelect)
+                {
+                    <MButton Disabled="@(!HasSelectedKeys)"
+                             Color="error"
+                             Outlined
+                             Loading="@_deleting"
+                             OnClick="@HandleOnBulkDelete">
+                        批量删除
+                    </MButton>
+                }
+                <MButton Color="secondary"
+                         Outlined
+                         OnClick="@ResetView">
+                    重置
+                </MButton>
+            </MDefaultsProvider>
+        </MCol>
+    </MRow>
+</div>
+
+<PDrawer @bind-Value="_configDialog"
+         Title="表格配置"
+         MaxWidth="600"
+         ContentClass="m-template-table__config">
+    <MExpansionPanels Flat Multiple Accordion @bind-Values="_panels">
+        <MExpansionPanel Title="全局设置">
+            <MExpansionPanelContent>
+                <div class="mb-3">
+                    <MDivider Class="mb-3" Left>
+                        列设置
+                    </MDivider>
+                    <MAlert Color="grey" Dense Text Tag="ul">
+                        <li>拖动以调整列顺序，列顺序只影响当前视图</li>
+                        <li>列的可见性也只影响当前视图</li>
+                    </MAlert>
+                    <div class="m-template-table__toolbar-columns" @ref="@_columnsRef">
+                        <MSortableProvider Items="@Columns"
+                                           ItemKey="@(column => column.Id)"
+                                           Order="@ColumnOrder"
+                                           OrderChanged="@ColumnOrderChanged"
+                                           ContainerRef="@_columnsRef"
+                                           GhostClass="accent--text"
+                                           Handle=".handle"
+                                           Ignore=".ignore-element">
+                            <ItemContent Context="sortContext">
+                                @{
+                                    bool hidden, handle, editable;
+                                    if (sortContext.Item.Id == Preset.ActionsColumnId)
+                                    {
+                                        hidden = !HasActions;
+                                        handle = false;
+                                        editable = false;
+                                    }
+                                    else if (sortContext.Item.Id == Preset.RowSelectColumnId)
+                                    {
+                                        hidden = !HasSelect;
+                                        handle = false;
+                                        editable = false;
+                                    }
+                                    else
+                                    {
+                                        hidden = HiddenColumnIds.Contains(sortContext.Item.Id);
+                                        handle = true;
+                                        editable = true;
+                                    }
+
+                                    var css = $"{(handle ? "handle" : "ignore-element")} {(hidden ? "hidden" : "")}";
+                                }
+                                <MChip Draggable="@handle"
+                                       Label
+                                       Class="@css"
+                                       Color="@(hidden ? "grey" : "black")"
+                                       Outlined
+                                       Attributes="@sortContext.Attrs">
+                                    @Templates.GenTypeIcon(sortContext.Item.Type, small: true)
+                                    <span class="mr-2">@sortContext.Item.Name</span>
+                                    @if (editable)
+                                    {
+                                        <MButton IconName="mdi-pencil-outline"
+                                                 Small
+                                                 Style="color: inherit"
+                                                 OnClick="@(() => OnColumnEditClick.InvokeAsync(sortContext.Item))">
+                                        </MButton>
+                                        <MDivider Vertical Length="16" Class="my-auto mx-1"/>
+                                    }
+                                    <MToggle Value="@(!hidden)"
+                                             DataOn="@("mdi-eye-outline")"
+                                             DataOff="@("mdi-eye-off-outline")"
+                                             TData="string">
+                                        <MButton IconName="@context.Data"
+                                                 Small
+                                                 Style="color: inherit"
+                                                 OnClick="@(() => OnColumnToggle.InvokeAsync(sortContext.Item.Id))"/>
+                                    </MToggle>
+                                </MChip>
+                            </ItemContent>
+                        </MSortableProvider>
+                    </div>
+                </div>
+                <div>
+                    <MDivider Class="mb-3" Left>
+                        分页设置
+                    </MDivider>
+                    <MSelect Value="@PageSizeOptions"
+                             ValueChanged="@HandleOnPageSizeOptionsChange"
+                             TItem="int"
+                             TItemValue="int"
+                             TValue="List<int>"
+                             Items="@_itemsPerPageOptions"
+                             ItemText="u => u.ToString(CultureInfo.InvariantCulture)"
+                             ItemValue="u => u"
+                             Dense
+                             Filled
+                             Label="每页数量"
+                             Multiple
+                             HideDetails="@("auto")"
+                             Messages="@_messages"
+                             MenuProps="m => m.OffsetY = true">
+                    </MSelect>
+                </div>
+            </MExpansionPanelContent>
+        </MExpansionPanel>
+        <MExpansionPanel Title="视图设置">
+            <MExpansionPanelContent>
+                <MSwitch Value="@ShowBulkDelete"
+                         ValueChanged="@ShowBulkDeleteChanged"
+                         TValue="bool"
+                         HideDetails="true"
+                         Label="Show the bulk delete action"
+                         Inset>
+                </MSwitch>
+            </MExpansionPanelContent>
+        </MExpansionPanel>
+    </MExpansionPanels>
+</PDrawer>
+
+<MDialog @bind-Value="_filterDialog"
+         MaxWidth="400">
+    <MButton Outlined Block>Add filter</MButton>
+</MDialog>
+
+@code {
+
+    private IDictionary<string, IDictionary<string, object?>> _defaults = new Dictionary<string, IDictionary<string, object?>>
+    {
+        [nameof(MButton)] = new Dictionary<string, object?>
+        {
+            [nameof(MButton.Class)] = "text-none",
+            [nameof(MButton.Outlined)] = true,
+            [nameof(MButton.Small)] = true
+        }
+    };
+
+    private ElementReference _columnsRef;
+
+    private List<StringNumber> _panels = [0, 1];
+
+    private static RenderFragment GenModifiedChip(ViewInfo viewInfo) => __builder =>
+    {
+        <div class="d-flex align-center justify-space-between"
+             style="width: 100%">
+            @viewInfo.Value.Name
+
+            @if (viewInfo.State is ViewState.Modified or ViewState.Unsaved)
+            {
+                <MChip Color="warning" Style="flex:none" Small Outlined>未保存</MChip>
+            }
+        </div>
+    };
+
+}

@@ -1,0 +1,39 @@
+﻿@namespace Masa.Blazor.Components.TemplateTable.ColumnConfigs
+@inherits ConfigInputBase<DateConfig>
+
+<MSelect @bind-Value="@Config.Format"
+         @bind-Value:after="UpdateValue"
+         TValue="string?"
+         TItemValue="string"
+         TItem="Tuple<string, string>"
+         Items="_items"
+         ItemText="u => u.Item1"
+         ItemValue="u => u.Item2"
+         Filled
+         Clearable
+         Label="date-format">
+</MSelect>
+
+@code {
+
+    private static IList<string> _dateTemplates =
+    [
+        "yyyy-MM-dd", "yyyy/MM/dd", "MM/dd/yyyy", "dd/MM/yyyy",
+        "yyyy-MM-dd HH:mm:ss", "yyyy/MM/dd HH:mm:ss", "MM/dd/yyyy HH:mm:ss", "dd/MM/yyyy HH:mm:ss",
+        "yyyy-MM", "yyyy/MM", "MM/yyyy",
+        "yyyy-MM-dd HH:mm", "yyyy/MM/dd HH:mm", "MM/dd/yyyy HH:mm", "dd/MM/yyyy HH:mm"
+    ];
+
+    private IList<Tuple<string, string>> _items = [];
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        // TODO: 时区
+        _items = _dateTemplates.Select(template => new Tuple<string, string>(DateTime.Now.ToString(template), template)).ToList();
+
+        // update value using the default format
+        UpdateValue();
+    }
+}

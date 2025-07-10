@@ -1,0 +1,34 @@
+﻿<MDialog @bind-Value="_imageViewer"
+         @bind-Value:after="OnImageViewerChanged"
+         ContentClass="image-viewer">
+    <MCarousel HideDelimiters
+               ShowArrows="@(_imagesToView.Count > 1)">
+        @foreach (var item in _imagesToView)
+        {
+            <MCarouselItem Src="@item" OnClick="@(() => _imageViewer = false)">
+            </MCarouselItem>
+        }
+    </MCarousel>
+</MDialog>
+
+@code {
+
+    private bool _imageViewer;
+    private IList<string> _imagesToView = [];
+
+    internal void Open(IList<string> images)
+    {
+        _imageViewer = true;
+        _imagesToView = images;
+        StateHasChanged();
+    }
+
+    private void OnImageViewerChanged()
+    {
+        if (_imageViewer == false)
+        {
+            _imagesToView = [];
+        }
+    }
+
+}

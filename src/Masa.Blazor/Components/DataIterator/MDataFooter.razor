@@ -4,25 +4,29 @@
 <div class="@GetClass()">
     @PrependContent
 
-    @if (ComputedDataItemsPerPageOptions.Count() > 1)
-    {
-        <div class="@_block.Element("select")">
-            @ItemsPerPageText
-            <CascadingValue Value="true" Name="DisableDefaultsProvider">
-                <MSelect Items="@ComputedDataItemsPerPageOptions.ToList()"
-                         TItem="DataItemsPerPageOption"
-                         TItemValue="int"
-                         TValue="int"
-                         Disabled="@DisableItemsPerPage"
-                         Value="@ItemsPagePageValue"
-                         ValueChanged="@HandleOnChangeItemsPerPageAsync"
-                         ItemValue="u => u.Value"
-                         ItemText="u => u.Text"
-                         HideDetails="@true"
-                         MinWidth="75">
-                </MSelect>
-            </CascadingValue>
-        </div>
+    @{
+        var count = ComputedDataItemsPerPageOptions.Count();
+
+        if (count > 1 || (count == 1 && ShowItemsPerPageOptionsEvenIfOne))
+        {
+            <div class="@_block.Element("select")">
+                @ItemsPerPageText
+                <CascadingValue Value="true" Name="DisableDefaultsProvider">
+                    <MSelect Items="@ComputedDataItemsPerPageOptions.ToList()"
+                             TItem="DataItemsPerPageOption"
+                             TItemValue="int"
+                             TValue="int"
+                             Disabled="@DisableItemsPerPage"
+                             Value="@ItemsPagePageValue"
+                             ValueChanged="@HandleOnChangeItemsPerPageAsync"
+                             ItemValue="u => u.Value"
+                             ItemText="u => u.Text"
+                             HideDetails="@true"
+                             MinWidth="75">
+                    </MSelect>
+                </CascadingValue>
+            </div>
+        }
     }
 
     <div class="@_block.Element("pagination")">

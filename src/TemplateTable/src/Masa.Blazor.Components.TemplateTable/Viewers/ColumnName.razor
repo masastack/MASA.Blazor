@@ -1,0 +1,150 @@
+﻿@inject IJSRuntime JSRuntime
+
+<div @ref="_ref"
+     class="masa-table-viewer__header-column-content @Class"
+     @onclick="@HandleOnClick">
+    @if (IsRowSelect)
+    {
+        <MSimpleCheckbox Class="m-data-table__checkbox"
+                         Indeterminate="@IsIndeterminate"
+                         Value="@IsSelectedAll"
+                         ValueChanged="@OnSelectAll"
+                         Color="@CheckboxColor"/>
+    }
+    else
+    {
+        @Templates.GenTypeIcon(Data.Type, true)
+        <span class="text-truncate">@Data.Name</span>
+    }
+
+    @if (!Internal)
+    {
+        <MIcon Small Class="sort-icon">$sort</MIcon>
+
+        @if (Index > 0)
+        {
+            <span class="m-data-table-header__sort-badge">@Index</span>
+        }
+    }
+
+    @if (!IsRowSelect && Editable)
+    {
+        <Dropdown>
+            @if (!Internal)
+            {
+                <MListItem Title="Edit" PrependIcon="mdi-pencil-outline"
+                           OnClick="@(() => OnColumnEditClick.InvokeAsync(Data))"></MListItem>
+            }
+            <MListItem Title="Hide" PrependIcon="mdi-eye-off-outline"
+                       OnClick="@(() => OnColumnToggle.InvokeAsync(Data.Id))"></MListItem>
+        </Dropdown>
+    }
+</div>
+
+@if (!Internal)
+{
+    <Resizor/>
+}
+
+@code {
+
+    [Parameter] public Column Data { get; set; } = null!;
+
+    [Parameter] public bool Editable { get; set; }
+
+    [Parameter] public Sort? Sort { get; set; }
+
+    [Parameter] public EventCallback<Sort> OnClick { get; set; }
+
+    [Parameter] public EventCallback<Column> OnColumnEditClick { get; set; }
+
+    [Parameter] public EventCallback<string> OnColumnToggle { get; set; }
+
+    [Parameter] public bool IsSelectedAll { get; set; }
+
+    [Parameter] public bool IsIndeterminate { get; set; }
+
+    [Parameter] public EventCallback<bool> OnSelectAll { get; set; }
+
+    [Parameter] public string? CheckboxColor { get; set; }
+
+    private ElementReference _ref;
+
+    private SortOption? SortOption => Sort?.Options.FirstOrDefault(u => u.ColumnId == Data.Id);
+
+    private bool IsRowSelect => Data.Type == ColumnType.RowSelect;
+
+    private bool Internal => IsRowSelect || Data.Type is ColumnType.Actions;
+
+    private int Index
+    {
+        get
+        {
+            if (SortOption is null || Sort is null || Internal)
+            {
+                return 0;
+            }
+
+            return Sort.Options.OrderBy(u => u.Index).ToList().IndexOf(SortOption) + 1;
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _ = JSRuntime.InvokeVoidAsync(JsInteropConstants.AddStopPropagationEvent, _ref, "pointerdown");
+        }
+    }
+
+    private string Class
+    {
+        get
+        {
+            if (SortOption is null)
+            {
+                return "";
+            }
+
+            return SortOption.OrderBy switch
+            {
+                SortOrder.Asc => "active asc",
+                SortOrder.Desc => "active desc",
+                _ => ""
+            };
+        }
+    }
+
+    private async Task HandleOnClick()
+    {
+        if (Internal)
+        {
+            return;
+        }
+
+        var sort = Sort ?? new();
+
+        if (SortOption is null)
+        {
+            var sortOption = new SortOption
+            {
+                ColumnId = Data.Id,
+                OrderBy = SortOrder.Asc,
+                Index = sort.Options.MaxBy(u => u.Index)?.Index + 1 ?? 0
+            };
+
+            sort.Options.Add(sortOption);
+        }
+        else if (SortOption.OrderBy == SortOrder.Asc)
+        {
+            SortOption.OrderBy = SortOrder.Desc;
+        }
+        else
+        {
+            sort.Options.Remove(SortOption);
+        }
+
+        await OnClick.InvokeAsync(sort);
+    }
+
+}

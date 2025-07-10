@@ -1,0 +1,45 @@
+﻿@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+<MMenu OffsetY Left Transition="slide-y-transition">
+    <ActivatorContent>
+        @if (ActivatorContent is null)
+        {
+            <MButton Class="menu"
+                     Small
+                     IconName="@Icon"
+                     @attributes="@context.Attrs"
+                     @ref="_defaultBtn">
+            </MButton>
+        }
+        else
+        {
+            @ActivatorContent(context)
+        }
+    </ActivatorContent>
+    <ChildContent>
+        <MList Dense Slim>
+            @ChildContent
+        </MList>
+    </ChildContent>
+</MMenu>
+
+@code {
+
+    [Parameter] public string? Icon { get; set; } = "mdi-dots-vertical";
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
+
+    private MButton? _defaultBtn;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender && _defaultBtn is not null)
+        {
+            _ = JSRuntime.InvokeVoidAsync(JsInteropConstants.AddStopPropagationEvent, _defaultBtn.Ref, "pointerdown");
+        }
+    }
+
+}
