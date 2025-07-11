@@ -4,6 +4,10 @@
   background: black;
 }
 
+.m-video-feed .xgplayer-fullscreen {
+  display: none;
+}
+
 .m-video-feed--rotate-fullscreen .swiper,
 .m-video-feed--rotate-fullscreen .swiper-wrapper {
   position: unset !important;

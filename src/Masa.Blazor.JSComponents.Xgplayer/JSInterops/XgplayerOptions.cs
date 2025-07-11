@@ -46,7 +46,7 @@ public class XgplayerOptions
     /// <summary>
     /// Default volume for media element, reference values: 0 ~ 1
     /// </summary>
-    public float Volume { get; set; } = 0.6f;
+    public IXgplayerVolume? Volume { get; set; }
 
     /// <summary>
     /// Determine whether to play in a loop

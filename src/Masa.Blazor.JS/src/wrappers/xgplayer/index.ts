@@ -133,8 +133,6 @@ class XgplayerProxy {
       };
     }
 
-    console.log("Xgplayer options", playerOptions);
-
     if (window.MasaBlazor.xgplayerPluginOptions) {
       playerOptions = {
         ...playerOptions,

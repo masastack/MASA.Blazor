@@ -115,6 +115,7 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     private IXgplayerMobile? _mobile;
     private IXgplayerCssFullscreen? _cssFullscreen;
     private IXgplayerFullscreen? _fullscreen;
+    private IXgplayerVolume? _volumePlugin;
 
     private string ComputedLang
     {
@@ -234,7 +235,6 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             Autoplay = Autoplay,
             AutoplayMuted = AutoplayMuted,
             DefaultPlaybackRate = DefaultPlaybackRate,
-            Volume = Volume,
             Loop = Loop,
             StartTime = StartTime,
             Lang = ComputedLang,
@@ -250,6 +250,10 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             Mobile = _mobile,
             CssFullscreen = _cssFullscreen,
             Fullscreen = _fullscreen,
+            Volume = _volumePlugin ?? new MXgplayerVolume()
+            {
+                Default = Volume
+            }
         };
     }
 
@@ -277,6 +281,9 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
                 break;
             case IXgplayerFullscreen fullscreen:
                 _fullscreen = fullscreen;
+                break;
+            case IXgplayerVolume volume:
+                _volumePlugin = volume;
                 break;
         }
 
