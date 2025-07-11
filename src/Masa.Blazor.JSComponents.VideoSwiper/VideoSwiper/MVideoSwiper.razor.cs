@@ -1,22 +1,24 @@
-﻿using Masa.Blazor.Components.VideoFeed;
+﻿using Masa.Blazor.JSComponents.VideoSwiper;
 
 namespace Masa.Blazor;
 
-public partial class MVideoFeed : MasaComponentBase
+public partial class MVideoSwiper
 {
     [Parameter] public List<Video> Videos { get; set; } = [];
 
-    [Parameter] public EventCallback<Video> OnFullscreen { get; set; }
-
-    [Parameter] public EventCallback<Video> OnCloseFullscreen { get; set; }
-
     [Parameter] public RenderFragment<Video>? ActionsContent { get; set; }
-
-    [Parameter] public bool InternalFullscreenMode { get; set; }
 
     [Parameter] public StringNumber? Height { get; set; } = "100vh";
 
     [Parameter] [MasaApiParameter("100%")] public StringNumber? Width { get; set; } = "100%";
+
+    /// <summary>
+    /// Rotated 90 degrees in the vertical screen state to achieve the horizontal screen effect,
+    /// which is generally used on the mobile terminal
+    /// </summary>
+    [Parameter] public bool RotateFullscreen { get; set; }
+
+    [Parameter] public EventCallback<FullscreenEventArgs> OnFullscreen { get; set; }
 
     private static readonly Block _block = new("m-video-feed");
     private ModifierBuilder _blockBuilder = _block.CreateModifierBuilder();
@@ -26,6 +28,7 @@ public partial class MVideoFeed : MasaComponentBase
     private int _index;
     private bool _muted = true;
     private bool _autoPlayFirstVideo;
+    private bool _fullscreen;
 
     protected override void OnInitialized()
     {
@@ -41,6 +44,17 @@ public partial class MVideoFeed : MasaComponentBase
         AutoPlayFirstVideo();
     }
 
+    protected override IEnumerable<string?> BuildComponentClass()
+    {
+        yield return _blockBuilder.Add("rotate-fullscreen", RotateFullscreen && _fullscreen).Build();
+    }
+
+    protected override IEnumerable<string?> BuildComponentStyle()
+    {
+        yield return $"--m-video-feed-width: {Width}";
+        yield return $"--m-video-feed-height: {Height}";
+    }
+
     private void AutoPlayFirstVideo()
     {
         if (_autoPlayFirstVideo || Videos.Count == 0) return;
@@ -49,6 +63,7 @@ public partial class MVideoFeed : MasaComponentBase
         _prevVideo.Playing = true;
         _autoPlayFirstVideo = true;
     }
+
 
     private void OnClick()
     {
@@ -83,23 +98,10 @@ public partial class MVideoFeed : MasaComponentBase
         video.Playing = true;
     }
 
-    private async Task HandleOnFullscreen(Video video)
+    private async Task HandleOnFullscreen(FullscreenEventArgs args)
     {
-        if (InternalFullscreenMode)
-        {
-            await _swiper.InvokeVoidAsync("disable");
-        }
-
-        await OnFullscreen.InvokeAsync(video);
-    }
-
-    private async Task HandleOnCloseFullscreen(Video video)
-    {
-        if (InternalFullscreenMode)
-        {
-            await _swiper.InvokeVoidAsync("enable");
-        }
-
-        await OnCloseFullscreen.InvokeAsync(video);
+        await OnFullscreen.InvokeAsync(args);
+        _fullscreen = args.IsFullscreen;
+        await _swiper.InvokeVoidAsync(args.IsFullscreen ? "disable" : "enable");
     }
 }

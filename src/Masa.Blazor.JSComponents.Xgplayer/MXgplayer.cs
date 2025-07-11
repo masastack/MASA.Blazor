@@ -48,6 +48,9 @@ public class MXgplayer : MXgMusicPlayer
     /// </summary>
     [Parameter] public Thumbnail? Thumbnail { get; set; }
 
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? FullscreenTarget { get; set; }
+
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return "m-xgplayer";
@@ -69,6 +72,8 @@ public class MXgplayer : MXgMusicPlayer
         options.VideoFillMode = VideoFillMode;
         options.Thumbnail = Thumbnail;
         options.VideoAttributes = VideoAttributes;
+
+        options.FullscreenTarget = FullscreenTarget;
 
         return options;
     }

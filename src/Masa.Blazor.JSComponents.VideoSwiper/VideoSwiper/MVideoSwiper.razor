@@ -1,9 +1,12 @@
 ﻿@namespace Masa.Blazor
-@using Masa.Blazor.Components.VideoFeed
+@using Masa.Blazor.Components.VideoSwiper
 @inherits MasaComponentBase
 
-<div class="@_blockBuilder"
-     style="--m-video-feed-width: @Width; --m-video-feed-height: @Height;">
+<div class="@GetClass()"
+     style="@GetStyle()"
+     id="@Id"
+     @ref="@Ref"
+     @attributes="@Attributes">
     @if (Videos.Count > 0)
     {
         <MSwiper Index="@_index"
@@ -20,9 +23,8 @@
                 <MSwiperSlide>
                     <MRichVideo Data="@item"
                                 @bind-Muted="@_muted"
-                                InternalFullscreenMode="@InternalFullscreenMode"
+                                RotateFullscreen="@RotateFullscreen"
                                 OnFullscreen="@HandleOnFullscreen"
-                                OnCloseFullscreen="@HandleOnCloseFullscreen"
                                 ActionsContent="@ActionsContent"/>
                 </MSwiperSlide>
             }

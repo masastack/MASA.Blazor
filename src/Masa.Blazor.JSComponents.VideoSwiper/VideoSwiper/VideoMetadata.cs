@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.Components.VideoFeed;
+﻿namespace Masa.Blazor.Components.VideoSwiper;
 
 public class VideoMetadata
 {

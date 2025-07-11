@@ -1,0 +1,32 @@
+﻿@namespace Masa.Blazor.Components.VideoSwiper
+@using Masa.Blazor.Components.Xgplayer.Plugins
+@inherits MasaComponentBase
+
+@if (_available)
+{
+    <MXgplayer Poster="@Data.Poster"
+               Loop
+               Autoplay="@Data.Playing"
+               AutoplayMuted
+               Url="@Data.Src"
+               OnFullscreenChange="HandleOnFullscreen"
+               Ignores="@( ["cssFullscreen"])"
+               Height="@("100%")"
+               Width="@("100%")"
+               @ref="_xgplayer">
+        <MXgplayerMobile DisablePress="false"/>
+        <MXgplayerFullscreen RotateFullscreen="@RotateFullscreen" NeedBackIcon Index="0" Position="PluginPosition.ControlsCenter"/>
+    </MXgplayer>
+    
+    <MVideoControls Fullscreen="@_fullscreen"
+                    IsPlaying="@_internalPlaying"
+                    Title="@Data.Title"
+                    Subtitle="@Data.Subtitle"
+                    @ref="_videoControls">
+        <ActionsContent>
+            <div class="m-video-feed__actions">
+                @ActionsContent?.Invoke(Data)
+            </div>
+        </ActionsContent>
+    </MVideoControls>
+}

@@ -1,5 +1,6 @@
 import Xgplayer, { Events, IPlayerOptions } from "xgplayer";
 import MusicPreset, { Music } from "xgplayer-music";
+import CssFullScreen from "xgplayer/es/plugins/cssFullScreen";
 import Mobile from "xgplayer/es/plugins/mobile";
 import Play from "xgplayer/es/plugins/play";
 import Playbackrate from "xgplayer/es/plugins/playbackRate";
@@ -50,6 +51,25 @@ class XgplayerProxy {
     }
   }
 
+  togglePlay(force: boolean = null) {
+    console.log("togglePlay", force, this.player.paused);
+    let toPlay = force !== null ? force : this.player.paused;
+    console.log("toPlay", toPlay);
+
+    if (toPlay) {
+      this.player.play();
+    } else {
+      this.player.pause();
+    }
+  }
+
+  toggleMuted(force: boolean = null) {
+    console.log("toggleMuted", force, this.player.muted);
+    let toMuted = force !== null ? force : !this.player.muted;
+    console.log("toMuted", toMuted);
+    this.player.muted = toMuted;
+  }
+
   getPropsAndStates() {
     return {
       autoplay: this.player.autoplay,
@@ -84,6 +104,20 @@ class XgplayerProxy {
       url,
     };
 
+    if (options.fullscreenTarget) {
+      const fullscreenEl = document.querySelector(options.fullscreenTarget);
+      if (fullscreenEl) {
+        options.fullscreenTarget = fullscreenEl;
+      }
+    }
+
+    if (options.cssFullscreen && options.cssFullscreen.target) {
+      const el = document.querySelector(options.cssFullscreen.target);
+      if (el) {
+        options.cssFullscreen.target = el;
+      }
+    }
+
     if (options.music) {
       playerOptions = {
         ...playerOptions,
@@ -95,16 +129,13 @@ class XgplayerProxy {
     } else {
       playerOptions = {
         ...playerOptions,
-        ...options,
+        ...options
       };
     }
 
-    if (window.MasaBlazor.xgplayerPlugins) {
-      playerOptions.plugins = [
-        ...(playerOptions.plugins ?? []),
-        ...window.MasaBlazor.xgplayerPlugins,
-      ];
+    console.log("Xgplayer options", playerOptions);
 
+    if (window.MasaBlazor.xgplayerPluginOptions) {
       playerOptions = {
         ...playerOptions,
         ...window.MasaBlazor.xgplayerPluginOptions,
@@ -113,10 +144,10 @@ class XgplayerProxy {
 
     this.player = new Xgplayer(playerOptions);
 
-    this.player.on(Events.FULLSCREEN_CHANGE, (val) => {
+    this.player.on(Events.FULLSCREEN_CHANGE, val => {
       this.handle.invokeMethodAsync("OnFullscreenChange", val);
     });
-    this.player.on(Events.CSS_FULLSCREEN_CHANGE, (val) => {
+    this.player.on(Events.CSS_FULLSCREEN_CHANGE, val => {
       this.handle.invokeMethodAsync("OnCssFullscreenChange", val);
     });
 

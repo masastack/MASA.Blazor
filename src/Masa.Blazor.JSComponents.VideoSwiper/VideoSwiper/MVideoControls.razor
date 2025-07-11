@@ -1,0 +1,16 @@
+﻿@inherits MasaComponentBase
+@namespace Masa.Blazor.Components.VideoSwiper
+
+<MThemeProvider WithBackground
+                Class="@_controlsModifierBuilder.Add(Fullscreen).ToString()"
+                Theme="dark">
+    <div class="m-video-feed__info" @onclick:stopPropagation="true">
+        <div class="d-flex align-end justify-space-between">
+            <div style="max-width: 70%">
+                <div class="text-truncate text-subtitle-1">@Title</div>
+                <div class="text--secondary text-body-2">@Subtitle</div>
+            </div>
+            @ActionsContent
+        </div>
+    </div>
+</MThemeProvider>

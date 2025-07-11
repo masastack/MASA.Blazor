@@ -2,6 +2,8 @@
 using Masa.Blazor.Components.Xgplayer;
 using Masa.Blazor.Components.Xgplayer.Plugins;
 using Masa.Blazor.Components.Xgplayer.Plugins.Controls;
+using Masa.Blazor.Components.Xgplayer.Plugins.CssFullscreen;
+using Masa.Blazor.Components.Xgplayer.Plugins.Mobile;
 using Masa.Blazor.Components.Xgplayer.Plugins.Play;
 using Masa.Blazor.Components.Xgplayer.Plugins.Start;
 using Masa.Blazor.Components.Xgplayer.Plugins.Time;
@@ -110,6 +112,9 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     private IXgplayerPlay? _play;
     private IXgplayerTime? _time;
     private IXgplayerStart? _start;
+    private IXgplayerMobile? _mobile;
+    private IXgplayerCssFullscreen? _cssFullscreen;
+    private IXgplayerFullscreen? _fullscreen;
 
     private string ComputedLang
     {
@@ -210,10 +215,13 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
 
     private async Task CreateXgplayerAsync()
     {
-       _importJSObjectReference = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor.JSComponents.Xgplayer/xgplayer.js")
+        _importJSObjectReference = await Js
+            .InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor.JSComponents.Xgplayer/xgplayer.js")
             .ConfigureAwait(false);
-       
-        var jsObjectReference = await _importJSObjectReference.InvokeAsync<IJSObjectReference>("init", Ref.GetSelector(), Url, GenOptions(), _jsInteropHandle);
+
+        var jsObjectReference =
+            await _importJSObjectReference.InvokeAsync<IJSObjectReference>("init", Ref.GetSelector(), Url, GenOptions(),
+                _jsInteropHandle);
         XgplayerJSObjectReference = new XgplayerJSObjectReference(jsObjectReference);
     }
 
@@ -239,6 +247,9 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             Play = _play,
             Time = _time,
             Start = _start,
+            Mobile = _mobile,
+            CssFullscreen = _cssFullscreen,
+            Fullscreen = _fullscreen,
         };
     }
 
@@ -257,6 +268,15 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
                 break;
             case IXgplayerStart start:
                 _start = start;
+                break;
+            case IXgplayerMobile mobile:
+                _mobile = mobile;
+                break;
+            case IXgplayerCssFullscreen cssFullscreen:
+                _cssFullscreen = cssFullscreen;
+                break;
+            case IXgplayerFullscreen fullscreen:
+                _fullscreen = fullscreen;
                 break;
         }
 
@@ -290,6 +310,26 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     public async Task InvokeVoidAsync(string identity, params object[] args)
     {
         await XgplayerJSObjectReference.InvokeVoidAsync(identity, args);
+    }
+
+    /// <summary>
+    /// Toggle play state of the player.
+    /// </summary>
+    /// <param name="force">Force set the play state.</param>
+    [MasaApiPublicMethod]
+    public async Task TogglePlayAsync(bool? force = null)
+    {
+        await XgplayerJSObjectReference.TogglePlayAsync();
+    }
+
+    /// <summary>
+    /// Toggle the muted state of the player.
+    /// </summary>
+    /// <param name="force">Force set a muted state.</param>
+    [MasaApiPublicMethod]
+    public async Task ToggleMutedAsync(bool? force = null)
+    {
+        await XgplayerJSObjectReference.ToggleMutedAsync(force);
     }
 
     private bool IsZhHant(CultureInfo culture)

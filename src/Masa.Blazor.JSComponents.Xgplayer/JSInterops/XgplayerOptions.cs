@@ -1,5 +1,7 @@
 ﻿using Masa.Blazor.Components.Xgplayer.Plugins;
 using Masa.Blazor.Components.Xgplayer.Plugins.Controls;
+using Masa.Blazor.Components.Xgplayer.Plugins.CssFullscreen;
+using Masa.Blazor.Components.Xgplayer.Plugins.Mobile;
 using Masa.Blazor.Components.Xgplayer.Plugins.Play;
 using Masa.Blazor.Components.Xgplayer.Plugins.Start;
 using Masa.Blazor.Components.Xgplayer.Plugins.Time;
@@ -117,6 +119,8 @@ public class XgplayerOptions
     /// and will not overlap with the video screen.
     /// </summary>
     public bool MarginControls { get; set; }
+    
+    public string? FullscreenTarget { get; set; }
 
     /// <summary>
     /// A list of plugins to be ignored.
@@ -136,6 +140,12 @@ public class XgplayerOptions
     public IXgplayerTime? Time { get; set; }
 
     public IXgplayerStart? Start { get; set; }
+
+    public IXgplayerMobile? Mobile { get; set; }
+
+    public IXgplayerCssFullscreen? CssFullscreen { get; set; }
+    
+    public IXgplayerFullscreen? Fullscreen { get; set; }
 }
 
 public enum DomEventType

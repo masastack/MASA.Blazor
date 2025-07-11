@@ -30,6 +30,16 @@ public class XgplayerJSObjectReference : JSObjectReferenceBase
         await JSObjectReference.InvokeVoidAsync("switchVideo", url);
     }
 
+    public async Task TogglePlayAsync(bool? force = null)
+    {
+        await JSObjectReference.InvokeVoidAsync("togglePlay", force);
+    }
+
+    public async Task ToggleMutedAsync(bool? force = null)
+    {
+        await JSObjectReference.InvokeVoidAsync("toggleMuted", force);
+    }
+
     public async Task DestroyAsync()
     {
         await JSObjectReference.InvokeVoidAsync("destroy");

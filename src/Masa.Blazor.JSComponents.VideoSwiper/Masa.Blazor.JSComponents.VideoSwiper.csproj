@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <PackageTags>blazor;masa;masa.blazor;masa blazor</PackageTags>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageIcon>Masa.Blazor96_96.png</PackageIcon>
+        <Company>masastack</Company>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <SupportedPlatform Include="browser"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.25"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="Masa.Blazor96_96.png" Pack="true" PackagePath=""/>
+        <Content Remove="tsconfig.json;package.json"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Masa.Blazor.JSComponents.Swiper\Masa.Blazor.JSComponents.Swiper.csproj"/>
+        <ProjectReference Include="..\Masa.Blazor.JSComponents.Xgplayer\Masa.Blazor.JSComponents.Xgplayer.csproj"/>
+    </ItemGroup>
+
+</Project>
