@@ -10,6 +10,7 @@ using Masa.Blazor.Components.Xgplayer.Plugins.Start;
 using Masa.Blazor.Components.Xgplayer.Plugins.Time;
 using Masa.Blazor.Core;
 using Masa.Blazor.Extensions;
+using Masa.Blazor.JSComponents.Xgplayer;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
 
@@ -104,6 +105,12 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     /// when using this component in Webview, you may need to use this event.
     /// </summary>
     [Parameter] public EventCallback OnFullscreenTouchend { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback<VideoMetadata> OnVideoMetadataLoaded { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback<VideoSize> OnVideoResize { get; set; }
 
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
     public string? ProgressColor { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Masa.Blazor.Components.Xgplayer;
+using Masa.Blazor.JSComponents.Xgplayer;
 using Masa.Blazor.JSModules;
 using Microsoft.JSInterop;
 

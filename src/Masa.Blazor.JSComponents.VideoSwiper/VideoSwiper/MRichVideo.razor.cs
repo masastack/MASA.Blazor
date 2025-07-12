@@ -1,5 +1,6 @@
 ﻿using Masa.Blazor.Components.Xgplayer.Plugins;
 using Masa.Blazor.JSComponents.VideoSwiper;
+using Masa.Blazor.JSComponents.Xgplayer;
 using Element = BemIt.Element;
 
 namespace Masa.Blazor.Components.VideoSwiper;
@@ -38,6 +39,7 @@ public partial class MRichVideo : MasaComponentBase
     private MXgplayer? _xgplayer;
 
     private bool _available;
+    private string? _fullscreenChipStyle;
 
     protected override Task OnInitializedAsync()
     {
@@ -58,31 +60,15 @@ public partial class MRichVideo : MasaComponentBase
         {
             if (Data.Playing)
             {
-                await InitJSInteropAsync();
+                _ = ToggleMute(Muted);
             }
-
-            StateHasChanged();
         }
-    }
-
-    private async Task InitJSInteropAsync()
-    {
-        // _videoMetadata = await _VideoSwiperHelper.InvokeAsync<VideoMetadata>("init");
-        _ = ToggleMute(Muted);
-        _available = true;
-        StateHasChanged();
-        
-        NextTick(() =>
-        {
-            
-        });
     }
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        Console.Out.WriteLine($"[MRichVideo] OnParametersSet {Data.Title} {Data.Playing}");
         if (!_available && Data.Playing)
         {
             _available = true;
@@ -114,6 +100,13 @@ public partial class MRichVideo : MasaComponentBase
         await OnFullscreen.InvokeAsync(args);
     }
 
+    private void HandleOnVideoResize(VideoSize videoSize)
+    {
+        _fullscreenChipStyle = "--m-video-height: " +
+                               Math.Round(videoSize.VideoWidth / (videoSize.VideoScale / 1000), 2) + "px;";
+        StateHasChanged();
+    }
+
     private async Task ToggleMute(bool muted)
     {
         await _xgplayer.ToggleMutedAsync(muted).ConfigureAwait(false);
@@ -130,7 +123,7 @@ public partial class MRichVideo : MasaComponentBase
         _internalPlaying = true;
         await _xgplayer.TogglePlayAsync(true).ConfigureAwait(false);
     }
-    
+
     private async Task GetFullscreenAsync()
     {
         await _xgplayer.InvokeVoidAsync("getRotateFullscreen").ConfigureAwait(false);

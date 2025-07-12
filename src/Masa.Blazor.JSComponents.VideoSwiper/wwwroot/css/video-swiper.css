@@ -77,7 +77,7 @@
 .m-video-feed__controls-fullscreen {
   position: absolute;
   left: 50%;
+  top: calc(50% + (var(--m-video-height) / 2) + 16px);
   transform: translateX(-50%);
-  bottom: 30%;
   color: rgba(var(--m-theme-on-surface), var(--m-medium-emphasis-opacity));
 }

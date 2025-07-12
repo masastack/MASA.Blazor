@@ -1,4 +1,5 @@
-﻿using Microsoft.JSInterop;
+﻿using Masa.Blazor.JSComponents.Xgplayer;
+using Microsoft.JSInterop;
 
 namespace Masa.Blazor.Components.Xgplayer;
 
@@ -15,4 +16,12 @@ public class XgplayerJSInteropHandle(MXgMusicPlayer player)
     [JSInvokable]
     public Task OnFullscreenTouchend()
         => player.OnFullscreenTouchend.InvokeAsync();
+
+    [JSInvokable]
+    public Task OnMetadataLoaded(VideoMetadata metadata)
+        => player.OnVideoMetadataLoaded.InvokeAsync(metadata);
+
+    [JSInvokable]
+    public Task OnResize(VideoSize size)
+        => player.OnVideoResize.InvokeAsync(size);
 }

@@ -10,10 +10,11 @@
                Autoplay="@Data.Playing"
                AutoplayMuted
                Url="@Data.Src"
-               OnFullscreenChange="HandleOnFullscreen"
                Ignores="@IgnoredXgplayerPlugins"
                Height="@("100%")"
                Width="@("100%")"
+               OnFullscreenChange="@HandleOnFullscreen"
+               OnVideoResize="@HandleOnVideoResize"
                @ref="_xgplayer">
         <MXgplayerStart ShowAtPause/>
         <MXgplayerControls Mode="ControlsMode.Flex"/>
@@ -30,12 +31,16 @@
                     Class="@ControlsElement.ToString()"
                     @onclick:stoppPropagation
                     Theme="dark">
-        <MChip Class="@ControlsFullscreenElement.ToString()"
-               Outlined
-               Small
-               OnClick="@GetFullscreenAsync">
-            全屏播放
-        </MChip>
+        @if (_fullscreenChipStyle != null)
+        {
+            <MChip Class="@ControlsFullscreenElement.ToString()"
+                   Outlined
+                   Small
+                   OnClick="@GetFullscreenAsync"
+                   Style="@_fullscreenChipStyle">
+                全屏播放
+            </MChip>
+        }
         <div class="@ControlsTopElement">
             @TopContent?.Invoke(Data)
         </div>

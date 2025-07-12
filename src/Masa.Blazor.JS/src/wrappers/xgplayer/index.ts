@@ -98,6 +98,21 @@ class XgplayerProxy {
     };
   }
 
+  getMetadata(video: HTMLVideoElement) {
+    // 获取视频的宽高
+    const videoWidth = video.videoWidth || 0;
+    const videoHeight = video.videoHeight || 0;
+
+    // 计算宽高比
+    const aspectRatio = videoHeight > 0 ? videoWidth / videoHeight : 0;
+
+    return {
+      width: videoWidth,
+      height: videoHeight,
+      aspectRatio: aspectRatio,
+    };
+  }
+
   init(url: IPlayerOptions["url"], options: XgplayerOptions) {
     let playerOptions: IPlayerOptions = {
       el: this.el,
@@ -129,7 +144,7 @@ class XgplayerProxy {
     } else {
       playerOptions = {
         ...playerOptions,
-        ...options
+        ...options,
       };
     }
 
@@ -147,6 +162,13 @@ class XgplayerProxy {
     });
     this.player.on(Events.CSS_FULLSCREEN_CHANGE, val => {
       this.handle.invokeMethodAsync("OnCssFullscreenChange", val);
+    });
+    this.player.on(Events.LOADED_DATA, val => {
+      const metadata = this.getMetadata(val.player.media);
+      this.handle.invokeMethodAsync("OnMetadataLoaded", metadata);
+    });
+    this.player.on(Events.VIDEO_RESIZE, val => {
+      this.handle.invokeMethodAsync("OnResize", val);
     });
 
     if (!options.music) {

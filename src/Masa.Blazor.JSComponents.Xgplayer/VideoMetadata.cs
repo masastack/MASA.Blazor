@@ -1,8 +1,10 @@
-﻿namespace Masa.Blazor.Components.VideoSwiper;
+﻿namespace Masa.Blazor.JSComponents.Xgplayer;
 
 public class VideoMetadata
 {
-    public double Duration { get; set; }
+    public double Width { get; set; }
+
+    public double Height { get; set; }
 
     /// <summary>
     /// The aspect ratio of the video, calculated as width / height.
