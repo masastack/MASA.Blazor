@@ -8,7 +8,7 @@ public interface IXgplayerVolume
 
     bool ShowValueLabel { get; set; }
 
-    float Default { get; set; }
+    double Default { get; set; }
 
-    float MiniVolume { get; set; }
+    double MiniVolume { get; set; }
 }

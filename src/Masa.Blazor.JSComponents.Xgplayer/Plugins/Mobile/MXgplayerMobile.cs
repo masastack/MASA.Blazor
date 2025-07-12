@@ -18,11 +18,11 @@ public class MXgplayerMobile : XgplayerPluginBase, IXgplayerMobile
 
     [Parameter]
     [MasaApiParameter(0.25)]
-    public float ScopeL { get; set; } = 0.25f;
+    public double ScopeL { get; set; } = 0.25;
 
     [Parameter]
     [MasaApiParameter(0.25)]
-    public float ScopeR { get; set; } = 0.25f;
+    public double ScopeR { get; set; } = 0.25;
 
     [Parameter]
     [MasaApiParameter(2)]

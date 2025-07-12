@@ -59,6 +59,9 @@ public partial class MSwiper : MasaComponentBase
     /// </summary>
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.10.0")] public bool Virtual { get; set; }
 
+    [Parameter] [MasaApiParameter(true, ReleasedIn = "v1.11.0")]
+    public bool TouchStartPreventDefault { get; set; } = true;
+
     private SwiperJsModule? _swiperJSModule;
     private DotNetObjectReference<object>? _swiperInteropHandle;
     private SwiperJSObjectReferenceProxy? _swiperProxy;
@@ -158,6 +161,7 @@ public partial class MSwiper : MasaComponentBase
                 SlidesPerView = SlidesPerView,
                 Virtual = Virtual,
                 CenteredSlides = CenteredSlides,
+                TouchStartPreventDefault = TouchStartPreventDefault,
                 Autoplay = _autoplay?.GetOptions(),
                 Pagination = _pagination?.GetOptions($"{rootSelector} .swiper-pagination"),
                 Navigation = _navigation?.GetOptions($"{rootSelector} .swiper-button-next", $"{rootSelector} .swiper-button-prev")

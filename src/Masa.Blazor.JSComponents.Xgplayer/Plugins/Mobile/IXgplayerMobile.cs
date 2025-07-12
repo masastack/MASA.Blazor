@@ -20,12 +20,12 @@ public interface IXgplayerMobile
     /// <summary>
     /// Gesture range on the left, Ranges 0-1
     /// </summary>
-    float ScopeL { get; set; }
+    double ScopeL { get; set; }
 
     /// <summary>
     /// Gesture range on the right， Ranges 0-1
     /// </summary>
-    float ScopeR { get; set; }
+    double ScopeR { get; set; }
 
     /// <summary>
     /// Long press to fast forward and double speed

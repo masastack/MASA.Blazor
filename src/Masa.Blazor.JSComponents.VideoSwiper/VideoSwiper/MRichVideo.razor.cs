@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.JSComponents.VideoSwiper;
+﻿using Masa.Blazor.Components.Xgplayer.Plugins;
+using Masa.Blazor.JSComponents.VideoSwiper;
 using Element = BemIt.Element;
 
 namespace Masa.Blazor.Components.VideoSwiper;
@@ -17,18 +18,26 @@ public partial class MRichVideo : MasaComponentBase
 
     [Parameter] public RenderFragment<Video>? ActionsContent { get; set; }
 
-    private static readonly Element Element = new("m-video-feed", "video");
-    private readonly ModifierBuilder _modifierBuilder = Element.CreateModifierBuilder();
+    [Parameter] public RenderFragment<Video>? TopContent { get; set; }
+
+    [Parameter] public RenderFragment<Video>? BottomContent { get; set; }
+
+    private static readonly string[] IgnoredXgplayerPlugins =
+        [BuiltInPlugin.Play, BuiltInPlugin.PlaybackRate, BuiltInPlugin.CssFullscreen, BuiltInPlugin.Volume];
+
+    private static readonly Block _block = new("m-video-feed");
+    private static readonly Element ControlsElement = _block.Element("controls");
+    private static readonly Element ControlsTopElement = _block.Element("controls-top");
+    private static readonly Element ControlsBottomElement = _block.Element("controls-bottom");
+    private static readonly Element ControlsRightElement = _block.Element("controls-right");
+    private static readonly Element ControlsFullscreenElement = _block.Element("controls-fullscreen");
 
     private bool _prevPlaying;
     private bool _internalPlaying;
     private bool _prevMuted;
-    private MVideoControls? _videoControls;
     private MXgplayer? _xgplayer;
 
     private bool _available;
-
-    private bool _fullscreen;
 
     protected override Task OnInitializedAsync()
     {
@@ -37,8 +46,6 @@ public partial class MRichVideo : MasaComponentBase
         _internalPlaying = Data.Playing;
 
         _available = Data.Playing;
-
-        Console.Out.WriteLine($"[MRichVideo] OnInitializedAsync {Data.Title} {Data.Playing}");
 
         return Task.CompletedTask;
     }
@@ -64,6 +71,11 @@ public partial class MRichVideo : MasaComponentBase
         _ = ToggleMute(Muted);
         _available = true;
         StateHasChanged();
+        
+        NextTick(() =>
+        {
+            
+        });
     }
 
     protected override void OnParametersSet()
@@ -98,7 +110,6 @@ public partial class MRichVideo : MasaComponentBase
 
     private async Task HandleOnFullscreen(bool fullscreen)
     {
-        _fullscreen = fullscreen;
         FullscreenEventArgs args = new(Data, fullscreen);
         await OnFullscreen.InvokeAsync(args);
     }
@@ -118,5 +129,10 @@ public partial class MRichVideo : MasaComponentBase
     {
         _internalPlaying = true;
         await _xgplayer.TogglePlayAsync(true).ConfigureAwait(false);
+    }
+    
+    private async Task GetFullscreenAsync()
+    {
+        await _xgplayer.InvokeVoidAsync("getRotateFullscreen").ConfigureAwait(false);
     }
 }

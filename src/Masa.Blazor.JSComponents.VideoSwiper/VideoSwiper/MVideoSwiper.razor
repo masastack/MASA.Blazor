@@ -15,9 +15,8 @@
                  Height="@Height"
                  Vertical
                  Virtual
-                 @onclick="OnClick"
-                 @ref="_swiper"
-                 Debug>
+                 TouchStartPreventDefault="false"
+                 @ref="_swiper">
             @foreach (var item in Videos)
             {
                 <MSwiperSlide>
@@ -25,7 +24,9 @@
                                 @bind-Muted="@_muted"
                                 RotateFullscreen="@RotateFullscreen"
                                 OnFullscreen="@HandleOnFullscreen"
-                                ActionsContent="@ActionsContent"/>
+                                ActionsContent="@ActionsContent"
+                                TopContent="@TopContent"
+                                BottomContent="@BottomContent"/>
                 </MSwiperSlide>
             }
         </MSwiper>

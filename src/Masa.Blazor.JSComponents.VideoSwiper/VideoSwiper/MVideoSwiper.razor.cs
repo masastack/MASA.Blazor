@@ -6,8 +6,6 @@ public partial class MVideoSwiper
 {
     [Parameter] public List<Video> Videos { get; set; } = [];
 
-    [Parameter] public RenderFragment<Video>? ActionsContent { get; set; }
-
     [Parameter] public StringNumber? Height { get; set; } = "100vh";
 
     [Parameter] [MasaApiParameter("100%")] public StringNumber? Width { get; set; } = "100%";
@@ -19,6 +17,12 @@ public partial class MVideoSwiper
     [Parameter] public bool RotateFullscreen { get; set; }
 
     [Parameter] public EventCallback<FullscreenEventArgs> OnFullscreen { get; set; }
+
+    [Parameter] public RenderFragment<Video>? ActionsContent { get; set; }
+    
+    [Parameter] public RenderFragment<Video>? TopContent { get; set; }
+
+    [Parameter] public RenderFragment<Video>? BottomContent { get; set; }
 
     private static readonly Block _block = new("m-video-feed");
     private ModifierBuilder _blockBuilder = _block.CreateModifierBuilder();
@@ -62,16 +66,6 @@ public partial class MVideoSwiper
         _prevVideo = Videos.First();
         _prevVideo.Playing = true;
         _autoPlayFirstVideo = true;
-    }
-
-
-    private void OnClick()
-    {
-        var activeVideo = Videos.ElementAtOrDefault(_index);
-        if (activeVideo is not null)
-        {
-            activeVideo.Playing = !activeVideo.Playing;
-        }
     }
 
     private void IndexChanged(int index)

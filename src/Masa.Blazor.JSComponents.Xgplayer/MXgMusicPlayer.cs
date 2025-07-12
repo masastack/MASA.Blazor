@@ -3,6 +3,7 @@ using Masa.Blazor.Components.Xgplayer;
 using Masa.Blazor.Components.Xgplayer.Plugins;
 using Masa.Blazor.Components.Xgplayer.Plugins.Controls;
 using Masa.Blazor.Components.Xgplayer.Plugins.CssFullscreen;
+using Masa.Blazor.Components.Xgplayer.Plugins.DynamicBg;
 using Masa.Blazor.Components.Xgplayer.Plugins.Mobile;
 using Masa.Blazor.Components.Xgplayer.Plugins.Play;
 using Masa.Blazor.Components.Xgplayer.Plugins.Start;
@@ -17,6 +18,8 @@ namespace Masa.Blazor;
 public class MXgMusicPlayer : MasaComponentBase, IXgplayer
 {
     [Inject] private I18n I18n { get; set; } = null!;
+
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
     /// <summary>
     /// Media resource URL, when the URL is in the form of an array,
@@ -44,12 +47,12 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     /// <summary>
     /// Default playback rate for a media element, reference values: 0.5, 0.75, 1, 1.5, 2
     /// </summary>
-    [Parameter] [MasaApiParameter(1)] public float DefaultPlaybackRate { get; set; } = 1;
+    [Parameter] [MasaApiParameter(1)] public double DefaultPlaybackRate { get; set; } = 1;
 
     /// <summary>
     /// Default volume for media element, reference values: 0 ~ 1
     /// </summary>
-    [Parameter] [MasaApiParameter(0.6)] public float Volume { get; set; } = 0.6f;
+    [Parameter] [MasaApiParameter(0.6)] public double Volume { get; set; } = 0.6;
 
     /// <summary>
     /// Determine whether to play in a loop
@@ -102,6 +105,24 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     /// </summary>
     [Parameter] public EventCallback OnFullscreenTouchend { get; set; }
 
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? ProgressColor { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? PlayedColor { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? CachedColor { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? VolumeColor { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? SliderBtnBackground { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? SliderBtnShadow { get; set; }
+
     private CancellationTokenSource? _cancellationTokenSource;
     private bool _hasFirstRender;
     private XgplayerUrl? _prevUrl;
@@ -116,6 +137,7 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     private IXgplayerCssFullscreen? _cssFullscreen;
     private IXgplayerFullscreen? _fullscreen;
     private IXgplayerVolume? _volumePlugin;
+    private IXgplayerDynamicBg? _dynamicBgPlugin;
 
     private string ComputedLang
     {
@@ -242,6 +264,8 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             ProgressDots = ProgressDots,
             MarginControls = MarginControls,
             Ignores = Ignores,
+            CommonStyle = new CommonStyle(ProgressColor, PlayedColor, CachedColor, VolumeColor, SliderBtnBackground,
+                SliderBtnShadow, MasaBlazor.Theme.Themes.Dark),
             Music = new XgplayerMusic(), // indicate that this is a music player
             Controls = _controls,
             Play = _play,
@@ -250,10 +274,8 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             Mobile = _mobile,
             CssFullscreen = _cssFullscreen,
             Fullscreen = _fullscreen,
-            Volume = _volumePlugin ?? new MXgplayerVolume()
-            {
-                Default = Volume
-            }
+            Volume = _volumePlugin ?? new MXgplayerVolume(@default: Volume),
+            DynamicBg = _dynamicBgPlugin,
         };
     }
 
@@ -284,6 +306,9 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
                 break;
             case IXgplayerVolume volume:
                 _volumePlugin = volume;
+                break;
+            case IXgplayerDynamicBg dynamicBg:
+                _dynamicBgPlugin = dynamicBg;
                 break;
         }
 
