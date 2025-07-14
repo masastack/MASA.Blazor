@@ -167,8 +167,15 @@ public partial class MSwiper : MasaComponentBase
                 Navigation = _navigation?.GetOptions($"{rootSelector} .swiper-button-next", $"{rootSelector} .swiper-button-prev")
             };
 
-            _swiperJSModule ??= new SwiperJsModule(Js);
-            _swiperProxy = await _swiperJSModule.Init(Ref, options, _swiperInteropHandle);
+            try
+            {
+                _swiperJSModule ??= new SwiperJsModule(Js);
+                _swiperProxy = await _swiperJSModule.Init(Ref, options, _swiperInteropHandle);
+            }
+            catch (JSException)
+            {
+                // ignored
+            }
 
             await SliderToIndexAsync(0);
         }, 16, _ctsForInit.Token);
