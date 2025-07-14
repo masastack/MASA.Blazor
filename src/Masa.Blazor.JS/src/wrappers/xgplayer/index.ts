@@ -1,12 +1,12 @@
 import Xgplayer, { Events, IPlayerOptions } from "xgplayer";
 import MusicPreset, { Music } from "xgplayer-music";
-import CssFullScreen from "xgplayer/es/plugins/cssFullScreen";
 import Mobile from "xgplayer/es/plugins/mobile";
 import Play from "xgplayer/es/plugins/play";
 import Playbackrate from "xgplayer/es/plugins/playbackRate";
 import Progress from "xgplayer/es/plugins/progress";
 import Time from "xgplayer/es/plugins/time";
 import Volume from "xgplayer/es/plugins/volume";
+import DynamicBg from "xgplayer/es/plugins/dynamicBg";
 
 export type XgplayerOptions = Omit<
   IPlayerOptions,
@@ -43,6 +43,12 @@ class XgplayerProxy {
     this.el = el;
     this.handle = handle;
     this.init(url, options);
+
+    if (!DynamicBg.isSupport) {
+      console.warn(
+        "[Xgplayer] DynamicBg plugin is not supported in this environment."
+      );
+    }
   }
 
   invokeVoid(prop: string, ...args: any[]) {
@@ -148,26 +154,25 @@ class XgplayerProxy {
       };
     }
 
-    if (window.MasaBlazor.xgplayerPluginOptions) {
-      playerOptions = {
-        ...playerOptions,
-        ...window.MasaBlazor.xgplayerPluginOptions,
-      };
-    }
+    this.debug("options", playerOptions);
 
     this.player = new Xgplayer(playerOptions);
 
     this.player.on(Events.FULLSCREEN_CHANGE, val => {
+      this.debug("Fullscreen change", val);
       this.handle.invokeMethodAsync("OnFullscreenChange", val);
     });
     this.player.on(Events.CSS_FULLSCREEN_CHANGE, val => {
+      this.debug("CSS Fullscreen change", val);
       this.handle.invokeMethodAsync("OnCssFullscreenChange", val);
     });
     this.player.on(Events.LOADED_DATA, val => {
       const metadata = this.getMetadata(val.player.media);
+      this.debug("Loaded data", metadata);
       this.handle.invokeMethodAsync("OnMetadataLoaded", metadata);
     });
     this.player.on(Events.VIDEO_RESIZE, val => {
+      this.debug("Video resize", val);
       this.handle.invokeMethodAsync("OnResize", val);
     });
 
@@ -189,6 +194,12 @@ class XgplayerProxy {
     this.player.destroy();
     this.player = null;
     this.handle.dispose();
+  }
+
+  private debug(message: string, ...args: any[]) {
+    if (window.MasaBlazor.debug.includes("xgplayer")) {
+      console.debug(`[Xgplayer] ${message}: `, ...args);
+    }
   }
 }
 

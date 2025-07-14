@@ -1,8 +1,8 @@
-﻿using Masa.Blazor.JSComponents.VideoSwiper;
+﻿using Masa.Blazor.JSComponents.VideoFeeder;
 
 namespace Masa.Blazor;
 
-public partial class MVideoSwiper
+public partial class MVideoFeeder
 {
     [Parameter] public List<Video> Videos { get; set; } = [];
 
@@ -24,7 +24,7 @@ public partial class MVideoSwiper
 
     [Parameter] public RenderFragment<Video>? BottomContent { get; set; }
 
-    private static readonly Block _block = new("m-video-feed");
+    private static readonly Block _block = new("m-video-feeder");
     private ModifierBuilder _blockBuilder = _block.CreateModifierBuilder();
 
     private Video? _prevVideo;

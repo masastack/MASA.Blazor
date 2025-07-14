@@ -9,8 +9,7 @@ declare global {
     MasaBlazor: {
       interop: {};
       extendMarkdownIt?: (parser: MarkdownParser) => void;
-      xgplayerPlugins: any[];
-      xgplayerPluginOptions?: { [prop: string]: any };
+      debug: Array<"xgplayer" | "echarts">
     };
   }
 }
@@ -22,5 +21,5 @@ window.MasaBlazor = {
     ...textarea,
     ...infiniteScroll,
   },
-  xgplayerPlugins: [],
+  debug: [],
 };

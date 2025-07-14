@@ -1,11 +1,11 @@
 ﻿using Masa.Blazor.Components.Xgplayer.Plugins;
-using Masa.Blazor.JSComponents.VideoSwiper;
+using Masa.Blazor.JSComponents.VideoFeeder;
 using Masa.Blazor.JSComponents.Xgplayer;
 using Element = BemIt.Element;
 
-namespace Masa.Blazor.Components.VideoSwiper;
+namespace Masa.Blazor.Components.VideoFeeder;
 
-public partial class MRichVideo : MasaComponentBase
+public partial class Player : MasaComponentBase
 {
     [Parameter] [EditorRequired] public Video Data { get; set; } = null!;
 
@@ -26,7 +26,7 @@ public partial class MRichVideo : MasaComponentBase
     private static readonly string[] IgnoredXgplayerPlugins =
         [BuiltInPlugin.Play, BuiltInPlugin.PlaybackRate, BuiltInPlugin.CssFullscreen, BuiltInPlugin.Volume];
 
-    private static readonly Block _block = new("m-video-feed");
+    private static readonly Block _block = new("m-video-feeder");
     private static readonly Element ControlsElement = _block.Element("controls");
     private static readonly Element ControlsTopElement = _block.Element("controls-top");
     private static readonly Element ControlsBottomElement = _block.Element("controls-bottom");

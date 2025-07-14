@@ -1,5 +1,5 @@
 ﻿@namespace Masa.Blazor
-@using Masa.Blazor.Components.VideoSwiper
+@using Masa.Blazor.Components.VideoFeeder
 @inherits MasaComponentBase
 
 <div class="@GetClass()"
@@ -20,13 +20,13 @@
             @foreach (var item in Videos)
             {
                 <MSwiperSlide>
-                    <MRichVideo Data="@item"
-                                @bind-Muted="@_muted"
-                                RotateFullscreen="@RotateFullscreen"
-                                OnFullscreen="@HandleOnFullscreen"
-                                ActionsContent="@ActionsContent"
-                                TopContent="@TopContent"
-                                BottomContent="@BottomContent"/>
+                    <Player Data="@item"
+                            @bind-Muted="@_muted"
+                            RotateFullscreen="@RotateFullscreen"
+                            OnFullscreen="@HandleOnFullscreen"
+                            ActionsContent="@ActionsContent"
+                            TopContent="@TopContent"
+                            BottomContent="@BottomContent"/>
                 </MSwiperSlide>
             }
         </MSwiper>

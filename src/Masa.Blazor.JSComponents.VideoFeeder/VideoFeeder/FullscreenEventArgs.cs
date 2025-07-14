@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.JSComponents.VideoSwiper;
+﻿namespace Masa.Blazor.JSComponents.VideoFeeder;
 
 public class FullscreenEventArgs(Video video, bool isFullscreen) : EventArgs
 {

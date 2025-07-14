@@ -1,4 +1,4 @@
-﻿namespace Masa.Blazor.JSComponents.VideoSwiper;
+﻿namespace Masa.Blazor.JSComponents.VideoFeeder;
 
 public class Video(string? title, string? subtitle, string? src, string? poster)
 {
