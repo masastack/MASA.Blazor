@@ -351,6 +351,12 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
         await XgplayerJSObjectReference.InvokeVoidAsync(identity, args);
     }
 
+    [MasaApiPublicMethod]
+    public async Task SetPropAsync(string prop, object value)
+    {
+        await XgplayerJSObjectReference.SetPropAsync(prop, value);
+    }
+
     /// <summary>
     /// Toggle play state of the player.
     /// </summary>
@@ -358,7 +364,7 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     [MasaApiPublicMethod]
     public async Task TogglePlayAsync(bool? force = null)
     {
-        await XgplayerJSObjectReference.TogglePlayAsync();
+        await XgplayerJSObjectReference.TogglePlayAsync(force);
     }
 
     /// <summary>

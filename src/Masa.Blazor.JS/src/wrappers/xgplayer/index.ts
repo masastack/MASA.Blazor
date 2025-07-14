@@ -57,6 +57,12 @@ class XgplayerProxy {
     }
   }
 
+  setProp(prop: string, value: any) {
+    if (this.player[prop] !== undefined) {
+      this.player[prop] = value;
+    }
+  }
+
   togglePlay(force: boolean = null) {
     console.log("togglePlay", force, this.player.paused);
     let toPlay = force !== null ? force : this.player.paused;

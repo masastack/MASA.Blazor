@@ -1,5 +1,4 @@
 ﻿using Masa.Blazor.Components.Xgplayer;
-using Masa.Blazor.JSComponents.Xgplayer;
 
 namespace Masa.Blazor;
 
@@ -51,8 +50,6 @@ public class MXgplayer : MXgMusicPlayer
 
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
     public string? FullscreenTarget { get; set; }
-
-    private VideoMetadata _videoMetadata;
 
     protected override IEnumerable<string> BuildComponentClass()
     {

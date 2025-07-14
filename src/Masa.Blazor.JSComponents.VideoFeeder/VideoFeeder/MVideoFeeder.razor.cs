@@ -19,7 +19,7 @@ public partial class MVideoFeeder
     [Parameter] public EventCallback<FullscreenEventArgs> OnFullscreen { get; set; }
 
     [Parameter] public RenderFragment<Video>? ActionsContent { get; set; }
-    
+
     [Parameter] public RenderFragment<Video>? TopContent { get; set; }
 
     [Parameter] public RenderFragment<Video>? BottomContent { get; set; }
@@ -29,6 +29,7 @@ public partial class MVideoFeeder
 
     private Video? _prevVideo;
     private MSwiper? _swiper;
+    private bool _sheet;
     private int _index;
     private bool _muted = true;
     private bool _autoPlayFirstVideo;
@@ -97,5 +98,10 @@ public partial class MVideoFeeder
         await OnFullscreen.InvokeAsync(args);
         _fullscreen = args.IsFullscreen;
         await _swiper.InvokeVoidAsync(args.IsFullscreen ? "disable" : "enable");
+    }
+
+    private void HandleOnLongPress()
+    {
+        _sheet = true;
     }
 }

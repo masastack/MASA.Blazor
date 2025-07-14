@@ -5,6 +5,7 @@
 <div class="@GetClass()"
      style="@GetStyle()"
      id="@Id"
+     @onlongpress="@HandleOnLongPress"
      @ref="@Ref"
      @attributes="@Attributes">
     @if (Videos.Count > 0)
@@ -22,6 +23,7 @@
                 <MSwiperSlide>
                     <Player Data="@item"
                             @bind-Muted="@_muted"
+                            PlaybackRate="@_playrate"
                             RotateFullscreen="@RotateFullscreen"
                             OnFullscreen="@HandleOnFullscreen"
                             ActionsContent="@ActionsContent"
@@ -31,4 +33,38 @@
             }
         </MSwiper>
     }
+
+    <MBottomSheet @bind-Value="_sheet">
+        <MList Dense Slim>
+            <MListItem Link PrependIcon="mdi-cast-audio-variant" Title="转音频播放">
+            </MListItem>
+            <MListItem PrependIcon="mdi-play-speed" Title="倍数播放">
+                <MListItemAction>
+                    <MButtonGroup Value="_playrate" ValueChanged="@(val => _playrate = val.AsT2)"
+                                  ActiveClass="primary--text"
+                                  Borderless
+                                  Mandatory>
+                        <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="0.75">0.75</MButton>
+                        <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="1.0">1.0</MButton>
+                        <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="1.25">1.25</MButton>
+                        <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="1.5">1.5</MButton>
+                        <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="2.0">2.0</MButton>
+                    </MButtonGroup>
+                </MListItemAction>
+            </MListItem>
+            <MListItem Link PrependIcon="mdi-download-box-outline" Title="下载视频"></MListItem>
+            <MListItem Link PrependIcon="mdi-playlist-play" Title="自动连播">
+                <MListItemAction>
+                    <MSwitch @bind-Value="_palyauto" Inset Dense/>
+                </MListItemAction>
+            </MListItem>
+        </MList>
+    </MBottomSheet>
 </div>
+
+@code {
+
+    private double _playrate = 1.0;
+    private bool _palyauto = true;
+
+}

@@ -6,6 +6,7 @@ class OutsideClick {
   mousedownListener: (e: MouseEvent) => void;
   excludedSelectors: string[];
   lastMousedownWasOutside: boolean = true;
+  lastMousedownTarget: EventTarget | null = null;
 
   constructor(dotNetHelper: DotNet.DotNetObject, excludedSelectors: string[]) {
     this.dotNetHelper = dotNetHelper;
@@ -13,16 +14,23 @@ class OutsideClick {
   }
 
   genListeners() {
-    this.listener = (e) => {
+    this.listener = e => {
       if (this.checkEvent(e)) return;
+
+      const isSameTarget = this.lastMousedownTarget === e.target;
+      // 如果点击目标和 mousedown 目标不同，可能是长按后的遮罩点击
+      if (!isSameTarget) {
+        return;
+      }
 
       if (this.lastMousedownWasOutside) {
         this.dotNetHelper.invokeMethodAsync("OnOutsideClick");
       }
     };
 
-    this.mousedownListener = (e) => {
+    this.mousedownListener = e => {
       this.lastMousedownWasOutside = !this.checkEvent(e);
+      this.lastMousedownTarget = e.target;
     };
   }
 
@@ -47,7 +55,7 @@ class OutsideClick {
   }
 
   checkEvent(e: MouseEvent) {
-    return this.excludedSelectors.some((selector) => {
+    return this.excludedSelectors.some(selector => {
       const parentElement = get$ParentElement(selector);
       if (parentElement) {
         return parentElement.contains(e.target as HTMLElement);

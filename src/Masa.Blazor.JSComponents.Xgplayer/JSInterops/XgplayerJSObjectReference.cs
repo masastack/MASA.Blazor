@@ -41,6 +41,12 @@ public class XgplayerJSObjectReference : JSObjectReferenceBase
         await JSObjectReference.InvokeVoidAsync("toggleMuted", force);
     }
 
+    public async Task SetPropAsync(string prop, object value)
+    {
+        await JSObjectReference.InvokeVoidAsync("setProp", prop, value);
+    }
+
+
     public async Task DestroyAsync()
     {
         await JSObjectReference.InvokeVoidAsync("destroy");

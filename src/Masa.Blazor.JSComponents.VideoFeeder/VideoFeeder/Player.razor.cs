@@ -13,6 +13,8 @@ public partial class Player : MasaComponentBase
 
     [Parameter] public EventCallback<bool> MutedChanged { get; set; }
 
+    [Parameter] public double PlaybackRate { get; set; } = 1;
+
     [Parameter] public bool RotateFullscreen { get; set; }
 
     [Parameter] public EventCallback<FullscreenEventArgs> OnFullscreen { get; set; }
@@ -36,6 +38,7 @@ public partial class Player : MasaComponentBase
     private bool _prevPlaying;
     private bool _internalPlaying;
     private bool _prevMuted;
+    private double _playbackRate = 1;
     private MXgplayer? _xgplayer;
 
     private bool _available;
@@ -78,6 +81,12 @@ public partial class Player : MasaComponentBase
         {
             _prevMuted = Muted;
             _ = ToggleMute(Muted);
+        }
+
+        if (_playbackRate != PlaybackRate)
+        {
+            _playbackRate = PlaybackRate;
+            _ = SetPlaybackRateAsync();
         }
 
         var playing = _internalPlaying;
@@ -127,5 +136,10 @@ public partial class Player : MasaComponentBase
     private async Task GetFullscreenAsync()
     {
         await _xgplayer.InvokeVoidAsync("getRotateFullscreen").ConfigureAwait(false);
+    }
+
+    private async Task SetPlaybackRateAsync()
+    {
+        await _xgplayer.SetPropAsync("playbackRate", PlaybackRate).ConfigureAwait(false);
     }
 }

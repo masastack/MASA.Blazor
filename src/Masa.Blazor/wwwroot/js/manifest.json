@@ -9,6 +9,6 @@
   "components/window/touch.js": "components/window/touch-f9d2ba92.js",
   "mixins/activatable/index.js": "mixins/activatable/index-82cb7376.js",
   "mixins/intersect/index.js": "mixins/intersect/index-f360c115.js",
-  "mixins/outside-click/index.js": "mixins/outside-click/index-47d0ce8d.js",
+  "mixins/outside-click/index.js": "mixins/outside-click/index-da19b90c.js",
   "mixins/resize/index.js": "mixins/resize/index-07a0c3f6.js"
 }
