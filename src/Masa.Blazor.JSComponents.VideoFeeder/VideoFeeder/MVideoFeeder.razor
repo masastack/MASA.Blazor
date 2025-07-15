@@ -5,7 +5,6 @@
 <div class="@GetClass()"
      style="@GetStyle()"
      id="@Id"
-     @onlongpress="@HandleOnLongPress"
      @ref="@Ref"
      @attributes="@Attributes">
     @if (Videos.Count > 0)
@@ -20,12 +19,17 @@
                  @ref="_swiper">
             @foreach (var item in Videos)
             {
+                var index = Videos.IndexOf(item);
+
                 <MSwiperSlide>
                     <Player Data="@item"
+                            Index="@index"
                             @bind-Muted="@_muted"
-                            PlaybackRate="@_playrate"
+                            PlaybackRate="@_playbackRate"
                             RotateFullscreen="@RotateFullscreen"
                             OnFullscreen="@HandleOnFullscreen"
+                            OnLongPress="@HandleOnLongPress"
+                            OnEnded="@HandleOnEnded"
                             ActionsContent="@ActionsContent"
                             TopContent="@TopContent"
                             BottomContent="@BottomContent"/>
@@ -40,7 +44,7 @@
             </MListItem>
             <MListItem PrependIcon="mdi-play-speed" Title="倍数播放">
                 <MListItemAction>
-                    <MButtonGroup Value="_playrate" ValueChanged="@(val => _playrate = val.AsT2)"
+                    <MButtonGroup Value="_playbackRate" ValueChanged="@(val => _playbackRate = val.AsT2)"
                                   ActiveClass="primary--text"
                                   Borderless
                                   Mandatory>
@@ -55,16 +59,9 @@
             <MListItem Link PrependIcon="mdi-download-box-outline" Title="下载视频"></MListItem>
             <MListItem Link PrependIcon="mdi-playlist-play" Title="自动连播">
                 <MListItemAction>
-                    <MSwitch @bind-Value="_palyauto" Inset Dense/>
+                    <MSwitch @bind-Value="_autoPlayNext" Inset Dense/>
                 </MListItemAction>
             </MListItem>
         </MList>
     </MBottomSheet>
 </div>
-
-@code {
-
-    private double _playrate = 1.0;
-    private bool _palyauto = true;
-
-}

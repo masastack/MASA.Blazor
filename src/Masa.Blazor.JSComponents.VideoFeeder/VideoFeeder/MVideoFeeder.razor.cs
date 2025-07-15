@@ -8,7 +8,10 @@ public partial class MVideoFeeder
 
     [Parameter] public StringNumber? Height { get; set; } = "100vh";
 
-    [Parameter] [MasaApiParameter("100%")] public StringNumber? Width { get; set; } = "100%";
+    [Parameter] [MasaApiParameter("100%")]
+    public StringNumber? Width { get; set; } = "100%";
+
+    [Parameter] public bool DefaultAutoPlayNext { get; set; }
 
     /// <summary>
     /// Rotated 90 degrees in the vertical screen state to achieve the horizontal screen effect,
@@ -24,8 +27,8 @@ public partial class MVideoFeeder
 
     [Parameter] public RenderFragment<Video>? BottomContent { get; set; }
 
-    private static readonly Block _block = new("m-video-feeder");
-    private ModifierBuilder _blockBuilder = _block.CreateModifierBuilder();
+    private static readonly Block Block = new("m-video-feeder");
+    private readonly ModifierBuilder _blockBuilder = Block.CreateModifierBuilder();
 
     private Video? _prevVideo;
     private MSwiper? _swiper;
@@ -34,10 +37,14 @@ public partial class MVideoFeeder
     private bool _muted = true;
     private bool _autoPlayFirstVideo;
     private bool _fullscreen;
+    private double _playbackRate = 1.0;
+    private bool _autoPlayNext;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
+
+        _autoPlayNext = DefaultAutoPlayNext;
 
         AutoPlayFirstVideo();
     }
@@ -72,6 +79,7 @@ public partial class MVideoFeeder
     private void IndexChanged(int index)
     {
         _index = index;
+        _playbackRate = 1;
 
         OnIndexUpdated();
     }
@@ -98,6 +106,18 @@ public partial class MVideoFeeder
         await OnFullscreen.InvokeAsync(args);
         _fullscreen = args.IsFullscreen;
         await _swiper.InvokeVoidAsync(args.IsFullscreen ? "disable" : "enable");
+    }
+
+    private async Task HandleOnEnded()
+    {
+        if (!_autoPlayNext || _index >= Videos.Count - 1)
+        {
+            return;
+        }
+
+        _index++;
+        await _swiper.InvokeVoidAsync("slideTo", _index);
+        OnIndexUpdated();
     }
 
     private void HandleOnLongPress()

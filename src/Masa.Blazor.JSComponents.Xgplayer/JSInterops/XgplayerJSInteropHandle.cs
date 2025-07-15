@@ -10,18 +10,22 @@ public class XgplayerJSInteropHandle(MXgMusicPlayer player)
         => player.OnFullscreenChange.InvokeAsync(isFullscreen);
 
     [JSInvokable]
-    public Task OnCssFullscreenChange(bool isCssFullscreen)
-        => player.OnCssFullscreenChange.InvokeAsync(isCssFullscreen);
+    public Task OnCssFullscreenChange(bool isCssFullscreen) =>
+        player.OnCssFullscreenChange.InvokeAsync(isCssFullscreen);
 
     [JSInvokable]
-    public Task OnFullscreenTouchend()
-        => player.OnFullscreenTouchend.InvokeAsync();
+    public Task OnFullscreenTouchend() => player.OnFullscreenTouchend.InvokeAsync();
 
     [JSInvokable]
     public Task OnMetadataLoaded(VideoMetadata metadata)
         => player.OnVideoMetadataLoaded.InvokeAsync(metadata);
 
     [JSInvokable]
-    public Task OnResize(VideoSize size)
-        => player.OnVideoResize.InvokeAsync(size);
+    public Task OnResize(VideoSize size) => player.OnVideoResize.InvokeAsync(size);
+
+    [JSInvokable]
+    public Task OnEnded() => player.OnEnded.InvokeAsync();
+
+    [JSInvokable]
+    public Task OnReady() => player.OnReady.InvokeAsync();
 }

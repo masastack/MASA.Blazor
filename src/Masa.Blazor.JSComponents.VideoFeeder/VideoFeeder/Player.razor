@@ -6,29 +6,29 @@
 @if (_available)
 {
     <MXgplayer Poster="@Data.Poster"
-               Loop
                Autoplay="@Data.Playing"
                AutoplayMuted
+               Loop
                Url="@Data.Src"
                Ignores="@IgnoredXgplayerPlugins"
+               Class="m-video-feeder__player"
                Height="@("100%")"
                Width="@("100%")"
+               OnReady="@OnReady"
                OnFullscreenChange="@HandleOnFullscreen"
                OnVideoResize="@HandleOnVideoResize"
+               OnEnded="@OnEnded"
+               data-player-index="@Index"
                @ref="_xgplayer">
         <MXgplayerStart ShowAtPause/>
         <MXgplayerControls Mode="ControlsMode.Flex"/>
         <MXgplayerVolume Default="1f"/>
         <MXgplayerDynamicBg Disable="false"/>
-        <MXgplayerFullscreen RotateFullscreen="@RotateFullscreen"
-                             NeedBackIcon
-                             Index="0"
-                             Position="PluginPosition.ControlsCenter"/>
+        <MXgplayerFullscreen RotateFullscreen="@RotateFullscreen" NeedBackIcon/>
     </MXgplayer>
 
     <MThemeProvider WithBackground
                     Class="@ControlsElement.ToString()"
-                    @onclick:stoppPropagation
                     Theme="dark">
         @if (_fullscreenChipStyle != null)
         {
@@ -47,16 +47,18 @@
             @BottomContent?.Invoke(Data)
         </div>
         <div class="@ControlsRightElement">
-            @ActionsContent?.Invoke(Data)
-            <MToggle Value="@Muted"
-                     ValueChanged="@MutedChanged"
-                     DataOn="@("mdi-volume-off")"
-                     Dataoff="@("mdi-volume-high")">
-                <MButton IconName="@context.Data"
-                         Large
-                         OnClick="@context.Toggle"
-                         OnClickStopPropagation/>
-            </MToggle>
+            <MDefaultsProvider Defaults="@_rightActionDefaults">
+                @ActionsContent?.Invoke(Data)
+                <MToggle Value="@Muted"
+                         ValueChanged="@MutedChanged"
+                         DataOn="@("mdi-volume-off")"
+                         Dataoff="@("mdi-volume-high")">
+                    <MButton IconName="@context.Data"
+                             Large
+                             OnClick="@context.Toggle"
+                             OnClickStopPropagation/>
+                </MToggle>
+            </MDefaultsProvider>
         </div>
     </MThemeProvider>
 }

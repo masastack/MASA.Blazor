@@ -164,6 +164,10 @@ class XgplayerProxy {
 
     this.player = new Xgplayer(playerOptions);
 
+    this.player.on(Events.READY, () => {
+      this.debug("Player is ready");
+      this.handle.invokeMethodAsync("OnReady");
+    });
     this.player.on(Events.FULLSCREEN_CHANGE, val => {
       this.debug("Fullscreen change", val);
       this.handle.invokeMethodAsync("OnFullscreenChange", val);
@@ -181,6 +185,10 @@ class XgplayerProxy {
       this.debug("Video resize", val);
       this.handle.invokeMethodAsync("OnResize", val);
     });
+    this.player.on(Events.ENDED, val => {
+      this.debug("Video ended", val);
+      this.handle.invokeMethodAsync("OnEnded");
+    })
 
     if (!options.music) {
       const fullScreen = this.el.querySelector(".xgplayer-fullscreen");

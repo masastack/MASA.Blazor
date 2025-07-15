@@ -113,6 +113,12 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     public EventCallback<VideoSize> OnVideoResize { get; set; }
 
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback OnEnded { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback OnReady { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
     public string? ProgressColor { get; set; }
 
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
@@ -209,10 +215,11 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "class", GetClass());
-        builder.AddAttribute(2, "style", GetStyle());
-        builder.AddElementReferenceCapture(3, elementReference => Ref = elementReference);
-        builder.AddContent(4, RenderChildContent);
+        builder.AddMultipleAttributes(1, Attributes);
+        builder.AddAttribute(2, "class", GetClass());
+        builder.AddAttribute(3, "style", GetStyle());
+        builder.AddElementReferenceCapture(4, elementReference => Ref = elementReference);
+        builder.AddContent(5, RenderChildContent);
         builder.CloseElement();
 
         void RenderChildContent(RenderTreeBuilder nextBuilder)
