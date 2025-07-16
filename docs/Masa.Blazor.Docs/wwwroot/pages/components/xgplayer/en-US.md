@@ -38,12 +38,10 @@ Disable plugins through the `Ignores` property. The built-in plugin list can be 
 
 ### Misc
 
-#### Switch music and video
+#### Switch between video and audio {#switch-video-audio updated-in=v1.11.0}
 
 **MXgMusicPlayer** is a separate music player component.
 This example shows how to switch between music and video.
-The `_startTime` field is used to record the progress of video and audio playback.
-The `_isRunning` field is used to record whether the video or audio is playing.
 
 <masa-example file="Examples.components.xgplayer.Switch"></masa-example>
 
@@ -53,10 +51,20 @@ The `_isRunning` field is used to record whether the video or audio is playing.
 
 <masa-example file="Examples.components.xgplayer.MusicPlayer"></masa-example>
 
-## Plugin components
+## Plugin components {updated-in=v1.11.0}
 
-Currently, only plugin components **Controls**, **Play**, **Time** and **Start** are implemented,
-and other plugin components are welcome to PR.
+Currently, the following plugin components are implemented, and other plugin components are welcome to contribute:
+
+- **Controls**: Control bar
+- **CssFullscreen**: Page fullscreen button
+- **Download**: Download plugin for PC
+- **DynamicBg**: Dynamic background Gaussian blur rendering plugin
+- **Fullscreen**: Fullscreen toggle component in the control bar, used to switch the current video to fullscreen. The fullscreen component defaults to using system fullscreen. To address inconsistent fullscreen behavior on mobile devices, it supports using web fullscreen or rotation fullscreen as an alternative.
+- **Mobile**: Interaction plugin for the player on mobile web
+- **Play**: Play/pause control plugin in the control bar
+- **Star**: Button in the center of the player to toggle pause/play
+- **Time**: Plugin for displaying playback time and duration in the control bar
+- **Volume**: Volume control plugin
 
 ### Controls
 
