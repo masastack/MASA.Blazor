@@ -152,6 +152,8 @@ public class XgplayerOptions
     public IXgplayerFullscreen? Fullscreen { get; set; }
 
     public IXgplayerDynamicBg? DynamicBg { get; set; }
+
+    public IXgplayerDownload? Download { get; set; }
 }
 
 public enum DomEventType

@@ -64,9 +64,7 @@ class XgplayerProxy {
   }
 
   togglePlay(force: boolean = null) {
-    console.log("togglePlay", force, this.player.paused);
     let toPlay = force !== null ? force : this.player.paused;
-    console.log("toPlay", toPlay);
 
     if (toPlay) {
       this.player.play();
@@ -76,9 +74,7 @@ class XgplayerProxy {
   }
 
   toggleMuted(force: boolean = null) {
-    console.log("toggleMuted", force, this.player.muted);
     let toMuted = force !== null ? force : !this.player.muted;
-    console.log("toMuted", toMuted);
     this.player.muted = toMuted;
   }
 
@@ -125,20 +121,129 @@ class XgplayerProxy {
     };
   }
 
-  init(url: IPlayerOptions["url"], options: XgplayerOptions) {
+  // 将播放器切换到音乐模式
+  toMusic() {
+    // 如果已经是audio模式，则不需要切换
+    if (this.player.media instanceof HTMLAudioElement) {
+      this.debug("Already in music mode, no need to switch.");
+      return;
+    }
+
+    // 保存当前播放状态
+    let currentTime = 0;
+    let volume = 1;
+    let playbackRate = 1;
+    let muted = false;
+    let paused = true;
+
+    if (this.player) {
+      currentTime = this.player.currentTime || 0;
+      volume = this.player.volume || 1;
+      playbackRate = this.player.playbackRate || 1;
+      muted = this.player.muted || false;
+      paused = this.player.paused;
+
+      // 销毁当前播放器
+      this.player.destroy();
+    }
+
+    // 创建音乐模式的选项
+    const musicOptions: XgplayerOptions = {
+      ...this.initOptions,
+      music: this.initOptions.music || ({} as Music),
+      volume: volume,
+      playbackRate: playbackRate,
+      muted: muted,
+    };
+
+    delete musicOptions.fullscreenTarget;
+    delete musicOptions.cssFullscreen;
+
+    // 重新初始化为音乐模式
+    this.init(this.player.url, musicOptions);
+
+    // 在播放器准备好后恢复播放状态
+    this.player.once(Events.READY, () => {
+      if (currentTime > 0) {
+        this.player.currentTime = currentTime;
+      }
+      if (!paused) {
+        this.player.play();
+      }
+    });
+  }
+
+  // 将播放器切换到视频模式
+  toVideo() {
+    if (this.player.media instanceof HTMLVideoElement) {
+      this.debug("Already in video mode, no need to switch.");
+      return;
+    }
+
+    // 保存当前播放状态
+    let currentTime = 0;
+    let volume = 1;
+    let playbackRate = 1;
+    let muted = false;
+    let paused = true;
+
+    if (this.player) {
+      currentTime = this.player.currentTime || 0;
+      volume = this.player.volume || 1;
+      playbackRate = this.player.playbackRate || 1;
+      muted = this.player.muted || false;
+      paused = this.player.paused;
+
+      // 销毁当前播放器
+      this.player.destroy();
+    }
+
+    // 创建视频模式的选项 (移除 music 属性)
+    const videoOptions: XgplayerOptions = {
+      ...this.initOptions,
+      volume: volume,
+      playbackRate: playbackRate,
+      muted: muted,
+    };
+
+    // 移除音乐模式相关属性
+    delete videoOptions.music;
+    console.log("toVideo", videoOptions);
+    // 重新初始化为视频模式
+    this.init(this.player.url, videoOptions);
+
+    // 在播放器准备好后恢复播放状态
+    this.player.once(Events.READY, () => {
+      if (currentTime > 0) {
+        this.player.currentTime = currentTime;
+      }
+      if (!paused) {
+        this.player.play();
+      }
+    });
+  }
+
+  private init(url: IPlayerOptions["url"], options: XgplayerOptions) {
     let playerOptions: IPlayerOptions = {
       el: this.el,
       url,
     };
 
-    if (options.fullscreenTarget) {
+    if (
+      options.fullscreenTarget &&
+      typeof options.fullscreenTarget === "string"
+    ) {
       const fullscreenEl = document.querySelector(options.fullscreenTarget);
       if (fullscreenEl) {
         options.fullscreenTarget = fullscreenEl;
       }
     }
 
-    if (options.cssFullscreen && options.cssFullscreen.target) {
+    if (
+      options.cssFullscreen &&
+      options.cssFullscreen.target &&
+      typeof options.cssFullscreen.target === "string"
+    ) {
       const el = document.querySelector(options.cssFullscreen.target);
       if (el) {
         options.cssFullscreen.target = el;
@@ -188,7 +293,7 @@ class XgplayerProxy {
     this.player.on(Events.ENDED, val => {
       this.debug("Video ended", val);
       this.handle.invokeMethodAsync("OnEnded");
-    })
+    });
 
     if (!options.music) {
       const fullScreen = this.el.querySelector(".xgplayer-fullscreen");
@@ -212,7 +317,7 @@ class XgplayerProxy {
 
   private debug(message: string, ...args: any[]) {
     if (window.MasaBlazor.debug.includes("xgplayer")) {
-      console.debug(`[Xgplayer] ${message}: `, ...args);
+      console.debug(`[Xgplayer] ${message}`, ...args);
     }
   }
 }

@@ -240,7 +240,7 @@ public partial class MSwiper : MasaComponentBase
         _ctsForUpdateSlides = new CancellationTokenSource();
 
         await RunTaskInMicrosecondsAsync(
-            () => _ = _swiperProxy.InvokeVoidAsync("update"),
+            () => _ = _swiperProxy.InvokeInstanceVoidAsync("update"),
             16,
             _ctsForUpdateSlides.Token);
     }
@@ -263,6 +263,6 @@ public partial class MSwiper : MasaComponentBase
             return;
         }
 
-        await _swiperProxy.InvokeVoidAsync(funcName, args);
+        await _swiperProxy.InvokeInstanceVoidAsync(funcName, args);
     }
 }

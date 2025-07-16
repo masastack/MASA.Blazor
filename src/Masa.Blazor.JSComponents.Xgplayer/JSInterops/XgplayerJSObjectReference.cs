@@ -5,15 +5,11 @@ using Microsoft.JSInterop;
 
 namespace Masa.Blazor;
 
-public class XgplayerJSObjectReference : JSObjectReferenceBase
+public class XgplayerJSObjectReference(IJSObjectReference jsObjectReference) : JSObjectReferenceBase(jsObjectReference)
 {
-    public XgplayerJSObjectReference(IJSObjectReference jsObjectReference) : base(jsObjectReference)
-    {
-    }
-
     public async ValueTask UpdateUrlAsync(XgplayerUrl url)
     {
-        await InvokeVoidAsync("playNext", new { url });
+        await InvokeInstanceVoidAsync("playNext", new { url });
     }
 
     public async ValueTask<XgplayerPropsAndStates> GetPropsAndStatesAsync()
@@ -21,14 +17,14 @@ public class XgplayerJSObjectReference : JSObjectReferenceBase
         return await JSObjectReference.InvokeAsync<XgplayerPropsAndStates>("getPropsAndStates");
     }
 
-    public async ValueTask SwitchToMusicAsync(XgplayerUrl url)
+    public async ValueTask ToMusicPlayerAsync()
     {
-        await JSObjectReference.InvokeVoidAsync("switchMusic", url);
+        await JSObjectReference.InvokeVoidAsync("toMusic");
     }
 
-    public async ValueTask SwitchToVideoAsync(XgplayerUrl url)
+    public async ValueTask ToVideoPlayerAsync()
     {
-        await JSObjectReference.InvokeVoidAsync("switchVideo", url);
+        await JSObjectReference.InvokeVoidAsync("toVideo");
     }
 
     public async Task TogglePlayAsync(bool? force = null)

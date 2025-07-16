@@ -83,14 +83,14 @@ public class MXgplayer : MXgMusicPlayer
     }
 
     [MasaApiPublicMethod]
-    public async Task SwitchToMusicAsync(XgplayerUrl url)
+    public async Task ToMusicPlayerAsync()
     {
-        await XgplayerJSObjectReference.SwitchToMusicAsync(url);
+        await XgplayerJSObjectReference.ToMusicPlayerAsync();
     }
 
     [MasaApiPublicMethod]
-    public async Task SwitchToVideoAsync(XgplayerUrl url)
+    public async Task ToVideoPlayerAsync()
     {
-        await XgplayerJSObjectReference.SwitchToVideoAsync(url);
+        await XgplayerJSObjectReference.ToVideoPlayerAsync();
     }
 }
