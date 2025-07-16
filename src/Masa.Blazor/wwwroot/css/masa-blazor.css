@@ -20888,6 +20888,10 @@ html.overflow-y-hidden {
     font-size: 0.75rem;
 }
 
+.m-list--dense .m-list-item__action, .m-list-item--dense .m-list-item__action {
+    margin: 0;
+}
+
 .m-list-item__avatar {
     align-self: center;
     justify-content: flex-start;
