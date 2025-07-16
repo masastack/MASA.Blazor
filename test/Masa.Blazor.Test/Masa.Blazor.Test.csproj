@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Masa.Blazor.Components.TemplateTable.Contracts\Masa.Blazor.Components.TemplateTable.Contracts.csproj" />
     <ProjectReference Include="..\..\src\Masa.Blazor\Masa.Blazor.csproj" />
   </ItemGroup>
 
