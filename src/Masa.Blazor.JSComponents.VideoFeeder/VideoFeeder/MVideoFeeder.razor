@@ -1,6 +1,7 @@
 ﻿@namespace Masa.Blazor
 @using Masa.Blazor.Components.VideoFeeder
 @inherits MasaComponentBase
+@inject I18n I18n
 
 <div class="@GetClass()"
      style="@GetStyle()"
@@ -25,14 +26,14 @@
                     <Player Data="@item"
                             Index="@index"
                             @bind-Muted="@_muted"
-                            PlaybackRate="@_playbackRate"
                             RotateFullscreen="@RotateFullscreen"
                             OnFullscreen="@HandleOnFullscreen"
                             OnLongPress="@HandleOnLongPress"
                             OnEnded="@HandleOnEnded"
-                            ActionsContent="@ActionsContent"
+                            ActionsContent="@SideActionsContent"
                             TopContent="@TopContent"
-                            BottomContent="@BottomContent"/>
+                            BottomContent="@BottomContent"
+                            @ref="item.Player"/>
                 </MSwiperSlide>
             }
         </MSwiper>
@@ -40,11 +41,16 @@
 
     <MBottomSheet @bind-Value="_sheet">
         <MList Dense Slim>
-            <MListItem Link PrependIcon="mdi-cast-audio-variant" Title="转音频播放">
-            </MListItem>
-            <MListItem PrependIcon="mdi-play-speed" Title="倍数播放">
+            @BottomActionsContent
+            <MListItem Link
+                       PrependIcon="mdi-cast-audio-variant"
+                       Title="@ToggleModeText"
+                       OnClick="@ToggleMode"/>
+            <MListItem PrependIcon="mdi-play-speed"
+                       Title="@I18n.T("$masaBlazor.video-feeder.playbackRate")">
                 <MListItemAction>
-                    <MButtonGroup Value="_playbackRate" ValueChanged="@(val => _playbackRate = val.AsT2)"
+                    <MButtonGroup Value="_playbackRate"
+                                  ValueChanged="@SetPlaybackRate"
                                   ActiveClass="primary--text"
                                   Borderless
                                   Mandatory>
@@ -56,8 +62,18 @@
                     </MButtonGroup>
                 </MListItemAction>
             </MListItem>
-            <MListItem Link PrependIcon="mdi-download-box-outline" Title="下载视频"></MListItem>
-            <MListItem Link PrependIcon="mdi-playlist-play" Title="自动连播">
+
+            @if (OnDownload.HasDelegate)
+            {
+                <MListItem Link
+                           PrependIcon="mdi-download-box-outline"
+                           Title="@I18n.T("$masaBlazor.video-feeder.download")"
+                           OnClick="@OnDownload.InvokeAsync"/>
+            }
+
+            <MListItem Link
+                       PrependIcon="mdi-playlist-play"
+                       Title="@I18n.T("$masaBlazor.video-feeder.autoPlayNext")">
                 <MListItemAction>
                     <MSwitch @bind-Value="_autoPlayNext" Inset Dense/>
                 </MListItemAction>
@@ -65,3 +81,9 @@
         </MList>
     </MBottomSheet>
 </div>
+
+@code {
+
+    private string ToggleModeText => I18n.T(CurrentVideo?.Player?._isMusic is true ? "$masaBlazor.video-feeder.toVideo" : "$masaBlazor.video-feeder.toMusic");
+
+}

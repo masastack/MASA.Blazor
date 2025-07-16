@@ -1,4 +1,6 @@
-﻿using Masa.Blazor.JSComponents.VideoFeeder;
+﻿using System.Diagnostics.CodeAnalysis;
+using Masa.Blazor.Components.VideoFeeder;
+using Masa.Blazor.JSComponents.VideoFeeder;
 
 namespace Masa.Blazor;
 
@@ -21,11 +23,31 @@ public partial class MVideoFeeder
 
     [Parameter] public EventCallback<FullscreenEventArgs> OnFullscreen { get; set; }
 
-    [Parameter] public RenderFragment<Video>? ActionsContent { get; set; }
+    /// <summary>
+    /// Event callback when clicking the "Download" item in the action menu.
+    /// Only show when the parameter is set.
+    /// </summary>
+    [Parameter] public EventCallback<Video> OnDownload { get; set; }
 
+    /// <summary>
+    /// The slot for right action buttons.
+    /// </summary>
+    [Parameter] public RenderFragment<Video>? SideActionsContent { get; set; }
+
+    /// <summary>
+    /// The slot for top content. Used to display video title, subtitle, etc.
+    /// </summary>
     [Parameter] public RenderFragment<Video>? TopContent { get; set; }
 
+    /// <summary>
+    /// The slot for bottom content. Used to display video title, subtitle, etc.
+    /// </summary>
     [Parameter] public RenderFragment<Video>? BottomContent { get; set; }
+
+    /// <summary>
+    /// The slot for bottom sheet actions. Accepts the <see cref="MListItem"/> components.
+    /// </summary>
+    [Parameter] public RenderFragment<Video>? BottomActionsContent { get; set; }
 
     private static readonly Block Block = new("m-video-feeder");
     private readonly ModifierBuilder _blockBuilder = Block.CreateModifierBuilder();
@@ -37,8 +59,10 @@ public partial class MVideoFeeder
     private bool _muted = true;
     private bool _autoPlayFirstVideo;
     private bool _fullscreen;
-    private double _playbackRate = 1.0;
+    private StringNumber? _playbackRate = 1.0;
     private bool _autoPlayNext;
+
+    private Video? CurrentVideo => _index >= 0 && _index < Videos.Count ? Videos[_index] : null;
 
     protected override void OnInitialized()
     {
@@ -123,5 +147,25 @@ public partial class MVideoFeeder
     private void HandleOnLongPress()
     {
         _sheet = true;
+    }
+
+    private async Task SetPlaybackRate(StringNumber? value)
+    {
+        _playbackRate = value!;
+
+        if (CurrentVideo?.Player is not null)
+        {
+            await CurrentVideo.Player.SetPlaybackRateAsync(_playbackRate.AsT2);
+        }
+    }
+
+    private async Task ToggleMode()
+    {
+        _sheet = false;
+
+        if (CurrentVideo?.Player is not null)
+        {
+            await CurrentVideo.Player.ToggleModeAsync();
+        }
     }
 }

@@ -2,6 +2,7 @@
 @using Masa.Blazor.Components.Xgplayer.Plugins
 @using Masa.Blazor.Components.Xgplayer.Plugins.Controls
 @inherits MasaComponentBase
+@inject I18n I18n
 
 @if (_available)
 {
@@ -30,14 +31,14 @@
     <MThemeProvider WithBackground
                     Class="@ControlsElement.ToString()"
                     Theme="dark">
-        @if (_fullscreenChipStyle != null)
+        @if (!_isMusic && _fullscreenChipStyle != null)
         {
             <MChip Class="@ControlsFullscreenElement.ToString()"
                    Outlined
                    Small
                    OnClick="@GetFullscreenAsync"
                    Style="@_fullscreenChipStyle">
-                全屏播放
+                @I18n.T("$masaBlazor.video-feeder.fullscreen")
             </MChip>
         }
         <div class="@ControlsTopElement">

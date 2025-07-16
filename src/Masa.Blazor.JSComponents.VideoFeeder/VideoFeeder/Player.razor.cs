@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Masa.Blazor.Components.Xgplayer.Plugins;
+﻿using Masa.Blazor.Components.Xgplayer.Plugins;
 using Masa.Blazor.JSComponents.VideoFeeder;
 using Masa.Blazor.JSComponents.Xgplayer;
 using Masa.Blazor.JSModules;
@@ -20,8 +19,6 @@ public partial class Player : MasaComponentBase
 
     [Parameter] public EventCallback<bool> MutedChanged { get; set; }
 
-    [Parameter] public double PlaybackRate { get; set; } = 1;
-
     [Parameter] public bool RotateFullscreen { get; set; }
 
     [Parameter] public EventCallback<FullscreenEventArgs> OnFullscreen { get; set; }
@@ -37,7 +34,10 @@ public partial class Player : MasaComponentBase
     [Parameter] public RenderFragment<Video>? BottomContent { get; set; }
 
     private static readonly string[] IgnoredXgplayerPlugins =
-        [BuiltInPlugin.Play, BuiltInPlugin.PlaybackRate, BuiltInPlugin.CssFullscreen, BuiltInPlugin.Volume];
+    [
+        BuiltInPlugin.Play, BuiltInPlugin.PlaybackRate, BuiltInPlugin.CssFullscreen, BuiltInPlugin.Volume,
+        BuiltInPlugin.MusicBackward, BuiltInPlugin.MusicPrev, BuiltInPlugin.MusicForward, BuiltInPlugin.MusicNext
+    ];
 
     private static readonly Block _block = new("m-video-feeder");
     private static readonly Element ControlsElement = _block.Element("controls");
@@ -65,6 +65,7 @@ public partial class Player : MasaComponentBase
     private bool _prevMuted;
     private double _playbackRate = 1;
     private MXgplayer? _xgplayer;
+    internal bool _isMusic;
 
     /// <summary>
     /// due to swiper virtual mode, the player may not be available
@@ -89,10 +90,7 @@ public partial class Player : MasaComponentBase
 
     private async Task OnReady()
     {
-        Console.Out.WriteLine("[Masa.Blazor.JSComponents.VideoFeeder] Player.OnReady() " + Index);
-
         await ToggleMute();
-        await SetPlaybackRateAsync();
 
         await RegisterLongPressEventAsync();
     }
@@ -132,12 +130,6 @@ public partial class Player : MasaComponentBase
         {
             _prevMuted = Muted;
             _ = ToggleMute();
-        }
-
-        if (Math.Abs(_playbackRate - PlaybackRate) > 0)
-        {
-            _playbackRate = PlaybackRate;
-            _ = SetPlaybackRateAsync();
         }
 
         var playing = _internalPlaying;
@@ -189,9 +181,23 @@ public partial class Player : MasaComponentBase
         await _xgplayer.InvokeVoidAsync("getRotateFullscreen");
     }
 
-    private async Task SetPlaybackRateAsync()
+    internal async Task SetPlaybackRateAsync(double playbackRate)
     {
-        await _xgplayer.SetPropAsync("playbackRate", PlaybackRate);
+        await _xgplayer.SetPropAsync("playbackRate", playbackRate);
+    }
+
+    internal async Task ToggleModeAsync()
+    {
+        _isMusic = !_isMusic;
+
+        if (_isMusic)
+        {
+            await _xgplayer.ToMusicPlayerAsync();
+        }
+        else
+        {
+            await _xgplayer.ToVideoPlayerAsync();
+        }
     }
 
     protected override async ValueTask DisposeAsyncCore()
