@@ -9,7 +9,7 @@
   "components/window/touch.js": "components/window/touch-f9d2ba92.js",
   "mixins/activatable/index.js": "mixins/activatable/index-55deb3a9.js",
   "mixins/intersect/index.js": "mixins/intersect/index-23f28932.js",
-  "mixins/long-press/index.js": "mixins/long-press/index-231deb5b.js",
+  "mixins/long-press/index.js": "mixins/long-press/index-07722781.js",
   "mixins/outside-click/index.js": "mixins/outside-click/index-b6f528bb.js",
   "mixins/resize/index.js": "mixins/resize/index-07a0c3f6.js"
 }

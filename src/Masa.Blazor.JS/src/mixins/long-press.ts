@@ -29,10 +29,6 @@ export function register(s: HTMLElement | string, dotnet: DotNet.DotNetObject) {
       }
 
       const element = e.target as HTMLElement;
-      console.log(
-        `Long press started on ${eventType} event with target:`,
-        element
-      );
 
       let timer: ReturnType<typeof setTimeout>;
       const longPressDelay = 500; // 长按阈值（毫秒）
@@ -76,11 +72,6 @@ export function register(s: HTMLElement | string, dotnet: DotNet.DotNetObject) {
       const cancelPress = function (event?: MouseEvent | TouchEvent) {
         isPressed = false;
         clearTimeout(timer);
-
-        console.log(
-          `Long press cancelled on ${eventType} event with target:`,
-          event?.target
-        );
 
         // 清理所有监听器
         if (eventType === "mouse") {
