@@ -33,4 +33,6 @@ public class SwiperOptions
     public bool Virtual { get; set; }
     
     public bool CenteredSlides { get; set; }
+    
+    public bool TouchStartPreventDefault { get; set; }
 }

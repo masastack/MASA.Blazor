@@ -12,7 +12,7 @@ public class SortableJSObjectReference : JSObjectReferenceBase
         => JSObjectReference.InvokeAsync<List<string>>("invoke", "toArray");
 
     public ValueTask SortAsync(List<string> order, bool useAnimation)
-        => InvokeVoidAsync("sort", order, useAnimation);
+        => InvokeInstanceVoidAsync("sort", order, useAnimation);
     
     
 }

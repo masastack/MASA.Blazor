@@ -208,7 +208,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         base.RegisterWatchers(watcher);
 
         watcher.Watch<bool>(nameof(Disabled),
-            val => { _jsObjectReference?.InvokeVoidAsync("option", "disabled", val); });
+            val => { _jsObjectReference?.InvokeInstanceVoidAsync("option", "disabled", val); });
     }
 
     protected override void OnParametersSet()

@@ -6,6 +6,7 @@ using Masa.Blazor.Components.ScrollToTarget;
 using Masa.Blazor.Components.Sortable;
 using Masa.Blazor.Components.Transition;
 using Masa.Blazor.JSModules;
+using Masa.Blazor.JSModules.LongPress;
 using Masa.Blazor.Mixins.Activatable;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -80,6 +81,7 @@ public static class ServiceCollectionExtensions
         services.TryAddScoped<DrawflowJSModule>();
         services.TryAddScoped<IntersectJSModule>();
         services.TryAddScoped<IResizeJSModule, ResizeJSModule>();
+        services.TryAddScoped<ILongPressJSModule, LongPressJSModule>();
         services.TryAddScoped<ScrollToTargetJSModule>();
         services.TryAddScoped<SortableJSModule>();
 

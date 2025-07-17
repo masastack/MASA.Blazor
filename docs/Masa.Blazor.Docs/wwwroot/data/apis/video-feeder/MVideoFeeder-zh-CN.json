@@ -1,0 +1,22 @@
+{
+  "props": {
+    "items": "数据源，由于 MSwiper 组件虚拟化特性的缺陷，只能一次性提供所有数据，无法增量更新。",
+    "itemUrl": "视频地址。",
+    "itemPoster": "视频封面地址。",
+    "height": "视频区域高度，默认 100vh。",
+    "width": "视频区域宽度，默认 100%。",
+    "defaultAutoplayNext": "是否默认自动播放下一个视频。",
+    "autoplay": "是否自动播放当前视频。",
+    "rotateFullscreen": "全屏时是否自动旋转，常用于移动端横屏效果。"
+  },
+  "events": {
+    "OnFullscreen": "全屏状态变化时触发，参数为当前视频及全屏状态。",
+    "OnDownload": "点击下载按钮时触发，参数为当前视频项。"
+  },
+  "contents": {
+    "sideActionsContent": "右侧操作按钮插槽。",
+    "topContent": "顶部内容插槽，可用于展示视频标题、字幕等。",
+    "bottomContent": "底部内容插槽，可用于展示视频标题、字幕等。",
+    "bottomActionsContent": "底部操作栏插槽，支持自定义 <MListItem> 组件。"
+  }
+}

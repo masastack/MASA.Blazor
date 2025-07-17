@@ -18980,38 +18980,22 @@ html.overflow-y-hidden {
 .m-btn.m-btn--outlined.m-btn--text {
     border-color: rgba(var(--m-theme-outline));
 }
+.m-btn:focus-visible::before {
+    opacity: var(--m-focus-opacity);
+}
+.m-btn.m-btn--active::before {
+    opacity: var(--m-activated-opacity);
+}
+.m-btn.m-btn--active:focus-visible::before {
+    opacity: calc(var(--m-activated-opacity) + var(--m-hover-opacity));
+}
 @media (hover: hover) {
     .m-btn:hover::before {
         opacity: var(--m-hover-opacity);
     }
 
-    .m-btn:focus-visible::before {
-        opacity: var(--m-focus-opacity);
-    }
-
-    .m-btn.m-btn--active:hover::before, .m-btn.m-btn--active::before {
+    .m-btn.m-btn--active:hover::before {
         opacity: var(--m-activated-opacity);
-    }
-
-    .m-btn.m-btn--active:focus-visible::before {
-        opacity: calc(var(--m-activated-opacity) + var(--m-hover-opacity));
-    }
-}
-@media (hover: none) {
-    .m-btn:hover::before {
-        opacity: var(--m-hover-opacity);
-    }
-
-    .m-btn:focus-visible::before {
-        opacity: var(--m-focus-opacity);
-    }
-
-    .m-btn.m-btn--active:hover::before, .m-btn.m-btn--active::before {
-        opacity: var(--m-activated-opacity);
-    }
-
-    .m-btn.m-btn--active:focus-visible::before {
-        opacity: calc(var(--m-activated-opacity) + var(--m-hover-opacity));
     }
 }
 
@@ -20904,6 +20888,10 @@ html.overflow-y-hidden {
     font-size: 0.75rem;
 }
 
+.m-list--dense .m-list-item__action, .m-list-item--dense .m-list-item__action {
+    margin: 0;
+}
+
 .m-list-item__avatar {
     align-self: center;
     justify-content: flex-start;
@@ -21113,13 +21101,11 @@ html.overflow-y-hidden {
 .m-list-item:not(.m-list-item--disabled) .m-list-item__action-text {
     opacity: var(--m-medium-emphasis-opacity);
 }
-.m-list-item:hover::before {
-    opacity: var(--m-hover-opacity);
-}
+
 .m-list-item:focus-visible::before {
     opacity: var(--m-focus-opacity);
 }
-.m-list-item--active:hover::before, .m-list-item--active::before {
+.m-list-item--active::before {
     opacity: var(--m-activated-opacity);
 }
 .m-list-item--active:focus-visible::before {
@@ -21127,6 +21113,14 @@ html.overflow-y-hidden {
 }
 .m-list-item.m-list-item--highlighted::before {
     opacity: var(--m-highlight-opacity);
+}
+@media (hover: hover) {
+    .m-list-item:hover::before {
+        opacity: var(--m-hover-opacity);
+    }
+    .m-list-item--active:hover::before {
+        opacity: var(--m-activated-opacity);
+    }
 }
 
 .m-list .m-list-item--active {

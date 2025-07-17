@@ -1,5 +1,9 @@
 import { parseMouseEvent } from "./EventType";
-import { registerExtraDropEvent, registerExtraMouseEvent, registerExtraTouchEvent } from "./extra";
+import {
+  registerExtraDropEvent,
+  registerExtraMouseEvent,
+  registerExtraTouchEvent,
+} from "./extra";
 
 export function registerExtraEvents() {
   registerExtraMouseEvent("exmousedown", "mousedown");
@@ -26,7 +30,7 @@ function registerAuxclickEvent() {
   if (Blazor) {
     Blazor.registerCustomEventType("auxclick", {
       browserEventName: "auxclick",
-      createEventArgs: parseMouseEvent
+      createEventArgs: parseMouseEvent,
     });
   }
 }

@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\src\Masa.Blazor.JSComponents.Gridstack\Masa.Blazor.JSComponents.Gridstack.csproj" />
     <ProjectReference Include="..\..\src\Masa.Blazor.JSComponents.PdfJS\Masa.Blazor.JSComponents.PdfJS.csproj" />
     <ProjectReference Include="..\..\src\Masa.Blazor.JSComponents.Swiper\Masa.Blazor.JSComponents.Swiper.csproj" />
+    <ProjectReference Include="..\..\src\Masa.Blazor.JSComponents.VideoFeeder\Masa.Blazor.JSComponents.VideoFeeder.csproj" />
     <ProjectReference Include="..\..\src\Masa.Blazor.JSComponents.Xgplayer\Masa.Blazor.JSComponents.Xgplayer.csproj" />
     <ProjectReference Include="..\..\src\Masa.Blazor.MobileComponents\Masa.Blazor.MobileComponents.csproj" />
     <ProjectReference Include="..\Masa.Docs.Core\Masa.Docs.Core.csproj" />

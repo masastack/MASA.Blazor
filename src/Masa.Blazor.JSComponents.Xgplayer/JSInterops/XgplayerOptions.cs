@@ -1,5 +1,8 @@
 ﻿using Masa.Blazor.Components.Xgplayer.Plugins;
 using Masa.Blazor.Components.Xgplayer.Plugins.Controls;
+using Masa.Blazor.Components.Xgplayer.Plugins.CssFullscreen;
+using Masa.Blazor.Components.Xgplayer.Plugins.DynamicBg;
+using Masa.Blazor.Components.Xgplayer.Plugins.Mobile;
 using Masa.Blazor.Components.Xgplayer.Plugins.Play;
 using Masa.Blazor.Components.Xgplayer.Plugins.Start;
 using Masa.Blazor.Components.Xgplayer.Plugins.Time;
@@ -39,12 +42,12 @@ public class XgplayerOptions
     /// <summary>
     /// Default playback rate for media element, reference values: 0.5, 0.75, 1, 1.5, 2
     /// </summary>
-    public float DefaultPlaybackRate { get; set; } = 1;
+    public double DefaultPlaybackRate { get; set; } = 1;
 
     /// <summary>
     /// Default volume for media element, reference values: 0 ~ 1
     /// </summary>
-    public float Volume { get; set; } = 0.6f;
+    public IXgplayerVolume? Volume { get; set; }
 
     /// <summary>
     /// Determine whether to play in a loop
@@ -118,6 +121,11 @@ public class XgplayerOptions
     /// </summary>
     public bool MarginControls { get; set; }
 
+    public string? FullscreenTarget { get; set; }
+
+    [JsonInclude]
+    internal CommonStyle? CommonStyle { get; set; }
+
     /// <summary>
     /// A list of plugins to be ignored.
     /// You can find all built-in plugins in <see cref="BuiltInPlugin"/>.
@@ -136,6 +144,16 @@ public class XgplayerOptions
     public IXgplayerTime? Time { get; set; }
 
     public IXgplayerStart? Start { get; set; }
+
+    public IXgplayerMobile? Mobile { get; set; }
+
+    public IXgplayerCssFullscreen? CssFullscreen { get; set; }
+
+    public IXgplayerFullscreen? Fullscreen { get; set; }
+
+    public IXgplayerDynamicBg? DynamicBg { get; set; }
+
+    public IXgplayerDownload? Download { get; set; }
 }
 
 public enum DomEventType
@@ -228,4 +246,39 @@ public class Thumbnail
     /// Width for video frame in seperate thumbnail picture by px
     /// </summary>
     public int Width { get; set; }
+}
+
+internal class CommonStyle
+{
+    public string? ProgressColor { get; set; }
+
+    public string? PlayedColor { get; set; }
+
+    public string? CachedColor { get; set; }
+
+    public string? VolumeColor { get; set; }
+
+    public SliderBtnStyle? SliderBtnStyle { get; set; }
+
+    public CommonStyle(string? progressColor, string? playedColor, string? cachedColor, string? volumeColor,
+        string? sliderBtnBackground, string? sliderBtnShadow, ThemeOptions themeOptions)
+    {
+        var primary = themeOptions.InversePrimary;
+
+        PlayedColor = playedColor ?? primary;
+        VolumeColor = volumeColor ?? primary;
+        ProgressColor = progressColor;
+        CachedColor = cachedColor;
+        SliderBtnStyle = new SliderBtnStyle()
+        {
+            Background = sliderBtnBackground ?? primary + "4e",
+            BoxShadow = sliderBtnShadow ?? "0 0 1px " + primary + "62"
+        };
+    }
+}
+
+internal class SliderBtnStyle
+{
+    public string? Background { get; set; }
+    public string? BoxShadow { get; set; }
 }

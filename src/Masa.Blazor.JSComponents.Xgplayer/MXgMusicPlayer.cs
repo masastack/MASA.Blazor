@@ -2,11 +2,15 @@
 using Masa.Blazor.Components.Xgplayer;
 using Masa.Blazor.Components.Xgplayer.Plugins;
 using Masa.Blazor.Components.Xgplayer.Plugins.Controls;
+using Masa.Blazor.Components.Xgplayer.Plugins.CssFullscreen;
+using Masa.Blazor.Components.Xgplayer.Plugins.DynamicBg;
+using Masa.Blazor.Components.Xgplayer.Plugins.Mobile;
 using Masa.Blazor.Components.Xgplayer.Plugins.Play;
 using Masa.Blazor.Components.Xgplayer.Plugins.Start;
 using Masa.Blazor.Components.Xgplayer.Plugins.Time;
 using Masa.Blazor.Core;
 using Masa.Blazor.Extensions;
+using Masa.Blazor.JSComponents.Xgplayer;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.JSInterop;
 
@@ -15,6 +19,8 @@ namespace Masa.Blazor;
 public class MXgMusicPlayer : MasaComponentBase, IXgplayer
 {
     [Inject] private I18n I18n { get; set; } = null!;
+
+    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
     /// <summary>
     /// Media resource URL, when the URL is in the form of an array,
@@ -42,12 +48,12 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     /// <summary>
     /// Default playback rate for a media element, reference values: 0.5, 0.75, 1, 1.5, 2
     /// </summary>
-    [Parameter] [MasaApiParameter(1)] public float DefaultPlaybackRate { get; set; } = 1;
+    [Parameter] [MasaApiParameter(1)] public double DefaultPlaybackRate { get; set; } = 1;
 
     /// <summary>
     /// Default volume for media element, reference values: 0 ~ 1
     /// </summary>
-    [Parameter] [MasaApiParameter(0.6)] public float Volume { get; set; } = 0.6f;
+    [Parameter] [MasaApiParameter(0.6)] public double Volume { get; set; } = 0.6;
 
     /// <summary>
     /// Determine whether to play in a loop
@@ -100,16 +106,61 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     /// </summary>
     [Parameter] public EventCallback OnFullscreenTouchend { get; set; }
 
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback<VideoMetadata> OnVideoMetadataLoaded { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback<VideoSize> OnVideoResize { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback OnPlay { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback OnPause { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback OnError { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback OnEnded { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback OnReady { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? ProgressColor { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? PlayedColor { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? CachedColor { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? VolumeColor { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? SliderBtnBackground { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? SliderBtnShadow { get; set; }
+
     private CancellationTokenSource? _cancellationTokenSource;
     private bool _hasFirstRender;
     private XgplayerUrl? _prevUrl;
     private IJSObjectReference? _importJSObjectReference;
     private DotNetObjectReference<XgplayerJSInteropHandle>? _jsInteropHandle;
 
-    private IXgplayerControls? _controls;
-    private IXgplayerPlay? _play;
-    private IXgplayerTime? _time;
-    private IXgplayerStart? _start;
+    private IXgplayerControls? _controlsPlugin;
+    private IXgplayerPlay? _playPlugin;
+    private IXgplayerTime? _timePlugin;
+    private IXgplayerStart? _startPlugin;
+    private IXgplayerMobile? _mobilePlugin;
+    private IXgplayerCssFullscreen? _cssFullscreenPlugin;
+    private IXgplayerFullscreen? _fullscreenPlugin;
+    private IXgplayerVolume? _volumePlugin;
+    private IXgplayerDynamicBg? _dynamicBgPlugin;
+    private IXgplayerDownload? _downloadPlugin;
 
     private string ComputedLang
     {
@@ -174,10 +225,11 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     protected override void BuildRenderTree(RenderTreeBuilder builder)
     {
         builder.OpenElement(0, "div");
-        builder.AddAttribute(1, "class", GetClass());
-        builder.AddAttribute(2, "style", GetStyle());
-        builder.AddElementReferenceCapture(3, elementReference => Ref = elementReference);
-        builder.AddContent(4, RenderChildContent);
+        builder.AddMultipleAttributes(1, Attributes);
+        builder.AddAttribute(2, "class", GetClass());
+        builder.AddAttribute(3, "style", GetStyle());
+        builder.AddElementReferenceCapture(4, elementReference => Ref = elementReference);
+        builder.AddContent(5, RenderChildContent);
         builder.CloseElement();
 
         void RenderChildContent(RenderTreeBuilder nextBuilder)
@@ -210,10 +262,13 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
 
     private async Task CreateXgplayerAsync()
     {
-       _importJSObjectReference = await Js.InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor.JSComponents.Xgplayer/xgplayer.js")
+        _importJSObjectReference = await Js
+            .InvokeAsync<IJSObjectReference>("import", "./_content/Masa.Blazor.JSComponents.Xgplayer/xgplayer.js")
             .ConfigureAwait(false);
-       
-        var jsObjectReference = await _importJSObjectReference.InvokeAsync<IJSObjectReference>("init", Ref.GetSelector(), Url, GenOptions(), _jsInteropHandle);
+
+        var jsObjectReference =
+            await _importJSObjectReference.InvokeAsync<IJSObjectReference>("init", Ref.GetSelector(), Url, GenOptions(),
+                _jsInteropHandle);
         XgplayerJSObjectReference = new XgplayerJSObjectReference(jsObjectReference);
     }
 
@@ -226,7 +281,6 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             Autoplay = Autoplay,
             AutoplayMuted = AutoplayMuted,
             DefaultPlaybackRate = DefaultPlaybackRate,
-            Volume = Volume,
             Loop = Loop,
             StartTime = StartTime,
             Lang = ComputedLang,
@@ -234,11 +288,19 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             ProgressDots = ProgressDots,
             MarginControls = MarginControls,
             Ignores = Ignores,
+            CommonStyle = new CommonStyle(ProgressColor, PlayedColor, CachedColor, VolumeColor, SliderBtnBackground,
+                SliderBtnShadow, MasaBlazor.Theme.Themes.Dark),
             Music = new XgplayerMusic(), // indicate that this is a music player
-            Controls = _controls,
-            Play = _play,
-            Time = _time,
-            Start = _start,
+            Controls = _controlsPlugin,
+            Play = _playPlugin,
+            Time = _timePlugin,
+            Start = _startPlugin,
+            Mobile = _mobilePlugin,
+            CssFullscreen = _cssFullscreenPlugin,
+            Fullscreen = _fullscreenPlugin,
+            Volume = _volumePlugin ?? new MXgplayerVolume { Default = Volume },
+            DynamicBg = _dynamicBgPlugin,
+            Download = _downloadPlugin,
         };
     }
 
@@ -247,16 +309,34 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
         switch (plugin)
         {
             case IXgplayerControls controls:
-                _controls = controls;
+                _controlsPlugin = controls;
                 break;
             case IXgplayerPlay play:
-                _play = play;
+                _playPlugin = play;
                 break;
             case IXgplayerTime time:
-                _time = time;
+                _timePlugin = time;
                 break;
             case IXgplayerStart start:
-                _start = start;
+                _startPlugin = start;
+                break;
+            case IXgplayerMobile mobile:
+                _mobilePlugin = mobile;
+                break;
+            case IXgplayerCssFullscreen cssFullscreen:
+                _cssFullscreenPlugin = cssFullscreen;
+                break;
+            case IXgplayerFullscreen fullscreen:
+                _fullscreenPlugin = fullscreen;
+                break;
+            case IXgplayerVolume volume:
+                _volumePlugin = volume;
+                break;
+            case IXgplayerDynamicBg dynamicBg:
+                _dynamicBgPlugin = dynamicBg;
+                break;
+            case IXgplayerDownload download:
+                _downloadPlugin = download;
                 break;
         }
 
@@ -289,7 +369,33 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     [MasaApiPublicMethod]
     public async Task InvokeVoidAsync(string identity, params object[] args)
     {
-        await XgplayerJSObjectReference.InvokeVoidAsync(identity, args);
+        await XgplayerJSObjectReference.InvokeInstanceVoidAsync(identity, args);
+    }
+
+    [MasaApiPublicMethod]
+    public async Task SetPropAsync(string prop, object value)
+    {
+        await XgplayerJSObjectReference.SetPropAsync(prop, value);
+    }
+
+    /// <summary>
+    /// Toggle play state of the player.
+    /// </summary>
+    /// <param name="force">Force set the play state.</param>
+    [MasaApiPublicMethod]
+    public async Task TogglePlayAsync(bool? force = null)
+    {
+        await XgplayerJSObjectReference.TogglePlayAsync(force);
+    }
+
+    /// <summary>
+    /// Toggle the muted state of the player.
+    /// </summary>
+    /// <param name="force">Force set a muted state.</param>
+    [MasaApiPublicMethod]
+    public async Task ToggleMutedAsync(bool? force = null)
+    {
+        await XgplayerJSObjectReference.ToggleMutedAsync(force);
     }
 
     private bool IsZhHant(CultureInfo culture)

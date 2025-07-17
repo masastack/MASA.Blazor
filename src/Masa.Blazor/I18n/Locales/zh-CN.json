@@ -104,7 +104,7 @@
         "year": "每年"
       },
       "fromTo": "周期从{0}{2}到{1}{2}",
-      "startFromAndExec":"从{0}{2}开始，每{1}{2}执行一次",
+      "startFromAndExec": "从{0}{2}开始，每{1}{2}执行一次",
       "weekDayOfWeek": "第{0}周的{1}",
       "nearestWorkDayPerMonth": "每月{0}号最近的工作日",
       "lastDayOfPerMonth": "每月最后一天",
@@ -160,7 +160,7 @@
       "Wednesday": "三",
       "Thursday": "四",
       "Friday": "五",
-      "Saturday":  "六"
+      "Saturday": "六"
     },
     "mobileCascader": {
       "pleaseSelect": "请选择"
@@ -175,6 +175,14 @@
       "next": "下一步",
       "prev": "上一步",
       "done": "完成"
+    },
+    "video-feeder": {
+      "toMusic": "转音频播放",
+      "toVideo": "转视频播放",
+      "playbackRate": "倍数播放",
+      "download": "下载视频",
+      "autoPlayNext": "自动播放",
+      "fullScreen": "全屏播放"
     }
   }
 }

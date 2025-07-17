@@ -59,6 +59,9 @@ public partial class MSwiper : MasaComponentBase
     /// </summary>
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.10.0")] public bool Virtual { get; set; }
 
+    [Parameter] [MasaApiParameter(true, ReleasedIn = "v1.11.0")]
+    public bool TouchStartPreventDefault { get; set; } = true;
+
     private SwiperJsModule? _swiperJSModule;
     private DotNetObjectReference<object>? _swiperInteropHandle;
     private SwiperJSObjectReferenceProxy? _swiperProxy;
@@ -158,13 +161,21 @@ public partial class MSwiper : MasaComponentBase
                 SlidesPerView = SlidesPerView,
                 Virtual = Virtual,
                 CenteredSlides = CenteredSlides,
+                TouchStartPreventDefault = TouchStartPreventDefault,
                 Autoplay = _autoplay?.GetOptions(),
                 Pagination = _pagination?.GetOptions($"{rootSelector} .swiper-pagination"),
                 Navigation = _navigation?.GetOptions($"{rootSelector} .swiper-button-next", $"{rootSelector} .swiper-button-prev")
             };
 
-            _swiperJSModule ??= new SwiperJsModule(Js);
-            _swiperProxy = await _swiperJSModule.Init(Ref, options, _swiperInteropHandle);
+            try
+            {
+                _swiperJSModule ??= new SwiperJsModule(Js);
+                _swiperProxy = await _swiperJSModule.Init(Ref, options, _swiperInteropHandle);
+            }
+            catch (JSException)
+            {
+                // ignored
+            }
 
             await SliderToIndexAsync(0);
         }, 16, _ctsForInit.Token);
@@ -229,7 +240,7 @@ public partial class MSwiper : MasaComponentBase
         _ctsForUpdateSlides = new CancellationTokenSource();
 
         await RunTaskInMicrosecondsAsync(
-            () => _ = _swiperProxy.InvokeVoidAsync("update"),
+            () => _ = _swiperProxy.InvokeInstanceVoidAsync("update"),
             16,
             _ctsForUpdateSlides.Token);
     }
@@ -252,6 +263,6 @@ public partial class MSwiper : MasaComponentBase
             return;
         }
 
-        await _swiperProxy.InvokeVoidAsync(funcName, args);
+        await _swiperProxy.InvokeInstanceVoidAsync(funcName, args);
     }
 }

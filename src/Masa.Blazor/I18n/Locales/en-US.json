@@ -166,6 +166,14 @@
       "next": "Next →",
       "prev": "← Previous",
       "done": "Done"
+    },
+    "video-feeder": {
+      "toMusic": "To Audio",
+      "toVideo": "To Video",
+      "playbackRate": "Playback rate",
+      "download": "Download video",
+      "autoPlayNext": "Auto play next",
+      "fullScreen": "Full screen"
     }
   }
 }

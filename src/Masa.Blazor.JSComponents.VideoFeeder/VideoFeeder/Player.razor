@@ -1,0 +1,66 @@
+﻿@namespace Masa.Blazor.Components.VideoFeeder
+@using Masa.Blazor.Components.Xgplayer.Plugins
+@using Masa.Blazor.Components.Xgplayer.Plugins.Controls
+@inherits MasaComponentBase
+@inject I18n I18n
+@typeparam TItem
+
+@if (_available)
+{
+    <MXgplayer Poster="@Data.Poster"
+               Autoplay="@Autoplay"
+               AutoplayMuted
+               Loop="@Loop"
+               Url="@Data.Url"
+               Ignores="@IgnoredXgplayerPlugins"
+               Class="m-video-feeder__player"
+               Height="@("100%")"
+               Width="@("100%")"
+               OnReady="@OnReady"
+               OnFullscreenChange="@HandleOnFullscreen"
+               OnVideoResize="@HandleOnVideoResize"
+               OnEnded="@OnEnded"
+               data-player-index="@Index"
+               @ref="_xgplayer">
+        <MXgplayerStart ShowAtPause/>
+        <MXgplayerControls Mode="ControlsMode.Flex"/>
+        <MXgplayerVolume Default="1f"/>
+        <MXgplayerDynamicBg Disable="@(!DynamicBg)"/>
+        <MXgplayerFullscreen RotateFullscreen="@RotateFullscreen" NeedBackIcon/>
+    </MXgplayer>
+
+    <MThemeProvider WithBackground
+                    Class="@ControlsElement.ToString()"
+                    Theme="dark">
+        @if (!_isMusic && _fullscreenChipStyle != null)
+        {
+            <MChip Class="@ControlsFullscreenElement.ToString()"
+                   Outlined
+                   Small
+                   OnClick="@GetFullscreenAsync"
+                   Style="@_fullscreenChipStyle">
+                @I18n.T("$masaBlazor.video-feeder.fullscreen")
+            </MChip>
+        }
+        <div class="@ControlsTopElement">
+            @TopContent?.Invoke(Data.Item)
+        </div>
+        <div class="@ControlsBottomElement">
+            @BottomContent?.Invoke(Data.Item)
+        </div>
+        <div class="@ControlsRightElement">
+            <MDefaultsProvider Defaults="@_rightActionDefaults">
+                @ActionsContent?.Invoke(Data.Item)
+                <MToggle Value="@GlobalMuted"
+                         ValueChanged="@HandleOnGlobalMutedChange"
+                         DataOn="@("mdi-volume-off")"
+                         Dataoff="@("mdi-volume-high")">
+                    <MButton IconName="@context.Data"
+                             Large
+                             OnClick="@context.Toggle"
+                             OnClickStopPropagation/>
+                </MToggle>
+            </MDefaultsProvider>
+        </div>
+    </MThemeProvider>
+}

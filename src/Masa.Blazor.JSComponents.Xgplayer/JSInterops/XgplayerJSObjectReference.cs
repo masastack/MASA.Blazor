@@ -1,18 +1,15 @@
 ﻿using Masa.Blazor.Components.Xgplayer;
+using Masa.Blazor.JSComponents.Xgplayer;
 using Masa.Blazor.JSModules;
 using Microsoft.JSInterop;
 
 namespace Masa.Blazor;
 
-public class XgplayerJSObjectReference : JSObjectReferenceBase
+public class XgplayerJSObjectReference(IJSObjectReference jsObjectReference) : JSObjectReferenceBase(jsObjectReference)
 {
-    public XgplayerJSObjectReference(IJSObjectReference jsObjectReference) : base(jsObjectReference)
-    {
-    }
-
     public async ValueTask UpdateUrlAsync(XgplayerUrl url)
     {
-        await InvokeVoidAsync("playNext", new { url });
+        await InvokeInstanceVoidAsync("playNext", new { url });
     }
 
     public async ValueTask<XgplayerPropsAndStates> GetPropsAndStatesAsync()
@@ -20,15 +17,31 @@ public class XgplayerJSObjectReference : JSObjectReferenceBase
         return await JSObjectReference.InvokeAsync<XgplayerPropsAndStates>("getPropsAndStates");
     }
 
-    public async ValueTask SwitchToMusicAsync(XgplayerUrl url)
+    public async ValueTask ToMusicPlayerAsync(string[]? ignores = null)
     {
-        await JSObjectReference.InvokeVoidAsync("switchMusic", url);
+        await JSObjectReference.InvokeVoidAsync("toMusic", (object?)ignores);
     }
 
-    public async ValueTask SwitchToVideoAsync(XgplayerUrl url)
+    public async ValueTask ToVideoPlayerAsync()
     {
-        await JSObjectReference.InvokeVoidAsync("switchVideo", url);
+        await JSObjectReference.InvokeVoidAsync("toVideo");
     }
+
+    public async Task TogglePlayAsync(bool? force = null)
+    {
+        await JSObjectReference.InvokeVoidAsync("togglePlay", force);
+    }
+
+    public async Task ToggleMutedAsync(bool? force = null)
+    {
+        await JSObjectReference.InvokeVoidAsync("toggleMuted", force);
+    }
+
+    public async Task SetPropAsync(string prop, object value)
+    {
+        await JSObjectReference.InvokeVoidAsync("setProp", prop, value);
+    }
+
 
     public async Task DestroyAsync()
     {

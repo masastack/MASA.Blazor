@@ -48,6 +48,9 @@ public class MXgplayer : MXgMusicPlayer
     /// </summary>
     [Parameter] public Thumbnail? Thumbnail { get; set; }
 
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? FullscreenTarget { get; set; }
+
     protected override IEnumerable<string> BuildComponentClass()
     {
         yield return "m-xgplayer";
@@ -70,6 +73,8 @@ public class MXgplayer : MXgMusicPlayer
         options.Thumbnail = Thumbnail;
         options.VideoAttributes = VideoAttributes;
 
+        options.FullscreenTarget = FullscreenTarget;
+
         return options;
     }
 
@@ -77,15 +82,22 @@ public class MXgplayer : MXgMusicPlayer
     {
     }
 
+    /// <summary>
+    /// Convert the current player to a music player.
+    /// </summary>
+    /// <param name="ignores">Override the ignore list of video player</param>
     [MasaApiPublicMethod]
-    public async Task SwitchToMusicAsync(XgplayerUrl url)
+    public async Task ToMusicPlayerAsync(string[]? ignores = null)
     {
-        await XgplayerJSObjectReference.SwitchToMusicAsync(url);
+        await XgplayerJSObjectReference.ToMusicPlayerAsync(ignores);
     }
 
+    /// <summary>
+    /// Convert the current player to a video player.
+    /// </summary>
     [MasaApiPublicMethod]
-    public async Task SwitchToVideoAsync(XgplayerUrl url)
+    public async Task ToVideoPlayerAsync()
     {
-        await XgplayerJSObjectReference.SwitchToVideoAsync(url);
+        await XgplayerJSObjectReference.ToVideoPlayerAsync();
     }
 }

@@ -3,9 +3,11 @@ title: Watermark（水印）
 desc: "给某个区域加上水印。"
 ---
 
-> This component is in [Masa.Blazor.SomethingSkia](https://www.nuget.org/packages/Masa.Blazor.SomethingSkia) package.
-
 ## 使用 {#usage}
+
+```shell
+dotnet add package Masa.Blazor.SomethingSkia
+```
 
 [//]: # (<watermark-usage></watermark-usage>)
 
