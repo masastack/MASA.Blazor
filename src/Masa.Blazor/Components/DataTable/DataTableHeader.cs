@@ -29,7 +29,11 @@ public class DataTableHeader
 
     public bool Divider { get; set; }
 
-    public string? Value { get; set; }
+    /// <summary>
+    /// The name of the property, used for getting the value of the item by reflection.
+    /// It's recommended to use <see cref="ValueExpression"/> instead of this property.
+    /// </summary>
+    public virtual string? Value { get; set; }
 
     public string? Text { get; set; }
 

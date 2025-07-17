@@ -17,6 +17,12 @@ related:
 
 ### 属性
 
+#### ValueExpression {released-on=v1.11.0}
+
+`DataTableHeader<TItem>.ValueExpression` 属性允许你指定一个表达式来获取数据表格的值。这对于在数据表格中使用复杂对象时非常有用。
+
+<masa-example file="Examples.components.data_tables.ValueExpression"></masa-example>
+
 #### 单元格省略 {released-on=v1.5.0}
 
 设置单元格的 `Width` 属性，并开启 `Ellipsis` 属性，可以让单元格内容超出时显示省略号。

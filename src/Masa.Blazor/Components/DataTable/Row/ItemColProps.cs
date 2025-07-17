@@ -7,7 +7,7 @@ public class ItemColProps<TItem>(DataTableHeader<TItem> header, TItem item)
     public TItem Item { get; } = item;
 
     /// <summary>
-    /// The value of current cell.
+    /// The value of the current cell.
     /// It's recommended to use <see cref="ValueContent"/>
     /// to render cell content as it has better compatibility.
     /// </summary>
@@ -26,7 +26,7 @@ public class ItemColProps<TItem>(DataTableHeader<TItem> header, TItem item)
                 return render.AsT1;
             }
 
-            return Header.ItemValue.Invoke(Item);
+            return Header.ItemValue?.Invoke(Item);
         }
     }
 

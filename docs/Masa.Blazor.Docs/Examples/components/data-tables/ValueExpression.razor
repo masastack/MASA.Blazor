@@ -1,0 +1,47 @@
+﻿<MDataTable Headers="_headers"
+            Items="_desserts"
+            ItemsPerPage="5"
+            Class="elevation-1">
+</MDataTable>
+
+@code {
+
+    private record Dessert(string? Name, DessertData Data);
+
+    private record DessertData(
+        int Calories,
+        double Fat,
+        int Carbs,
+        double Protein,
+        string Iron);
+
+    private List<DataTableHeader<Dessert>> _headers =
+    [
+        new("Dessert (100g serving)", d => d.Name)
+        {
+            Align = DataTableHeaderAlign.Start,
+            Sortable = false,
+        },
+
+        new("Calories", d => d.Data.Calories),
+        new("Fat (g)", d => d.Data.Fat),
+        new("Carbs (g)", d => d.Data.Carbs),
+        new("Protein (g)", d => d.Data.Protein),
+        new("Iron (%)", d => d.Data.Iron)
+    ];
+
+    private List<Dessert> _desserts =
+    [
+        new("Frozen Yogurt", new DessertData(159, 6.0, 24, 4.0, "1%")),
+        new("Ice cream sandwich", new DessertData(237, 9.0, 37, 4.3, "1%")),
+        new("Eclair", new DessertData(262, 16.0, 23, 6.0, "7%")),
+        new("Cupcake", new DessertData(305, 3.7, 67, 4.3, "8%")),
+        new("Gingerbread", new DessertData(356, 16.0, 49, 3.9, "16%")),
+        new("Jelly bean", new DessertData(375, 0.0, 94, 0.0, "0%")),
+        new("Lollipop", new DessertData(392, 0.2, 98, 0, "2%")),
+        new("Honeycomb", new DessertData(408, 3.2, 87, 6.5, "45%")),
+        new("Donut", new DessertData(452, 25.0, 51, 4.9, "22%")),
+        new("KitKat", new DessertData(518, 26.0, 65, 7, "6%"))
+    ];
+
+}
