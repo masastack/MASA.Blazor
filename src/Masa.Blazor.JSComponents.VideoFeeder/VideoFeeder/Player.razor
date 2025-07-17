@@ -3,14 +3,15 @@
 @using Masa.Blazor.Components.Xgplayer.Plugins.Controls
 @inherits MasaComponentBase
 @inject I18n I18n
+@typeparam TItem
 
 @if (_available)
 {
     <MXgplayer Poster="@Data.Poster"
-               Autoplay="@Data.Playing"
+               Autoplay="@Autoplay"
                AutoplayMuted
-               Loop
-               Url="@Data.Src"
+               Loop="@Loop"
+               Url="@Data.Url"
                Ignores="@IgnoredXgplayerPlugins"
                Class="m-video-feeder__player"
                Height="@("100%")"
@@ -24,7 +25,7 @@
         <MXgplayerStart ShowAtPause/>
         <MXgplayerControls Mode="ControlsMode.Flex"/>
         <MXgplayerVolume Default="1f"/>
-        <MXgplayerDynamicBg Disable="false"/>
+        <MXgplayerDynamicBg Disable="@(!DynamicBg)"/>
         <MXgplayerFullscreen RotateFullscreen="@RotateFullscreen" NeedBackIcon/>
     </MXgplayer>
 
@@ -42,16 +43,16 @@
             </MChip>
         }
         <div class="@ControlsTopElement">
-            @TopContent?.Invoke(Data)
+            @TopContent?.Invoke(Data.Item)
         </div>
         <div class="@ControlsBottomElement">
-            @BottomContent?.Invoke(Data)
+            @BottomContent?.Invoke(Data.Item)
         </div>
         <div class="@ControlsRightElement">
             <MDefaultsProvider Defaults="@_rightActionDefaults">
-                @ActionsContent?.Invoke(Data)
-                <MToggle Value="@Muted"
-                         ValueChanged="@MutedChanged"
+                @ActionsContent?.Invoke(Data.Item)
+                <MToggle Value="@GlobalMuted"
+                         ValueChanged="@HandleOnGlobalMutedChange"
                          DataOn="@("mdi-volume-off")"
                          Dataoff="@("mdi-volume-high")">
                     <MButton IconName="@context.Data"

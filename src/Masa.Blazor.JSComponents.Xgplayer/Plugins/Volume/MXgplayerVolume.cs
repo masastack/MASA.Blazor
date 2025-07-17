@@ -5,15 +5,6 @@ namespace Masa.Blazor;
 
 public class MXgplayerVolume : XgplayerPluginBase, IXgplayerVolume
 {
-    public MXgplayerVolume()
-    {
-    }
-
-    public MXgplayerVolume(double @default)
-    {
-        Default = @default;
-    }
-
     [Parameter] public PluginPosition Position { get; set; }
     [Parameter] public int Index { get; set; }
     [Parameter] public bool ShowValueLabel { get; set; }

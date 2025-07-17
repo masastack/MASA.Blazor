@@ -7,36 +7,47 @@ using Element = BemIt.Element;
 
 namespace Masa.Blazor.Components.VideoFeeder;
 
-public partial class Player : MasaComponentBase
+public partial class Player<TItem> : MasaComponentBase where TItem : notnull
 {
     [Inject] private ILongPressJSModule LongPressJSModule { get; set; } = null!;
 
-    [Parameter] [EditorRequired] public Video Data { get; set; } = null!;
+    [Parameter] [EditorRequired] public Video<TItem> Data { get; set; } = null!;
+
+    [Parameter] public bool Autoplay { get; set; }
 
     [Parameter] public int Index { get; set; }
 
-    [Parameter] public bool Muted { get; set; }
+    [Parameter] public bool GlobalMuted { get; set; }
 
-    [Parameter] public EventCallback<bool> MutedChanged { get; set; }
+    [Parameter] public EventCallback<bool> GlobalMutedChanged { get; set; }
+
+    [Parameter] public bool Loop { get; set; }
 
     [Parameter] public bool RotateFullscreen { get; set; }
 
-    [Parameter] public EventCallback<FullscreenEventArgs> OnFullscreen { get; set; }
+    [Parameter] public bool DynamicBg { get; set; }
+
+    [Parameter] public EventCallback<FullscreenEventArgs<TItem>> OnFullscreen { get; set; }
 
     [Parameter] public EventCallback OnEnded { get; set; }
 
-    [Parameter] public EventCallback<Video> OnLongPress { get; set; }
+    [Parameter] public EventCallback<TItem> OnLongPress { get; set; }
 
-    [Parameter] public RenderFragment<Video>? ActionsContent { get; set; }
+    [Parameter] public RenderFragment<TItem>? ActionsContent { get; set; }
 
-    [Parameter] public RenderFragment<Video>? TopContent { get; set; }
+    [Parameter] public RenderFragment<TItem>? TopContent { get; set; }
 
-    [Parameter] public RenderFragment<Video>? BottomContent { get; set; }
+    [Parameter] public RenderFragment<TItem>? BottomContent { get; set; }
 
     private static readonly string[] IgnoredXgplayerPlugins =
     [
-        BuiltInPlugin.Play, BuiltInPlugin.PlaybackRate, BuiltInPlugin.CssFullscreen, BuiltInPlugin.Volume,
-        BuiltInPlugin.MusicBackward, BuiltInPlugin.MusicPrev, BuiltInPlugin.MusicForward, BuiltInPlugin.MusicNext
+        BuiltInPlugin.Play, BuiltInPlugin.PlaybackRate, BuiltInPlugin.CssFullscreen, BuiltInPlugin.Volume
+    ];
+
+    private static readonly string[] IgnoredXgplayerMusicPlugins =
+    [
+        BuiltInPlugin.PlaybackRate, BuiltInPlugin.Volume, BuiltInPlugin.MusicBackward, BuiltInPlugin.MusicPrev,
+        BuiltInPlugin.MusicForward, BuiltInPlugin.MusicNext
     ];
 
     private static readonly Block _block = new("m-video-feeder");
@@ -52,6 +63,7 @@ public partial class Player : MasaComponentBase
             [nameof(MButton)] = new Dictionary<string, object>()
             {
                 [nameof(MButton.Large)] = true,
+                [nameof(MButton.Text)] = true,
                 [nameof(MButton.Ripple)] = false
             },
             [nameof(MIcon)] = new Dictionary<string, object>()
@@ -60,9 +72,6 @@ public partial class Player : MasaComponentBase
             },
         };
 
-    private bool _prevPlaying;
-    private bool _internalPlaying;
-    private bool _prevMuted;
     private double _playbackRate = 1;
     private MXgplayer? _xgplayer;
     internal bool _isMusic;
@@ -79,18 +88,18 @@ public partial class Player : MasaComponentBase
 
     protected override Task OnInitializedAsync()
     {
-        _prevMuted = Muted;
-        _prevPlaying = Data.Playing;
-        _internalPlaying = Data.Playing;
-
-        _available = Data.Playing;
+        _available = Index == 0;
 
         return Task.CompletedTask;
     }
 
     private async Task OnReady()
     {
-        await ToggleMute();
+        await SetMuteAsync(Data.Muted);
+        if (Data.Playing)
+        {
+            await SetPlayingAsync(true);
+        }
 
         await RegisterLongPressEventAsync();
     }
@@ -101,14 +110,14 @@ public partial class Player : MasaComponentBase
         var selector = "[data-player-index='" + Index + "'] .trigger";
 
         _longPressJSObject =
-            await LongPressJSModule.RegisterAsync(selector, () => OnLongPress.InvokeAsync(Data));
+            await LongPressJSModule.RegisterAsync(selector, () => OnLongPress.InvokeAsync(Data.Item));
 
         // on desktop devices, the "video" element is used to detect long press events
         if (_longPressJSObject is null)
         {
             selector = "[data-player-index='" + Index + "'] video";
             _longPressJSObject =
-                await LongPressJSModule.RegisterAsync(selector, () => OnLongPress.InvokeAsync(Data));
+                await LongPressJSModule.RegisterAsync(selector, () => OnLongPress.InvokeAsync(Data.Item));
         }
     }
 
@@ -120,35 +129,17 @@ public partial class Player : MasaComponentBase
         {
             _available = true;
         }
+    }
 
-        if (!_available)
-        {
-            return;
-        }
-
-        if (_prevMuted != Muted)
-        {
-            _prevMuted = Muted;
-            _ = ToggleMute();
-        }
-
-        var playing = _internalPlaying;
-
-        if (_prevPlaying != Data.Playing)
-        {
-            _prevPlaying = Data.Playing;
-            playing = Data.Playing;
-        }
-
-        if (_internalPlaying != playing)
-        {
-            _ = playing ? Play() : Pause();
-        }
+    private async Task HandleOnGlobalMutedChange(bool muted)
+    {
+        await SetMuteAsync(muted);
+        await GlobalMutedChanged.InvokeAsync(muted);
     }
 
     private async Task HandleOnFullscreen(bool fullscreen)
     {
-        FullscreenEventArgs args = new(Data, fullscreen);
+        FullscreenEventArgs<TItem> args = new(Data.Item, fullscreen);
         await OnFullscreen.InvokeAsync(args);
     }
 
@@ -159,40 +150,39 @@ public partial class Player : MasaComponentBase
         StateHasChanged();
     }
 
-    private async Task ToggleMute()
+    internal async Task SetMuteAsync(bool muted)
     {
-        await _xgplayer.ToggleMutedAsync(force: Muted);
+        if (_xgplayer is null) return;
+        await _xgplayer.ToggleMutedAsync(force: muted);
     }
 
-    private async Task Pause()
+    internal async Task SetPlayingAsync(bool playing)
     {
-        _internalPlaying = false;
-        await _xgplayer.TogglePlayAsync(false);
-    }
-
-    private async Task Play()
-    {
-        _internalPlaying = true;
-        await _xgplayer.TogglePlayAsync(true);
+        if (_xgplayer is null) return;
+        await _xgplayer.TogglePlayAsync(playing);
     }
 
     private async Task GetFullscreenAsync()
     {
+        if (_xgplayer is null) return;
         await _xgplayer.InvokeVoidAsync("getRotateFullscreen");
     }
 
     internal async Task SetPlaybackRateAsync(double playbackRate)
     {
+        if (_xgplayer is null) return;
         await _xgplayer.SetPropAsync("playbackRate", playbackRate);
     }
 
     internal async Task ToggleModeAsync()
     {
+        if (_xgplayer is null) return;
+
         _isMusic = !_isMusic;
 
         if (_isMusic)
         {
-            await _xgplayer.ToMusicPlayerAsync();
+            await _xgplayer.ToMusicPlayerAsync(IgnoredXgplayerMusicPlugins);
         }
         else
         {

@@ -17,9 +17,9 @@ public class XgplayerJSObjectReference(IJSObjectReference jsObjectReference) : J
         return await JSObjectReference.InvokeAsync<XgplayerPropsAndStates>("getPropsAndStates");
     }
 
-    public async ValueTask ToMusicPlayerAsync()
+    public async ValueTask ToMusicPlayerAsync(string[]? ignores = null)
     {
-        await JSObjectReference.InvokeVoidAsync("toMusic");
+        await JSObjectReference.InvokeVoidAsync("toMusic", (object?)ignores);
     }
 
     public async ValueTask ToVideoPlayerAsync()

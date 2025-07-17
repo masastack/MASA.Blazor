@@ -82,12 +82,19 @@ public class MXgplayer : MXgMusicPlayer
     {
     }
 
+    /// <summary>
+    /// Convert the current player to a music player.
+    /// </summary>
+    /// <param name="ignores">Override the ignore list of video player</param>
     [MasaApiPublicMethod]
-    public async Task ToMusicPlayerAsync()
+    public async Task ToMusicPlayerAsync(string[]? ignores = null)
     {
-        await XgplayerJSObjectReference.ToMusicPlayerAsync();
+        await XgplayerJSObjectReference.ToMusicPlayerAsync(ignores);
     }
 
+    /// <summary>
+    /// Convert the current player to a video player.
+    /// </summary>
     [MasaApiPublicMethod]
     public async Task ToVideoPlayerAsync()
     {

@@ -1,84 +1,92 @@
 ﻿@namespace Masa.Blazor
 @using Masa.Blazor.Components.VideoFeeder
+@using Masa.Blazor.JSComponents.VideoFeeder
 @inherits MasaComponentBase
 @inject I18n I18n
+@typeparam TItem
 
 <div class="@GetClass()"
      style="@GetStyle()"
      id="@Id"
      @ref="@Ref"
      @attributes="@Attributes">
-    @if (Videos.Count > 0)
+    @if (Items.Count > 0)
     {
         <MSwiper Index="@_index"
                  IndexChanged="@IndexChanged"
-                 Width="@Width"
                  Height="@Height"
                  Vertical
                  Virtual
                  TouchStartPreventDefault="false"
                  @ref="_swiper">
-            @foreach (var item in Videos)
+            @foreach (var video in _videos)
             {
-                var index = Videos.IndexOf(item);
+                var index = _videos.IndexOf(video);
 
                 <MSwiperSlide>
-                    <Player Data="@item"
+                    <Player Data="video"
                             Index="@index"
-                            @bind-Muted="@_muted"
+                            @bind-GlobalMuted="@_globalMuted"
+                            Autoplay="@Autoplay"
+                            Loop="@_autoplayNext"
+                            DynamicBg="@DynamicBg"
                             RotateFullscreen="@RotateFullscreen"
                             OnFullscreen="@HandleOnFullscreen"
-                            OnLongPress="@HandleOnLongPress"
+                            OnLongPress="@OpenSheet"
                             OnEnded="@HandleOnEnded"
                             ActionsContent="@SideActionsContent"
                             TopContent="@TopContent"
                             BottomContent="@BottomContent"
-                            @ref="item.Player"/>
+                            TItem="TItem"
+                            @ref="video.Player"
+                            @key="@video.Item"/>
                 </MSwiperSlide>
             }
         </MSwiper>
     }
 
     <MBottomSheet @bind-Value="_sheet">
-        <MList Dense Slim>
-            @BottomActionsContent
-            <MListItem Link
-                       PrependIcon="mdi-cast-audio-variant"
-                       Title="@ToggleModeText"
-                       OnClick="@ToggleMode"/>
-            <MListItem PrependIcon="mdi-play-speed"
-                       Title="@I18n.T("$masaBlazor.video-feeder.playbackRate")">
-                <MListItemAction>
-                    <MButtonGroup Value="_playbackRate"
-                                  ValueChanged="@SetPlaybackRate"
-                                  ActiveClass="primary--text"
-                                  Borderless
-                                  Mandatory>
-                        <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="0.75">0.75</MButton>
-                        <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="1.0">1.0</MButton>
-                        <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="1.25">1.25</MButton>
-                        <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="1.5">1.5</MButton>
-                        <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="2.0">2.0</MButton>
-                    </MButtonGroup>
-                </MListItemAction>
-            </MListItem>
-
-            @if (OnDownload.HasDelegate)
-            {
+        @if (CurrentVideo is not null)
+        {
+            <MList Dense Slim>
+                @BottomActionsContent?.Invoke(new BottomActionContext<TItem>(CurrentVideo.Item, CloseSheet))
                 <MListItem Link
-                           PrependIcon="mdi-download-box-outline"
-                           Title="@I18n.T("$masaBlazor.video-feeder.download")"
-                           OnClick="@OnDownload.InvokeAsync"/>
-            }
+                           PrependIcon="mdi-cast-audio-variant"
+                           Title="@ToggleModeText"
+                           OnClick="@ToggleMode"/>
+                <MListItem PrependIcon="mdi-play-speed"
+                           Title="@I18n.T("$masaBlazor.video-feeder.playbackRate")">
+                    <MListItemAction>
+                        <MButtonGroup Value="_playbackRate"
+                                      ValueChanged="@SetPlaybackRate"
+                                      ActiveClass="primary--text"
+                                      Borderless
+                                      Mandatory>
+                            <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="0.75">0.75</MButton>
+                            <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="1.0">1.0</MButton>
+                            <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="1.25">1.25</MButton>
+                            <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="1.5">1.5</MButton>
+                            <MButton Class="px-2" MinWidth="@("auto")" Small Text Value="2.0">2.0</MButton>
+                        </MButtonGroup>
+                    </MListItemAction>
+                </MListItem>
 
-            <MListItem Link
-                       PrependIcon="mdi-playlist-play"
-                       Title="@I18n.T("$masaBlazor.video-feeder.autoPlayNext")">
-                <MListItemAction>
-                    <MSwitch @bind-Value="_autoPlayNext" Inset Dense/>
-                </MListItemAction>
-            </MListItem>
-        </MList>
+                @if (OnDownload.HasDelegate)
+                {
+                    <MListItem Link
+                               PrependIcon="mdi-download-box-outline"
+                               Title="@I18n.T("$masaBlazor.video-feeder.download")"
+                               OnClick="@OnDownload.InvokeAsync"/>
+                }
+
+                <MListItem PrependIcon="mdi-playlist-play"
+                           Title="@I18n.T("$masaBlazor.video-feeder.autoPlayNext")">
+                    <MListItemAction>
+                        <MSwitch @bind-Value="_autoplayNext" Inset Dense/>
+                    </MListItemAction>
+                </MListItem>
+            </MList>
+        }
     </MBottomSheet>
 </div>
 

@@ -1,4 +1,4 @@
-import Xgplayer, { Events, IPlayerOptions } from "xgplayer";
+import Xgplayer, { Events, IPlayerOptions, Start } from "xgplayer";
 import MusicPreset, { Music } from "xgplayer-music";
 import Mobile from "xgplayer/es/plugins/mobile";
 import Play from "xgplayer/es/plugins/play";
@@ -30,13 +30,12 @@ class XgplayerProxy {
     const el: HTMLElement = document.querySelector(selector);
 
     if (!el) {
-      throw new Error(
-        "[Xgplayer] this selector of DOM node that player to mount on is required."
-      );
+      this.debug("Selector not found:", selector);
+      return;
     }
 
     if (!url) {
-      throw new Error("[Xgplayer] this media resource url is required.");
+      this.debug("URL is required for the player.");
     }
 
     this.initOptions = options;
@@ -122,7 +121,7 @@ class XgplayerProxy {
   }
 
   // 将播放器切换到音乐模式
-  toMusic() {
+  toMusic(ignores: string[] = [], plugins: string[] = []) {
     // 如果已经是audio模式，则不需要切换
     if (this.player.media instanceof HTMLAudioElement) {
       this.debug("Already in music mode, no need to switch.");
@@ -158,6 +157,14 @@ class XgplayerProxy {
 
     delete musicOptions.fullscreenTarget;
     delete musicOptions.cssFullscreen;
+
+    // override ignores
+    if (ignores && ignores.length > 0) {
+      musicOptions.ignores = ignores;
+    }
+
+    // always show the controls on mobile
+    musicOptions.controls["autoHide"] = false;
 
     // 重新初始化为音乐模式
     this.init(this.player.url, musicOptions);
@@ -208,7 +215,6 @@ class XgplayerProxy {
 
     // 移除音乐模式相关属性
     delete videoOptions.music;
-    console.log("toVideo", videoOptions);
     // 重新初始化为视频模式
     this.init(this.player.url, videoOptions);
 
@@ -289,6 +295,18 @@ class XgplayerProxy {
     this.player.on(Events.VIDEO_RESIZE, val => {
       this.debug("Video resize", val);
       this.handle.invokeMethodAsync("OnResize", val);
+    });
+    this.player.on(Events.PLAY, val => {
+      this.debug("Video play", val);
+      this.handle.invokeMethodAsync("OnPlay");
+    });
+    this.player.on(Events.PAUSE, val => {
+      this.debug("Video pause", val);
+      this.handle.invokeMethodAsync("OnPause");
+    });
+    this.player.on(Events.ERROR, val => {
+      this.debug("Video error", val);
+      this.handle.invokeMethodAsync("OnError");
     });
     this.player.on(Events.ENDED, val => {
       this.debug("Video ended", val);

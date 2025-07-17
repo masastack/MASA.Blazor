@@ -28,6 +28,7 @@
     <ItemGroup>
         <ProjectReference Include="..\Masa.Blazor.JSComponents.Swiper\Masa.Blazor.JSComponents.Swiper.csproj"/>
         <ProjectReference Include="..\Masa.Blazor.JSComponents.Xgplayer\Masa.Blazor.JSComponents.Xgplayer.csproj"/>
+        <ProjectReference Include="..\Masa.Blazor.Docs.ComponentApiGenerator\Masa.Blazor.Docs.ComponentApiGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 
 </Project>

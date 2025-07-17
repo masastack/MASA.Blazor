@@ -113,6 +113,15 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     public EventCallback<VideoSize> OnVideoResize { get; set; }
 
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback OnPlay { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback OnPause { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback OnError { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
     public EventCallback OnEnded { get; set; }
 
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
@@ -289,7 +298,7 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             Mobile = _mobilePlugin,
             CssFullscreen = _cssFullscreenPlugin,
             Fullscreen = _fullscreenPlugin,
-            Volume = _volumePlugin ?? new MXgplayerVolume(@default: Volume),
+            Volume = _volumePlugin ?? new MXgplayerVolume { Default = Volume },
             DynamicBg = _dynamicBgPlugin,
             Download = _downloadPlugin,
         };

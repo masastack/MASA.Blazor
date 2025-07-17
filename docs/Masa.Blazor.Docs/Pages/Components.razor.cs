@@ -282,6 +282,7 @@ public partial class Components
         list.AddRange(MarkdownItApiGenerator.ComponentMetas);
         list.AddRange(SwiperApiGenerator.ComponentMetas);
         list.AddRange(GridstackApiGenerator.ComponentMetas);
+        list.AddRange(VideoFeederApiGenerator.ComponentMetas);
         return list;
     }
 

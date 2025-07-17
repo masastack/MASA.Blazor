@@ -2,25 +2,24 @@
 
 namespace Masa.Blazor.JSComponents.VideoFeeder;
 
-public class Video(string? title, string? subtitle, string? src, string? poster)
+public class Video<TItem> where TItem : notnull
 {
-    public Video(string? title, string? subtitle, string? src) : this(title, subtitle, src, null)
+    internal Video(TItem item, Func<TItem, string> url, Func<TItem, string>? poster)
     {
+        Poster = poster?.Invoke(item);
+        Url = url.Invoke(item);
+        Item = item;
     }
 
-    public Video(string title, string src) : this(title, null, src, null)
-    {
-    }
+    public string? Poster { get; init; }
 
-    public string? Title { get; set; } = title;
+    public string? Url { get; init; }
 
-    public string? Subtitle { get; set; } = subtitle;
-
-    public string? Poster { get; init; } = poster;
-
-    public string? Src { get; init; } = src;
+    public TItem Item { get; init; }
 
     internal bool Playing { get; set; }
 
-    internal Player? Player { get; set; }
+    internal bool Muted { get; set; } = true;
+
+    internal Player<TItem>? Player { get; set; }
 }

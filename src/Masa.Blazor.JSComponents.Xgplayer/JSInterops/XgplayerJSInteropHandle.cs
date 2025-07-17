@@ -24,6 +24,15 @@ public class XgplayerJSInteropHandle(MXgMusicPlayer player)
     public Task OnResize(VideoSize size) => player.OnVideoResize.InvokeAsync(size);
 
     [JSInvokable]
+    public Task OnPlay() => player.OnPlay.InvokeAsync();
+
+    [JSInvokable]
+    public Task OnPause() => player.OnPause.InvokeAsync();
+
+    [JSInvokable]
+    public Task OnError() => player.OnError.InvokeAsync();
+
+    [JSInvokable]
     public Task OnEnded() => player.OnEnded.InvokeAsync();
 
     [JSInvokable]

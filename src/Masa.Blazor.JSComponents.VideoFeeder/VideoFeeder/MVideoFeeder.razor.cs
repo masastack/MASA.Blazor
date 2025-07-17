@@ -1,19 +1,24 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Masa.Blazor.Components.VideoFeeder;
-using Masa.Blazor.JSComponents.VideoFeeder;
+﻿using Masa.Blazor.JSComponents.VideoFeeder;
 
 namespace Masa.Blazor;
 
-public partial class MVideoFeeder
+public partial class MVideoFeeder<TItem> where TItem : notnull
 {
-    [Parameter] public List<Video> Videos { get; set; } = [];
+    [Parameter] public List<TItem> Items { get; set; } = [];
 
-    [Parameter] public StringNumber? Height { get; set; } = "100vh";
+    [Parameter] [EditorRequired] public Func<TItem, string>? ItemUrl { get; set; }
 
-    [Parameter] [MasaApiParameter("100%")]
-    public StringNumber? Width { get; set; } = "100%";
+    [Parameter] public Func<TItem, string?>? ItemPoster { get; set; }
 
-    [Parameter] public bool DefaultAutoPlayNext { get; set; }
+    [Parameter] [MasaApiParameter(844)] public StringNumber? Height { get; set; } = 844;
+
+    [Parameter] [MasaApiParameter(390)] public StringNumber? Width { get; set; } = 390;
+
+    [Parameter] public bool DefaultAutoplayNext { get; set; }
+
+    [Parameter] public bool Autoplay { get; set; }
+
+    [Parameter] public bool DynamicBg { get; set; }
 
     /// <summary>
     /// Rotated 90 degrees in the vertical screen state to achieve the horizontal screen effect,
@@ -21,63 +26,75 @@ public partial class MVideoFeeder
     /// </summary>
     [Parameter] public bool RotateFullscreen { get; set; }
 
-    [Parameter] public EventCallback<FullscreenEventArgs> OnFullscreen { get; set; }
+    [Parameter] public EventCallback<FullscreenEventArgs<TItem>> OnFullscreen { get; set; }
 
     /// <summary>
     /// Event callback when clicking the "Download" item in the action menu.
     /// Only show when the parameter is set.
     /// </summary>
-    [Parameter] public EventCallback<Video> OnDownload { get; set; }
+    [Parameter] public EventCallback<TItem> OnDownload { get; set; }
 
     /// <summary>
     /// The slot for right action buttons.
     /// </summary>
-    [Parameter] public RenderFragment<Video>? SideActionsContent { get; set; }
+    [Parameter] public RenderFragment<TItem>? SideActionsContent { get; set; }
 
     /// <summary>
     /// The slot for top content. Used to display video title, subtitle, etc.
     /// </summary>
-    [Parameter] public RenderFragment<Video>? TopContent { get; set; }
+    [Parameter] public RenderFragment<TItem>? TopContent { get; set; }
 
     /// <summary>
     /// The slot for bottom content. Used to display video title, subtitle, etc.
     /// </summary>
-    [Parameter] public RenderFragment<Video>? BottomContent { get; set; }
+    [Parameter] public RenderFragment<TItem>? BottomContent { get; set; }
 
     /// <summary>
     /// The slot for bottom sheet actions. Accepts the <see cref="MListItem"/> components.
     /// </summary>
-    [Parameter] public RenderFragment<Video>? BottomActionsContent { get; set; }
+    [Parameter] public RenderFragment<BottomActionContext<TItem>>? BottomActionsContent { get; set; }
 
     private static readonly Block Block = new("m-video-feeder");
     private readonly ModifierBuilder _blockBuilder = Block.CreateModifierBuilder();
 
-    private Video? _prevVideo;
+    private Video<TItem>? _prevVideo;
     private MSwiper? _swiper;
     private bool _sheet;
     private int _index;
-    private bool _muted = true;
-    private bool _autoPlayFirstVideo;
+    private bool _globalMuted = true;
     private bool _fullscreen;
     private StringNumber? _playbackRate = 1.0;
-    private bool _autoPlayNext;
+    private bool _autoplayNext;
+    private List<Video<TItem>> _videos = [];
+    private bool _itemsHasSet;
 
-    private Video? CurrentVideo => _index >= 0 && _index < Videos.Count ? Videos[_index] : null;
+    private Video<TItem>? CurrentVideo => _index >= 0 && _index < _videos.Count ? _videos[_index] : null;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
-        _autoPlayNext = DefaultAutoPlayNext;
-
-        AutoPlayFirstVideo();
+        _autoplayNext = DefaultAutoplayNext;
+        UpdateVideos();
     }
 
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
 
-        AutoPlayFirstVideo();
+        UpdateVideos();
+    }
+
+    private void UpdateVideos()
+    {
+        // As the Swiper has a virtual list feature, that cannot be incrementally updated,
+        // here we limit the setting to only once.
+        // TODO: Consider a better way to handle this, update Swiper component.
+        if (!_itemsHasSet && Items.Count > 0)
+        {
+            _itemsHasSet = true;
+            _videos = Items.Select(i => new Video<TItem>(i, ItemUrl!, ItemPoster!)).ToList();
+        }
     }
 
     protected override IEnumerable<string?> BuildComponentClass()
@@ -87,35 +104,31 @@ public partial class MVideoFeeder
 
     protected override IEnumerable<string?> BuildComponentStyle()
     {
-        yield return $"--m-video-feed-width: {Width}";
-        yield return $"--m-video-feed-height: {Height}";
+        yield return CssStyleUtils.GetHeight(Height);
+        yield return CssStyleUtils.GetWidth(Width);
     }
 
-    private void AutoPlayFirstVideo()
+    private async Task IndexChanged(int index)
     {
-        if (_autoPlayFirstVideo || Videos.Count == 0) return;
+        _prevVideo ??= _videos.ElementAtOrDefault(_index);
 
-        _prevVideo = Videos.First();
-        _prevVideo.Playing = true;
-        _autoPlayFirstVideo = true;
-    }
-
-    private void IndexChanged(int index)
-    {
         _index = index;
         _playbackRate = 1;
 
-        OnIndexUpdated();
+        await OnIndexUpdated();
     }
 
-    private void OnIndexUpdated()
+    private async Task OnIndexUpdated()
     {
         if (_prevVideo is not null)
         {
             _prevVideo.Playing = false;
+            _prevVideo.Muted = true;
+            await _prevVideo.Player!.SetMuteAsync(true);
+            await _prevVideo.Player.SetPlayingAsync(false);
         }
 
-        var video = Videos.ElementAtOrDefault(_index);
+        var video = _videos.ElementAtOrDefault(_index);
         _prevVideo = video;
         if (video is null)
         {
@@ -123,9 +136,12 @@ public partial class MVideoFeeder
         }
 
         video.Playing = true;
+        video.Muted = _globalMuted;
+        await video.Player!.SetMuteAsync(_globalMuted);
+        await video.Player.SetPlayingAsync(true);
     }
 
-    private async Task HandleOnFullscreen(FullscreenEventArgs args)
+    private async Task HandleOnFullscreen(FullscreenEventArgs<TItem> args)
     {
         await OnFullscreen.InvokeAsync(args);
         _fullscreen = args.IsFullscreen;
@@ -134,20 +150,19 @@ public partial class MVideoFeeder
 
     private async Task HandleOnEnded()
     {
-        if (!_autoPlayNext || _index >= Videos.Count - 1)
+        if (!_autoplayNext || _index >= Items.Count - 1)
         {
             return;
         }
 
         _index++;
         await _swiper.InvokeVoidAsync("slideTo", _index);
-        OnIndexUpdated();
+        await OnIndexUpdated();
     }
 
-    private void HandleOnLongPress()
-    {
-        _sheet = true;
-    }
+    private void OpenSheet() => _sheet = true;
+
+    private void CloseSheet() => _sheet = false;
 
     private async Task SetPlaybackRate(StringNumber? value)
     {

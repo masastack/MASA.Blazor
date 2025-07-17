@@ -553,6 +553,11 @@
         "type": "data-display"
       },
       {
+        "title": "video-feeder",
+        "type": "images-and-icons",
+        "state": "labs"
+      },
+      {
         "title": "virtual-scroll",
         "type": "data-display"
       },
