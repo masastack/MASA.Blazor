@@ -3,9 +3,11 @@ title: Watermark
 desc: "Add specific text or image to the page."
 ---
 
-> This component is in [Masa.Blazor.SomethingSkia](https://www.nuget.org/packages/Masa.Blazor.SomethingSkia) package.
-
 ## Usage
+
+```shell
+dotnet add package Masa.Blazor.SomethingSkia
+```
 
 [//]: # (<watermark-usage></watermark-usage>)
 
