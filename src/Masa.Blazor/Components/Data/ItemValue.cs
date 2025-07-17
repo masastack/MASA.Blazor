@@ -5,9 +5,9 @@ namespace Masa.Blazor
 {
     public class ItemValue<TItem>
     {
-        public ItemValue(string? name = null)
+        public ItemValue(string? name)
         {
-            Name = name ?? throw new ArgumentNullException(nameof(name));
+            Name = name;
         }
 
         internal ItemValue(Func<TItem, object?> factory)
@@ -45,7 +45,7 @@ namespace Masa.Blazor
 
         public object? Invoke(TItem item) => Factory.Invoke(item);
 
-        public static implicit operator string(ItemValue<TItem> itemValue) => itemValue.Name;
+        public static implicit operator string?(ItemValue<TItem> itemValue) => itemValue.Name;
 
         public static implicit operator ItemValue<TItem>(string name) => new(name);
     }
