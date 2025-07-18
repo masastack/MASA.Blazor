@@ -88,6 +88,13 @@ public partial class MDriverJS : DisposableComponentBase
     [MasaApiParameter(DefaultDoneBtnText)]
     public string? DoneBtnText { get; set; } = DefaultDoneBtnText;
 
+    /// <summary>
+    /// Callback that is invoked when the driver is ready.
+    /// </summary>
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.10.2")]
+    public Action? OnReady { get; set; }
+
     private const string DefaultNextBtnText = "$masaBlazor.driverjs.next";
     private const string DefaultPrevBtnText = "$masaBlazor.driverjs.prev";
     private const string DefaultDoneBtnText = "$masaBlazor.driverjs.done";
@@ -104,6 +111,8 @@ public partial class MDriverJS : DisposableComponentBase
         {
             _importJSObjectReference = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
                 "./_content/Masa.Blazor.JSComponents.DriverJS/MDriverJS.js").ConfigureAwait(false);
+
+            OnReady?.Invoke();
 
             _hasRendered = true;
 
