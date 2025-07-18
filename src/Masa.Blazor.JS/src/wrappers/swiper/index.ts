@@ -7,9 +7,12 @@ class SwiperProxy {
   handle: DotNet.DotNetObject;
   swiper: SwiperClass;
 
-  // This flag is used to solve the issue where Blazor has not finished rendering when calling the update method,
-  // resulting in no UI changes after the update. Previously, it required a manual delay(await Task.Delay(1000);) before
-  // calling the update method to resolve this issue.
+  /**
+   * A flag used to address the issue where Blazor has not finished rendering when the `update` method is called,
+   * resulting in no UI changes after the update. When set to `true`, the `slidesUpdated` event triggers an additional
+   * call to the `update` method. This eliminates the need for a manual delay (e.g., `await Task.Delay(1000);`) before
+   * calling `update`.
+   */
   updateAgainInSlidesUpdatedEvent: boolean;
 
   constructor(
