@@ -21,6 +21,6 @@ jobs:
     - name: build
       run: dotnet build Masa.Blazor.Build.slnx -c Release /p:ContinuousIntegrationBuild=true
     - name: pack
-      run: dotnet pack Masa.Blazor.Build.slnx --no-build --include-symbols -c Release -p:PackageVersion=$GITHUB_REF_NAME
+      run: dotnet pack Masa.Blazor.Build.slnx --no-build --include-symbols -c Release -p:Version=$GITHUB_REF_NAME
     - name: package push
       run: dotnet nuget push "**/*.symbols.nupkg" --skip-duplicate -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json
