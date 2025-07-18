@@ -239,10 +239,7 @@ public partial class MSwiper : MasaComponentBase
         _ctsForUpdateSlides.Cancel();
         _ctsForUpdateSlides = new CancellationTokenSource();
 
-        await RunTaskInMicrosecondsAsync(
-            () => _ = _swiperProxy.InvokeInstanceVoidAsync("update"),
-            16,
-            _ctsForUpdateSlides.Token);
+        await RunTaskInMicrosecondsAsync(_swiperProxy.UpdateAsync, 16, _ctsForUpdateSlides.Token);
     }
 
     /// <summary>

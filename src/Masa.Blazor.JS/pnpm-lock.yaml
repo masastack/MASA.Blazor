@@ -135,8 +135,8 @@ importers:
         specifier: ^1.15.2
         version: 1.15.6
       swiper:
-        specifier: ^10.2.0
-        version: 10.3.1
+        specifier: ^11.2.10
+        version: 11.2.10
       tslib:
         specifier: ^2.4.0
         version: 2.8.1
@@ -1661,8 +1661,8 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  swiper@10.3.1:
-    resolution: {integrity: sha512-24Wk3YUdZHxjc9faID97GTu6xnLNia+adMt6qMTZG/HgdSUt4fS0REsGUXJOgpTED0Amh/j+gRGQxsLayJUlBQ==}
+  swiper@11.2.10:
+    resolution: {integrity: sha512-RMeVUUjTQH+6N3ckimK93oxz6Sn5la4aDlgPzB+rBrG/smPdCTicXyhxa+woIpopz+jewEloiEE3lKo1h9w2YQ==}
     engines: {node: '>= 4.7.0'}
 
   terser@5.43.1:
@@ -3424,7 +3424,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  swiper@10.3.1: {}
+  swiper@11.2.10: {}
 
   terser@5.43.1:
     dependencies:

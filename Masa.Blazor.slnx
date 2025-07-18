@@ -41,7 +41,6 @@
   </Folder>
   <Folder Name="/9 - Solution Itms/">
     <File Path=".gitignore" />
-    <File Path=".gitlab-ci.yml" />
     <File Path=".gitmodules" />
     <File Path="CONTRIBUTING.md" />
     <File Path="Dockerfile" />

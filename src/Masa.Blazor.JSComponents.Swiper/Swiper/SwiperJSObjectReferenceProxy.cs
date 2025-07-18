@@ -20,6 +20,11 @@ public class SwiperJSObjectReferenceProxy(IJSObjectReference jsObjectReference)
         await JSObjectReference.InvokeVoidAsync("slidePrev", speed);
     }
 
+    public async Task UpdateAsync()
+    {
+        await JSObjectReference.InvokeVoidAsync("update");
+    }
+
     protected override ValueTask DisposeAsyncCore()
     {
         return JSObjectReference.InvokeVoidAsync("dispose");
