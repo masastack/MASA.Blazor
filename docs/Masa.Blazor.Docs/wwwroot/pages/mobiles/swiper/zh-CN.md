@@ -15,11 +15,11 @@ dotnet add package Masa.Blazor.JSComponents.Swiper
 ```
 
 ```html
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.2.0/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css"/>
 ```
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/10.2.0/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
 ```
 
 ## 使用 {#usage}
@@ -46,15 +46,7 @@ dotnet add package Masa.Blazor.JSComponents.Swiper
 
 默认情况下，Swiper 的高度是由高度最高的 slide 决定的，如果需要自适应高度，可以设置 `AutoHeight` 属性。
 
-对于 **MSwiperSlide** 中的内容是异步加载的场景，建议在 **MSwiperSlide** 组件外加一个条件判断，以便在内容加载完成后重新计算高度。
-
-```razor
-<MSwiper AutoHeight>
-    @if (content is not null) {
-        <MSwiperSlide>@content</MSwiperSlide>
-    }
-</MSwiper>
-```
+> 对于 **MSwiperSlide** 中的内容是异步加载的场景，高度没有自适应时需要手动调用 `_swiper.UpdateAsync()` 方法通知 Swiper 重新计算高度。
 
 <masa-example file="Examples.mobiles.swiper.AutoHeight"></masa-example>
 

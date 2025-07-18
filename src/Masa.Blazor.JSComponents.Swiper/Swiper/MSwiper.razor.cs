@@ -59,6 +59,9 @@ public partial class MSwiper : MasaComponentBase
     /// </summary>
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.10.0")] public bool Virtual { get; set; }
 
+    [Parameter] [MasaApiParameter(true, ReleasedIn = "v1.11.0")]
+    public bool TouchStartPreventDefault { get; set; } = true;
+
     private SwiperJsModule? _swiperJSModule;
     private DotNetObjectReference<object>? _swiperInteropHandle;
     private SwiperJSObjectReferenceProxy? _swiperProxy;
@@ -163,8 +166,15 @@ public partial class MSwiper : MasaComponentBase
                 Navigation = _navigation?.GetOptions($"{rootSelector} .swiper-button-next", $"{rootSelector} .swiper-button-prev")
             };
 
-            _swiperJSModule ??= new SwiperJsModule(Js);
-            _swiperProxy = await _swiperJSModule.Init(Ref, options, _swiperInteropHandle);
+            try
+            {
+                _swiperJSModule ??= new SwiperJsModule(Js);
+                _swiperProxy = await _swiperJSModule.Init(Ref, options, _swiperInteropHandle);
+            }
+            catch (JSException)
+            {
+                // ignored
+            }
 
             await SliderToIndexAsync(0);
         }, 16, _ctsForInit.Token);
@@ -228,10 +238,7 @@ public partial class MSwiper : MasaComponentBase
         _ctsForUpdateSlides.Cancel();
         _ctsForUpdateSlides = new CancellationTokenSource();
 
-        await RunTaskInMicrosecondsAsync(
-            () => _ = _swiperProxy.InvokeVoidAsync("update"),
-            16,
-            _ctsForUpdateSlides.Token);
+        await RunTaskInMicrosecondsAsync(_swiperProxy.UpdateAsync, 16, _ctsForUpdateSlides.Token);
     }
 
     /// <summary>

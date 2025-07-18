@@ -15,11 +15,11 @@ dotnet add package Masa.Blazor.JSComponents.Swiper
 ```
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 ```
 
 ## Usage
@@ -47,17 +47,8 @@ dotnet add package Masa.Blazor.JSComponents.Swiper
 By default, the highest slide determines the height of the Swiper.
 If you need to adapt the height, you can set the `AutoHeight` property.
 
-For scenarios where the content in the **MSwiperSlide** is loaded asynchronously, 
-it is recommended to add a conditional judgment outside the **MSwiperSlide** component
-to recalculate the height after the content is loaded.
-
-```razor
-<MSwiper AutoHeight>
-    @if (content is not null) {
-        <MSwiperSlide>@content</MSwiperSlide>
-    } 
-</MSwiper>
-```
+> For scenarios where the content in **MSwiperSlide** is loaded asynchronously,
+> you need to manually call `_swiper.UpdateAsync()` to notify Swiper to recalculate the height when the height does not adapt.
 
 <masa-example file="Examples.mobiles.swiper.AutoHeight"></masa-example>
 
