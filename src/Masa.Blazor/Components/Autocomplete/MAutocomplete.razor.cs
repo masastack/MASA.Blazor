@@ -170,6 +170,13 @@ public partial class MAutocomplete<TItem, TItemValue, TValue> : MSelect<TItem, T
             .Watch<List<TItem>>(nameof(FilteredItems), OnFilteredItemsChanged);
     }
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    
+        SetSearch();
+    }
+
     private static Block _block = new("m-autocomplete");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
