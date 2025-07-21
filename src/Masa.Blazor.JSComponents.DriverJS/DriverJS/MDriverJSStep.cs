@@ -1,5 +1,4 @@
-﻿using Masa.Blazor.Attributes;
-using Masa.Blazor.JSComponents.DriverJS;
+﻿using Masa.Blazor.JSComponents.DriverJS;
 using Microsoft.AspNetCore.Components;
 
 namespace Masa.Blazor;
@@ -18,9 +17,9 @@ internal interface IDriverJSStep
 
     string? PopoverClass { get; }
 
-    PopoverButton[] ShowButtons { get; }
+    IEnumerable<PopoverButton> ShowButtons { get; }
 
-    PopoverButton[] DisableButtons { get; }
+    IEnumerable<PopoverButton> DisableButtons { get; }
 
     string? NextBtnText { get; }
 
