@@ -9,7 +9,7 @@ declare global {
     MasaBlazor: {
       interop: {};
       extendMarkdownIt?: (parser: MarkdownParser) => void;
-      debug: Array<"xgplayer" | "echarts">
+      debug: Array<"xgplayer" | "echarts" | "driverjs">;
     };
   }
 }
