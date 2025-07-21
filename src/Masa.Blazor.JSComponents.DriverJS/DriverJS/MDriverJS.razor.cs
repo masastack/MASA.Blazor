@@ -93,7 +93,7 @@ public partial class MDriverJS : DisposableComponentBase
     /// </summary>
     [Parameter]
     [MasaApiParameter(ReleasedIn = "v1.10.2")]
-    public Action? OnReady { get; set; }
+    public Action<MDriverJS>? OnReady { get; set; }
 
     private const string DefaultNextBtnText = "$masaBlazor.driverjs.next";
     private const string DefaultPrevBtnText = "$masaBlazor.driverjs.prev";
@@ -104,7 +104,7 @@ public partial class MDriverJS : DisposableComponentBase
     private CancellationTokenSource? _initStepsCts;
     private List<IDriverJSStep> _steps = [];
     private IJSObjectReference? _importJSObjectReference;
-
+    
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -112,7 +112,7 @@ public partial class MDriverJS : DisposableComponentBase
             _importJSObjectReference = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
                 "./_content/Masa.Blazor.JSComponents.DriverJS/MDriverJS.js").ConfigureAwait(false);
 
-            OnReady?.Invoke();
+            OnReady?.Invoke(this);
 
             _hasRendered = true;
 
