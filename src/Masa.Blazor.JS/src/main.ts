@@ -11,6 +11,7 @@ declare global {
       extendMarkdownIt?: (parser: MarkdownParser) => void;
       xgplayerPlugins: any[];
       xgplayerPluginOptions?: { [prop: string]: any };
+      debug: Array<"xgplayer" | "echarts" | "driverjs">;
     };
   }
 }
@@ -23,4 +24,5 @@ window.MasaBlazor = {
     ...infiniteScroll,
   },
   xgplayerPlugins: [],
+  debug: []
 };

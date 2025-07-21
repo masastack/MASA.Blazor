@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Masa.Blazor.Attributes;
 using Masa.Blazor.JSInterop;
 using Microsoft.AspNetCore.Components;
 
@@ -50,7 +51,7 @@ public class Popover
     /// </summary>
     [Parameter]
     [JsonIgnore]
-    public PopoverButton[]? ShowButtons { get; set; }
+    public IEnumerable<PopoverButton>? ShowButtons { get; set; }
 
     /// <summary>
     /// An array of buttons to disable. This is
@@ -59,7 +60,7 @@ public class Popover
     /// </summary>
     [JsonIgnore]
     [Parameter]
-    public PopoverButton[]? DisableButtons { get; set; }
+    public IEnumerable<PopoverButton>? DisableButtons { get; set; }
 
     [Parameter]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
