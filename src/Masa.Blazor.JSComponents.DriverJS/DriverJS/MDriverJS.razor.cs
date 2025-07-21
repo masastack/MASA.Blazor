@@ -88,13 +88,6 @@ public partial class MDriverJS : DisposableComponentBase
     [MasaApiParameter(DefaultDoneBtnText)]
     public string? DoneBtnText { get; set; } = DefaultDoneBtnText;
 
-    /// <summary>
-    /// Callback that is invoked when the driver is ready.
-    /// </summary>
-    [Parameter]
-    [MasaApiParameter(ReleasedIn = "v1.10.2")]
-    public Action<MDriverJS>? OnReady { get; set; }
-
     private const string DefaultNextBtnText = "$masaBlazor.driverjs.next";
     private const string DefaultPrevBtnText = "$masaBlazor.driverjs.prev";
     private const string DefaultDoneBtnText = "$masaBlazor.driverjs.done";
@@ -104,19 +97,20 @@ public partial class MDriverJS : DisposableComponentBase
     private CancellationTokenSource? _initStepsCts;
     private List<IDriverJSStep> _steps = [];
     private IJSObjectReference? _importJSObjectReference;
-    
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            _importJSObjectReference = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
-                "./_content/Masa.Blazor.JSComponents.DriverJS/MDriverJS.js").ConfigureAwait(false);
-
-            OnReady?.Invoke(this);
+            var importJSObjectReference = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
+                "./_content/Masa.Blazor.JSComponents.DriverJS/MDriverJS.js?v=1.10.3").ConfigureAwait(false);
+            _importJSObjectReference =
+                await importJSObjectReference.InvokeAsync<IJSObjectReference>("init", GetConfig());
+            await importJSObjectReference.DisposeAsync();
 
             _hasRendered = true;
 
-            if (_initSteps == false && AutoDrive)
+            if (_initSteps == false)
             {
                 await InitDriverJsAsync();
             }
@@ -143,7 +137,7 @@ public partial class MDriverJS : DisposableComponentBase
 
         var step = new DriverStep(selector, defaultPopover);
 
-        _ = _importJSObjectReference?.InvokeVoidAsync("highlight", GetConfig(), step).ConfigureAwait(false);
+        _ = _importJSObjectReference?.InvokeVoidAsync("highlight", step).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -157,10 +151,7 @@ public partial class MDriverJS : DisposableComponentBase
     {
         _steps.Add(step);
 
-        if (AutoDrive)
-        {
-            await InitDriverJsAsync();
-        }
+        await InitDriverJsAsync();
     }
 
     private async Task InitDriverJsAsync()
@@ -179,7 +170,7 @@ public partial class MDriverJS : DisposableComponentBase
 
             _initSteps = true;
 
-            await DriveAsync(0);
+            await UpdateStepsAsync();
         }
         catch (TaskCanceledException)
         {
@@ -187,12 +178,9 @@ public partial class MDriverJS : DisposableComponentBase
         }
     }
 
-    private async Task DriveAsync(int stepIndex)
+    private async Task UpdateStepsAsync()
     {
-        if (_importJSObjectReference is null)
-        {
-            return;
-        }
+        if (_importJSObjectReference is null) return;
 
         var steps = _steps.Select(s =>
         {
@@ -200,7 +188,14 @@ public partial class MDriverJS : DisposableComponentBase
             return new DriverStep(s.Element, popover!);
         }).ToArray();
 
-        await _importJSObjectReference.InvokeVoidAsync("drive", GetConfig(steps), stepIndex);
+        await _importJSObjectReference.InvokeVoidAsync("updateConfig", GetConfig(steps), AutoDrive);
+    }
+
+    private async Task DriveAsync(int stepIndex)
+    {
+        if (_importJSObjectReference is null) return;
+
+        await _importJSObjectReference.InvokeVoidAsync("drive", stepIndex);
     }
 
     private Config GetConfig(DriverStep[]? steps = null)
