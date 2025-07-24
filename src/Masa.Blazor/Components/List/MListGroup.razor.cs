@@ -54,7 +54,7 @@ public partial class MListGroup : MasaComponentBase
 
     /// <summary>
     /// Re-render requests will also be responded to when inactive.
-    /// By default, only active window item will be rendered.
+    /// By default, only active list group will be rendered.
     /// </summary>
     [Parameter]
     [MasaApiParameter(ReleasedIn = "v1.10.3")]
