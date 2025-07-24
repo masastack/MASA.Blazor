@@ -43,7 +43,7 @@
                                            id="@_contentId"
                                            onscroll="@OnScroll"
                                            ReferenceCaptureAction="el => ContentElement = el">
-                        <MShouldRender Value="@IsActive">
+                        <MShouldRender Value="@(ShouldRenderWhenInactive || IsActive)">
                             @ChildContent
                         </MShouldRender>
                     </ShowTransitionElement>

@@ -24,6 +24,14 @@ public partial class MWindowItem : MGroupItem<MItemGroupBase>
     [Parameter] public bool Eager { get; set; }
 
     /// <summary>
+    /// Re-render requests will also be responded to when inactive.
+    /// By default, only active window item will be rendered.
+    /// </summary>
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.10.3")]
+    public bool ShouldRenderWhenInactive { get; set; }
+
+    /// <summary>
     /// Internal use
     /// </summary>
     public virtual string Tag { get; set; }

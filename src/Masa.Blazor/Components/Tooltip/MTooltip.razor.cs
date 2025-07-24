@@ -31,6 +31,14 @@ namespace Masa.Blazor
         [MasaApiParameter(ReleasedIn = "v1.9.0")]
         public string? Text { get; set; }
 
+        /// <summary>
+        /// Re-render requests will also be responded to when inactive.
+        /// By default, only active window item will be rendered.
+        /// </summary>
+        [Parameter]
+        [MasaApiParameter(ReleasedIn = "v1.10.3")]
+        public bool ShouldRenderWhenInactive { get; set; }
+
         protected override string DefaultAttachSelector => Permanent ? ".m-application__permanent" : ".m-application";
 
         private static Block _block = new("m-tooltip");

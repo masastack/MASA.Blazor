@@ -38,7 +38,7 @@
         <div class="@_wrapperElement.AppendClasses(("active", IsActive))"
              style="@style"
              @ref="_wrapper">
-            <MShouldRender Value="@IsActive">
+            <MShouldRender Value="@(ShouldRenderWhenInactive || IsActive)">
                 @ChildContent
             </MShouldRender>
         </div>

@@ -47,6 +47,14 @@ namespace Masa.Blazor
         [MasaApiParameter(ReleasedIn = "v1.8.0")]
         public ScrollStrategy ScrollStrategy { get; set; } = ScrollStrategy.Reposition;
 
+        /// <summary>
+        /// Re-render requests will also be responded to when inactive.
+        /// By default, only active window item will be rendered.
+        /// </summary>
+        [Parameter]
+        [MasaApiParameter(ReleasedIn = "v1.10.3")]
+        public bool ShouldRenderWhenInactive { get; set; }
+
         private static Block _block = new("m-menu");
         private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
         private ModifierBuilder _contentModifierBuilder = _block.Element("content").CreateModifierBuilder();
