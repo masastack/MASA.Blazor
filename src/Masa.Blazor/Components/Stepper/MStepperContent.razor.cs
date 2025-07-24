@@ -14,6 +14,14 @@ public partial class MStepperContent : MasaComponentBase
 
     [Parameter] public bool Eager { get; set; }
 
+    /// <summary>
+    /// Re-render requests will also be responded to when inactive.
+    /// By default, only active stepper content will be rendered.
+    /// </summary>
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.10.3")]
+    public bool ShouldRenderWhenInactive { get; set; }
+
     private bool _booting;
     private bool _firstRender = true;
     private StringNumber _height = 0;

@@ -8,6 +8,14 @@ public partial class MExpansionPanelContent : MasaComponentBase
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
+    /// <summary>
+    /// Re-render requests will also be responded to when inactive.
+    /// By default, only active expansion panel content will be rendered.
+    /// </summary>
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.10.3")]
+    public bool ShouldRenderWhenInactive { get; set; }
+
     private bool _isBooted;
     private bool _booting;
     private bool _isActive;

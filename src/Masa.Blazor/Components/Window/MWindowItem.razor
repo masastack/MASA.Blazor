@@ -16,7 +16,7 @@
                                ReferenceCaptureAction="r => Ref = r"
                                Tag="@Tag"
                                @attributes="@Attributes">
-            <MShouldRender Value="@InternalIsActive">
+            <MShouldRender Value="@(ShouldRenderWhenInactive || InternalIsActive)">
                 @GenChildContent()
             </MShouldRender>
         </ShowTransitionElement>

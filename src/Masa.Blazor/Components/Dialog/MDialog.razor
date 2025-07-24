@@ -26,7 +26,7 @@
                                                Style="@GetStyle()"
                                                ReferenceCaptureAction="r => DialogRef = r"
                                                tabindex="@(IsActive ? 0 : null)">
-                            <MShouldRender Value="@IsActive">
+                            <MShouldRender Value="@(ShouldRenderWhenInactive || IsActive)">
                                 @(OutcomeContent?.Invoke(_contentContext!) ?? ChildContent)
                             </MShouldRender>
                         </ShowTransitionElement>
