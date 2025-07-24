@@ -20592,7 +20592,7 @@ html.overflow-y-hidden {
     cursor: default;
 }
 .m-divider {
-    opacity: var(--m-border-opacity);
+    opacity: var(--m-border-opacity, .12);
 }
 
 .m-divider {
