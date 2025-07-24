@@ -10,7 +10,7 @@ public partial class MExpansionPanelContent : MasaComponentBase
 
     /// <summary>
     /// Re-render requests will also be responded to when inactive.
-    /// By default, only active window item will be rendered.
+    /// By default, only active expansion panel content will be rendered.
     /// </summary>
     [Parameter]
     [MasaApiParameter(ReleasedIn = "v1.10.3")]
