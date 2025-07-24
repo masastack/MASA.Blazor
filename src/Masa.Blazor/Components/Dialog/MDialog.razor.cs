@@ -73,6 +73,14 @@ namespace Masa.Blazor
         [MasaApiParameter(ReleasedIn = "v1.8.0")]
         public bool DisableAutoFocus { get; set; }
 
+        /// <summary>
+        /// Re-render requests will also be responded to when inactive.
+        /// By default, only active dialog will be rendered.
+        /// </summary>
+        [Parameter]
+        [MasaApiParameter(ReleasedIn = "v1.10.3")]
+        public bool ShouldRenderWhenInactive { get; set; }
+
         private readonly HashSet<IDependent> _dependents = new();
 
         private bool _attached;

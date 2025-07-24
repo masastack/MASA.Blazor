@@ -11,7 +11,7 @@
                                id="@Id"
                                @attributes="@Attributes">
             <div class="@_block.Element("wrap")">
-                <MShouldRender Value="@_isActive">
+                <MShouldRender Value="@(ShouldRenderWhenInactive || _isActive)">
                     @ChildContent
                 </MShouldRender>
             </div>

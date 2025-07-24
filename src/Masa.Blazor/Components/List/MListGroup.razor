@@ -33,7 +33,7 @@
                 <ExpandTransition>
                     <ShowTransitionElement Value="IsActive"
                                            Class="@_block.Element("items").Name">
-                        <MShouldRender Value="@IsActive">
+                        <MShouldRender Value="@(ShouldRenderWhenInactive || IsActive)">
                             @ChildContent
                         </MShouldRender>
                     </ShowTransitionElement>

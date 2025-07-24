@@ -44,7 +44,7 @@
                                        Class="@css"
                                        Style="@style"
                                        ReferenceCaptureAction="r => ContentElement = r">
-                    <MShouldRender Value="@IsActive">
+                    <MShouldRender Value="@(ShouldRenderWhenInactive || IsActive)">
                         @(ChildContent ?? (RenderFragment)(b => b.AddContent(0, Text)))
                     </MShouldRender>
                 </ShowTransitionElement>
