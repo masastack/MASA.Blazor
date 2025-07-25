@@ -2,6 +2,7 @@
 title: Video Feeder（视频流）
 desc: 类似于抖音的视频流组件。
 tag: "基于JS封装"
+release: v1.11.0
 ---
 
 ## 使用 {#usage}

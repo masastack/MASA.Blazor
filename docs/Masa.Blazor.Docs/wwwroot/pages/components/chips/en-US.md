@@ -17,6 +17,10 @@ Chips come in the following variations: closeable, filter, outlined, pill. The d
 
 ### Props
 
+#### Tonal {#tonal released-on="v1.11.0"}
+
+<masa-example file="Examples.components.chips.Tonal"></masa-example>
+
 #### Closable
 
 The chip that can be closed can be controlled by Close by default. If you want to know when the chip is closed, you can also listen to the OnCloseClick event.

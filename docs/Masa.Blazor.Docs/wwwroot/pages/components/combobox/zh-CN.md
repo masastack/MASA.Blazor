@@ -1,13 +1,12 @@
 ﻿---
 title: Combobox（组合选择框）
 desc: "**MCombobox**组件是一个允许用户输入不存在于所提供项目的值的 [MAutocomplete](/blazor/components/autocompletes)。"
+release: v1.10.0
 related:
   - /blazor/components/autocompletes
   - /blazor/components/cascaders
   - /blazor/components/selects
 ---
-
-> 该组件在 [v1.10.0](/blazor/getting-started/release-notes?v=v1.10.0) 版本中引入。
 
 ## 使用 {#usage}
 

@@ -1,6 +1,7 @@
 ﻿---
 title: Sticky
 desc: Make elements stick of the viewport when scrolling. 
+release: v1.8.0
 ---
 
 > The native `position: sticky` can only be applied to the nearest scrolling container, while the **MSticky** component can specify the scrolling container and get the state to achieve more functions. But its performance is not as good as the native `position: sticky`.

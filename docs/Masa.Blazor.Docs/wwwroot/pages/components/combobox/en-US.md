@@ -1,13 +1,12 @@
 ﻿---
 title: Combobox
 desc: "**MCombobox** is a component that allows users to input values that are not present in the provided items, extending the functionality of [MAutocomplete](/blazor/components/autocompletes)."
+release: v1.10.0
 related:
   - /blazor/components/autocompletes
   - /blazor/components/cascaders
   - /blazor/components/selects
 ---
-
-> This component was introduced in [v1.10.0](/blazor/getting-started/release-notes?v=v1.10.0).
 
 ## Usage
 

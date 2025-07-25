@@ -1,6 +1,7 @@
 ---
 title: Empty state
 desc: "**MEmptyState** component is used to indicate that a list is empty or the search results are empty."
+release: v1.10.0
 related:
   - /blazor/components/buttons
   - /blazor/components/icons

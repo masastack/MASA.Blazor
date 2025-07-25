@@ -1,6 +1,7 @@
 ﻿---
 title: Page stack（页面堆栈）
 desc: "**PPageStack** 组件提供了一个类似页面堆栈的容器，主要用于移动端。"
+release: v1.5.0
 related:
   - /blazor/components/page-tabs
   - /blazor/components/application

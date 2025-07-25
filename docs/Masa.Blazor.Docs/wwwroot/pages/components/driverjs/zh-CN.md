@@ -2,9 +2,8 @@
 title: Tour（引导）
 desc: "一个基于 [driver.js](https://github.com/kamranahmedse/driver.js) 的引导组件。"
 tag: "基于JS封装"
+release: v1.9.0
 ---
-
-> 该组件在 [v1.9.0](/blazor/getting-started/release-notes?v=v1.9.0) 版本中引入。
 
 ```shell {#install-cli}
 dotnet add package Masa.Blazor.JSComponents.DriverJS

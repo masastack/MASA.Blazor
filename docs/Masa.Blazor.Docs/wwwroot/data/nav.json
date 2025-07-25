@@ -164,7 +164,8 @@
       },
       {
         "title": "chips",
-        "type": "containment"
+        "type": "containment",
+        "state": "update"
       },
       {
         "title": "copyable-text",
@@ -515,15 +516,18 @@
         "items": [
           {
             "title": "data-iterators",
-            "type": "data-display"
+            "type": "data-display",
+            "type-group": "tables"
           },
           {
             "title": "data-tables",
-            "type": "data-display"
+            "type": "data-display",
+            "type-group": "tables"
           },
           {
             "title": "simple-tables",
-            "type": "data-display"
+            "type": "data-display",
+            "type-group": "tables"
           }
         ]
       },
@@ -589,15 +593,21 @@
       {
         "title": "pdf-mobile-viewer"
       },
-      "pull-refresh",
-      "swiper"
+      {
+        "title": "pull-refresh"
+      },
+      {
+        "title": "swiper"
+      }
     ]
   },
   {
     "title": "js-modules",
     "icon": "$languageJavascript",
     "items": [
-      "intersection-observer"
+      {
+        "title": "intersection-observer"
+      }
     ]
   },
   {

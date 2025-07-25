@@ -2,6 +2,7 @@
 title: Video Feeder
 desc: Provides a video feed similar to Douyin.
 tag: "JS Wrapper"
+release: v1.11.0
 ---
 
 ## Usage

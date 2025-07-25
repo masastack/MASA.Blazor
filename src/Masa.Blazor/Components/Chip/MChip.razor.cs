@@ -65,6 +65,9 @@ public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
 
     [Parameter] public string? Target { get; set; }
 
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public bool Tonal { get; set; }
+
     private IRoutable? _router;
 
     public bool Exact { get; }
@@ -97,15 +100,18 @@ public partial class MChip : MGroupItem<MItemGroupBase>, IRoutable
 
     protected override IEnumerable<string> BuildComponentClass()
     {
+        var colorForText = Outlined || Tonal;
+        
         yield return _modifierBuilder
             .Add("clickable", IsClickable)
             .Add(Disabled, Draggable, Label, Link, Outlined, Pill)
             .Add("no-color", string.IsNullOrWhiteSpace(Color))
             .Add("removable", Close)
             .Add("active", InternalIsActive)
+            .Add(Tonal)
             .AddTheme(ComputedTheme)
-            .AddBackgroundColor(Color, !Outlined)
-            .AddTextColor(Color, Outlined)
+            .AddBackgroundColor(Color, !colorForText)
+            .AddTextColor(Color, colorForText)
             .AddTextColor(TextColor)
             .AddClass(ComputedActiveClass, InternalIsActive)
             .AddClass(CssClassUtils.GetSize(XSmall, Small, Large, XLarge))
