@@ -8,8 +8,6 @@ related:
   - /blazor/components/selects
 ---
 
-> This component was introduced in [v1.10.0](/blazor/getting-started/release-notes?v=v1.10.0).
-
 ## Usage
 
 <masa-example file="Examples.components.combobox.Usage"></masa-example>
