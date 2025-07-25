@@ -1,0 +1,73 @@
+﻿@using Masa.Blazor.JSComponents.VideoFeeder
+
+<MVideoFeeder Items="@_videos"
+              TItem="Video"
+              ItemUrl="v => v.Url"
+              Autoplay="false"
+              Class="mx-auto"
+              RotateFullscreen>
+    <TopContent>
+        <div class="text-h6">
+            @context.Title
+        </div>
+        <div class="text-body-2">
+            @context.Subtitle
+        </div>
+    </TopContent>
+    <BottomContent>
+        <div class="text-body-2">
+            @context.Title
+        </div>
+        <div class="text-caption">
+            @context.Subtitle
+        </div>
+    </BottomContent>
+    <SideActionsContent>
+        <MToggle @bind-Value="_heart" @bind-Value:after="@OnStar" DataOn="@("red")" DataOff="@("")"
+                 Context="tg">
+            <MButton Class="text-none" Color="@tg.Data" OnClick="@tg.Toggle">
+                <MIcon>mdi-heart</MIcon>
+                <span class="white--text">
+                    Star
+                </span>
+            </MButton>
+        </MToggle>
+        <MButton IconName="mdi-star"/>
+        <MButton IconName="mdi-share"/>
+    </SideActionsContent>
+    <BottomActionsContent>
+        <MListItem Link PrependIcon="mdi-heart-broken-outline" Title="Dislike" OnClick="@(() => OnDislike(context))"/>
+    </BottomActionsContent>
+</MVideoFeeder>
+
+@code{
+
+    private List<Video> _videos =
+    [
+        new Video("宣传片1", null, "https://img-cdn.lonsid.cn/download/1602691659.mp4"),
+        new Video("空净宣传片", "老人片", "http://img-cdn.lonsid.cn/download/1602692059.mp4"),
+        new Video("空净宣传片2", "父子篇 ", "https://img-cdn.lonsid.cn/download/1602692042.mp4")
+    ];
+
+    private bool _heart;
+
+    private async Task OnStar()
+    {
+        // do something with the heart toggle
+    }
+
+    private async Task OnDislike(BottomActionContext<Video> context)
+    {
+        context.CloseSheet();
+        // do something with the disliked video
+    }
+
+    record Video(string Title, string? Subtitle, string Url)
+    {
+        public int Id { get; set; } = new Random().Next(1, 1000);
+        public string Title { get; set; } = Title;
+        public string? Subtitle { get; set; } = Subtitle;
+        public string Url { get; set; } = Url;
+    }
+
+}
