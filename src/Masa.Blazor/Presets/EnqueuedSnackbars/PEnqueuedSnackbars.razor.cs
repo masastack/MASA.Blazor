@@ -114,7 +114,7 @@ namespace Masa.Blazor.Presets
         {
             return StyleBuilder.Create()
                 .AddMaxWidth(MaxWidth)
-                .AddIf("bottom", $"{MasaBlazor.Application.Bottom}px", IsPositionBottom)
+                .AddIf("bottom", $"{MasaBlazor.Application.Bottom + MasaBlazor.Application.Footer}px", IsPositionBottom)
                 .AddIf("top", $"{MasaBlazor.Application.Top}px", IsPositionTop).GenerateCssStyles();
         }
 
