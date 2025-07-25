@@ -2,6 +2,7 @@
 title: PDF Mobile Viewer（PDF 移动端查看器）
 desc: "专为移动设备设计的 PDF 查看器。"
 tag: "基于JS封装"
+release: v1.7.0
 ---
 
 ## 安装 {#installation released-on=v1.9.0}

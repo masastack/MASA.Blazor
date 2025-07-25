@@ -25,10 +25,10 @@
         }
 
         <MTabsItems Touchless Value="IsApiTab.ToString()" Style="background-color: unset; overflow: unset;">
-            <MTabItem Value="@("False")" Transition="" Eager>
+            <MTabItem Value="@("False")" Transition="" Eager ShouldRenderWhenInactive>
                 @if (_md == null)
                 {
-                    <MSkeletonLoader Type="article,card"></MSkeletonLoader>
+                    <MSkeletonLoader Type="article,card" ></MSkeletonLoader>
                 }
                 else
                 {

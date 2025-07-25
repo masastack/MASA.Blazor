@@ -1,6 +1,7 @@
 ---
 title: Empty state（空状态）
 desc: "**MEmptyState** 组件用于表示某个列表是空的或者搜索结果是空的。"
+release: v1.10.0
 related:
   - /blazor/components/buttons
   - /blazor/components/icons

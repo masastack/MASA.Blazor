@@ -2,6 +2,7 @@
 title: Sortable
 desc: "Reorderable drag-and-drop lists for modern browsers and touch devices. Base on [Sortablejs](https://github.com/SortableJS/Sortable)."
 tag: "JS Wrapper"
+release: v1.4.0
 ---
 
 ## Usage

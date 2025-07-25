@@ -2,9 +2,8 @@
 title: Tour
 desc: "A tour component based on [driver.js](https://github.com/kamranahmedse/driver.js)."
 tag: "JS Wrapper"
+release: v1.9.0
 ---
-
-> This component was introduced in [v1.9.0](/blazor/getting-started/release-notes?v=v1.9.0).
 
 ```shell {#install-cli}
 dotnet add package Masa.Blazor.JSComponents.DriverJS

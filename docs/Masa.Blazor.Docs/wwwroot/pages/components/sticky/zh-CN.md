@@ -1,6 +1,7 @@
 ﻿---
 title: Sticky（固定）
 desc: 当滚动时使元素固定在视口上。
+release: v1.8.0
 ---
 
 > 原生的 `position: sticky` 只能作用于最近的滚动容器，而 **MSticky** 组件可以指定滚动容器，还能获取状态从而实现更多的功能。但其性能是不如原生的 `position: sticky` 的。

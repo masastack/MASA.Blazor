@@ -2,6 +2,7 @@
 title: PDF Mobile Viewer
 desc: "A PDF viewer designed for mobile."
 tag: "JS Wrapper"
+release: v1.7.0
 ---
 
 ## Installation {released-on=v1.9.0}

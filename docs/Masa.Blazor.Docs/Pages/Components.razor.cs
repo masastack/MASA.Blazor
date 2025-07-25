@@ -136,7 +136,7 @@ public partial class Components
             await ReadDocumentAndApiAsync();
             AppService.Toc = CurrentToc;
         }
-        else if ((IsApiTab && _apiData.Any() is false) || (!IsApiTab && _md is null))
+        else if ((IsApiTab && _apiData.Count != 0) || (!IsApiTab && _md is null))
         {
             await ReadDocumentAndApiAsync();
             AppService.Toc = CurrentToc;

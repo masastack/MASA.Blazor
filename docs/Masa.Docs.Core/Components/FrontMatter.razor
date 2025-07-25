@@ -7,15 +7,21 @@
 <div class="@(string.IsNullOrWhiteSpace(Meta.Description) ? "" : "mt-n3") mb-4">
     @if (!string.IsNullOrWhiteSpace(Meta.Tag))
     {
-        <MChip Class="mr-2" Small Color="primary">@Meta.Tag</MChip>
+        <MChip Class="mr-2" Small Color="primary" Tonal>@Meta.Tag</MChip>
     }
 
     @if (AdditionalTags.Any())
     {
         foreach (var item in AdditionalTags)
         {
-            <MChip Class="mr-2" Small Color="primary">@item</MChip>
+            <MChip Class="mr-2" Small Color="primary" Tonal>@item</MChip>
         }
+    }
+    
+    @if (Meta.Release != null)
+    {
+        var href = "/blazor/getting-started/release-notes?v=" + Meta.Release;
+        <MChip Small Color="green" Href="@href" Tonal>@Meta.Release</MChip>
     }
 </div>
 

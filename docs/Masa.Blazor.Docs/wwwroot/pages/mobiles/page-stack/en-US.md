@@ -1,6 +1,7 @@
 ﻿---
 title: Page Stack
 desc: "**PPageStack** component provides a container similar to a page stack, mainly for mobile."
+release: v1.5.0
 related:
   - /blazor/components/page-tabs
   - /blazor/components/application
