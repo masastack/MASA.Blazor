@@ -82,9 +82,12 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
     /// </summary>
     private bool _available;
 
+    private double _aspectRatio;
     private string? _fullscreenChipStyle;
 
     private LongPressJSObject? _longPressJSObject;
+
+    private bool ShowFullscreenBtn => !_isMusic && _fullscreenChipStyle != null && _aspectRatio > 1;
 
     protected override Task OnInitializedAsync()
     {
@@ -143,6 +146,11 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
         await OnFullscreen.InvokeAsync(args);
     }
 
+    private void HandleOnMetadataLoaded(VideoMetadata metadata)
+    {
+        _aspectRatio = metadata.AspectRatio;
+    }
+
     private void HandleOnVideoResize(VideoSize videoSize)
     {
         _fullscreenChipStyle = "--m-video-height: " +
@@ -182,7 +190,7 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
 
         if (_isMusic)
         {
-            await _xgplayer.ToMusicPlayerAsync(IgnoredXgplayerMusicPlugins);
+            await _xgplayer.ToMusicPlayerAsync();
         }
         else
         {

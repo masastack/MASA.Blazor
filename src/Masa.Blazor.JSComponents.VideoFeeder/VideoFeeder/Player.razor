@@ -17,6 +17,7 @@
                Height="@("100%")"
                Width="@("100%")"
                OnReady="@OnReady"
+               OnVideoMetadataLoaded="@HandleOnMetadataLoaded"
                OnFullscreenChange="@HandleOnFullscreen"
                OnVideoResize="@HandleOnVideoResize"
                OnEnded="@OnEnded"
@@ -32,7 +33,7 @@
     <MThemeProvider WithBackground
                     Class="@ControlsElement.ToString()"
                     Theme="dark">
-        @if (!_isMusic && _fullscreenChipStyle != null)
+        @if (ShowFullscreenBtn)
         {
             <MChip Class="@ControlsFullscreenElement.ToString()"
                    Outlined
