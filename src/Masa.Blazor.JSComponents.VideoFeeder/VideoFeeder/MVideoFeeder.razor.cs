@@ -54,6 +54,11 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
     /// </summary>
     [Parameter] public RenderFragment<BottomActionContext<TItem>>? BottomActionsContent { get; set; }
 
+    /// <summary>
+    /// Whether to automatically use cover mode for the video when it is in portrait orientation.
+    /// </summary>
+    [Parameter] public bool AutoCoverInPortrait { get; set; }
+
     private static readonly Block Block = new("m-video-feeder");
     private readonly ModifierBuilder _blockBuilder = Block.CreateModifierBuilder();
 

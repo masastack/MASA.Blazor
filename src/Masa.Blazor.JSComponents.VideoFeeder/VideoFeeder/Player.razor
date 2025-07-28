@@ -13,7 +13,7 @@
                Loop="@Loop"
                Url="@Data.Url"
                Ignores="@IgnoredXgplayerPlugins"
-               Class="m-video-feeder__player"
+               Class="@_playerModifierBuilder.Add(Portrait).Build()"
                Height="@("100%")"
                Width="@("100%")"
                OnReady="@OnReady"
