@@ -22,6 +22,10 @@
   display: none !important;
 }
 
+.m-video-feeder__player--portrait video {
+  object-fit: cover;
+}
+
 .m-video-feeder__controls-top {
   position: absolute;
   top: 0;

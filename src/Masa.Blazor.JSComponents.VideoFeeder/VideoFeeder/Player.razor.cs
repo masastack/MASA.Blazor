@@ -27,6 +27,8 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
 
     [Parameter] public bool DynamicBg { get; set; }
 
+    [Parameter] public bool AutoCoverInPortrait { get; set; }
+
     [Parameter] public EventCallback<FullscreenEventArgs<TItem>> OnFullscreen { get; set; }
 
     [Parameter] public EventCallback OnEnded { get; set; }
@@ -51,11 +53,13 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
     ];
 
     private static readonly Block _block = new("m-video-feeder");
+    private static readonly Element PlayerElement = _block.Element("player");
     private static readonly Element ControlsElement = _block.Element("controls");
     private static readonly Element ControlsTopElement = _block.Element("controls-top");
     private static readonly Element ControlsBottomElement = _block.Element("controls-bottom");
     private static readonly Element ControlsRightElement = _block.Element("controls-right");
     private static readonly Element ControlsFullscreenElement = _block.Element("controls-fullscreen");
+    private readonly ModifierBuilder _playerModifierBuilder = PlayerElement.CreateModifierBuilder();
 
     private readonly IDictionary<string, IDictionary<string, object>> _rightActionDefaults =
         new Dictionary<string, IDictionary<string, object>>()
@@ -87,7 +91,9 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
 
     private LongPressJSObject? _longPressJSObject;
 
-    private bool ShowFullscreenBtn => !_isMusic && _fullscreenChipStyle != null && _aspectRatio > 1;
+    private bool IsPortrait => _aspectRatio < 1;
+    private bool Portrait => AutoCoverInPortrait && IsPortrait;
+    private bool ShowFullscreenBtn => !_isMusic && _fullscreenChipStyle != null && !IsPortrait;
 
     protected override Task OnInitializedAsync()
     {
