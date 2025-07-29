@@ -123,9 +123,9 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
 
     private async Task OnIndexChanged(int index)
     {
-        await UpdateIndex(index);
-        
         _prevVideo ??= _videos.ElementAtOrDefault(Index);
+
+        await UpdateIndex(index);
 
         _playbackRate = 1;
 
