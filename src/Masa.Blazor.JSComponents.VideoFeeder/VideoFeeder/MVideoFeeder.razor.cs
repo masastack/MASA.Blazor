@@ -178,12 +178,16 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
         var index = Index + 1;
         await UpdateIndex(index);
 
-        await _swiper.InvokeVoidAsync("slideTo", Index); // TODO: 需要吗？
         await OnIndexUpdated();
     }
 
     private async Task UpdateIndex(int index)
     {
+        if (index < 0 || index >= _videos.Count)
+        {
+            return;
+        }
+
         if (IndexChanged.HasDelegate)
         {
             await IndexChanged.InvokeAsync(index);
