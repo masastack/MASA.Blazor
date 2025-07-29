@@ -10,6 +10,10 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
 
     [Parameter] public Func<TItem, string?>? ItemPoster { get; set; }
 
+    [Parameter] public int Index { get; set; }
+
+    [Parameter] public EventCallback<int> IndexChanged { get; set; }
+
     [Parameter] [MasaApiParameter(844)] public StringNumber? Height { get; set; } = 844;
 
     [Parameter] [MasaApiParameter(390)] public StringNumber? Width { get; set; } = 390;
@@ -70,7 +74,6 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
     private Video<TItem>? _prevVideo;
     private MSwiper? _swiper;
     private bool _sheet;
-    private int _index;
     private bool _globalMuted = true;
     private bool _fullscreen;
     private StringNumber? _playbackRate = 1.0;
@@ -78,7 +81,7 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
     private List<Video<TItem>> _videos = [];
     private bool _itemsHasSet;
 
-    private Video<TItem>? CurrentVideo => _index >= 0 && _index < _videos.Count ? _videos[_index] : null;
+    private Video<TItem>? CurrentVideo => Index >= 0 && Index < _videos.Count ? _videos[Index] : null;
 
     protected override void OnInitialized()
     {
@@ -118,11 +121,12 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
         yield return CssStyleUtils.GetWidth(Width);
     }
 
-    private async Task IndexChanged(int index)
+    private async Task OnIndexChanged(int index)
     {
-        _prevVideo ??= _videos.ElementAtOrDefault(_index);
+        await UpdateIndex(index);
+        
+        _prevVideo ??= _videos.ElementAtOrDefault(Index);
 
-        _index = index;
         _playbackRate = 1;
 
         await OnIndexUpdated();
@@ -138,7 +142,7 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
             await _prevVideo.Player.SetPlayingAsync(false);
         }
 
-        var video = _videos.ElementAtOrDefault(_index);
+        var video = _videos.ElementAtOrDefault(Index);
         _prevVideo = video;
         if (video is null)
         {
@@ -166,14 +170,28 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
 
     private async Task HandleOnEnded()
     {
-        if (!_autoplayNext || _index >= Items.Count - 1)
+        if (!_autoplayNext || Index >= Items.Count - 1)
         {
             return;
         }
 
-        _index++;
-        await _swiper.InvokeVoidAsync("slideTo", _index);
+        var index = Index + 1;
+        await UpdateIndex(index);
+
+        await _swiper.InvokeVoidAsync("slideTo", Index); // TODO: 需要吗？
         await OnIndexUpdated();
+    }
+
+    private async Task UpdateIndex(int index)
+    {
+        if (IndexChanged.HasDelegate)
+        {
+            await IndexChanged.InvokeAsync(index);
+        }
+        else
+        {
+            Index = index;
+        }
     }
 
     private void OpenSheet() => _sheet = true;
