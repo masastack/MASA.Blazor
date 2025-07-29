@@ -12,8 +12,8 @@
      @attributes="@Attributes">
     @if (Items.Count > 0)
     {
-        <MSwiper Index="@_index"
-                 IndexChanged="@IndexChanged"
+        <MSwiper Index="@Index"
+                 IndexChanged="@OnIndexChanged"
                  Height="@Height"
                  Vertical
                  Virtual
