@@ -59,6 +59,11 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
     /// </summary>
     [Parameter] public bool AutoCoverInPortrait { get; set; }
 
+    /// <summary>
+    /// Whether to only show the poster in music mode. No poster will be shown in video mode.
+    /// </summary>
+    [Parameter] public bool OnlyShowPosterInMusicMode { get; set; }
+
     private static readonly Block Block = new("m-video-feeder");
     private readonly ModifierBuilder _blockBuilder = Block.CreateModifierBuilder();
 
@@ -144,6 +149,12 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
         video.Muted = _globalMuted;
         await video.Player!.SetMuteAsync(_globalMuted);
         await video.Player.SetPlayingAsync(true);
+    }
+
+    private void OnGlobalMutedChange(bool globalMuted)
+    {
+        _globalMuted = globalMuted;
+        _videos.ForEach(v => v.Muted = globalMuted);
     }
 
     private async Task HandleOnFullscreen(FullscreenEventArgs<TItem> args)

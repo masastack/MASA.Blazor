@@ -29,6 +29,8 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
 
     [Parameter] public bool AutoCoverInPortrait { get; set; }
 
+    [Parameter] public bool OnlyShowPosterInMusicMode { get; set; }
+
     [Parameter] public EventCallback<FullscreenEventArgs<TItem>> OnFullscreen { get; set; }
 
     [Parameter] public EventCallback OnEnded { get; set; }
@@ -196,7 +198,7 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
 
         if (_isMusic)
         {
-            await _xgplayer.ToMusicPlayerAsync();
+            await _xgplayer.ToMusicPlayerAsync(IgnoredXgplayerMusicPlugins);
         }
         else
         {
