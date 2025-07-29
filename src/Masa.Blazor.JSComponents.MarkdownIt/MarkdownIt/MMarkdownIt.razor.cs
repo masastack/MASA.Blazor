@@ -281,11 +281,13 @@ public partial class MMarkdownIt : MasaComponentBase
         if (_importJSObjectReference is not null)
         {
             await _importJSObjectReference.DisposeAsync();
+            _importJSObjectReference = null;
         }
         
         if (_markdownItObjectReference is not null)
         {
            await _markdownItObjectReference.DisposeAsync();
+           _markdownItObjectReference = null;
         }
     }
 }

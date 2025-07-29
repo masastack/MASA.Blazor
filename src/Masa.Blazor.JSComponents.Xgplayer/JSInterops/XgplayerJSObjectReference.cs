@@ -42,7 +42,6 @@ public class XgplayerJSObjectReference(IJSObjectReference jsObjectReference) : J
         await JSObjectReference.InvokeVoidAsync("setProp", prop, value);
     }
 
-
     public async Task DestroyAsync()
     {
         await JSObjectReference.InvokeVoidAsync("destroy");

@@ -251,5 +251,6 @@ public partial class MGridstack<TItem> : MasaComponentBase
 
         _gridstackInstance.Resize -= GridstackOnResize;
         await (_gridstackInstance as IAsyncDisposable).DisposeAsync();
+        _gridstackInstance = null;
     }
 }

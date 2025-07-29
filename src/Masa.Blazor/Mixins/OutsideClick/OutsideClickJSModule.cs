@@ -72,6 +72,7 @@ public class OutsideClickJSModule(IJSRuntime js)
         if (_instance is not null)
         {
             await _instance.DisposeAsync();
+            _instance = null;
         }
     }
 }
