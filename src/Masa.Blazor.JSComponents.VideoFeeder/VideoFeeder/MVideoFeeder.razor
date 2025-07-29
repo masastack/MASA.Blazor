@@ -26,12 +26,14 @@
                 <MSwiperSlide>
                     <Player Data="video"
                             Index="@index"
-                            @bind-GlobalMuted="@_globalMuted"
+                            GlobalMuted="@_globalMuted"
+                            GlobalMutedChanged="@OnGlobalMutedChange"
                             Autoplay="@Autoplay"
                             Loop="@_autoplayNext"
                             DynamicBg="@DynamicBg"
-                            AutoCoverInPortrait="@AutoCoverInPortrait"
                             RotateFullscreen="@RotateFullscreen"
+                            AutoCoverInPortrait="@AutoCoverInPortrait"
+                            OnlyShowPosterInMusicMode="@OnlyShowPosterInMusicMode"
                             OnFullscreen="@HandleOnFullscreen"
                             OnLongPress="@OpenSheet"
                             OnEnded="@HandleOnEnded"
@@ -51,10 +53,12 @@
         {
             <MList Dense Slim>
                 @BottomActionsContent?.Invoke(new BottomActionContext<TItem>(CurrentVideo.Item, CloseSheet))
+
                 <MListItem Link
                            PrependIcon="mdi-cast-audio-variant"
                            Title="@ToggleModeText"
                            OnClick="@ToggleMode"/>
+
                 <MListItem PrependIcon="mdi-play-speed"
                            Title="@I18n.T("$masaBlazor.video-feeder.playbackRate")">
                     <MListItemAction>

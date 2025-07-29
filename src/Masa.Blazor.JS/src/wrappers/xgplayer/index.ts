@@ -20,6 +20,9 @@ class XgplayerProxy {
   initOptions: XgplayerOptions;
   player: Xgplayer;
   handle: DotNet.DotNetObject;
+  cacheOptions: {
+    [key: string]: any;
+  } = {};
 
   constructor(
     selector: string,
@@ -121,7 +124,7 @@ class XgplayerProxy {
   }
 
   // 将播放器切换到音乐模式
-  toMusic(ignores: string[] = [], plugins: string[] = []) {
+  toMusic(ignores: string[] = []) {
     // 如果已经是audio模式，则不需要切换
     if (this.player.media instanceof HTMLAudioElement) {
       this.debug("Already in music mode, no need to switch.");
@@ -142,6 +145,8 @@ class XgplayerProxy {
       muted = this.player.muted || false;
       paused = this.player.paused;
 
+      this.cacheOptions["poster"] = this.player.poster;
+
       // 销毁当前播放器
       this.player.destroy();
     }
@@ -157,6 +162,7 @@ class XgplayerProxy {
 
     delete musicOptions.fullscreenTarget;
     delete musicOptions.cssFullscreen;
+    delete musicOptions.poster;
 
     // override ignores
     if (ignores && ignores.length > 0) {
@@ -215,6 +221,13 @@ class XgplayerProxy {
 
     // 移除音乐模式相关属性
     delete videoOptions.music;
+
+    // 如果有缓存的 poster，则恢复
+    if (this.cacheOptions["poster"]) {
+      videoOptions.poster = this.cacheOptions["poster"];
+      delete this.cacheOptions["poster"];
+    }
+
     // 重新初始化为视频模式
     this.init(this.player.url, videoOptions);
 

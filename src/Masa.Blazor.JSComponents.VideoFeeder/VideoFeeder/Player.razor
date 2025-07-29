@@ -7,7 +7,9 @@
 
 @if (_available)
 {
-    <MXgplayer Poster="@Data.Poster"
+    var poster = OnlyShowPosterInMusicMode ? null : Data.Poster;
+
+    <MXgplayer Poster="@poster"
                Autoplay="@Autoplay"
                AutoplayMuted
                Loop="@Loop"
@@ -33,6 +35,13 @@
     <MThemeProvider WithBackground
                     Class="@ControlsElement.ToString()"
                     Theme="dark">
+        @if (_isMusic && Data.Poster is not null)
+        {
+            <div class="m-video-feeder__music-cover">
+                <img src="@Data.Poster" alt="Poster"/>
+            </div>
+        }
+
         @if (ShowFullscreenBtn)
         {
             <MChip Class="@ControlsFullscreenElement.ToString()"

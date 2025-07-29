@@ -300,7 +300,7 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             Fullscreen = _fullscreenPlugin,
             Volume = _volumePlugin ?? new MXgplayerVolume { Default = Volume },
             DynamicBg = _dynamicBgPlugin,
-            Download = _downloadPlugin,
+            Download = _downloadPlugin
         };
     }
 
