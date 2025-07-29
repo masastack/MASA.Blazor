@@ -137,7 +137,7 @@ public partial class MDriverJS : DisposableComponentBase
 
         var step = new DriverStep(selector, defaultPopover);
 
-        _ = _importJSObjectReference?.InvokeVoidAsync("highlight", step).ConfigureAwait(false);
+        _ = _importJSObjectReference.TryInvokeVoidAsync("highlight", step);
     }
 
     /// <summary>
@@ -145,7 +145,7 @@ public partial class MDriverJS : DisposableComponentBase
     /// </summary>
     /// <param name="stepIndex"></param>
     [MasaApiParameter]
-    public void Drive(int stepIndex = 0) => _ = DriveAsync(stepIndex).ConfigureAwait(false);
+    public void Drive(int stepIndex = 0) => _ = DriveAsync(stepIndex);
 
     internal async Task AddStep(IDriverJSStep step)
     {
@@ -242,6 +242,7 @@ public partial class MDriverJS : DisposableComponentBase
         if (_importJSObjectReference is not null)
         {
             await _importJSObjectReference.DisposeAsync();
+            _importJSObjectReference = null;
         }
     }
 }

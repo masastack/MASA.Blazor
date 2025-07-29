@@ -265,6 +265,7 @@ public partial class MPullRefresh
     protected override async ValueTask DisposeAsyncCore()
     {
         await _scrollParentJSRef.TryDisposeAsync();
+        _scrollParentJSRef = null;
 
         await Js.RemoveHtmlElementEventListener(_touchstartEventId);
         await Js.RemoveHtmlElementEventListener(_touchmoveEventId);

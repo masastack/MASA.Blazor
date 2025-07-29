@@ -328,6 +328,7 @@ public abstract class MSortableProviderBase<TItem> : MasaComponentBase, ISortabl
         if (_jsObjectReference != null)
         {
             await _jsObjectReference.DisposeAsync();
+            _jsObjectReference = null;
         }
     }
 }

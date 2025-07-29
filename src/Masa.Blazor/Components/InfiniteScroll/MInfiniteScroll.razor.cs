@@ -231,6 +231,7 @@ public partial class MInfiniteScroll : MasaComponentBase
         {
             await _jsObjectReference.InvokeVoidAsync("dispose");
             await _jsObjectReference.TryDisposeAsync();
+            _jsObjectReference = null;
         }
     }
 }
