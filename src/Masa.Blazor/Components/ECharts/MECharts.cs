@@ -328,6 +328,7 @@ public class MECharts : Container, IEChartsJsCallbacks
         if (_echarts is not null)
         {
             await _echarts.DisposeAsync();
+            _echarts = null;
         }
     }
 }

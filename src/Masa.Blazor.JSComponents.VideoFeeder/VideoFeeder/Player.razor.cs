@@ -211,6 +211,7 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
         if (_longPressJSObject is not null)
         {
             await _longPressJSObject.DisposeAsync();
+            _longPressJSObject = null;
         }
     }
 }

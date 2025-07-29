@@ -239,6 +239,7 @@ public partial class MEditor : MasaComponentBase
         if (_quillHelper != null)
         {
             await _quillHelper.DisposeAsync();
+            _quillHelper = null;
         }
     }
 }

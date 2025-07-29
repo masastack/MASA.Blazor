@@ -353,9 +353,14 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     }
 
     [MasaApiPublicMethod]
-    public async Task<XgplayerPropsAndStates> GetPropsAndStatesAsync()
+    public async Task<XgplayerPropsAndStates?> GetPropsAndStatesAsync()
     {
-        return await XgplayerJSObjectReference!.GetPropsAndStatesAsync();
+        if (XgplayerJSObjectReference == null)
+        {
+            return null;
+        }
+
+        return await XgplayerJSObjectReference.GetPropsAndStatesAsync();
     }
 
     /// <summary>
@@ -369,13 +374,15 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     [MasaApiPublicMethod]
     public async Task InvokeVoidAsync(string identity, params object[] args)
     {
-        await XgplayerJSObjectReference.InvokeInstanceVoidAsync(identity, args);
+        if (XgplayerJSObjectReference != null)
+            await XgplayerJSObjectReference.InvokeInstanceVoidAsync(identity, args);
     }
 
     [MasaApiPublicMethod]
     public async Task SetPropAsync(string prop, object value)
     {
-        await XgplayerJSObjectReference.SetPropAsync(prop, value);
+        if (XgplayerJSObjectReference != null)
+            await XgplayerJSObjectReference.SetPropAsync(prop, value);
     }
 
     /// <summary>
@@ -385,7 +392,8 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     [MasaApiPublicMethod]
     public async Task TogglePlayAsync(bool? force = null)
     {
-        await XgplayerJSObjectReference.TogglePlayAsync(force);
+        if (XgplayerJSObjectReference != null)
+            await XgplayerJSObjectReference.TogglePlayAsync(force);
     }
 
     /// <summary>
@@ -395,7 +403,8 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     [MasaApiPublicMethod]
     public async Task ToggleMutedAsync(bool? force = null)
     {
-        await XgplayerJSObjectReference.ToggleMutedAsync(force);
+        if (XgplayerJSObjectReference != null)
+            await XgplayerJSObjectReference.ToggleMutedAsync(force);
     }
 
     private bool IsZhHant(CultureInfo culture)
@@ -413,6 +422,7 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
         if (_importJSObjectReference != null)
         {
             await _importJSObjectReference.DisposeAsync();
+            _importJSObjectReference = null;
         }
 
         if (XgplayerJSObjectReference != null)
@@ -421,6 +431,7 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             {
                 await XgplayerJSObjectReference.DestroyAsync();
                 await XgplayerJSObjectReference.DisposeAsync();
+                XgplayerJSObjectReference = null;
             }
             catch (JSDisconnectedException)
             {

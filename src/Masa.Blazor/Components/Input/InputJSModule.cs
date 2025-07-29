@@ -70,5 +70,6 @@ public class InputJSModule(IJSRuntime js) : JSModule(js, $"./_content/Masa.Blazo
         _selfReference?.Dispose();
 
         await _instance.TryDisposeAsync();
+        _instance = null;
     }
 }

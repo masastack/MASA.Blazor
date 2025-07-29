@@ -60,6 +60,7 @@ public class GridstackJSModule : JSModule
     protected override async ValueTask DisposeAsyncCore()
     {
         _dotNetObjectReference.Dispose();
+
         if (_instance is not null)
         {
             await _instance.DisposeAsync();

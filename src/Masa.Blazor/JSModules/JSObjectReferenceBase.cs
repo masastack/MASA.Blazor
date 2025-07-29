@@ -2,7 +2,7 @@
 
 public class JSObjectReferenceBase(IJSObjectReference jsObjectReference) : IAsyncDisposable
 {
-    protected IJSObjectReference JSObjectReference { get; init; } = jsObjectReference;
+    protected IJSObjectReference JSObjectReference { get; private set; } = jsObjectReference;
 
     /// <summary>
     /// Invokes a JavaScript function on the JSObjectReference instance with the specified identity and arguments.
@@ -19,12 +19,9 @@ public class JSObjectReferenceBase(IJSObjectReference jsObjectReference) : IAsyn
     public async ValueTask DisposeAsync()
     {
         // TODO: need try-catch?
-        await JSObjectReference.DisposeAsync();
         await DisposeAsyncCore();
+        await JSObjectReference.DisposeAsync();
     }
 
-    protected virtual async ValueTask DisposeAsyncCore()
-    {
-        await JSObjectReference.DisposeAsync();
-    }
+    protected virtual ValueTask DisposeAsyncCore() => ValueTask.CompletedTask;
 }

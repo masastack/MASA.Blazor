@@ -118,6 +118,7 @@ public partial class MSyntaxHighlight : MasaComponentBase
         if (_importJSObjectReference is not null)
         {
             await _importJSObjectReference.DisposeAsync();
+            _importJSObjectReference = null;
         }
     }
 }

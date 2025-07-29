@@ -82,6 +82,7 @@ public class ActivatableJsModule(IJSRuntime js)
         if (_instance != null)
         {
             await _instance.DisposeAsync();
+            _instance = null;
         }
     }
 }

@@ -524,6 +524,7 @@ public partial class PPageStack : MasaComponentBase
         {
             await _module.InvokeVoidAsync("detachListener", _dotnetObjectId);
             await _module.DisposeAsync();
+            _module = null;
         }
     }
 }

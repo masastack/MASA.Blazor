@@ -12,5 +12,8 @@ public class ScrollToTargetJSObjectReference : JSObjectReferenceBase
 
     public ValueTask UnobserveAsync(string id) => JSObjectReference.InvokeVoidAsync("unobserve", id);
 
-    public ValueTask DisposeAsync() => JSObjectReference.InvokeVoidAsync("dispose");
+    protected override async ValueTask DisposeAsyncCore()
+    {
+        await JSObjectReference.InvokeVoidAsync("dispose");
+    }
 }
