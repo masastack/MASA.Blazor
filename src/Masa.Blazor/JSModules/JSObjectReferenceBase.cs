@@ -2,7 +2,7 @@
 
 public class JSObjectReferenceBase(IJSObjectReference jsObjectReference) : IAsyncDisposable
 {
-    protected IJSObjectReference JSObjectReference { get; private set; } = jsObjectReference;
+    protected IJSObjectReference JSObjectReference { get; init; } = jsObjectReference;
 
     /// <summary>
     /// Invokes a JavaScript function on the JSObjectReference instance with the specified identity and arguments.
