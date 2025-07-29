@@ -183,7 +183,7 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
 
     private async Task UpdateIndex(int index)
     {
-        if (index < 0 || index >= _videos.Count)
+        if (index < 0 || index >= Items.Count)
         {
             return;
         }
