@@ -317,3373 +317,3302 @@
         margin-left: -2px;
     }
 }
+
 /* color */
 .m-application .black {
-    color: #FFFFFF !important;
+  color: var(--m-color-black-on, #FFFFFF) !important;
 }
 
 .m-application .white {
-    color: #000000 !important;
+  color: var(--m-color-white-on, #000000) !important;
 }
 
 .m-application .transparent {
-    color: currentColor !important;
+  color: currentColor !important;
 }
 
 .m-application .red {
-    color: #FFFFFF !important;
+  color: var(--m-color-red-on, #FFFFFF) !important;
 }
 
 .m-application .red.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-red-lighten-5-on, #000000) !important;
 }
 
 .m-application .red.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-red-lighten-4-on, #000000) !important;
 }
 
 .m-application .red.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-red-lighten-3-on, #000000) !important;
 }
 
 .m-application .red.lighten-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-red-lighten-2-on, #FFFFFF) !important;
 }
 
 .m-application .red.lighten-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-red-lighten-1-on, #FFFFFF) !important;
 }
 
 .m-application .red.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-red-darken-1-on, #FFFFFF) !important;
 }
 
 .m-application .red.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-red-darken-2-on, #FFFFFF) !important;
 }
 
 .m-application .red.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-red-darken-3-on, #FFFFFF) !important;
 }
 
 .m-application .red.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-red-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .red.accent-1 {
-    color: #000000 !important;
+  color: var(--m-color-red-accent-1-on, #000000) !important;
 }
 
 .m-application .red.accent-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-red-accent-2-on, #FFFFFF) !important;
 }
 
 .m-application .red.accent-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-red-accent-3-on, #FFFFFF) !important;
 }
 
 .m-application .red.accent-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-red-accent-4-on, #FFFFFF) !important;
 }
 
+/* pink */
 .m-application .pink {
-    color: #FFFFFF !important;
+  color: var(--m-color-pink-on, #FFFFFF) !important;
 }
-
 .m-application .pink.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-pink-lighten-5-on, #000000) !important;
 }
-
 .m-application .pink.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-pink-lighten-4-on, #000000) !important;
 }
-
 .m-application .pink.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-pink-lighten-3-on, #000000) !important;
 }
-
 .m-application .pink.lighten-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-pink-lighten-2-on, #FFFFFF) !important;
 }
-
 .m-application .pink.lighten-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-pink-lighten-1-on, #FFFFFF) !important;
 }
-
 .m-application .pink.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-pink-darken-1-on, #FFFFFF) !important;
 }
-
 .m-application .pink.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-pink-darken-2-on, #FFFFFF) !important;
 }
-
 .m-application .pink.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-pink-darken-3-on, #FFFFFF) !important;
 }
-
 .m-application .pink.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-pink-darken-4-on, #FFFFFF) !important;
 }
-
 .m-application .pink.accent-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-pink-accent-1-on, #FFFFFF) !important;
 }
-
 .m-application .pink.accent-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-pink-accent-2-on, #FFFFFF) !important;
 }
-
 .m-application .pink.accent-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-pink-accent-3-on, #FFFFFF) !important;
 }
-
 .m-application .pink.accent-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-pink-accent-4-on, #FFFFFF) !important;
 }
 
+/* purple */
 .m-application .purple {
-    color: #FFFFFF !important;
+  color: var(--m-color-purple-on, #FFFFFF) !important;
 }
-
 .m-application .purple.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-purple-lighten-5-on, #000000) !important;
 }
-
 .m-application .purple.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-purple-lighten-4-on, #000000) !important;
 }
-
 .m-application .purple.lighten-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-purple-lighten-3-on, #FFFFFF) !important;
 }
-
 .m-application .purple.lighten-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-purple-lighten-2-on, #FFFFFF) !important;
 }
-
 .m-application .purple.lighten-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-purple-lighten-1-on, #FFFFFF) !important;
 }
-
 .m-application .purple.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-purple-darken-1-on, #FFFFFF) !important;
 }
-
 .m-application .purple.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-purple-darken-2-on, #FFFFFF) !important;
 }
-
 .m-application .purple.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-purple-darken-3-on, #FFFFFF) !important;
 }
-
 .m-application .purple.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-purple-darken-4-on, #FFFFFF) !important;
 }
-
 .m-application .purple.accent-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-purple-accent-1-on, #FFFFFF) !important;
 }
-
 .m-application .purple.accent-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-purple-accent-2-on, #FFFFFF) !important;
 }
-
 .m-application .purple.accent-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-purple-accent-3-on, #FFFFFF) !important;
 }
-
 .m-application .purple.accent-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-purple-accent-4-on, #FFFFFF) !important;
 }
 
+/* deep-purple */
 .m-application .deep-purple {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-purple-on, #FFFFFF) !important;
 }
-
 .m-application .deep-purple.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-deep-purple-lighten-5-on, #000000) !important;
 }
-
 .m-application .deep-purple.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-deep-purple-lighten-4-on, #000000) !important;
 }
-
 .m-application .deep-purple.lighten-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-purple-lighten-3-on, #FFFFFF) !important;
 }
-
 .m-application .deep-purple.lighten-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-purple-lighten-2-on, #FFFFFF) !important;
 }
-
 .m-application .deep-purple.lighten-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-purple-lighten-1-on, #FFFFFF) !important;
 }
-
 .m-application .deep-purple.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-purple-darken-1-on, #FFFFFF) !important;
 }
-
 .m-application .deep-purple.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-purple-darken-2-on, #FFFFFF) !important;
 }
-
 .m-application .deep-purple.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-purple-darken-3-on, #FFFFFF) !important;
 }
-
 .m-application .deep-purple.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-purple-darken-4-on, #FFFFFF) !important;
 }
-
 .m-application .deep-purple.accent-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-purple-accent-1-on, #FFFFFF) !important;
 }
-
 .m-application .deep-purple.accent-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-purple-accent-2-on, #FFFFFF) !important;
 }
-
 .m-application .deep-purple.accent-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-purple-accent-3-on, #FFFFFF) !important;
 }
-
 .m-application .deep-purple.accent-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-purple-accent-4-on, #FFFFFF) !important;
 }
 
+/* indigo */
 .m-application .indigo {
-    color: #FFFFFF !important;
+  color: var(--m-color-indigo-on, #FFFFFF) !important;
 }
-
 .m-application .indigo.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-indigo-lighten-5-on, #000000) !important;
 }
-
 .m-application .indigo.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-indigo-lighten-4-on, #000000) !important;
 }
-
 .m-application .indigo.lighten-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-indigo-lighten-3-on, #FFFFFF) !important;
 }
-
 .m-application .indigo.lighten-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-indigo-lighten-2-on, #FFFFFF) !important;
 }
-
 .m-application .indigo.lighten-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-indigo-lighten-1-on, #FFFFFF) !important;
 }
-
 .m-application .indigo.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-indigo-darken-1-on, #FFFFFF) !important;
 }
-
 .m-application .indigo.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-indigo-darken-2-on, #FFFFFF) !important;
 }
-
 .m-application .indigo.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-indigo-darken-3-on, #FFFFFF) !important;
 }
-
 .m-application .indigo.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-indigo-darken-4-on, #FFFFFF) !important;
 }
-
 .m-application .indigo.accent-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-indigo-accent-1-on, #FFFFFF) !important;
 }
-
 .m-application .indigo.accent-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-indigo-accent-2-on, #FFFFFF) !important;
 }
-
 .m-application .indigo.accent-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-indigo-accent-3-on, #FFFFFF) !important;
 }
-
 .m-application .indigo.accent-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-indigo-accent-4-on, #FFFFFF) !important;
 }
 
+/* blue */
 .m-application .blue {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-on, #FFFFFF) !important;
 }
-
 .m-application .blue.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-blue-lighten-5-on, #000000) !important;
 }
-
 .m-application .blue.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-blue-lighten-4-on, #000000) !important;
 }
-
 .m-application .blue.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-blue-lighten-3-on, #000000) !important;
 }
-
 .m-application .blue.lighten-2 {
-    color: #000000 !important;
+  color: var(--m-color-blue-lighten-2-on, #000000) !important;
 }
-
 .m-application .blue.lighten-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-lighten-1-on, #FFFFFF) !important;
 }
-
 .m-application .blue.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-darken-1-on, #FFFFFF) !important;
 }
-
 .m-application .blue.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-darken-2-on, #FFFFFF) !important;
 }
-
 .m-application .blue.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-darken-3-on, #FFFFFF) !important;
 }
-
 .m-application .blue.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-darken-4-on, #FFFFFF) !important;
 }
-
 .m-application .blue.accent-1 {
-    color: #000000 !important;
+  color: var(--m-color-blue-accent-1-on, #000000) !important;
 }
-
 .m-application .blue.accent-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-accent-2-on, #FFFFFF) !important;
 }
-
 .m-application .blue.accent-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-accent-3-on, #FFFFFF) !important;
 }
-
 .m-application .blue.accent-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-accent-4-on, #FFFFFF) !important;
 }
 
+/* light-blue */
 .m-application .light-blue {
-    color: #FFFFFF !important;
+  color: var(--m-color-light-blue-on, #FFFFFF) !important;
 }
-
 .m-application .light-blue.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-light-blue-lighten-5-on, #000000) !important;
 }
-
 .m-application .light-blue.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-light-blue-lighten-4-on, #000000) !important;
 }
-
 .m-application .light-blue.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-light-blue-lighten-3-on, #000000) !important;
 }
-
 .m-application .light-blue.lighten-2 {
-    color: #000000 !important;
+  color: var(--m-color-light-blue-lighten-2-on, #000000) !important;
 }
-
 .m-application .light-blue.lighten-1 {
-    color: #000000 !important;
+  color: var(--m-color-light-blue-lighten-1-on, #000000) !important;
 }
-
 .m-application .light-blue.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-light-blue-darken-1-on, #FFFFFF) !important;
 }
-
 .m-application .light-blue.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-light-blue-darken-2-on, #FFFFFF) !important;
 }
-
 .m-application .light-blue.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-light-blue-darken-3-on, #FFFFFF) !important;
 }
-
 .m-application .light-blue.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-light-blue-darken-4-on, #FFFFFF) !important;
 }
-
 .m-application .light-blue.accent-1 {
-    color: #000000 !important;
+  color: var(--m-color-light-blue-accent-1-on, #000000) !important;
 }
-
 .m-application .light-blue.accent-2 {
-    color: #000000 !important;
+  color: var(--m-color-light-blue-accent-2-on, #000000) !important;
 }
-
 .m-application .light-blue.accent-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-light-blue-accent-3-on, #FFFFFF) !important;
 }
-
 .m-application .light-blue.accent-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-light-blue-accent-4-on, #FFFFFF) !important;
 }
 
 .m-application .cyan {
-    color: #000000 !important;
+  color: var(--m-color-cyan-on, #000000) !important;
 }
 
 .m-application .cyan.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-cyan-lighten-5-on, #000000) !important;
 }
 
 .m-application .cyan.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-cyan-lighten-4-on, #000000) !important;
 }
 
 .m-application .cyan.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-cyan-lighten-3-on, #000000) !important;
 }
 
 .m-application .cyan.lighten-2 {
-    color: #000000 !important;
+  color: var(--m-color-cyan-lighten-2-on, #000000) !important;
 }
 
 .m-application .cyan.lighten-1 {
-    color: #000000 !important;
+  color: var(--m-color-cyan-lighten-1-on, #000000) !important;
 }
 
 .m-application .cyan.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-cyan-darken-1-on, #FFFFFF) !important;
 }
 
 .m-application .cyan.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-cyan-darken-2-on, #FFFFFF) !important;
 }
 
 .m-application .cyan.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-cyan-darken-3-on, #FFFFFF) !important;
 }
 
 .m-application .cyan.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-cyan-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .cyan.accent-1 {
-    color: #000000 !important;
+  color: var(--m-color-cyan-accent-1-on, #000000) !important;
 }
 
 .m-application .cyan.accent-2 {
-    color: #000000 !important;
+  color: var(--m-color-cyan-accent-2-on, #000000) !important;
 }
 
 .m-application .cyan.accent-3 {
-    color: #000000 !important;
+  color: var(--m-color-cyan-accent-3-on, #000000) !important;
 }
 
 .m-application .cyan.accent-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-cyan-accent-4-on, #FFFFFF) !important;
 }
 
 .m-application .teal {
-    color: #FFFFFF !important;
+  color: var(--m-color-teal-on, #FFFFFF) !important;
 }
 
 .m-application .teal.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-teal-lighten-5-on, #000000) !important;
 }
 
 .m-application .teal.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-teal-lighten-4-on, #000000) !important;
 }
 
 .m-application .teal.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-teal-lighten-3-on, #000000) !important;
 }
 
 .m-application .teal.lighten-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-teal-lighten-2-on, #FFFFFF) !important;
 }
 
 .m-application .teal.lighten-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-teal-lighten-1-on, #FFFFFF) !important;
 }
 
 .m-application .teal.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-teal-darken-1-on, #FFFFFF) !important;
 }
 
 .m-application .teal.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-teal-darken-2-on, #FFFFFF) !important;
 }
 
 .m-application .teal.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-teal-darken-3-on, #FFFFFF) !important;
 }
 
 .m-application .teal.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-teal-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .teal.accent-1 {
-    color: #000000 !important;
+  color: var(--m-color-teal-accent-1-on, #000000) !important;
 }
 
 .m-application .teal.accent-2 {
-    color: #000000 !important;
+  color: var(--m-color-teal-accent-2-on, #000000) !important;
 }
 
 .m-application .teal.accent-3 {
-    color: #000000 !important;
+  color: var(--m-color-teal-accent-3-on, #000000) !important;
 }
 
 .m-application .teal.accent-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-teal-accent-4-on, #FFFFFF) !important;
 }
 
 .m-application .green {
-    color: #FFFFFF !important;
+  color: var(--m-color-green-on, #FFFFFF) !important;
 }
 
 .m-application .green.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-green-lighten-5-on, #000000) !important;
 }
 
 .m-application .green.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-green-lighten-4-on, #000000) !important;
 }
 
 .m-application .green.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-green-lighten-3-on, #000000) !important;
 }
 
 .m-application .green.lighten-2 {
-    color: #000000 !important;
+  color: var(--m-color-green-lighten-2-on, #000000) !important;
 }
 
 .m-application .green.lighten-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-green-lighten-1-on, #FFFFFF) !important;
 }
 
 .m-application .green.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-green-darken-1-on, #FFFFFF) !important;
 }
 
 .m-application .green.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-green-darken-2-on, #FFFFFF) !important;
 }
 
 .m-application .green.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-green-darken-3-on, #FFFFFF) !important;
 }
 
 .m-application .green.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-green-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .green.accent-1 {
-    color: #000000 !important;
+  color: var(--m-color-green-accent-1-on, #000000) !important;
 }
 
 .m-application .green.accent-2 {
-    color: #000000 !important;
+  color: var(--m-color-green-accent-2-on, #000000) !important;
 }
 
 .m-application .green.accent-3 {
-    color: #000000 !important;
+  color: var(--m-color-green-accent-3-on, #000000) !important;
 }
 
 .m-application .green.accent-4 {
-    color: #000000 !important;
+  color: var(--m-color-green-accent-4-on, #000000) !important;
 }
 
 .m-application .light-green {
-    color: #000000 !important;
+  color: var(--m-color-light-green-on, #000000) !important;
 }
 
 .m-application .light-green.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-light-green-lighten-5-on, #000000) !important;
 }
 
 .m-application .light-green.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-light-green-lighten-4-on, #000000) !important;
 }
 
 .m-application .light-green.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-light-green-lighten-3-on, #000000) !important;
 }
 
 .m-application .light-green.lighten-2 {
-    color: #000000 !important;
+  color: var(--m-color-light-green-lighten-2-on, #000000) !important;
 }
 
 .m-application .light-green.lighten-1 {
-    color: #000000 !important;
+  color: var(--m-color-light-green-lighten-1-on, #000000) !important;
 }
 
 .m-application .light-green.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-light-green-darken-1-on, #FFFFFF) !important;
 }
 
 .m-application .light-green.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-light-green-darken-2-on, #FFFFFF) !important;
 }
 
 .m-application .light-green.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-light-green-darken-3-on, #FFFFFF) !important;
 }
 
 .m-application .light-green.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-light-green-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .light-green.accent-1 {
-    color: #000000 !important;
+  color: var(--m-color-light-green-accent-1-on, #000000) !important;
 }
 
 .m-application .light-green.accent-2 {
-    color: #000000 !important;
+  color: var(--m-color-light-green-accent-2-on, #000000) !important;
 }
 
 .m-application .light-green.accent-3 {
-    color: #000000 !important;
+  color: var(--m-color-light-green-accent-3-on, #000000) !important;
 }
 
 .m-application .light-green.accent-4 {
-    color: #000000 !important;
+  color: var(--m-color-light-green-accent-4-on, #000000) !important;
 }
 
 .m-application .lime {
-    color: #000000 !important;
+  color: var(--m-color-lime-on, #000000) !important;
 }
 
 .m-application .lime.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-lime-lighten-5-on, #000000) !important;
 }
 
 .m-application .lime.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-lime-lighten-4-on, #000000) !important;
 }
 
 .m-application .lime.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-lime-lighten-3-on, #000000) !important;
 }
 
 .m-application .lime.lighten-2 {
-    color: #000000 !important;
+  color: var(--m-color-lime-lighten-2-on, #000000) !important;
 }
 
 .m-application .lime.lighten-1 {
-    color: #000000 !important;
+  color: var(--m-color-lime-lighten-1-on, #000000) !important;
 }
 
 .m-application .lime.darken-1 {
-    color: #000000 !important;
+  color: var(--m-color-lime-darken-1-on, #000000) !important;
 }
 
 .m-application .lime.darken-2 {
-    color: #000000 !important;
+  color: var(--m-color-lime-darken-2-on, #000000) !important;
 }
 
 .m-application .lime.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-lime-darken-3-on, #FFFFFF) !important;
 }
 
 .m-application .lime.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-lime-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .lime.accent-1 {
-    color: #000000 !important;
+  color: var(--m-color-lime-accent-1-on, #000000) !important;
 }
 
 .m-application .lime.accent-2 {
-    color: #000000 !important;
+  color: var(--m-color-lime-accent-2-on, #000000) !important;
 }
 
 .m-application .lime.accent-3 {
-    color: #000000 !important;
+  color: var(--m-color-lime-accent-3-on, #000000) !important;
 }
 
 .m-application .lime.accent-4 {
-    color: #000000 !important;
+  color: var(--m-color-lime-accent-4-on, #000000) !important;
 }
 
 .m-application .yellow {
-    color: #000000 !important;
+  color: var(--m-color-yellow-on, #000000) !important;
 }
 
 .m-application .yellow.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-yellow-lighten-5-on, #000000) !important;
 }
 
 .m-application .yellow.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-yellow-lighten-4-on, #000000) !important;
 }
 
 .m-application .yellow.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-yellow-lighten-3-on, #000000) !important;
 }
 
 .m-application .yellow.lighten-2 {
-    color: #000000 !important;
+  color: var(--m-color-yellow-lighten-2-on, #000000) !important;
 }
 
 .m-application .yellow.lighten-1 {
-    color: #000000 !important;
+  color: var(--m-color-yellow-lighten-1-on, #000000) !important;
 }
 
 .m-application .yellow.darken-1 {
-    color: #000000 !important;
+  color: var(--m-color-yellow-darken-1-on, #000000) !important;
 }
 
 .m-application .yellow.darken-2 {
-    color: #000000 !important;
+  color: var(--m-color-yellow-darken-2-on, #000000) !important;
 }
 
 .m-application .yellow.darken-3 {
-    color: #000000 !important;
+  color: var(--m-color-yellow-darken-3-on, #000000) !important;
 }
 
 .m-application .yellow.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-yellow-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .yellow.accent-1 {
-    color: #000000 !important;
+  color: var(--m-color-yellow-accent-1-on, #000000) !important;
 }
 
 .m-application .yellow.accent-2 {
-    color: #000000 !important;
+  color: var(--m-color-yellow-accent-2-on, #000000) !important;
 }
 
 .m-application .yellow.accent-3 {
-    color: #000000 !important;
+  color: var(--m-color-yellow-accent-3-on, #000000) !important;
 }
 
 .m-application .yellow.accent-4 {
-    color: #000000 !important;
+  color: var(--m-color-yellow-accent-4-on, #000000) !important;
 }
 
 .m-application .amber {
-    color: #000000 !important;
+  color: var(--m-color-amber-on, #000000) !important;
 }
 
 .m-application .amber.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-amber-lighten-5-on, #000000) !important;
 }
 
 .m-application .amber.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-amber-lighten-4-on, #000000) !important;
 }
 
 .m-application .amber.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-amber-lighten-3-on, #000000) !important;
 }
 
 .m-application .amber.lighten-2 {
-    color: #000000 !important;
+  color: var(--m-color-amber-lighten-2-on, #000000) !important;
 }
 
 .m-application .amber.lighten-1 {
-    color: #000000 !important;
+  color: var(--m-color-amber-lighten-1-on, #000000) !important;
 }
 
 .m-application .amber.darken-1 {
-    color: #000000 !important;
+  color: var(--m-color-amber-darken-1-on, #000000) !important;
 }
 
 .m-application .amber.darken-2 {
-    color: #000000 !important;
+  color: var(--m-color-amber-darken-2-on, #000000) !important;
 }
 
 .m-application .amber.darken-3 {
-    color: #000000 !important;
+  color: var(--m-color-amber-darken-3-on, #000000) !important;
 }
 
 .m-application .amber.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-amber-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .amber.accent-1 {
-    color: #000000 !important;
+  color: var(--m-color-amber-accent-1-on, #000000) !important;
 }
 
 .m-application .amber.accent-2 {
-    color: #000000 !important;
+  color: var(--m-color-amber-accent-2-on, #000000) !important;
 }
 
 .m-application .amber.accent-3 {
-    color: #000000 !important;
+  color: var(--m-color-amber-accent-3-on, #000000) !important;
 }
 
 .m-application .amber.accent-4 {
-    color: #000000 !important;
+  color: var(--m-color-amber-accent-4-on, #000000) !important;
 }
 
 .m-application .orange {
-    color: #000000 !important;
+  color: var(--m-color-orange-on, #000000) !important;
 }
 
 .m-application .orange.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-orange-lighten-5-on, #000000) !important;
 }
 
 .m-application .orange.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-orange-lighten-4-on, #000000) !important;
 }
 
 .m-application .orange.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-orange-lighten-3-on, #000000) !important;
 }
 
 .m-application .orange.lighten-2 {
-    color: #000000 !important;
+  color: var(--m-color-orange-lighten-2-on, #000000) !important;
 }
 
 .m-application .orange.lighten-1 {
-    color: #000000 !important;
+  color: var(--m-color-orange-lighten-1-on, #000000) !important;
 }
 
 .m-application .orange.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-orange-darken-1-on, #FFFFFF) !important;
 }
 
 .m-application .orange.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-orange-darken-2-on, #FFFFFF) !important;
 }
 
 .m-application .orange.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-orange-darken-3-on, #FFFFFF) !important;
 }
 
 .m-application .orange.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-orange-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .orange.accent-1 {
-    color: #000000 !important;
+  color: var(--m-color-orange-accent-1-on, #000000) !important;
 }
 
 .m-application .orange.accent-2 {
-    color: #000000 !important;
+  color: var(--m-color-orange-accent-2-on, #000000) !important;
 }
 
 .m-application .orange.accent-3 {
-    color: #000000 !important;
+  color: var(--m-color-orange-accent-3-on, #000000) !important;
 }
 
 .m-application .orange.accent-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-orange-accent-4-on, #FFFFFF) !important;
 }
 
 .m-application .deep-orange {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-orange-on, #FFFFFF) !important;
 }
 
 .m-application .deep-orange.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-deep-orange-lighten-5-on, #000000) !important;
 }
 
 .m-application .deep-orange.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-deep-orange-lighten-4-on, #000000) !important;
 }
 
 .m-application .deep-orange.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-deep-orange-lighten-3-on, #000000) !important;
 }
 
 .m-application .deep-orange.lighten-2 {
-    color: #000000 !important;
+  color: var(--m-color-deep-orange-lighten-2-on, #000000) !important;
 }
 
 .m-application .deep-orange.lighten-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-orange-lighten-1-on, #FFFFFF) !important;
 }
 
 .m-application .deep-orange.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-orange-darken-1-on, #FFFFFF) !important;
 }
 
 .m-application .deep-orange.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-orange-darken-2-on, #FFFFFF) !important;
 }
 
 .m-application .deep-orange.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-orange-darken-3-on, #FFFFFF) !important;
 }
 
 .m-application .deep-orange.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-orange-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .deep-orange.accent-1 {
-    color: #000000 !important;
+  color: var(--m-color-deep-orange-accent-1-on, #000000) !important;
 }
 
 .m-application .deep-orange.accent-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-orange-accent-2-on, #FFFFFF) !important;
 }
 
 .m-application .deep-orange.accent-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-orange-accent-3-on, #FFFFFF) !important;
 }
 
 .m-application .deep-orange.accent-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-deep-orange-accent-4-on, #FFFFFF) !important;
 }
 
 .m-application .brown {
-    color: #FFFFFF !important;
+  color: var(--m-color-brown-on, #FFFFFF) !important;
 }
 
 .m-application .brown.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-brown-lighten-5-on, #000000) !important;
 }
 
 .m-application .brown.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-brown-lighten-4-on, #000000) !important;
 }
 
 .m-application .brown.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-brown-lighten-3-on, #000000) !important;
 }
 
 .m-application .brown.lighten-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-brown-lighten-2-on, #FFFFFF) !important;
 }
 
 .m-application .brown.lighten-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-brown-lighten-1-on, #FFFFFF) !important;
 }
 
 .m-application .brown.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-brown-darken-1-on, #FFFFFF) !important;
 }
 
 .m-application .brown.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-brown-darken-2-on, #FFFFFF) !important;
 }
 
 .m-application .brown.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-brown-darken-3-on, #FFFFFF) !important;
 }
 
 .m-application .brown.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-brown-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .blue-grey {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-grey-on, #FFFFFF) !important;
 }
 
 .m-application .blue-grey.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-blue-grey-lighten-5-on, #000000) !important;
 }
 
 .m-application .blue-grey.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-blue-grey-lighten-4-on, #000000) !important;
 }
 
 .m-application .blue-grey.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-blue-grey-lighten-3-on, #000000) !important;
 }
 
 .m-application .blue-grey.lighten-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-grey-lighten-2-on, #FFFFFF) !important;
 }
 
 .m-application .blue-grey.lighten-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-grey-lighten-1-on, #FFFFFF) !important;
 }
 
 .m-application .blue-grey.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-grey-darken-1-on, #FFFFFF) !important;
 }
 
 .m-application .blue-grey.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-grey-darken-2-on, #FFFFFF) !important;
 }
 
 .m-application .blue-grey.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-grey-darken-3-on, #FFFFFF) !important;
 }
 
 .m-application .blue-grey.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-blue-grey-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .grey {
-    color: #FFFFFF !important;
+  color: var(--m-color-grey-on, #FFFFFF) !important;
 }
 
 .m-application .grey.lighten-5 {
-    color: #000000 !important;
+  color: var(--m-color-grey-lighten-5-on, #000000) !important;
 }
 
 .m-application .grey.lighten-4 {
-    color: #000000 !important;
+  color: var(--m-color-grey-lighten-4-on, #000000) !important;
 }
 
 .m-application .grey.lighten-3 {
-    color: #000000 !important;
+  color: var(--m-color-grey-lighten-3-on, #000000) !important;
 }
 
 .m-application .grey.lighten-2 {
-    color: #000000 !important;
+  color: var(--m-color-grey-lighten-2-on, #000000) !important;
 }
 
 .m-application .grey.lighten-1 {
-    color: #000000 !important;
+  color: var(--m-color-grey-lighten-1-on, #000000) !important;
 }
 
 .m-application .grey.darken-1 {
-    color: #FFFFFF !important;
+  color: var(--m-color-grey-darken-1-on, #FFFFFF) !important;
 }
 
 .m-application .grey.darken-2 {
-    color: #FFFFFF !important;
+  color: var(--m-color-grey-darken-2-on, #FFFFFF) !important;
 }
 
 .m-application .grey.darken-3 {
-    color: #FFFFFF !important;
+  color: var(--m-color-grey-darken-3-on, #FFFFFF) !important;
 }
 
 .m-application .grey.darken-4 {
-    color: #FFFFFF !important;
+  color: var(--m-color-grey-darken-4-on, #FFFFFF) !important;
 }
 
 .m-application .black {
-    background-color: #000000 !important;
+  background-color: var(--m-color-black, #000) !important;
 }
 
 .m-application .black--text {
-    color: #000000 !important;
-    caret-color: #000000 !important;
+  color: var(--m-color-black, #000000) !important;
+  caret-color: var(--m-color-black, #000000) !important;
 }
 
 .m-application .white {
-    background-color: #FFFFFF !important;
+  background-color: var(--m-color-white, #fff) !important;
 }
 
 .m-application .white--text {
-    color: #FFFFFF !important;
-    caret-color: #FFFFFF !important;
+  color: var(--m-color-white, #fff) !important;
+  caret-color: var(--m-color-white, #fff) !important;
 }
 
 .m-application .transparent {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .m-application .transparent--text {
-    color: transparent !important;
-    caret-color: transparent !important;
+  color: transparent !important;
+  caret-color: transparent !important;
 }
 
 .m-application .red {
-    background-color: #F44336 !important;
+  background-color: var(--m-color-red, #F44336) !important;
 }
 
 .m-application .red--text {
-    color: #F44336 !important;
-    caret-color: #F44336 !important;
+  color: var(--m-color-red, #F44336) !important;
+  caret-color: var(--m-color-red, #F44336) !important;
 }
 
 .m-application .red.lighten-5 {
-    background-color: #FFEBEE !important;
+  background-color: var(--m-color-red-lighten-5, #FFEBEE) !important;
 }
 
 .m-application .red--text.text--lighten-5 {
-    color: #FFEBEE !important;
-    caret-color: #FFEBEE !important;
+  color: var(--m-color-red-lighten-5, #FFEBEE) !important;
+  caret-color: var(--m-color-red-lighten-5, #FFEBEE) !important;
 }
 
 .m-application .red.lighten-4 {
-    background-color: #FFCDD2 !important;
+  background-color: var(--m-color-red-lighten-4, #FFCDD2) !important;
 }
 
 .m-application .red--text.text--lighten-4 {
-    color: #FFCDD2 !important;
-    caret-color: #FFCDD2 !important;
+  color: var(--m-color-red-lighten-4, #FFCDD2) !important;
+  caret-color: var(--m-color-red-lighten-4, #FFCDD2) !important;
 }
 
 .m-application .red.lighten-3 {
-    background-color: #EF9A9A !important;
+  background-color: var(--m-color-red-lighten-3, #EF9A9A) !important;
 }
 
 .m-application .red--text.text--lighten-3 {
-    color: #EF9A9A !important;
-    caret-color: #EF9A9A !important;
+  color: var(--m-color-red-lighten-3, #EF9A9A) !important;
+  caret-color: var(--m-color-red-lighten-3, #EF9A9A) !important;
 }
 
 .m-application .red.lighten-2 {
-    background-color: #E57373 !important;
+  background-color: var(--m-color-red-lighten-2, #E57373) !important;
 }
 
 .m-application .red--text.text--lighten-2 {
-    color: #E57373 !important;
-    caret-color: #E57373 !important;
+  color: var(--m-color-red-lighten-2, #E57373) !important;
+  caret-color: var(--m-color-red-lighten-2, #E57373) !important;
 }
 
 .m-application .red.lighten-1 {
-    background-color: #EF5350 !important;
+  background-color: var(--m-color-red-lighten-1, #EF5350) !important;
 }
 
 .m-application .red--text.text--lighten-1 {
-    color: #EF5350 !important;
-    caret-color: #EF5350 !important;
+  color: var(--m-color-red-lighten-1, #EF5350) !important;
+  caret-color: var(--m-color-red-lighten-1, #EF5350) !important;
 }
 
 .m-application .red.darken-1 {
-    background-color: #E53935 !important;
+  background-color: var(--m-color-red-darken-1, #E53935) !important;
 }
 
 .m-application .red--text.text--darken-1 {
-    color: #E53935 !important;
-    caret-color: #E53935 !important;
+  color: var(--m-color-red-darken-1, #E53935) !important;
+  caret-color: var(--m-color-red-darken-1, #E53935) !important;
 }
 
 .m-application .red.darken-2 {
-    background-color: #D32F2F !important;
+  background-color: var(--m-color-red-darken-2, #D32F2F) !important;
 }
 
 .m-application .red--text.text--darken-2 {
-    color: #D32F2F !important;
-    caret-color: #D32F2F !important;
+  color: var(--m-color-red-darken-2, #D32F2F) !important;
+  caret-color: var(--m-color-red-darken-2, #D32F2F) !important;
 }
 
 .m-application .red.darken-3 {
-    background-color: #C62828 !important;
+  background-color: var(--m-color-red-darken-3, #C62828) !important;
 }
 
 .m-application .red--text.text--darken-3 {
-    color: #C62828 !important;
-    caret-color: #C62828 !important;
+  color: var(--m-color-red-darken-3, #C62828) !important;
+  caret-color: var(--m-color-red-darken-3, #C62828) !important;
 }
 
 .m-application .red.darken-4 {
-    background-color: #B71C1C !important;
+  background-color: var(--m-color-red-darken-4, #B71C1C) !important;
 }
 
 .m-application .red--text.text--darken-4 {
-    color: #B71C1C !important;
-    caret-color: #B71C1C !important;
+  color: var(--m-color-red-darken-4, #B71C1C) !important;
+  caret-color: var(--m-color-red-darken-4, #B71C1C) !important;
 }
 
 .m-application .red.accent-1 {
-    background-color: #FF8A80 !important;
+  background-color: var(--m-color-red-accent-1, #FF8A80) !important;
 }
 
 .m-application .red--text.text--accent-1 {
-    color: #FF8A80 !important;
-    caret-color: #FF8A80 !important;
+  color: var(--m-color-red-accent-1, #FF8A80) !important;
+  caret-color: var(--m-color-red-accent-1, #FF8A80) !important;
 }
 
 .m-application .red.accent-2 {
-    background-color: #FF5252 !important;
+  background-color: var(--m-color-red-accent-2, #FF5252) !important;
 }
 
 .m-application .red--text.text--accent-2 {
-    color: #FF5252 !important;
-    caret-color: #FF5252 !important;
+  color: var(--m-color-red-accent-2, #FF5252) !important;
+  caret-color: var(--m-color-red-accent-2, #FF5252) !important;
 }
 
 .m-application .red.accent-3 {
-    background-color: #FF1744 !important;
+  background-color: var(--m-color-red-accent-3, #FF1744) !important;
 }
 
 .m-application .red--text.text--accent-3 {
-    color: #FF1744 !important;
-    caret-color: #FF1744 !important;
+  color: var(--m-color-red-accent-3, #FF1744) !important;
+  caret-color: var(--m-color-red-accent-3, #FF1744) !important;
 }
 
 .m-application .red.accent-4 {
-    background-color: #D50000 !important;
+  background-color: var(--m-color-red-accent-4, #D50000) !important;
 }
 
 .m-application .red--text.text--accent-4 {
-    color: #D50000 !important;
-    caret-color: #D50000 !important;
+  color: var(--m-color-red-accent-4, #D50000) !important;
+  caret-color: var(--m-color-red-accent-4, #D50000) !important;
 }
 
 .m-application .pink {
-    background-color: #e91e63 !important;
+  background-color: var(--m-color-pink, #e91e63) !important;
 }
 
 .m-application .pink--text {
-    color: #e91e63 !important;
-    caret-color: #e91e63 !important;
+  color: var(--m-color-pink, #e91e63) !important;
+  caret-color: var(--m-color-pink, #e91e63) !important;
 }
 
 .m-application .pink.lighten-5 {
-    background-color: #fce4ec !important;
+  background-color: var(--m-color-pink-lighten-5, #fce4ec) !important;
 }
 
 .m-application .pink--text.text--lighten-5 {
-    color: #fce4ec !important;
-    caret-color: #fce4ec !important;
+  color: var(--m-color-pink-lighten-5, #fce4ec) !important;
+  caret-color: var(--m-color-pink-lighten-5, #fce4ec) !important;
 }
 
 .m-application .pink.lighten-4 {
-    background-color: #f8bbd0 !important;
+  background-color: var(--m-color-pink-lighten-4, #f8bbd0) !important;
 }
 
 .m-application .pink--text.text--lighten-4 {
-    color: #f8bbd0 !important;
-    caret-color: #f8bbd0 !important;
+  color: var(--m-color-pink-lighten-4, #f8bbd0) !important;
+  caret-color: var(--m-color-pink-lighten-4, #f8bbd0) !important;
 }
 
 .m-application .pink.lighten-3 {
-    background-color: #f48fb1 !important;
+  background-color: var(--m-color-pink-lighten-3, #f48fb1) !important;
 }
 
 .m-application .pink--text.text--lighten-3 {
-    color: #f48fb1 !important;
-    caret-color: #f48fb1 !important;
+  color: var(--m-color-pink-lighten-3, #f48fb1) !important;
+  caret-color: var(--m-color-pink-lighten-3, #f48fb1) !important;
 }
 
 .m-application .pink.lighten-2 {
-    background-color: #f06292 !important;
+  background-color: var(--m-color-pink-lighten-2, #f06292) !important;
 }
 
 .m-application .pink--text.text--lighten-2 {
-    color: #f06292 !important;
-    caret-color: #f06292 !important;
+  color: var(--m-color-pink-lighten-2, #f06292) !important;
+  caret-color: var(--m-color-pink-lighten-2, #f06292) !important;
 }
 
 .m-application .pink.lighten-1 {
-    background-color: #ec407a !important;
+  background-color: var(--m-color-pink-lighten-1, #ec407a) !important;
 }
 
 .m-application .pink--text.text--lighten-1 {
-    color: #ec407a !important;
-    caret-color: #ec407a !important;
+  color: var(--m-color-pink-lighten-1, #ec407a) !important;
+  caret-color: var(--m-color-pink-lighten-1, #ec407a) !important;
 }
 
 .m-application .pink.darken-1 {
-    background-color: #d81b60 !important;
+  background-color: var(--m-color-pink-darken-1, #d81b60) !important;
 }
 
 .m-application .pink--text.text--darken-1 {
-    color: #d81b60 !important;
-    caret-color: #d81b60 !important;
+  color: var(--m-color-pink-darken-1, #d81b60) !important;
+  caret-color: var(--m-color-pink-darken-1, #d81b60) !important;
 }
 
 .m-application .pink.darken-2 {
-    background-color: #c2185b !important;
+  background-color: var(--m-color-pink-darken-2, #c2185b) !important;
 }
 
 .m-application .pink--text.text--darken-2 {
-    color: #c2185b !important;
-    caret-color: #c2185b !important;
+  color: var(--m-color-pink-darken-2, #c2185b) !important;
+  caret-color: var(--m-color-pink-darken-2, #c2185b) !important;
 }
 
 .m-application .pink.darken-3 {
-    background-color: #ad1457 !important;
+  background-color: var(--m-color-pink-darken-3, #ad1457) !important;
 }
 
 .m-application .pink--text.text--darken-3 {
-    color: #ad1457 !important;
-    caret-color: #ad1457 !important;
+  color: var(--m-color-pink-darken-3, #ad1457) !important;
+  caret-color: var(--m-color-pink-darken-3, #ad1457) !important;
 }
 
 .m-application .pink.darken-4 {
-    background-color: #880e4f !important;
+  background-color: var(--m-color-pink-darken-4, #880e4f) !important;
 }
 
 .m-application .pink--text.text--darken-4 {
-    color: #880e4f !important;
-    caret-color: #880e4f !important;
+  color: var(--m-color-pink-darken-4, #880e4f) !important;
+  caret-color: var(--m-color-pink-darken-4, #880e4f) !important;
 }
 
 .m-application .pink.accent-1 {
-    background-color: #ff80ab !important;
+  background-color: var(--m-color-pink-accent-1, #ff80ab) !important;
 }
 
 .m-application .pink--text.text--accent-1 {
-    color: #ff80ab !important;
-    caret-color: #ff80ab !important;
+  color: var(--m-color-pink-accent-1, #ff80ab) !important;
+  caret-color: var(--m-color-pink-accent-1, #ff80ab) !important;
 }
 
 .m-application .pink.accent-2 {
-    background-color: #ff4081 !important;
+  background-color: var(--m-color-pink-accent-2, #ff4081) !important;
 }
 
 .m-application .pink--text.text--accent-2 {
-    color: #ff4081 !important;
-    caret-color: #ff4081 !important;
+  color: var(--m-color-pink-accent-2, #ff4081) !important;
+  caret-color: var(--m-color-pink-accent-2, #ff4081) !important;
 }
 
 .m-application .pink.accent-3 {
-    background-color: #f50057 !important;
+  background-color: var(--m-color-pink-accent-3, #f50057) !important;
 }
 
 .m-application .pink--text.text--accent-3 {
-    color: #f50057 !important;
-    caret-color: #f50057 !important;
+  color: var(--m-color-pink-accent-3, #f50057) !important;
+  caret-color: var(--m-color-pink-accent-3, #f50057) !important;
 }
 
 .m-application .pink.accent-4 {
-    background-color: #c51162 !important;
+  background-color: var(--m-color-pink-accent-4, #c51162) !important;
 }
 
 .m-application .pink--text.text--accent-4 {
-    color: #c51162 !important;
-    caret-color: #c51162 !important;
+  color: var(--m-color-pink-accent-4, #c51162) !important;
+  caret-color: var(--m-color-pink-accent-4, #c51162) !important;
 }
 
 .m-application .purple {
-    background-color: #9c27b0 !important;
+  background-color: var(--m-color-purple, #9c27b0) !important;
 }
 
 .m-application .purple--text {
-    color: #9c27b0 !important;
-    caret-color: #9c27b0 !important;
+  color: var(--m-color-purple, #9c27b0) !important;
+  caret-color: var(--m-color-purple, #9c27b0) !important;
 }
 
 .m-application .purple.lighten-5 {
-    background-color: #f3e5f5 !important;
+  background-color: var(--m-color-purple-lighten-5, #f3e5f5) !important;
 }
 
 .m-application .purple--text.text--lighten-5 {
-    color: #f3e5f5 !important;
-    caret-color: #f3e5f5 !important;
+  color: var(--m-color-purple-lighten-5, #f3e5f5) !important;
+  caret-color: var(--m-color-purple-lighten-5, #f3e5f5) !important;
 }
 
 .m-application .purple.lighten-4 {
-    background-color: #e1bee7 !important;
+  background-color: var(--m-color-purple-lighten-4, #e1bee7) !important;
 }
 
 .m-application .purple--text.text--lighten-4 {
-    color: #e1bee7 !important;
-    caret-color: #e1bee7 !important;
+  color: var(--m-color-purple-lighten-4, #e1bee7) !important;
+  caret-color: var(--m-color-purple-lighten-4, #e1bee7) !important;
 }
 
 .m-application .purple.lighten-3 {
-    background-color: #ce93d8 !important;
+  background-color: var(--m-color-purple-lighten-3, #ce93d8) !important;
 }
 
 .m-application .purple--text.text--lighten-3 {
-    color: #ce93d8 !important;
-    caret-color: #ce93d8 !important;
+  color: var(--m-color-purple-lighten-3, #ce93d8) !important;
+  caret-color: var(--m-color-purple-lighten-3, #ce93d8) !important;
 }
 
 .m-application .purple.lighten-2 {
-    background-color: #ba68c8 !important;
+  background-color: var(--m-color-purple-lighten-2, #ba68c8) !important;
 }
 
 .m-application .purple--text.text--lighten-2 {
-    color: #ba68c8 !important;
-    caret-color: #ba68c8 !important;
+  color: var(--m-color-purple-lighten-2, #ba68c8) !important;
+  caret-color: var(--m-color-purple-lighten-2, #ba68c8) !important;
 }
 
 .m-application .purple.lighten-1 {
-    background-color: #ab47bc !important;
+  background-color: var(--m-color-purple-lighten-1, #ab47bc) !important;
 }
 
 .m-application .purple--text.text--lighten-1 {
-    color: #ab47bc !important;
-    caret-color: #ab47bc !important;
+  color: var(--m-color-purple-lighten-1, #ab47bc) !important;
+  caret-color: var(--m-color-purple-lighten-1, #ab47bc) !important;
 }
 
 .m-application .purple.darken-1 {
-    background-color: #8e24aa !important;
+  background-color: var(--m-color-purple-darken-1, #8e24aa) !important;
 }
 
 .m-application .purple--text.text--darken-1 {
-    color: #8e24aa !important;
-    caret-color: #8e24aa !important;
+  color: var(--m-color-purple-darken-1, #8e24aa) !important;
+  caret-color: var(--m-color-purple-darken-1, #8e24aa) !important;
 }
 
 .m-application .purple.darken-2 {
-    background-color: #7b1fa2 !important;
+  background-color: var(--m-color-purple-darken-2, #7b1fa2) !important;
 }
 
 .m-application .purple--text.text--darken-2 {
-    color: #7b1fa2 !important;
-    caret-color: #7b1fa2 !important;
+  color: var(--m-color-purple-darken-2, #7b1fa2) !important;
+  caret-color: var(--m-color-purple-darken-2, #7b1fa2) !important;
 }
 
 .m-application .purple.darken-3 {
-    background-color: #6a1b9a !important;
+  background-color: var(--m-color-purple-darken-3, #6a1b9a) !important;
 }
 
 .m-application .purple--text.text--darken-3 {
-    color: #6a1b9a !important;
-    caret-color: #6a1b9a !important;
+  color: var(--m-color-purple-darken-3, #6a1b9a) !important;
+  caret-color: var(--m-color-purple-darken-3, #6a1b9a) !important;
 }
 
 .m-application .purple.darken-4 {
-    background-color: #4a148c !important;
+  background-color: var(--m-color-purple-darken-4, #4a148c) !important;
 }
 
 .m-application .purple--text.text--darken-4 {
-    color: #4a148c !important;
-    caret-color: #4a148c !important;
+  color: var(--m-color-purple-darken-4, #4a148c) !important;
+  caret-color: var(--m-color-purple-darken-4, #4a148c) !important;
 }
 
 .m-application .purple.accent-1 {
-    background-color: #ea80fc !important;
+  background-color: var(--m-color-purple-accent-1, #ea80fc) !important;
 }
 
 .m-application .purple--text.text--accent-1 {
-    color: #ea80fc !important;
-    caret-color: #ea80fc !important;
+  color: var(--m-color-purple-accent-1, #ea80fc) !important;
+  caret-color: var(--m-color-purple-accent-1, #ea80fc) !important;
 }
 
 .m-application .purple.accent-2 {
-    background-color: #e040fb !important;
+  background-color: var(--m-color-purple-accent-2, #e040fb) !important;
 }
 
 .m-application .purple--text.text--accent-2 {
-    color: #e040fb !important;
-    caret-color: #e040fb !important;
+  color: var(--m-color-purple-accent-2, #e040fb) !important;
+  caret-color: var(--m-color-purple-accent-2, #e040fb) !important;
 }
 
 .m-application .purple.accent-3 {
-    background-color: #d500f9 !important;
+  background-color: var(--m-color-purple-accent-3, #d500f9) !important;
 }
 
 .m-application .purple--text.text--accent-3 {
-    color: #d500f9 !important;
-    caret-color: #d500f9 !important;
+  color: var(--m-color-purple-accent-3, #d500f9) !important;
+  caret-color: var(--m-color-purple-accent-3, #d500f9) !important;
 }
 
 .m-application .purple.accent-4 {
-    background-color: #aa00ff !important;
+  background-color: var(--m-color-purple-accent-4, #aa00ff) !important;
 }
 
 .m-application .purple--text.text--accent-4 {
-    color: #aa00ff !important;
-    caret-color: #aa00ff !important;
+  color: var(--m-color-purple-accent-4, #aa00ff) !important;
+  caret-color: var(--m-color-purple-accent-4, #aa00ff) !important;
 }
 
 .m-application .deep-purple {
-    background-color: #673ab7 !important;
+  background-color: var(--m-color-deep-purple, #673ab7) !important;
 }
 
 .m-application .deep-purple--text {
-    color: #673ab7 !important;
-    caret-color: #673ab7 !important;
+  color: var(--m-color-deep-purple, #673ab7) !important;
+  caret-color: var(--m-color-deep-purple, #673ab7) !important;
 }
 
 .m-application .deep-purple.lighten-5 {
-    background-color: #ede7f6 !important;
+  background-color: var(--m-color-deep-purple-lighten-5, #ede7f6) !important;
 }
 
 .m-application .deep-purple--text.text--lighten-5 {
-    color: #ede7f6 !important;
-    caret-color: #ede7f6 !important;
+  color: var(--m-color-deep-purple-lighten-5, #ede7f6) !important;
+  caret-color: var(--m-color-deep-purple-lighten-5, #ede7f6) !important;
 }
 
 .m-application .deep-purple.lighten-4 {
-    background-color: #d1c4e9 !important;
+  background-color: var(--m-color-deep-purple-lighten-4, #d1c4e9) !important;
 }
 
 .m-application .deep-purple--text.text--lighten-4 {
-    color: #d1c4e9 !important;
-    caret-color: #d1c4e9 !important;
+  color: var(--m-color-deep-purple-lighten-4, #d1c4e9) !important;
+  caret-color: var(--m-color-deep-purple-lighten-4, #d1c4e9) !important;
 }
 
 .m-application .deep-purple.lighten-3 {
-    background-color: #b39ddb !important;
+  background-color: var(--m-color-deep-purple-lighten-3, #b39ddb) !important;
 }
 
 .m-application .deep-purple--text.text--lighten-3 {
-    color: #b39ddb !important;
-    caret-color: #b39ddb !important;
+  color: var(--m-color-deep-purple-lighten-3, #b39ddb) !important;
+  caret-color: var(--m-color-deep-purple-lighten-3, #b39ddb) !important;
 }
 
 .m-application .deep-purple.lighten-2 {
-    background-color: #9575cd !important;
+  background-color: var(--m-color-deep-purple-lighten-2, #9575cd) !important;
 }
 
 .m-application .deep-purple--text.text--lighten-2 {
-    color: #9575cd !important;
-    caret-color: #9575cd !important;
+  color: var(--m-color-deep-purple-lighten-2, #9575cd) !important;
+  caret-color: var(--m-color-deep-purple-lighten-2, #9575cd) !important;
 }
 
 .m-application .deep-purple.lighten-1 {
-    background-color: #7e57c2 !important;
+  background-color: var(--m-color-deep-purple-lighten-1, #7e57c2) !important;
 }
 
 .m-application .deep-purple--text.text--lighten-1 {
-    color: #7e57c2 !important;
-    caret-color: #7e57c2 !important;
+  color: var(--m-color-deep-purple-lighten-1, #7e57c2) !important;
+  caret-color: var(--m-color-deep-purple-lighten-1, #7e57c2) !important;
 }
 
 .m-application .deep-purple.darken-1 {
-    background-color: #5e35b1 !important;
+  background-color: var(--m-color-deep-purple-darken-1, #5e35b1) !important;
 }
 
 .m-application .deep-purple--text.text--darken-1 {
-    color: #5e35b1 !important;
-    caret-color: #5e35b1 !important;
+  color: var(--m-color-deep-purple-darken-1, #5e35b1) !important;
+  caret-color: var(--m-color-deep-purple-darken-1, #5e35b1) !important;
 }
 
 .m-application .deep-purple.darken-2 {
-    background-color: #512da8 !important;
+  background-color: var(--m-color-deep-purple-darken-2, #512da8) !important;
 }
 
 .m-application .deep-purple--text.text--darken-2 {
-    color: #512da8 !important;
-    caret-color: #512da8 !important;
+  color: var(--m-color-deep-purple-darken-2, #512da8) !important;
+  caret-color: var(--m-color-deep-purple-darken-2, #512da8) !important;
 }
 
 .m-application .deep-purple.darken-3 {
-    background-color: #4527a0 !important;
+  background-color: var(--m-color-deep-purple-darken-3, #4527a0) !important;
 }
 
 .m-application .deep-purple--text.text--darken-3 {
-    color: #4527a0 !important;
-    caret-color: #4527a0 !important;
+  color: var(--m-color-deep-purple-darken-3, #4527a0) !important;
+  caret-color: var(--m-color-deep-purple-darken-3, #4527a0) !important;
 }
 
 .m-application .deep-purple.darken-4 {
-    background-color: #311b92 !important;
+  background-color: var(--m-color-deep-purple-darken-4, #311b92) !important;
 }
 
 .m-application .deep-purple--text.text--darken-4 {
-    color: #311b92 !important;
-    caret-color: #311b92 !important;
+  color: var(--m-color-deep-purple-darken-4, #311b92) !important;
+  caret-color: var(--m-color-deep-purple-darken-4, #311b92) !important;
 }
 
 .m-application .deep-purple.accent-1 {
-    background-color: #b388ff !important;
+  background-color: var(--m-color-deep-purple-accent-1, #b388ff) !important;
 }
 
 .m-application .deep-purple--text.text--accent-1 {
-    color: #b388ff !important;
-    caret-color: #b388ff !important;
+  color: var(--m-color-deep-purple-accent-1, #b388ff) !important;
+  caret-color: var(--m-color-deep-purple-accent-1, #b388ff) !important;
 }
 
 .m-application .deep-purple.accent-2 {
-    background-color: #7c4dff !important;
+  background-color: var(--m-color-deep-purple-accent-2, #7c4dff) !important;
 }
 
 .m-application .deep-purple--text.text--accent-2 {
-    color: #7c4dff !important;
-    caret-color: #7c4dff !important;
+  color: var(--m-color-deep-purple-accent-2, #7c4dff) !important;
+  caret-color: var(--m-color-deep-purple-accent-2, #7c4dff) !important;
 }
 
 .m-application .deep-purple.accent-3 {
-    background-color: #651fff !important;
+  background-color: var(--m-color-deep-purple-accent-3, #651fff) !important;
 }
 
 .m-application .deep-purple--text.text--accent-3 {
-    color: #651fff !important;
-    caret-color: #651fff !important;
+  color: var(--m-color-deep-purple-accent-3, #651fff) !important;
+  caret-color: var(--m-color-deep-purple-accent-3, #651fff) !important;
 }
 
 .m-application .deep-purple.accent-4 {
-    background-color: #6200ea !important;
+  background-color: var(--m-color-deep-purple-accent-4, #6200ea) !important;
 }
 
 .m-application .deep-purple--text.text--accent-4 {
-    color: #6200ea !important;
-    caret-color: #6200ea !important;
+  color: var(--m-color-deep-purple-accent-4, #6200ea) !important;
+  caret-color: var(--m-color-deep-purple-accent-4, #6200ea) !important;
 }
 
 .m-application .indigo {
-    background-color: #3f51b5 !important;
+  background-color: var(--m-color-indigo, #3f51b5) !important;
 }
 
 .m-application .indigo--text {
-    color: #3f51b5 !important;
-    caret-color: #3f51b5 !important;
+  color: var(--m-color-indigo, #3f51b5) !important;
+  caret-color: var(--m-color-indigo, #3f51b5) !important;
 }
 
 .m-application .indigo.lighten-5 {
-    background-color: #e8eaf6 !important;
+  background-color: var(--m-color-indigo-lighten-5, #e8eaf6) !important;
 }
 
 .m-application .indigo--text.text--lighten-5 {
-    color: #e8eaf6 !important;
-    caret-color: #e8eaf6 !important;
+  color: var(--m-color-indigo-lighten-5, #e8eaf6) !important;
+  caret-color: var(--m-color-indigo-lighten-5, #e8eaf6) !important;
 }
 
 .m-application .indigo.lighten-4 {
-    background-color: #c5cae9 !important;
+  background-color: var(--m-color-indigo-lighten-4, #c5cae9) !important;
 }
 
 .m-application .indigo--text.text--lighten-4 {
-    color: #c5cae9 !important;
-    caret-color: #c5cae9 !important;
+  color: var(--m-color-indigo-lighten-4, #c5cae9) !important;
+  caret-color: var(--m-color-indigo-lighten-4, #c5cae9) !important;
 }
 
 .m-application .indigo.lighten-3 {
-    background-color: #9fa8da !important;
+  background-color: var(--m-color-indigo-lighten-3, #9fa8da) !important;
 }
 
 .m-application .indigo--text.text--lighten-3 {
-    color: #9fa8da !important;
-    caret-color: #9fa8da !important;
+  color: var(--m-color-indigo-lighten-3, #9fa8da) !important;
+  caret-color: var(--m-color-indigo-lighten-3, #9fa8da) !important;
 }
 
 .m-application .indigo.lighten-2 {
-    background-color: #7986cb !important;
+  background-color: var(--m-color-indigo-lighten-2, #7986cb) !important;
 }
 
 .m-application .indigo--text.text--lighten-2 {
-    color: #7986cb !important;
-    caret-color: #7986cb !important;
+  color: var(--m-color-indigo-lighten-2, #7986cb) !important;
+  caret-color: var(--m-color-indigo-lighten-2, #7986cb) !important;
 }
 
 .m-application .indigo.lighten-1 {
-    background-color: #5c6bc0 !important;
+  background-color: var(--m-color-indigo-lighten-1, #5c6bc0) !important;
 }
 
 .m-application .indigo--text.text--lighten-1 {
-    color: #5c6bc0 !important;
-    caret-color: #5c6bc0 !important;
+  color: var(--m-color-indigo-lighten-1, #5c6bc0) !important;
+  caret-color: var(--m-color-indigo-lighten-1, #5c6bc0) !important;
 }
 
 .m-application .indigo.darken-1 {
-    background-color: #3949ab !important;
+  background-color: var(--m-color-indigo-darken-1, #3949ab) !important;
 }
 
 .m-application .indigo--text.text--darken-1 {
-    color: #3949ab !important;
-    caret-color: #3949ab !important;
+  color: var(--m-color-indigo-darken-1, #3949ab) !important;
+  caret-color: var(--m-color-indigo-darken-1, #3949ab) !important;
 }
 
 .m-application .indigo.darken-2 {
-    background-color: #303f9f !important;
+  background-color: var(--m-color-indigo-darken-2, #303f9f) !important;
 }
 
 .m-application .indigo--text.text--darken-2 {
-    color: #303f9f !important;
-    caret-color: #303f9f !important;
+  color: var(--m-color-indigo-darken-2, #303f9f) !important;
+  caret-color: var(--m-color-indigo-darken-2, #303f9f) !important;
 }
 
 .m-application .indigo.darken-3 {
-    background-color: #283593 !important;
+  background-color: var(--m-color-indigo-darken-3, #283593) !important;
 }
 
 .m-application .indigo--text.text--darken-3 {
-    color: #283593 !important;
-    caret-color: #283593 !important;
+  color: var(--m-color-indigo-darken-3, #283593) !important;
+  caret-color: var(--m-color-indigo-darken-3, #283593) !important;
 }
 
 .m-application .indigo.darken-4 {
-    background-color: #1a237e !important;
+  background-color: var(--m-color-indigo-darken-4, #1a237e) !important;
 }
 
 .m-application .indigo--text.text--darken-4 {
-    color: #1a237e !important;
-    caret-color: #1a237e !important;
+  color: var(--m-color-indigo-darken-4, #1a237e) !important;
+  caret-color: var(--m-color-indigo-darken-4, #1a237e) !important;
 }
 
 .m-application .indigo.accent-1 {
-    background-color: #8c9eff !important;
+  background-color: var(--m-color-indigo-accent-1, #8c9eff) !important;
 }
 
 .m-application .indigo--text.text--accent-1 {
-    color: #8c9eff !important;
-    caret-color: #8c9eff !important;
+  color: var(--m-color-indigo-accent-1, #8c9eff) !important;
+  caret-color: var(--m-color-indigo-accent-1, #8c9eff) !important;
 }
 
 .m-application .indigo.accent-2 {
-    background-color: #536dfe !important;
+  background-color: var(--m-color-indigo-accent-2, #536dfe) !important;
 }
 
 .m-application .indigo--text.text--accent-2 {
-    color: #536dfe !important;
-    caret-color: #536dfe !important;
+  color: var(--m-color-indigo-accent-2, #536dfe) !important;
+  caret-color: var(--m-color-indigo-accent-2, #536dfe) !important;
 }
 
 .m-application .indigo.accent-3 {
-    background-color: #3d5afe !important;
+  background-color: var(--m-color-indigo-accent-3, #3d5afe) !important;
 }
 
 .m-application .indigo--text.text--accent-3 {
-    color: #3d5afe !important;
-    caret-color: #3d5afe !important;
+  color: var(--m-color-indigo-accent-3, #3d5afe) !important;
+  caret-color: var(--m-color-indigo-accent-3, #3d5afe) !important;
 }
 
 .m-application .indigo.accent-4 {
-    background-color: #304ffe !important;
+  background-color: var(--m-color-indigo-accent-4, #304ffe) !important;
 }
 
 .m-application .indigo--text.text--accent-4 {
-    color: #304ffe !important;
-    caret-color: #304ffe !important;
+  color: var(--m-color-indigo-accent-4, #304ffe) !important;
+  caret-color: var(--m-color-indigo-accent-4, #304ffe) !important;
 }
 
 .m-application .blue {
-    background-color: #2196F3 !important;
+  background-color: var(--m-color-blue, #2196f3) !important;
 }
 
 .m-application .blue--text {
-    color: #2196F3 !important;
-    caret-color: #2196F3 !important;
+  color: var(--m-color-blue, #2196f3) !important;
+  caret-color: var(--m-color-blue, #2196f3) !important;
 }
 
 .m-application .blue.lighten-5 {
-    background-color: #E3F2FD !important;
+  background-color: var(--m-color-blue-lighten-5, #e3f2fd) !important;
 }
 
 .m-application .blue--text.text--lighten-5 {
-    color: #E3F2FD !important;
-    caret-color: #E3F2FD !important;
+  color: var(--m-color-blue-lighten-5, #e3f2fd) !important;
+  caret-color: var(--m-color-blue-lighten-5, #e3f2fd) !important;
 }
 
 .m-application .blue.lighten-4 {
-    background-color: #BBDEFB !important;
+  background-color: var(--m-color-blue-lighten-4, #bbdefb) !important;
 }
 
 .m-application .blue--text.text--lighten-4 {
-    color: #BBDEFB !important;
-    caret-color: #BBDEFB !important;
+  color: var(--m-color-blue-lighten-4, #bbdefb) !important;
+  caret-color: var(--m-color-blue-lighten-4, #bbdefb) !important;
 }
 
 .m-application .blue.lighten-3 {
-    background-color: #90CAF9 !important;
+  background-color: var(--m-color-blue-lighten-3, #90caf9) !important;
 }
 
 .m-application .blue--text.text--lighten-3 {
-    color: #90CAF9 !important;
-    caret-color: #90CAF9 !important;
+  color: var(--m-color-blue-lighten-3, #90caf9) !important;
+  caret-color: var(--m-color-blue-lighten-3, #90caf9) !important;
 }
 
 .m-application .blue.lighten-2 {
-    background-color: #64B5F6 !important;
+  background-color: var(--m-color-blue-lighten-2, #64b5f6) !important;
 }
 
 .m-application .blue--text.text--lighten-2 {
-    color: #64B5F6 !important;
-    caret-color: #64B5F6 !important;
+  color: var(--m-color-blue-lighten-2, #64b5f6) !important;
+  caret-color: var(--m-color-blue-lighten-2, #64b5f6) !important;
 }
 
 .m-application .blue.lighten-1 {
-    background-color: #42A5F5 !important;
+  background-color: var(--m-color-blue-lighten-1, #42a5f5) !important;
 }
 
 .m-application .blue--text.text--lighten-1 {
-    color: #42A5F5 !important;
-    caret-color: #42A5F5 !important;
+  color: var(--m-color-blue-lighten-1, #42a5f5) !important;
+  caret-color: var(--m-color-blue-lighten-1, #42a5f5) !important;
 }
 
 .m-application .blue.darken-1 {
-    background-color: #1E88E5 !important;
+  background-color: var(--m-color-blue-darken-1, #1e88e5) !important;
 }
 
 .m-application .blue--text.text--darken-1 {
-    color: #1E88E5 !important;
-    caret-color: #1E88E5 !important;
+  color: var(--m-color-blue-darken-1, #1e88e5) !important;
+  caret-color: var(--m-color-blue-darken-1, #1e88e5) !important;
 }
 
 .m-application .blue.darken-2 {
-    background-color: #1976D2 !important;
+  background-color: var(--m-color-blue-darken-2, #1976d2) !important;
 }
 
 .m-application .blue--text.text--darken-2 {
-    color: #1976D2 !important;
-    caret-color: #1976D2 !important;
+  color: var(--m-color-blue-darken-2, #1976d2) !important;
+  caret-color: var(--m-color-blue-darken-2, #1976d2) !important;
 }
 
 .m-application .blue.darken-3 {
-    background-color: #1565C0 !important;
+  background-color: var(--m-color-blue-darken-3, #1565c0) !important;
 }
 
 .m-application .blue--text.text--darken-3 {
-    color: #1565C0 !important;
-    caret-color: #1565C0 !important;
+  color: var(--m-color-blue-darken-3, #1565c0) !important;
+  caret-color: var(--m-color-blue-darken-3, #1565c0) !important;
 }
 
 .m-application .blue.darken-4 {
-    background-color: #0D47A1 !important;
+  background-color: var(--m-color-blue-darken-4, #0d47a1) !important;
 }
 
 .m-application .blue--text.text--darken-4 {
-    color: #0D47A1 !important;
-    caret-color: #0D47A1 !important;
+  color: var(--m-color-blue-darken-4, #0d47a1) !important;
+  caret-color: var(--m-color-blue-darken-4, #0d47a1) !important;
 }
 
 .m-application .blue.accent-1 {
-    background-color: #82B1FF !important;
+  background-color: var(--m-color-blue-accent-1, #82b1ff) !important;
 }
 
 .m-application .blue--text.text--accent-1 {
-    color: #82B1FF !important;
-    caret-color: #82B1FF !important;
+  color: var(--m-color-blue-accent-1, #82b1ff) !important;
+  caret-color: var(--m-color-blue-accent-1, #82b1ff) !important;
 }
 
 .m-application .blue.accent-2 {
-    background-color: #448AFF !important;
+  background-color: var(--m-color-blue-accent-2, #448aff) !important;
 }
 
 .m-application .blue--text.text--accent-2 {
-    color: #448AFF !important;
-    caret-color: #448AFF !important;
+  color: var(--m-color-blue-accent-2, #448aff) !important;
+  caret-color: var(--m-color-blue-accent-2, #448aff) !important;
 }
 
 .m-application .blue.accent-3 {
-    background-color: #2979FF !important;
+  background-color: var(--m-color-blue-accent-3, #2979ff) !important;
 }
 
 .m-application .blue--text.text--accent-3 {
-    color: #2979FF !important;
-    caret-color: #2979FF !important;
+  color: var(--m-color-blue-accent-3, #2979ff) !important;
+  caret-color: var(--m-color-blue-accent-3, #2979ff) !important;
 }
 
 .m-application .blue.accent-4 {
-    background-color: #2962FF !important;
+  background-color: var(--m-color-blue-accent-4, #2962ff) !important;
 }
 
 .m-application .blue--text.text--accent-4 {
-    color: #2962FF !important;
-    caret-color: #2962FF !important;
+  color: var(--m-color-blue-accent-4, #2962ff) !important;
+  caret-color: var(--m-color-blue-accent-4, #2962ff) !important;
 }
 
 .m-application .light-blue {
-    background-color: #03a9f4 !important;
+  background-color: var(--m-color-light-blue, #03a9f4) !important;
 }
 
 .m-application .light-blue--text {
-    color: #03a9f4 !important;
-    caret-color: #03a9f4 !important;
+  color: var(--m-color-light-blue, #03a9f4) !important;
+  caret-color: var(--m-color-light-blue, #03a9f4) !important;
 }
 
 .m-application .light-blue.lighten-5 {
-    background-color: #e1f5fe !important;
+  background-color: var(--m-color-light-blue-lighten-5, #e1f5fe) !important;
 }
 
 .m-application .light-blue--text.text--lighten-5 {
-    color: #e1f5fe !important;
-    caret-color: #e1f5fe !important;
+  color: var(--m-color-light-blue-lighten-5, #e1f5fe) !important;
+  caret-color: var(--m-color-light-blue-lighten-5, #e1f5fe) !important;
 }
 
 .m-application .light-blue.lighten-4 {
-    background-color: #b3e5fc !important;
+  background-color: var(--m-color-light-blue-lighten-4, #b3e5fc) !important;
 }
 
 .m-application .light-blue--text.text--lighten-4 {
-    color: #b3e5fc !important;
-    caret-color: #b3e5fc !important;
+  color: var(--m-color-light-blue-lighten-4, #b3e5fc) !important;
+  caret-color: var(--m-color-light-blue-lighten-4, #b3e5fc) !important;
 }
 
 .m-application .light-blue.lighten-3 {
-    background-color: #81d4fa !important;
+  background-color: var(--m-color-light-blue-lighten-3, #81d4fa) !important;
 }
 
 .m-application .light-blue--text.text--lighten-3 {
-    color: #81d4fa !important;
-    caret-color: #81d4fa !important;
+  color: var(--m-color-light-blue-lighten-3, #81d4fa) !important;
+  caret-color: var(--m-color-light-blue-lighten-3, #81d4fa) !important;
 }
 
 .m-application .light-blue.lighten-2 {
-    background-color: #4fc3f7 !important;
+  background-color: var(--m-color-light-blue-lighten-2, #4fc3f7) !important;
 }
 
 .m-application .light-blue--text.text--lighten-2 {
-    color: #4fc3f7 !important;
-    caret-color: #4fc3f7 !important;
+  color: var(--m-color-light-blue-lighten-2, #4fc3f7) !important;
+  caret-color: var(--m-color-light-blue-lighten-2, #4fc3f7) !important;
 }
 
 .m-application .light-blue.lighten-1 {
-    background-color: #29b6f6 !important;
+  background-color: var(--m-color-light-blue-lighten-1, #29b6f6) !important;
 }
 
 .m-application .light-blue--text.text--lighten-1 {
-    color: #29b6f6 !important;
-    caret-color: #29b6f6 !important;
+  color: var(--m-color-light-blue-lighten-1, #29b6f6) !important;
+  caret-color: var(--m-color-light-blue-lighten-1, #29b6f6) !important;
 }
 
 .m-application .light-blue.darken-1 {
-    background-color: #039be5 !important;
+  background-color: var(--m-color-light-blue-darken-1, #039be5) !important;
 }
 
 .m-application .light-blue--text.text--darken-1 {
-    color: #039be5 !important;
-    caret-color: #039be5 !important;
+  color: var(--m-color-light-blue-darken-1, #039be5) !important;
+  caret-color: var(--m-color-light-blue-darken-1, #039be5) !important;
 }
 
 .m-application .light-blue.darken-2 {
-    background-color: #0288d1 !important;
+  background-color: var(--m-color-light-blue-darken-2, #0288d1) !important;
 }
 
 .m-application .light-blue--text.text--darken-2 {
-    color: #0288d1 !important;
-    caret-color: #0288d1 !important;
+  color: var(--m-color-light-blue-darken-2, #0288d1) !important;
+  caret-color: var(--m-color-light-blue-darken-2, #0288d1) !important;
 }
 
 .m-application .light-blue.darken-3 {
-    background-color: #0277bd !important;
+  background-color: var(--m-color-light-blue-darken-3, #0277bd) !important;
 }
 
 .m-application .light-blue--text.text--darken-3 {
-    color: #0277bd !important;
-    caret-color: #0277bd !important;
+  color: var(--m-color-light-blue-darken-3, #0277bd) !important;
+  caret-color: var(--m-color-light-blue-darken-3, #0277bd) !important;
 }
 
 .m-application .light-blue.darken-4 {
-    background-color: #01579b !important;
+  background-color: var(--m-color-light-blue-darken-4, #01579b) !important;
 }
 
 .m-application .light-blue--text.text--darken-4 {
-    color: #01579b !important;
-    caret-color: #01579b !important;
+  color: var(--m-color-light-blue-darken-4, #01579b) !important;
+  caret-color: var(--m-color-light-blue-darken-4, #01579b) !important;
 }
 
 .m-application .light-blue.accent-1 {
-    background-color: #80d8ff !important;
+  background-color: var(--m-color-light-blue-accent-1, #80d8ff) !important;
 }
 
 .m-application .light-blue--text.text--accent-1 {
-    color: #80d8ff !important;
-    caret-color: #80d8ff !important;
+  color: var(--m-color-light-blue-accent-1, #80d8ff) !important;
+  caret-color: var(--m-color-light-blue-accent-1, #80d8ff) !important;
 }
 
 .m-application .light-blue.accent-2 {
-    background-color: #40c4ff !important;
+  background-color: var(--m-color-light-blue-accent-2, #40c4ff) !important;
 }
 
 .m-application .light-blue--text.text--accent-2 {
-    color: #40c4ff !important;
-    caret-color: #40c4ff !important;
+  color: var(--m-color-light-blue-accent-2, #40c4ff) !important;
+  caret-color: var(--m-color-light-blue-accent-2, #40c4ff) !important;
 }
 
 .m-application .light-blue.accent-3 {
-    background-color: #00b0ff !important;
+  background-color: var(--m-color-light-blue-accent-3, #00b0ff) !important;
 }
 
 .m-application .light-blue--text.text--accent-3 {
-    color: #00b0ff !important;
-    caret-color: #00b0ff !important;
+  color: var(--m-color-light-blue-accent-3, #00b0ff) !important;
+  caret-color: var(--m-color-light-blue-accent-3, #00b0ff) !important;
 }
 
 .m-application .light-blue.accent-4 {
-    background-color: #0091ea !important;
+  background-color: var(--m-color-light-blue-accent-4, #0091ea) !important;
 }
 
 .m-application .light-blue--text.text--accent-4 {
-    color: #0091ea !important;
-    caret-color: #0091ea !important;
+  color: var(--m-color-light-blue-accent-4, #0091ea) !important;
+  caret-color: var(--m-color-light-blue-accent-4, #0091ea) !important;
 }
 
 .m-application .cyan {
-    background-color: #00bcd4 !important;
+  background-color: var(--m-color-cyan, #00bcd4) !important;
 }
 
 .m-application .cyan--text {
-    color: #00bcd4 !important;
-    caret-color: #00bcd4 !important;
+  color: var(--m-color-cyan, #00bcd4) !important;
+  caret-color: var(--m-color-cyan, #00bcd4) !important;
 }
 
 .m-application .cyan.lighten-5 {
-    background-color: #e0f7fa !important;
+  background-color: var(--m-color-cyan-lighten-5, #e0f7fa) !important;
 }
 
 .m-application .cyan--text.text--lighten-5 {
-    color: #e0f7fa !important;
-    caret-color: #e0f7fa !important;
+  color: var(--m-color-cyan-lighten-5, #e0f7fa) !important;
+  caret-color: var(--m-color-cyan-lighten-5, #e0f7fa) !important;
 }
 
 .m-application .cyan.lighten-4 {
-    background-color: #b2ebf2 !important;
+  background-color: var(--m-color-cyan-lighten-4, #b2ebf2) !important;
 }
 
 .m-application .cyan--text.text--lighten-4 {
-    color: #b2ebf2 !important;
-    caret-color: #b2ebf2 !important;
+  color: var(--m-color-cyan-lighten-4, #b2ebf2) !important;
+  caret-color: var(--m-color-cyan-lighten-4, #b2ebf2) !important;
 }
 
 .m-application .cyan.lighten-3 {
-    background-color: #80deea !important;
+  background-color: var(--m-color-cyan-lighten-3, #80deea) !important;
 }
 
 .m-application .cyan--text.text--lighten-3 {
-    color: #80deea !important;
-    caret-color: #80deea !important;
+  color: var(--m-color-cyan-lighten-3, #80deea) !important;
+  caret-color: var(--m-color-cyan-lighten-3, #80deea) !important;
 }
 
 .m-application .cyan.lighten-2 {
-    background-color: #4dd0e1 !important;
+  background-color: var(--m-color-cyan-lighten-2, #4dd0e1) !important;
 }
 
 .m-application .cyan--text.text--lighten-2 {
-    color: #4dd0e1 !important;
-    caret-color: #4dd0e1 !important;
+  color: var(--m-color-cyan-lighten-2, #4dd0e1) !important;
+  caret-color: var(--m-color-cyan-lighten-2, #4dd0e1) !important;
 }
 
 .m-application .cyan.lighten-1 {
-    background-color: #26c6da !important;
+  background-color: var(--m-color-cyan-lighten-1, #26c6da) !important;
 }
 
 .m-application .cyan--text.text--lighten-1 {
-    color: #26c6da !important;
-    caret-color: #26c6da !important;
+  color: var(--m-color-cyan-lighten-1, #26c6da) !important;
+  caret-color: var(--m-color-cyan-lighten-1, #26c6da) !important;
 }
 
 .m-application .cyan.darken-1 {
-    background-color: #00acc1 !important;
+  background-color: var(--m-color-cyan-darken-1, #00acc1) !important;
 }
 
 .m-application .cyan--text.text--darken-1 {
-    color: #00acc1 !important;
-    caret-color: #00acc1 !important;
+  color: var(--m-color-cyan-darken-1, #00acc1) !important;
+  caret-color: var(--m-color-cyan-darken-1, #00acc1) !important;
 }
 
 .m-application .cyan.darken-2 {
-    background-color: #0097a7 !important;
+  background-color: var(--m-color-cyan-darken-2, #0097a7) !important;
 }
 
 .m-application .cyan--text.text--darken-2 {
-    color: #0097a7 !important;
-    caret-color: #0097a7 !important;
+  color: var(--m-color-cyan-darken-2, #0097a7) !important;
+  caret-color: var(--m-color-cyan-darken-2, #0097a7) !important;
 }
 
 .m-application .cyan.darken-3 {
-    background-color: #00838f !important;
+  background-color: var(--m-color-cyan-darken-3, #00838f) !important;
 }
 
 .m-application .cyan--text.text--darken-3 {
-    color: #00838f !important;
-    caret-color: #00838f !important;
+  color: var(--m-color-cyan-darken-3, #00838f) !important;
+  caret-color: var(--m-color-cyan-darken-3, #00838f) !important;
 }
 
 .m-application .cyan.darken-4 {
-    background-color: #006064 !important;
+  background-color: var(--m-color-cyan-darken-4, #006064) !important;
 }
 
 .m-application .cyan--text.text--darken-4 {
-    color: #006064 !important;
-    caret-color: #006064 !important;
+  color: var(--m-color-cyan-darken-4, #006064) !important;
+  caret-color: var(--m-color-cyan-darken-4, #006064) !important;
 }
 
 .m-application .cyan.accent-1 {
-    background-color: #84ffff !important;
+  background-color: var(--m-color-cyan-accent-1, #84ffff) !important;
 }
 
 .m-application .cyan--text.text--accent-1 {
-    color: #84ffff !important;
-    caret-color: #84ffff !important;
+  color: var(--m-color-cyan-accent-1, #84ffff) !important;
+  caret-color: var(--m-color-cyan-accent-1, #84ffff) !important;
 }
 
 .m-application .cyan.accent-2 {
-    background-color: #18ffff !important;
+  background-color: var(--m-color-cyan-accent-2, #18ffff) !important;
 }
 
 .m-application .cyan--text.text--accent-2 {
-    color: #18ffff !important;
-    caret-color: #18ffff !important;
+  color: var(--m-color-cyan-accent-2 #18ffff) !important;
+  caret-color: var(--m-color-cyan-accent-2 #18ffff) !important;
 }
 
 .m-application .cyan.accent-3 {
-    background-color: #00e5ff !important;
+  background-color: var(--m-color-cyan-accent-3, #00e5ff) !important;
 }
 
 .m-application .cyan--text.text--accent-3 {
-    color: #00e5ff !important;
-    caret-color: #00e5ff !important;
+  color: var(--m-color-cyan-accent-3, #00e5ff) !important;
+  caret-color: var(--m-color-cyan-accent-3, #00e5ff) !important;
 }
 
 .m-application .cyan.accent-4 {
-    background-color: #00b8d4 !important;
+  background-color: var(--m-color-cyan-accent-4, #00b8d4) !important;
 }
 
 .m-application .cyan--text.text--accent-4 {
-    color: #00b8d4 !important;
-    caret-color: #00b8d4 !important;
+  color: var(--m-color-cyan-accent-4, #00b8d4) !important;
+  caret-color: var(--m-color-cyan-accent-4, #00b8d4) !important;
 }
 
 .m-application .teal {
-    background-color: #009688 !important;
+  background-color: var(--m-color-teal, #009688) !important;
 }
 
 .m-application .teal--text {
-    color: #009688 !important;
-    caret-color: #009688 !important;
+  color: var(--m-color-teal, #009688) !important;
+  caret-color: var(--m-color-teal, #009688) !important;
 }
 
 .m-application .teal.lighten-5 {
-    background-color: #e0f2f1 !important;
+  background-color: var(--m-color-teal-lighten-5, #e0f2f1) !important;
 }
 
 .m-application .teal--text.text--lighten-5 {
-    color: #e0f2f1 !important;
-    caret-color: #e0f2f1 !important;
+  color: var(--m-color-teal-lighten-5, #e0f2f1) !important;
+  caret-color: var(--m-color-teal-lighten-5, #e0f2f1) !important;
 }
 
 .m-application .teal.lighten-4 {
-    background-color: #b2dfdb !important;
+  background-color: var(--m-color-teal-lighten-4, #b2dfdb) !important;
 }
 
 .m-application .teal--text.text--lighten-4 {
-    color: #b2dfdb !important;
-    caret-color: #b2dfdb !important;
+  color: var(--m-color-teal-lighten-4, #b2dfdb) !important;
+  caret-color: var(--m-color-teal-lighten-4, #b2dfdb) !important;
 }
 
 .m-application .teal.lighten-3 {
-    background-color: #80cbc4 !important;
+  background-color: var(--m-color-teal-lighten-3, #80cbc4) !important;
 }
 
 .m-application .teal--text.text--lighten-3 {
-    color: #80cbc4 !important;
-    caret-color: #80cbc4 !important;
+  color: var(--m-color-teal-lighten-3, #80cbc4) !important;
+  caret-color: var(--m-color-teal-lighten-3, #80cbc4) !important;
 }
 
 .m-application .teal.lighten-2 {
-    background-color: #4db6ac !important;
+  background-color: var(--m-color-teal-lighten-2, #4db6ac) !important;
 }
 
 .m-application .teal--text.text--lighten-2 {
-    color: #4db6ac !important;
-    caret-color: #4db6ac !important;
+  color: var(--m-color-teal-lighten-2, #4db6ac) !important;
+  caret-color: var(--m-color-teal-lighten-2, #4db6ac) !important;
 }
 
 .m-application .teal.lighten-1 {
-    background-color: #26a69a !important;
+  background-color: var(--m-color-teal-lighten-1, #26a69a) !important;
 }
 
 .m-application .teal--text.text--lighten-1 {
-    color: #26a69a !important;
-    caret-color: #26a69a !important;
+  color: var(--m-color-teal-lighten-1, #26a69a) !important;
+  caret-color: var(--m-color-teal-lighten-1, #26a69a) !important;
 }
 
 .m-application .teal.darken-1 {
-    background-color: #00897b !important;
+  background-color: var(--m-color-teal-darken-1, #00897b) !important;
 }
 
 .m-application .teal--text.text--darken-1 {
-    color: #00897b !important;
-    caret-color: #00897b !important;
+  color: var(--m-color-teal-darken-1, #00897b) !important;
+  caret-color: var(--m-color-teal-darken-1, #00897b) !important;
 }
 
 .m-application .teal.darken-2 {
-    background-color: #00796b !important;
+  background-color: var(--m-color-teal-darken-2, #00796b) !important;
 }
 
 .m-application .teal--text.text--darken-2 {
-    color: #00796b !important;
-    caret-color: #00796b !important;
+  color: var(--m-color-teal-darken-2, #00796b) !important;
+  caret-color: var(--m-color-teal-darken-2, #00796b) !important;
 }
 
 .m-application .teal.darken-3 {
-    background-color: #00695c !important;
+  background-color: var(--m-color-teal-darken-3, #00695c) !important;
 }
 
 .m-application .teal--text.text--darken-3 {
-    color: #00695c !important;
-    caret-color: #00695c !important;
+  color: var(--m-color-teal-darken-3, #00695c) !important;
+  caret-color: var(--m-color-teal-darken-3, #00695c) !important;
 }
 
 .m-application .teal.darken-4 {
-    background-color: #004d40 !important;
+  background-color: var(--m-color-teal-darken-4, #004d40) !important;
 }
 
 .m-application .teal--text.text--darken-4 {
-    color: #004d40 !important;
-    caret-color: #004d40 !important;
+  color: var(--m-color-teal-darken-4, #004d40) !important;
+  caret-color: var(--m-color-teal-darken-4, #004d40) !important;
 }
 
 .m-application .teal.accent-1 {
-    background-color: #a7ffeb !important;
+  background-color: var(--m-color-teal-accent-1, #a7ffeb) !important;
 }
 
 .m-application .teal--text.text--accent-1 {
-    color: #a7ffeb !important;
-    caret-color: #a7ffeb !important;
+  color: var(--m-color-teal-accent-1, #a7ffeb) !important;
+  caret-color: var(--m-color-teal-accent-1, #a7ffeb) !important;
 }
 
 .m-application .teal.accent-2 {
-    background-color: #64ffda !important;
+  background-color: var(--m-color-teal-accent-2, #64ffda) !important;
 }
 
 .m-application .teal--text.text--accent-2 {
-    color: #64ffda !important;
-    caret-color: #64ffda !important;
+  color: var(--m-color-teal-accent-2, #64ffda) !important;
+  caret-color: var(--m-color-teal-accent-2, #64ffda) !important;
 }
 
 .m-application .teal.accent-3 {
-    background-color: #1de9b6 !important;
+  background-color: var(--m-color-teal-accent-3, #1de9b6) !important;
 }
 
 .m-application .teal--text.text--accent-3 {
-    color: #1de9b6 !important;
-    caret-color: #1de9b6 !important;
+  color: var(--m-color-teal-accent-3, #1de9b6) !important;
+  caret-color: var(--m-color-teal-accent-3, #1de9b6) !important;
 }
 
 .m-application .teal.accent-4 {
-    background-color: #00bfa5 !important;
+  background-color: var(--m-color-teal-accent-4, #00bfa5) !important;
 }
 
 .m-application .teal--text.text--accent-4 {
-    color: #00bfa5 !important;
-    caret-color: #00bfa5 !important;
+  color: var(--m-color-teal-accent-4, #00bfa5) !important;
+  caret-color: var(--m-color-teal-accent-4, #00bfa5) !important;
 }
 
 .m-application .green {
-    background-color: #4CAF50 !important;
+  background-color: var(--m-color-green, #4caf50) !important;
 }
 
 .m-application .green--text {
-    color: #4CAF50 !important;
-    caret-color: #4CAF50 !important;
+  color: var(--m-color-green, #4caf50) !important;
+  caret-color: var(--m-color-green, #4caf50) !important;
 }
 
 .m-application .green.lighten-5 {
-    background-color: #E8F5E9 !important;
+  background-color: var(--m-color-green-lighten-5, #e8f5e9) !important;
 }
 
 .m-application .green--text.text--lighten-5 {
-    color: #E8F5E9 !important;
-    caret-color: #E8F5E9 !important;
+  color: var(--m-color-green-lighten-5, #e8f5e9) !important;
+  caret-color: var(--m-color-green-lighten-5, #e8f5e9) !important;
 }
 
 .m-application .green.lighten-4 {
-    background-color: #C8E6C9 !important;
+  background-color: var(--m-color-green-lighten-4, #c8e6c9) !important;
 }
 
 .m-application .green--text.text--lighten-4 {
-    color: #C8E6C9 !important;
-    caret-color: #C8E6C9 !important;
+  color: var(--m-color-green-lighten-4, #c8e6c9) !important;
+  caret-color: var(--m-color-green-lighten-4, #c8e6c9) !important;
 }
 
 .m-application .green.lighten-3 {
-    background-color: #A5D6A7 !important;
+  background-color: var(--m-color-green-lighten-3, #a5d6a7) !important;
 }
 
 .m-application .green--text.text--lighten-3 {
-    color: #A5D6A7 !important;
-    caret-color: #A5D6A7 !important;
+  color: var(--m-color-green-lighten-3, #a5d6a7) !important;
+  caret-color: var(--m-color-green-lighten-3, #a5d6a7) !important;
 }
 
 .m-application .green.lighten-2 {
-    background-color: #81C784 !important;
+  background-color: var(--m-color-green-lighten-2, #81c784) !important;
 }
 
 .m-application .green--text.text--lighten-2 {
-    color: #81C784 !important;
-    caret-color: #81C784 !important;
+  color: var(--m-color-green-lighten-2, #81c784) !important;
+  caret-color: var(--m-color-green-lighten-2, #81c784) !important;
 }
 
 .m-application .green.lighten-1 {
-    background-color: #66BB6A !important;
+  background-color: var(--m-color-green-lighten-1, #66bb6a) !important;
 }
 
 .m-application .green--text.text--lighten-1 {
-    color: #66BB6A !important;
-    caret-color: #66BB6A !important;
+  color: var(--m-color-green-lighten-1, #66bb6a) !important;
+  caret-color: var(--m-color-green-lighten-1, #66bb6a) !important;
 }
 
 .m-application .green.darken-1 {
-    background-color: #43A047 !important;
+  background-color: var(--m-color-green-darken-1, #43a047) !important;
 }
 
 .m-application .green--text.text--darken-1 {
-    color: #43A047 !important;
-    caret-color: #43A047 !important;
+  color: var(--m-color-green-darken-1, #43a047) !important;
+  caret-color: var(--m-color-green-darken-1, #43a047) !important;
 }
 
 .m-application .green.darken-2 {
-    background-color: #388E3C !important;
+  background-color: var(--m-color-green-darken-2, #388e3c) !important;
 }
 
 .m-application .green--text.text--darken-2 {
-    color: #388E3C !important;
-    caret-color: #388E3C !important;
+  color: var(--m-color-green-darken-2, #388e3c) !important;
+  caret-color: var(--m-color-green-darken-2, #388e3c) !important;
 }
 
 .m-application .green.darken-3 {
-    background-color: #2E7D32 !important;
+  background-color: var(--m-color-green-darken-3, #2e7d32) !important;
 }
 
 .m-application .green--text.text--darken-3 {
-    color: #2E7D32 !important;
-    caret-color: #2E7D32 !important;
+  color: var(--m-color-green-darken-3, #2e7d32) !important;
+  caret-color: var(--m-color-green-darken-3, #2e7d32) !important;
 }
 
 .m-application .green.darken-4 {
-    background-color: #1B5E20 !important;
+  background-color: var(--m-color-green-darken-4, #1b5e20) !important;
 }
 
 .m-application .green--text.text--darken-4 {
-    color: #1B5E20 !important;
-    caret-color: #1B5E20 !important;
+  color: var(--m-color-green-darken-4, #1b5e20) !important;
+  caret-color: var(--m-color-green-darken-4, #1b5e20) !important;
 }
 
 .m-application .green.accent-1 {
-    background-color: #B9F6CA !important;
+  background-color: var(--m-color-green-accent-1, #b9f6ca) !important;
 }
 
 .m-application .green--text.text--accent-1 {
-    color: #B9F6CA !important;
-    caret-color: #B9F6CA !important;
+  color: var(--m-color-green-accent-1, #b9f6ca) !important;
+  caret-color: var(--m-color-green-accent-1, #b9f6ca) !important;
 }
 
 .m-application .green.accent-2 {
-    background-color: #69F0AE !important;
+  background-color: var(--m-color-green-accent-2, #69f0ae) !important;
 }
 
 .m-application .green--text.text--accent-2 {
-    color: #69F0AE !important;
-    caret-color: #69F0AE !important;
+  color: var(--m-color-green-accent-2, #69f0ae) !important;
+  caret-color: var(--m-color-green-accent-2, #69f0ae) !important;
 }
 
 .m-application .green.accent-3 {
-    background-color: #00E676 !important;
+  background-color: var(--m-color-green-accent-3, #00e676) !important;
 }
 
 .m-application .green--text.text--accent-3 {
-    color: #00E676 !important;
-    caret-color: #00E676 !important;
+  color: var(--m-color-green-accent-3, #00e676) !important;
+  caret-color: var(--m-color-green-accent-3, #00e676) !important;
 }
 
 .m-application .green.accent-4 {
-    background-color: #00C853 !important;
+  background-color: var(--m-color-green-accent-4, #00c853) !important;
 }
 
 .m-application .green--text.text--accent-4 {
-    color: #00C853 !important;
-    caret-color: #00C853 !important;
+  color: var(--m-color-green-accent-4, #00c853) !important;
+  caret-color: var(--m-color-green-accent-4, #00c853) !important;
 }
 
 .m-application .light-green {
-    background-color: #8bc34a !important;
+  background-color: var(--m-color-light-green, #8bc34a) !important;
 }
 
 .m-application .light-green--text {
-    color: #8bc34a !important;
-    caret-color: #8bc34a !important;
+  color: var(--m-color-light-green, #8bc34a) !important;
+  caret-color: var(--m-color-light-green, #8bc34a) !important;
 }
 
 .m-application .light-green.lighten-5 {
-    background-color: #f1f8e9 !important;
+  background-color: var(--m-color-light-green-lighten-5, #f1f8e9) !important;
 }
 
 .m-application .light-green--text.text--lighten-5 {
-    color: #f1f8e9 !important;
-    caret-color: #f1f8e9 !important;
+  color: var(--m-color-light-green-lighten-5, #f1f8e9) !important;
+  caret-color: var(--m-color-light-green-lighten-5, #f1f8e9) !important;
 }
 
 .m-application .light-green.lighten-4 {
-    background-color: #dcedc8 !important;
+  background-color: var(--m-color-light-green-lighten-4, #dcedc8) !important;
 }
 
 .m-application .light-green--text.text--lighten-4 {
-    color: #dcedc8 !important;
-    caret-color: #dcedc8 !important;
+  color: var(--m-color-light-green-lighten-4, #dcedc8) !important;
+  caret-color: var(--m-color-light-green-lighten-4, #dcedc8) !important;
 }
 
 .m-application .light-green.lighten-3 {
-    background-color: #c5e1a5 !important;
+  background-color: var(--m-color-light-green-lighten-3, #c5e1a5) !important;
 }
 
 .m-application .light-green--text.text--lighten-3 {
-    color: #c5e1a5 !important;
-    caret-color: #c5e1a5 !important;
+  color: var(--m-color-light-green-lighten-3, #c5e1a5) !important;
+  caret-color: var(--m-color-light-green-lighten-3, #c5e1a5) !important;
 }
 
 .m-application .light-green.lighten-2 {
-    background-color: #aed581 !important;
+  background-color: var(--m-color-light-green-lighten-2, #aed581) !important;
 }
 
 .m-application .light-green--text.text--lighten-2 {
-    color: #aed581 !important;
-    caret-color: #aed581 !important;
+  color: var(--m-color-light-green-lighten-2, #aed581) !important;
+  caret-color: var(--m-color-light-green-lighten-2, #aed581) !important;
 }
 
 .m-application .light-green.lighten-1 {
-    background-color: #9ccc65 !important;
+  background-color: var(--m-color-light-green-lighten-1, #9ccc65) !important;
 }
 
 .m-application .light-green--text.text--lighten-1 {
-    color: #9ccc65 !important;
-    caret-color: #9ccc65 !important;
+  color: var(--m-color-light-green-lighten-1, #9ccc65) !important;
+  caret-color: var(--m-color-light-green-lighten-1, #9ccc65) !important;
 }
 
 .m-application .light-green.darken-1 {
-    background-color: #7cb342 !important;
+  background-color: var(--m-color-light-green-darken-1, #7cb342) !important;
 }
 
 .m-application .light-green--text.text--darken-1 {
-    color: #7cb342 !important;
-    caret-color: #7cb342 !important;
+  color: var(--m-color-light-green-darken-1, #7cb342) !important;
+  caret-color: var(--m-color-light-green-darken-1, #7cb342) !important;
 }
 
 .m-application .light-green.darken-2 {
-    background-color: #689f38 !important;
+  background-color: var(--m-color-light-green-darken-2, #689f38) !important;
 }
 
 .m-application .light-green--text.text--darken-2 {
-    color: #689f38 !important;
-    caret-color: #689f38 !important;
+  color: var(--m-color-light-green-darken-2, #689f38) !important;
+  caret-color: var(--m-color-light-green-darken-2, #689f38) !important;
 }
 
 .m-application .light-green.darken-3 {
-    background-color: #558b2f !important;
+  background-color: var(--m-color-light-green-darken-3, #558b2f) !important;
 }
 
 .m-application .light-green--text.text--darken-3 {
-    color: #558b2f !important;
-    caret-color: #558b2f !important;
+  color: var(--m-color-light-green-darken-3, #558b2f) !important;
+  caret-color: var(--m-color-light-green-darken-3, #558b2f) !important;
 }
 
 .m-application .light-green.darken-4 {
-    background-color: #33691e !important;
+  background-color: var(--m-color-light-green-darken-4, #33691e) !important;
 }
 
 .m-application .light-green--text.text--darken-4 {
-    color: #33691e !important;
-    caret-color: #33691e !important;
+  color: var(--m-color-light-green-darken-4, #33691e) !important;
+  caret-color: var(--m-color-light-green-darken-4, #33691e) !important;
 }
 
 .m-application .light-green.accent-1 {
-    background-color: #ccff90 !important;
+  background-color: var(--m-color-light-green-accent-1, #ccff90) !important;
 }
 
 .m-application .light-green--text.text--accent-1 {
-    color: #ccff90 !important;
-    caret-color: #ccff90 !important;
+  color: var(--m-color-light-green-accent-1, #ccff90) !important;
+  caret-color: var(--m-color-light-green-accent-1, #ccff90) !important;
 }
 
 .m-application .light-green.accent-2 {
-    background-color: #b2ff59 !important;
+  background-color: var(--m-color-light-green-accent-2, #b2ff59) !important;
 }
 
 .m-application .light-green--text.text--accent-2 {
-    color: #b2ff59 !important;
-    caret-color: #b2ff59 !important;
+  color: var(--m-color-light-green-accent-2, #b2ff59) !important;
+  caret-color: var(--m-color-light-green-accent-2, #b2ff59) !important;
 }
 
 .m-application .light-green.accent-3 {
-    background-color: #76ff03 !important;
+  background-color: var(--m-color-light-green-accent-3, #76ff03) !important;
 }
 
 .m-application .light-green--text.text--accent-3 {
-    color: #76ff03 !important;
-    caret-color: #76ff03 !important;
+  color: var(--m-color-light-green-accent-3, #76ff03) !important;
+  caret-color: var(--m-color-light-green-accent-3, #76ff03) !important;
 }
 
 .m-application .light-green.accent-4 {
-    background-color: #64dd17 !important;
+  background-color: var(--m-color-light-green-accent-4, #64dd17) !important;
 }
 
 .m-application .light-green--text.text--accent-4 {
-    color: #64dd17 !important;
-    caret-color: #64dd17 !important;
+  color: var(--m-color-light-green-accent-4, #64dd17) !important;
+  caret-color: var(--m-color-light-green-accent-4, #64dd17) !important;
 }
 
 .m-application .lime {
-    background-color: #cddc39 !important;
+  background-color: var(--m-color-lime, #cddc39) !important;
 }
 
 .m-application .lime--text {
-    color: #cddc39 !important;
-    caret-color: #cddc39 !important;
+  color: var(--m-color-lime, #cddc39) !important;
+  caret-color: var(--m-color-lime, #cddc39) !important;
 }
 
 .m-application .lime.lighten-5 {
-    background-color: #f9fbe7 !important;
+  background-color: var(--m-color-lime-lighten-5, #f9fbe7) !important;
 }
 
 .m-application .lime--text.text--lighten-5 {
-    color: #f9fbe7 !important;
-    caret-color: #f9fbe7 !important;
+  color: var(--m-color-lime-lighten-5, #f9fbe7) !important;
+  caret-color: var(--m-color-lime-lighten-5, #f9fbe7) !important;
 }
 
 .m-application .lime.lighten-4 {
-    background-color: #f0f4c3 !important;
+  background-color: var(--m-color-lime-lighten-4, #f0f4c3) !important;
 }
 
 .m-application .lime--text.text--lighten-4 {
-    color: #f0f4c3 !important;
-    caret-color: #f0f4c3 !important;
+  color: var(--m-color-lime-lighten-4, #f0f4c3) !important;
+  caret-color: var(--m-color-lime-lighten-4, #f0f4c3) !important;
 }
 
 .m-application .lime.lighten-3 {
-    background-color: #e6ee9c !important;
+  background-color: var(--m-color-lime-lighten-3, #e6ee9c) !important;
 }
 
 .m-application .lime--text.text--lighten-3 {
-    color: #e6ee9c !important;
-    caret-color: #e6ee9c !important;
+  color: var(--m-color-lime-lighten-3, #e6ee9c) !important;
+  caret-color: var(--m-color-lime-lighten-3, #e6ee9c) !important;
 }
 
 .m-application .lime.lighten-2 {
-    background-color: #dce775 !important;
+  background-color: var(--m-color-lime-lighten-2, #dce775) !important;
 }
 
 .m-application .lime--text.text--lighten-2 {
-    color: #dce775 !important;
-    caret-color: #dce775 !important;
+  color: var(--m-color-lime-lighten-2, #dce775) !important;
+  caret-color: var(--m-color-lime-lighten-2, #dce775) !important;
 }
 
 .m-application .lime.lighten-1 {
-    background-color: #d4e157 !important;
+  background-color: var(--m-color-lime-lighten-1, #d4e157) !important;
 }
 
 .m-application .lime--text.text--lighten-1 {
-    color: #d4e157 !important;
-    caret-color: #d4e157 !important;
+  color: var(--m-color-lime-lighten-1, #d4e157) !important;
+  caret-color: var(--m-color-lime-lighten-1, #d4e157) !important;
 }
 
 .m-application .lime.darken-1 {
-    background-color: #c0ca33 !important;
+  background-color: var(--m-color-lime-darken-1, #c0ca33) !important;
 }
 
 .m-application .lime--text.text--darken-1 {
-    color: #c0ca33 !important;
-    caret-color: #c0ca33 !important;
+  color: var(--m-color-lime-darken-1, #c0ca33) !important;
+  caret-color: var(--m-color-lime-darken-1, #c0ca33) !important;
 }
 
 .m-application .lime.darken-2 {
-    background-color: #afb42b !important;
+  background-color: var(--m-color-lime-darken-2, #afb42b) !important;
 }
 
 .m-application .lime--text.text--darken-2 {
-    color: #afb42b !important;
-    caret-color: #afb42b !important;
+  color: var(--m-color-lime-darken-2, #afb42b) !important;
+  caret-color: var(--m-color-lime-darken-2, #afb42b) !important;
 }
 
 .m-application .lime.darken-3 {
-    background-color: #9e9d24 !important;
+  background-color: var(--m-color-lime-darken-3, #9e9d24) !important;
 }
 
 .m-application .lime--text.text--darken-3 {
-    color: #9e9d24 !important;
-    caret-color: #9e9d24 !important;
+  color: var(--m-color-lime-darken-3, #9e9d24) !important;
+  caret-color: var(--m-color-lime-darken-3, #9e9d24) !important;
 }
 
 .m-application .lime.darken-4 {
-    background-color: #827717 !important;
+  background-color: var(--m-color-lime-darken-4, #827717) !important;
 }
 
 .m-application .lime--text.text--darken-4 {
-    color: #827717 !important;
-    caret-color: #827717 !important;
+  color: var(--m-color-lime-darken-4, #827717) !important;
+  caret-color: var(--m-color-lime-darken-4, #827717) !important;
 }
 
 .m-application .lime.accent-1 {
-    background-color: #f4ff81 !important;
+  background-color: var(--m-color-lime-accent-1, #f4ff81) !important;
 }
 
 .m-application .lime--text.text--accent-1 {
-    color: #f4ff81 !important;
-    caret-color: #f4ff81 !important;
+  color: var(--m-color-lime-accent-1, #f4ff81) !important;
+  caret-color: var(--m-color-lime-accent-1, #f4ff81) !important;
 }
 
 .m-application .lime.accent-2 {
-    background-color: #eeff41 !important;
+  background-color: var(--m-color-lime-accent-2, #eeff41) !important;
 }
 
 .m-application .lime--text.text--accent-2 {
-    color: #eeff41 !important;
-    caret-color: #eeff41 !important;
+  color: var(--m-color-lime-accent-2, #eeff41) !important;
+  caret-color: var(--m-color-lime-accent-2, #eeff41) !important;
 }
 
 .m-application .lime.accent-3 {
-    background-color: #c6ff00 !important;
+  background-color: var(--m-color-lime-accent-3, #c6ff00) !important;
 }
 
 .m-application .lime--text.text--accent-3 {
-    color: #c6ff00 !important;
-    caret-color: #c6ff00 !important;
+  color: var(--m-color-lime-accent-3, #c6ff00) !important;
+  caret-color: var(--m-color-lime-accent-3, #c6ff00) !important;
 }
 
 .m-application .lime.accent-4 {
-    background-color: #aeea00 !important;
+  background-color: var(--m-color-lime-accent-4, #aeea00) !important;
 }
 
 .m-application .lime--text.text--accent-4 {
-    color: #aeea00 !important;
-    caret-color: #aeea00 !important;
+  color: var(--m-color-lime-accent-4, #aeea00) !important;
+  caret-color: var(--m-color-lime-accent-4, #aeea00) !important;
 }
 
 .m-application .yellow {
-    background-color: #ffeb3b !important;
+  background-color: var(--m-color-yellow, #ffeb3b) !important;
 }
 
 .m-application .yellow--text {
-    color: #ffeb3b !important;
-    caret-color: #ffeb3b !important;
+  color: var(--m-color-yellow, #ffeb3b) !important;
+  caret-color: var(--m-color-yellow, #ffeb3b) !important;
 }
 
 .m-application .yellow.lighten-5 {
-    background-color: #fffde7 !important;
+  background-color: var(--m-color-yellow-lighten-5, #fffde7) !important;
 }
 
 .m-application .yellow--text.text--lighten-5 {
-    color: #fffde7 !important;
-    caret-color: #fffde7 !important;
+  color: var(--m-color-yellow-lighten-5, #fffde7) !important;
+  caret-color: var(--m-color-yellow-lighten-5, #fffde7) !important;
 }
 
 .m-application .yellow.lighten-4 {
-    background-color: #fff9c4 !important;
+  background-color: var(--m-color-yellow-lighten-4, #fff9c4) !important;
 }
 
 .m-application .yellow--text.text--lighten-4 {
-    color: #fff9c4 !important;
-    caret-color: #fff9c4 !important;
+  color: var(--m-color-yellow-lighten-4, #fff9c4) !important;
+  caret-color: var(--m-color-yellow-lighten-4, #fff9c4) !important;
 }
 
 .m-application .yellow.lighten-3 {
-    background-color: #fff59d !important;
+  background-color: var(--m-color-yellow-lighten-3, #fff59d) !important;
 }
 
 .m-application .yellow--text.text--lighten-3 {
-    color: #fff59d !important;
-    caret-color: #fff59d !important;
+  color: var(--m-color-yellow-lighten-3, #fff59d) !important;
+  caret-color: var(--m-color-yellow-lighten-3, #fff59d) !important;
 }
 
 .m-application .yellow.lighten-2 {
-    background-color: #fff176 !important;
+  background-color: var(--m-color-yellow-lighten-2, #fff176) !important;
 }
 
 .m-application .yellow--text.text--lighten-2 {
-    color: #fff176 !important;
-    caret-color: #fff176 !important;
+  color: var(--m-color-yellow-lighten-2, #fff176) !important;
+  caret-color: var(--m-color-yellow-lighten-2, #fff176) !important;
 }
 
 .m-application .yellow.lighten-1 {
-    background-color: #ffee58 !important;
+  background-color: var(--m-color-yellow-lighten-1, #ffee58) !important;
 }
 
 .m-application .yellow--text.text--lighten-1 {
-    color: #ffee58 !important;
-    caret-color: #ffee58 !important;
+  color: var(--m-color-yellow-lighten-1, #ffee58) !important;
+  caret-color: var(--m-color-yellow-lighten-1, #ffee58) !important;
 }
 
 .m-application .yellow.darken-1 {
-    background-color: #fdd835 !important;
+  background-color: var(--m-color-yellow-darken-1, #fdd835) !important;
 }
 
 .m-application .yellow--text.text--darken-1 {
-    color: #fdd835 !important;
-    caret-color: #fdd835 !important;
+  color: var(--m-color-yellow-darken-1, #fdd835) !important;
+  caret-color: var(--m-color-yellow-darken-1, #fdd835) !important;
 }
 
 .m-application .yellow.darken-2 {
-    background-color: #fbc02d !important;
+  background-color: var(--m-color-yellow-darken-2, #fbc02d) !important;
 }
 
 .m-application .yellow--text.text--darken-2 {
-    color: #fbc02d !important;
-    caret-color: #fbc02d !important;
+  color: var(--m-color-yellow-darken-2, #fbc02d) !important;
+  caret-color: var(--m-color-yellow-darken-2, #fbc02d) !important;
 }
 
 .m-application .yellow.darken-3 {
-    background-color: #f9a825 !important;
+  background-color: var(--m-color-yellow-darken-3, #f9a825) !important;
 }
 
 .m-application .yellow--text.text--darken-3 {
-    color: #f9a825 !important;
-    caret-color: #f9a825 !important;
+  color: var(--m-color-yellow-darken-3, #f9a825) !important;
+  caret-color: var(--m-color-yellow-darken-3, #f9a825) !important;
 }
 
 .m-application .yellow.darken-4 {
-    background-color: #f57f17 !important;
+  background-color: var(--m-color-yellow-darken-4, #f57f17) !important;
 }
 
 .m-application .yellow--text.text--darken-4 {
-    color: #f57f17 !important;
-    caret-color: #f57f17 !important;
+  color: var(--m-color-yellow-darken-4, #f57f17) !important;
+  caret-color: var(--m-color-yellow-darken-4, #f57f17) !important;
 }
 
 .m-application .yellow.accent-1 {
-    background-color: #ffff8d !important;
+  background-color: var(--m-color-yellow-accent-1, #ffff8d) !important;
 }
 
 .m-application .yellow--text.text--accent-1 {
-    color: #ffff8d !important;
-    caret-color: #ffff8d !important;
+  color: var(--m-color-yellow-accent-1, #ffff8d) !important;
+  caret-color: var(--m-color-yellow-accent-1, #ffff8d) !important;
 }
 
 .m-application .yellow.accent-2 {
-    background-color: #ffff00 !important;
+  background-color: var(--m-color-yellow-accent-2, #ffff00) !important;
 }
 
 .m-application .yellow--text.text--accent-2 {
-    color: #ffff00 !important;
-    caret-color: #ffff00 !important;
+  color: var(--m-color-yellow-accent-2, #ffff00) !important;
+  caret-color: var(--m-color-yellow-accent-2, #ffff00) !important;
 }
 
 .m-application .yellow.accent-3 {
-    background-color: #ffea00 !important;
+  background-color: var(--m-color-yellow-accent-3, #ffea00) !important;
 }
 
 .m-application .yellow--text.text--accent-3 {
-    color: #ffea00 !important;
-    caret-color: #ffea00 !important;
+  color: var(--m-color-yellow-accent-3, #ffea00) !important;
+  caret-color: var(--m-color-yellow-accent-3, #ffea00) !important;
 }
 
 .m-application .yellow.accent-4 {
-    background-color: #ffd600 !important;
+  background-color: var(--m-color-yellow-accent-4, #ffd600) !important;
 }
 
 .m-application .yellow--text.text--accent-4 {
-    color: #ffd600 !important;
-    caret-color: #ffd600 !important;
+  color: var(--m-color-yellow-accent-4, #ffd600) !important;
+  caret-color: var(--m-color-yellow-accent-4, #ffd600) !important;
 }
 
 .m-application .amber {
-    background-color: #ffc107 !important;
+  background-color: var(--m-color-amber, #ffc107) !important;
 }
 
 .m-application .amber--text {
-    color: #ffc107 !important;
-    caret-color: #ffc107 !important;
+  color: var(--m-color-amber, #ffc107) !important;
+  caret-color: var(--m-color-amber, #ffc107) !important;
 }
 
 .m-application .amber.lighten-5 {
-    background-color: #fff8e1 !important;
+  background-color: var(--m-color-amber-lighten-5, #fff8e1) !important;
 }
 
 .m-application .amber--text.text--lighten-5 {
-    color: #fff8e1 !important;
-    caret-color: #fff8e1 !important;
+  color: var(--m-color-amber-lighten-5, #fff8e1) !important;
+  caret-color: var(--m-color-amber-lighten-5, #fff8e1) !important;
 }
 
 .m-application .amber.lighten-4 {
-    background-color: #ffecb3 !important;
+  background-color: var(--m-color-amber-lighten-4, #ffecb3) !important;
 }
 
 .m-application .amber--text.text--lighten-4 {
-    color: #ffecb3 !important;
-    caret-color: #ffecb3 !important;
+  color: var(--m-color-amber-lighten-4, #ffecb3) !important;
+  caret-color: var(--m-color-amber-lighten-4, #ffecb3) !important;
 }
 
 .m-application .amber.lighten-3 {
-    background-color: #ffe082 !important;
+  background-color: var(--m-color-amber-lighten-3, #ffe082) !important;
 }
 
 .m-application .amber--text.text--lighten-3 {
-    color: #ffe082 !important;
-    caret-color: #ffe082 !important;
+  color: var(--m-color-amber-lighten-3, #ffe082) !important;
+  caret-color: var(--m-color-amber-lighten-3, #ffe082) !important;
 }
 
 .m-application .amber.lighten-2 {
-    background-color: #ffd54f !important;
+  background-color: var(--m-color-amber-lighten-2, #ffd54f) !important;
 }
 
 .m-application .amber--text.text--lighten-2 {
-    color: #ffd54f !important;
-    caret-color: #ffd54f !important;
+  color: var(--m-color-amber-lighten-2, #ffd54f) !important;
+  caret-color: var(--m-color-amber-lighten-2, #ffd54f) !important;
 }
 
 .m-application .amber.lighten-1 {
-    background-color: #ffca28 !important;
+  background-color: var(--m-color-amber-lighten-1, #ffca28) !important;
 }
 
 .m-application .amber--text.text--lighten-1 {
-    color: #ffca28 !important;
-    caret-color: #ffca28 !important;
+  color: var(--m-color-amber-lighten-1, #ffca28) !important;
+  caret-color: var(--m-color-amber-lighten-1, #ffca28) !important;
 }
 
 .m-application .amber.darken-1 {
-    background-color: #ffb300 !important;
+  background-color: var(--m-color-amber-darken-1, #ffb300) !important;
 }
 
 .m-application .amber--text.text--darken-1 {
-    color: #ffb300 !important;
-    caret-color: #ffb300 !important;
+  color: var(--m-color-amber-darken-1, #ffb300) !important;
+  caret-color: var(--m-color-amber-darken-1, #ffb300) !important;
 }
 
 .m-application .amber.darken-2 {
-    background-color: #ffa000 !important;
+  background-color: var(--m-color-amber-darken-2, #ffa000) !important;
 }
 
 .m-application .amber--text.text--darken-2 {
-    color: #ffa000 !important;
-    caret-color: #ffa000 !important;
+  color: var(--m-color-amber-darken-2, #ffa000) !important;
+  caret-color: var(--m-color-amber-darken-2, #ffa000) !important;
 }
 
 .m-application .amber.darken-3 {
-    background-color: #ff8f00 !important;
+  background-color: var(--m-color-amber-darken-3, #ff8f00) !important;
 }
 
 .m-application .amber--text.text--darken-3 {
-    color: #ff8f00 !important;
-    caret-color: #ff8f00 !important;
+  color: var(--m-color-amber-darken-3, #ff8f00) !important;
+  caret-color: var(--m-color-amber-darken-3, #ff8f00) !important;
 }
 
 .m-application .amber.darken-4 {
-    background-color: #ff6f00 !important;
+  background-color: var(--m-color-amber-darken-4, #ff6f00) !important;
 }
 
 .m-application .amber--text.text--darken-4 {
-    color: #ff6f00 !important;
-    caret-color: #ff6f00 !important;
+  color: var(--m-color-amber-darken-4, #ff6f00) !important;
+  caret-color: var(--m-color-amber-darken-4, #ff6f00) !important;
 }
 
 .m-application .amber.accent-1 {
-    background-color: #ffe57f !important;
+  background-color: var(--m-color-amber-accent-1, #ffe57f) !important;
 }
 
 .m-application .amber--text.text--accent-1 {
-    color: #ffe57f !important;
-    caret-color: #ffe57f !important;
+  color: var(--m-color-amber-accent-1, #ffe57f) !important;
+  caret-color: var(--m-color-amber-accent-1, #ffe57f) !important;
 }
 
 .m-application .amber.accent-2 {
-    background-color: #ffd740 !important;
+  background-color: var(--m-color-amber-accent-2, #ffd740) !important;
 }
 
 .m-application .amber--text.text--accent-2 {
-    color: #ffd740 !important;
-    caret-color: #ffd740 !important;
+  color: var(--m-color-amber-accent-2, #ffd740) !important;
+  caret-color: var(--m-color-amber-accent-2, #ffd740) !important;
 }
 
 .m-application .amber.accent-3 {
-    background-color: #ffc400 !important;
+  background-color: var(--m-color-amber-accent-3, #ffc400) !important;
 }
 
 .m-application .amber--text.text--accent-3 {
-    color: #ffc400 !important;
-    caret-color: #ffc400 !important;
+  color: var(--m-color-amber-accent-3, #ffc400) !important;
+  caret-color: var(--m-color-amber-accent-3, #ffc400) !important;
 }
 
 .m-application .amber.accent-4 {
-    background-color: #ffab00 !important;
+  background-color: var(--m-color-amber-accent-4, #ffab00) !important;
 }
 
 .m-application .amber--text.text--accent-4 {
-    color: #ffab00 !important;
-    caret-color: #ffab00 !important;
+  color: var(--m-color-amber-accent-4, #ffab00) !important;
+  caret-color: var(--m-color-amber-accent-4, #ffab00) !important;
 }
 
 .m-application .orange {
-    background-color: #ff9800 !important;
+  background-color: var(--m-color-orange, #ff9800) !important;
 }
 
 .m-application .orange--text {
-    color: #ff9800 !important;
-    caret-color: #ff9800 !important;
+  color: var(--m-color-orange, #ff9800) !important;
+  caret-color: var(--m-color-orange, #ff9800) !important;
 }
 
 .m-application .orange.lighten-5 {
-    background-color: #fff3e0 !important;
+  background-color: var(--m-color-orange-lighten-5, #fff3e0) !important;
 }
 
 .m-application .orange--text.text--lighten-5 {
-    color: #fff3e0 !important;
-    caret-color: #fff3e0 !important;
+  color: var(--m-color-orange-lighten-5, #fff3e0) !important;
+  caret-color: var(--m-color-orange-lighten-5, #fff3e0) !important;
 }
 
 .m-application .orange.lighten-4 {
-    background-color: #ffe0b2 !important;
+  background-color: var(--m-color-orange-lighten-4, #ffe0b2) !important;
 }
 
 .m-application .orange--text.text--lighten-4 {
-    color: #ffe0b2 !important;
-    caret-color: #ffe0b2 !important;
+  color: var(--m-color-orange-lighten-4, #ffe0b2) !important;
+  caret-color: var(--m-color-orange-lighten-4, #ffe0b2) !important;
 }
 
 .m-application .orange.lighten-3 {
-    background-color: #ffcc80 !important;
+  background-color: var(--m-color-orange-lighten-3, #ffcc80) !important;
 }
 
 .m-application .orange--text.text--lighten-3 {
-    color: #ffcc80 !important;
-    caret-color: #ffcc80 !important;
+  color: var(--m-color-orange-lighten-3, #ffcc80) !important;
+  caret-color: var(--m-color-orange-lighten-3, #ffcc80) !important;
 }
 
 .m-application .orange.lighten-2 {
-    background-color: #ffb74d !important;
+  background-color: var(--m-color-orange-lighten-2, #ffb74d) !important;
 }
 
 .m-application .orange--text.text--lighten-2 {
-    color: #ffb74d !important;
-    caret-color: #ffb74d !important;
+  color: var(--m-color-orange-lighten-2, #ffb74d) !important;
+  caret-color: var(--m-color-orange-lighten-2, #ffb74d) !important;
 }
 
 .m-application .orange.lighten-1 {
-    background-color: #ffa726 !important;
+  background-color: var(--m-color-orange-lighten-1, #ffa726) !important;
 }
 
 .m-application .orange--text.text--lighten-1 {
-    color: #ffa726 !important;
-    caret-color: #ffa726 !important;
+  color: var(--m-color-orange-lighten-1, #ffa726) !important;
+  caret-color: var(--m-color-orange-lighten-1, #ffa726) !important;
 }
 
 .m-application .orange.darken-1 {
-    background-color: #fb8c00 !important;
+  background-color: var(--m-color-orange-darken-1, #fb8c00) !important;
 }
 
 .m-application .orange--text.text--darken-1 {
-    color: #fb8c00 !important;
-    caret-color: #fb8c00 !important;
+  color: var(--m-color-orange-darken-1, #fb8c00) !important;
+  caret-color: var(--m-color-orange-darken-1, #fb8c00) !important;
 }
 
 .m-application .orange.darken-2 {
-    background-color: #f57c00 !important;
+  background-color: var(--m-color-orange-darken-2, #f57c00) !important;
 }
 
 .m-application .orange--text.text--darken-2 {
-    color: #f57c00 !important;
-    caret-color: #f57c00 !important;
+  color: var(--m-color-orange-darken-2, #f57c00) !important;
+  caret-color: var(--m-color-orange-darken-2, #f57c00) !important;
 }
 
 .m-application .orange.darken-3 {
-    background-color: #ef6c00 !important;
+  background-color: var(--m-color-orange-darken-3, #ef6c00) !important;
 }
 
 .m-application .orange--text.text--darken-3 {
-    color: #ef6c00 !important;
-    caret-color: #ef6c00 !important;
+  color: var(--m-color-orange-darken-3, #ef6c00) !important;
+  caret-color: var(--m-color-orange-darken-3, #ef6c00) !important;
 }
 
 .m-application .orange.darken-4 {
-    background-color: #e65100 !important;
+  background-color: var(--m-color-orange-darken-4, #e65100) !important;
 }
 
 .m-application .orange--text.text--darken-4 {
-    color: #e65100 !important;
-    caret-color: #e65100 !important;
+  color: var(--m-color-orange-darken-4, #e65100) !important;
+  caret-color: var(--m-color-orange-darken-4, #e65100) !important;
 }
 
 .m-application .orange.accent-1 {
-    background-color: #ffd180 !important;
+  background-color: var(--m-color-orange-accent-1, #ffd180) !important;
 }
 
 .m-application .orange--text.text--accent-1 {
-    color: #ffd180 !important;
-    caret-color: #ffd180 !important;
+  color: var(--m-color-orange-accent-1, #ffd180) !important;
+  caret-color: var(--m-color-orange-accent-1, #ffd180) !important;
 }
 
 .m-application .orange.accent-2 {
-    background-color: #ffab40 !important;
+  background-color: var(--m-color-orange-accent-2, #ffab40) !important;
 }
 
 .m-application .orange--text.text--accent-2 {
-    color: #ffab40 !important;
-    caret-color: #ffab40 !important;
+  color: var(--m-color-orange-accent-2, #ffab40) !important;
+  caret-color: var(--m-color-orange-accent-2, #ffab40) !important;
 }
 
 .m-application .orange.accent-3 {
-    background-color: #ff9100 !important;
+  background-color: var(--m-color-orange-accent-3, #ff9100) !important;
 }
 
 .m-application .orange--text.text--accent-3 {
-    color: #ff9100 !important;
-    caret-color: #ff9100 !important;
+  color: var(--m-color-orange-accent-3, #ff9100) !important;
+  caret-color: var(--m-color-orange-accent-3, #ff9100) !important;
 }
 
 .m-application .orange.accent-4 {
-    background-color: #ff6d00 !important;
+  background-color: var(--m-color-orange-accent-4, #ff6d00) !important;
 }
 
 .m-application .orange--text.text--accent-4 {
-    color: #ff6d00 !important;
-    caret-color: #ff6d00 !important;
+  color: var(--m-color-orange-accent-4, #ff6d00) !important;
+  caret-color: var(--m-color-orange-accent-4, #ff6d00) !important;
 }
 
 .m-application .deep-orange {
-    background-color: #ff5722 !important;
+  background-color: var(--m-color-deep-orange, #ff5722) !important;
 }
 
 .m-application .deep-orange--text {
-    color: #ff5722 !important;
-    caret-color: #ff5722 !important;
+  color: var(--m-color-deep-orange, #ff5722) !important;
+  caret-color: var(--m-color-deep-orange, #ff5722) !important;
 }
 
 .m-application .deep-orange.lighten-5 {
-    background-color: #fbe9e7 !important;
+  background-color: var(--m-color-deep-orange-lighten-5, #fbe9e7) !important;
 }
 
 .m-application .deep-orange--text.text--lighten-5 {
-    color: #fbe9e7 !important;
-    caret-color: #fbe9e7 !important;
+  color: var(--m-color-deep-orange-lighten-5, #fbe9e7) !important;
+  caret-color: var(--m-color-deep-orange-lighten-5, #fbe9e7) !important;
 }
 
 .m-application .deep-orange.lighten-4 {
-    background-color: #ffccbc !important;
+  background-color: var(--m-color-deep-orange-lighten-4, #ffccbc) !important;
 }
 
 .m-application .deep-orange--text.text--lighten-4 {
-    color: #ffccbc !important;
-    caret-color: #ffccbc !important;
+  color: var(--m-color-deep-orange-lighten-4, #ffccbc) !important;
+  caret-color: var(--m-color-deep-orange-lighten-4, #ffccbc) !important;
 }
 
 .m-application .deep-orange.lighten-3 {
-    background-color: #ffab91 !important;
+  background-color: var(--m-color-deep-orange-lighten-3, #ffab91) !important;
 }
 
 .m-application .deep-orange--text.text--lighten-3 {
-    color: #ffab91 !important;
-    caret-color: #ffab91 !important;
+  color: var(--m-color-deep-orange-lighten-3, #ffab91) !important;
+  caret-color: var(--m-color-deep-orange-lighten-3, #ffab91) !important;
 }
 
 .m-application .deep-orange.lighten-2 {
-    background-color: #ff8a65 !important;
+  background-color: var(--m-color-deep-orange-lighten-2, #ff8a65) !important;
 }
 
 .m-application .deep-orange--text.text--lighten-2 {
-    color: #ff8a65 !important;
-    caret-color: #ff8a65 !important;
+  color: var(--m-color-deep-orange-lighten-2, #ff8a65) !important;
+  caret-color: var(--m-color-deep-orange-lighten-2, #ff8a65) !important;
 }
 
 .m-application .deep-orange.lighten-1 {
-    background-color: #ff7043 !important;
+  background-color: var(--m-color-deep-orange-lighten-1, #ff7043) !important;
 }
 
 .m-application .deep-orange--text.text--lighten-1 {
-    color: #ff7043 !important;
-    caret-color: #ff7043 !important;
+  color: var(--m-color-deep-orange-lighten-1, #ff7043) !important;
+  caret-color: var(--m-color-deep-orange-lighten-1, #ff7043) !important;
 }
 
 .m-application .deep-orange.darken-1 {
-    background-color: #f4511e !important;
+  background-color: var(--m-color-deep-orange-darken-1, #f4511e) !important;
 }
 
 .m-application .deep-orange--text.text--darken-1 {
-    color: #f4511e !important;
-    caret-color: #f4511e !important;
+  color: var(--m-color-deep-orange-darken-1, #f4511e) !important;
+  caret-color: var(--m-color-deep-orange-darken-1, #f4511e) !important;
 }
 
 .m-application .deep-orange.darken-2 {
-    background-color: #e64a19 !important;
+  background-color: var(--m-color-deep-orange-darken-2, #e64a19) !important;
 }
 
 .m-application .deep-orange--text.text--darken-2 {
-    color: #e64a19 !important;
-    caret-color: #e64a19 !important;
+  color: var(--m-color-deep-orange-darken-2, #e64a19) !important;
+  caret-color: var(--m-color-deep-orange-darken-2, #e64a19) !important;
 }
 
 .m-application .deep-orange.darken-3 {
-    background-color: #d84315 !important;
+  background-color: var(--m-color-deep-orange-darken-3, #d84315) !important;
 }
 
 .m-application .deep-orange--text.text--darken-3 {
-    color: #d84315 !important;
-    caret-color: #d84315 !important;
+  color: var(--m-color-deep-orange-darken-3, #d84315) !important;
+  caret-color: var(--m-color-deep-orange-darken-3, #d84315) !important;
 }
 
 .m-application .deep-orange.darken-4 {
-    background-color: #bf360c !important;
+  background-color: var(--m-color-deep-orange-darken-4, #bf360c) !important;
 }
 
 .m-application .deep-orange--text.text--darken-4 {
-    color: #bf360c !important;
-    caret-color: #bf360c !important;
+  color: var(--m-color-deep-orange-darken-4, #bf360c) !important;
+  caret-color: var(--m-color-deep-orange-darken-4, #bf360c) !important;
 }
 
 .m-application .deep-orange.accent-1 {
-    background-color: #ff9e80 !important;
+  background-color: var(--m-color-deep-orange-accent-1, #ff9e80) !important;
 }
 
 .m-application .deep-orange--text.text--accent-1 {
-    color: #ff9e80 !important;
-    caret-color: #ff9e80 !important;
+  color: var(--m-color-deep-orange-accent-1, #ff9e80) !important;
+  caret-color: var(--m-color-deep-orange-accent-1, #ff9e80) !important;
 }
 
 .m-application .deep-orange.accent-2 {
-    background-color: #ff6e40 !important;
+  background-color: var(--m-color-deep-orange-accent-2, #ff6e40) !important;
 }
 
 .m-application .deep-orange--text.text--accent-2 {
-    color: #ff6e40 !important;
-    caret-color: #ff6e40 !important;
+  color: var(--m-color-deep-orange-accent-2, #ff6e40) !important;
+  caret-color: var(--m-color-deep-orange-accent-2, #ff6e40) !important;
 }
 
 .m-application .deep-orange.accent-3 {
-    background-color: #ff3d00 !important;
+  background-color: var(--m-color-deep-orange-accent-3, #ff3d00) !important;
 }
 
 .m-application .deep-orange--text.text--accent-3 {
-    color: #ff3d00 !important;
-    caret-color: #ff3d00 !important;
+  color: var(--m-color-deep-orange-accent-3, #ff3d00) !important;
+  caret-color: var(--m-color-deep-orange-accent-3, #ff3d00) !important;
 }
 
 .m-application .deep-orange.accent-4 {
-    background-color: #dd2c00 !important;
+  background-color: var(--m-color-deep-orange-accent-4, #dd2c00) !important;
 }
 
 .m-application .deep-orange--text.text--accent-4 {
-    color: #dd2c00 !important;
-    caret-color: #dd2c00 !important;
+  color: var(--m-color-deep-orange-accent-4, #dd2c00) !important;
+  caret-color: var(--m-color-deep-orange-accent-4, #dd2c00) !important;
 }
 
 .m-application .brown {
-    background-color: #795548 !important;
+  background-color: var(--m-color-brown, #795548) !important;
 }
 
 .m-application .brown--text {
-    color: #795548 !important;
-    caret-color: #795548 !important;
+  color: var(--m-color-brown, #795548) !important;
+  caret-color: var(--m-color-brown, #795548) !important;
 }
 
 .m-application .brown.lighten-5 {
-    background-color: #efebe9 !important;
+  background-color: var(--m-color-brown-lighten-5, #efebe9) !important;
 }
 
 .m-application .brown--text.text--lighten-5 {
-    color: #efebe9 !important;
-    caret-color: #efebe9 !important;
+  color: var(--m-color-brown-lighten-5, #efebe9) !important;
+  caret-color: var(--m-color-brown-lighten-5, #efebe9) !important;
 }
 
 .m-application .brown.lighten-4 {
-    background-color: #d7ccc8 !important;
+  background-color: var(--m-color-brown-lighten-4, #d7ccc8) !important;
 }
 
 .m-application .brown--text.text--lighten-4 {
-    color: #d7ccc8 !important;
-    caret-color: #d7ccc8 !important;
+  color: var(--m-color-brown-lighten-4, #d7ccc8) !important;
+  caret-color: var(--m-color-brown-lighten-4, #d7ccc8) !important;
 }
 
 .m-application .brown.lighten-3 {
-    background-color: #bcaaa4 !important;
+  background-color: var(--m-color-brown-lighten-3, #bcaaa4) !important;
 }
 
 .m-application .brown--text.text--lighten-3 {
-    color: #bcaaa4 !important;
-    caret-color: #bcaaa4 !important;
+  color: var(--m-color-brown-lighten-3, #bcaaa4) !important;
+  caret-color: var(--m-color-brown-lighten-3, #bcaaa4) !important;
 }
 
 .m-application .brown.lighten-2 {
-    background-color: #a1887f !important;
+  background-color: var(--m-color-brown-lighten-2, #a1887f) !important;
 }
 
 .m-application .brown--text.text--lighten-2 {
-    color: #a1887f !important;
-    caret-color: #a1887f !important;
+  color: var(--m-color-brown-lighten-2, #a1887f) !important;
+  caret-color: var(--m-color-brown-lighten-2, #a1887f) !important;
 }
 
 .m-application .brown.lighten-1 {
-    background-color: #8d6e63 !important;
+  background-color: var(--m-color-brown-lighten-1, #8d6e63) !important;
 }
 
 .m-application .brown--text.text--lighten-1 {
-    color: #8d6e63 !important;
-    caret-color: #8d6e63 !important;
+  color: var(--m-color-brown-lighten-1, #8d6e63) !important;
+  caret-color: var(--m-color-brown-lighten-1, #8d6e63) !important;
 }
 
 .m-application .brown.darken-1 {
-    background-color: #6d4c41 !important;
+  background-color: var(--m-color-brown-darken-1, #6d4c41) !important;
 }
 
 .m-application .brown--text.text--darken-1 {
-    color: #6d4c41 !important;
-    caret-color: #6d4c41 !important;
+  color: var(--m-color-brown-darken-1, #6d4c41) !important;
+  caret-color: var(--m-color-brown-darken-1, #6d4c41) !important;
 }
 
 .m-application .brown.darken-2 {
-    background-color: #5d4037 !important;
+  background-color: var(--m-color-brown-darken-2, #5d4037) !important;
 }
 
 .m-application .brown--text.text--darken-2 {
-    color: #5d4037 !important;
-    caret-color: #5d4037 !important;
+  color: var(--m-color-brown-darken-2, #5d4037) !important;
+  caret-color: var(--m-color-brown-darken-2, #5d4037) !important;
 }
 
 .m-application .brown.darken-3 {
-    background-color: #4e342e !important;
+  background-color: var(--m-color-brown-darken-3, #4e342e) !important;
 }
 
 .m-application .brown--text.text--darken-3 {
-    color: #4e342e !important;
-    caret-color: #4e342e !important;
+  color: var(--m-color-brown-darken-3, #4e342e) !important;
+  caret-color: var(--m-color-brown-darken-3, #4e342e) !important;
 }
 
 .m-application .brown.darken-4 {
-    background-color: #3e2723 !important;
+  background-color: var(--m-color-brown-darken-4, #3e2723) !important;
 }
 
 .m-application .brown--text.text--darken-4 {
-    color: #3e2723 !important;
-    caret-color: #3e2723 !important;
+  color: var(--m-color-brown-darken-4, #3e2723) !important;
+  caret-color: var(--m-color-brown-darken-4, #3e2723) !important;
 }
 
 .m-application .blue-grey {
-    background-color: #607d8b !important;
+  background-color: var(--m-color-blue-grey, #607d8b) !important;
 }
 
 .m-application .blue-grey--text {
-    color: #607d8b !important;
-    caret-color: #607d8b !important;
+  color: var(--m-color-blue-grey, #607d8b) !important;
+  caret-color: var(--m-color-blue-grey, #607d8b) !important;
 }
 
 .m-application .blue-grey.lighten-5 {
-    background-color: #eceff1 !important;
+  background-color: var(--m-color-blue-grey-lighten-5, #eceff1) !important;
 }
 
 .m-application .blue-grey--text.text--lighten-5 {
-    color: #eceff1 !important;
-    caret-color: #eceff1 !important;
+  color: var(--m-color-blue-grey-lighten-5, #eceff1) !important;
+  caret-color: var(--m-color-blue-grey-lighten-5, #eceff1) !important;
 }
 
 .m-application .blue-grey.lighten-4 {
-    background-color: #cfd8dc !important;
+  background-color: var(--m-color-blue-grey-lighten-4, #cfd8dc) !important;
 }
 
 .m-application .blue-grey--text.text--lighten-4 {
-    color: #cfd8dc !important;
-    caret-color: #cfd8dc !important;
+  color: var(--m-color-blue-grey-lighten-4, #cfd8dc) !important;
+  caret-color: var(--m-color-blue-grey-lighten-4, #cfd8dc) !important;
 }
 
 .m-application .blue-grey.lighten-3 {
-    background-color: #b0bec5 !important;
+  background-color: var(--m-color-blue-grey-lighten-3, #b0bec5) !important;
 }
 
 .m-application .blue-grey--text.text--lighten-3 {
-    color: #b0bec5 !important;
-    caret-color: #b0bec5 !important;
+  color: var(--m-color-blue-grey-lighten-3, #b0bec5) !important;
+  caret-color: var(--m-color-blue-grey-lighten-3, #b0bec5) !important;
 }
 
 .m-application .blue-grey.lighten-2 {
-    background-color: #90a4ae !important;
+  background-color: var(--m-color-blue-grey-lighten-2, #90a4ae) !important;
 }
 
 .m-application .blue-grey--text.text--lighten-2 {
-    color: #90a4ae !important;
-    caret-color: #90a4ae !important;
+  color: var(--m-color-blue-grey-lighten-2, #90a4ae) !important;
+  caret-color: var(--m-color-blue-grey-lighten-2, #90a4ae) !important;
 }
 
 .m-application .blue-grey.lighten-1 {
-    background-color: #78909c !important;
+  background-color: var(--m-color-blue-grey-lighten-1, #78909c) !important;
 }
 
 .m-application .blue-grey--text.text--lighten-1 {
-    color: #78909c !important;
-    caret-color: #78909c !important;
+  color: var(--m-color-blue-grey-lighten-1, #78909c) !important;
+  caret-color: var(--m-color-blue-grey-lighten-1, #78909c) !important;
 }
 
 .m-application .blue-grey.darken-1 {
-    background-color: #546e7a !important;
+  background-color: var(--m-color-blue-grey-darken-1, #546e7a) !important;
 }
 
 .m-application .blue-grey--text.text--darken-1 {
-    color: #546e7a !important;
-    caret-color: #546e7a !important;
+  color: var(--m-color-blue-grey-darken-1, #546e7a) !important;
+  caret-color: var(--m-color-blue-grey-darken-1, #546e7a) !important;
 }
 
 .m-application .blue-grey.darken-2 {
-    background-color: #455a64 !important;
+  background-color: var(--m-color-blue-grey-darken-2, #455a64) !important;
 }
 
 .m-application .blue-grey--text.text--darken-2 {
-    color: #455a64 !important;
-    caret-color: #455a64 !important;
+  color: var(--m-color-blue-grey-darken-2, #455a64) !important;
+  caret-color: var(--m-color-blue-grey-darken-2, #455a64) !important;
 }
 
 .m-application .blue-grey.darken-3 {
-    background-color: #37474f !important;
+  background-color: var(--m-color-blue-grey-darken-3, #37474f) !important;
 }
 
 .m-application .blue-grey--text.text--darken-3 {
-    color: #37474f !important;
-    caret-color: #37474f !important;
+  color: var(--m-color-blue-grey-darken-3, #37474f) !important;
+  caret-color: var(--m-color-blue-grey-darken-3, #37474f) !important;
 }
 
 .m-application .blue-grey.darken-4 {
-    background-color: #263238 !important;
+  background-color: var(--m-color-blue-grey-darken-4, #263238) !important;
 }
 
 .m-application .blue-grey--text.text--darken-4 {
-    color: #263238 !important;
-    caret-color: #263238 !important;
+  color: var(--m-color-blue-grey-darken-4, #263238) !important;
+  caret-color: var(--m-color-blue-grey-darken-4, #263238) !important;
 }
 
 .m-application .grey {
-    background-color: #9e9e9e !important;
+  background-color: var(--m-color-grey, #9e9e9e) !important;
 }
 
 .m-application .grey--text {
-    color: #9e9e9e !important;
-    caret-color: #9e9e9e !important;
+  color: var(--m-color-grey, #9e9e9e) !important;
+  caret-color: var(--m-color-grey, #9e9e9e) !important;
 }
 
 .m-application .grey.lighten-5 {
-    background-color: #fafafa !important;
+  background-color: var(--m-color-grey-lighten-5, #fafafa) !important;
 }
 
 .m-application .grey--text.text--lighten-5 {
-    color: #fafafa !important;
-    caret-color: #fafafa !important;
+  color: var(--m-color-grey-lighten-5, #fafafa) !important;
+  caret-color: var(--m-color-grey-lighten-5, #fafafa) !important;
 }
 
 .m-application .grey.lighten-4 {
-    background-color: #f5f5f5 !important;
+  background-color: var(--m-color-grey-lighten-4, #f5f5f5) !important;
 }
 
 .m-application .grey--text.text--lighten-4 {
-    color: #f5f5f5 !important;
-    caret-color: #f5f5f5 !important;
+  color: var(--m-color-grey-lighten-4, #f5f5f5) !important;
+  caret-color: var(--m-color-grey-lighten-4, #f5f5f5) !important;
 }
 
 .m-application .grey.lighten-3 {
-    background-color: #eeeeee !important;
+  background-color: var(--m-color-grey-lighten-3, #eeeeee) !important;
 }
 
 .m-application .grey--text.text--lighten-3 {
-    color: #eeeeee !important;
-    caret-color: #eeeeee !important;
+  color: var(--m-color-grey-lighten-3, #eeeeee) !important;
+  caret-color: var(--m-color-grey-lighten-3, #eeeeee) !important;
 }
 
 .m-application .grey.lighten-2 {
-    background-color: #e0e0e0 !important;
+  background-color: var(--m-color-grey-lighten-2, #e0e0e0) !important;
 }
 
 .m-application .grey--text.text--lighten-2 {
-    color: #e0e0e0 !important;
-    caret-color: #e0e0e0 !important;
+  color: var(--m-color-grey-lighten-2, #e0e0e0) !important;
+  caret-color: var(--m-color-grey-lighten-2, #e0e0e0) !important;
 }
 
 .m-application .grey.lighten-1 {
-    background-color: #bdbdbd !important;
+  background-color: var(--m-color-grey-lighten-1, #bdbdbd) !important;
 }
 
 .m-application .grey--text.text--lighten-1 {
-    color: #bdbdbd !important;
-    caret-color: #bdbdbd !important;
+  color: var(--m-color-grey-lighten-1, #bdbdbd) !important;
+  caret-color: var(--m-color-grey-lighten-1, #bdbdbd) !important;
 }
 
 .m-application .grey.darken-1 {
-    background-color: #757575 !important;
+  background-color: var(--m-color-grey-darken-1, #757575) !important;
 }
 
 .m-application .grey--text.text--darken-1 {
-    color: #757575 !important;
-    caret-color: #757575 !important;
+  color: var(--m-color-grey-darken-1, #757575) !important;
+  caret-color: var(--m-color-grey-darken-1, #757575) !important;
 }
 
 .m-application .grey.darken-2 {
-    background-color: #616161 !important;
+  background-color: var(--m-color-grey-darken-2, #616161) !important;
 }
 
 .m-application .grey--text.text--darken-2 {
-    color: #616161 !important;
-    caret-color: #616161 !important;
+  color: var(--m-color-grey-darken-2, #616161) !important;
+  caret-color: var(--m-color-grey-darken-2, #616161) !important;
 }
 
 .m-application .grey.darken-3 {
-    background-color: #424242 !important;
+  background-color: var(--m-color-grey-darken-3, #424242) !important;
 }
 
 .m-application .grey--text.text--darken-3 {
-    color: #424242 !important;
-    caret-color: #424242 !important;
+  color: var(--m-color-grey-darken-3, #424242) !important;
+  caret-color: var(--m-color-grey-darken-3, #424242) !important;
 }
 
 .m-application .grey.darken-4 {
-    background-color: #212121 !important;
+  background-color: var(--m-color-grey-darken-4, #212121) !important;
 }
 
 .m-application .grey--text.text--darken-4 {
-    color: #212121 !important;
-    caret-color: #212121 !important;
+  color: var(--m-color-grey-darken-4, #212121) !important;
+  caret-color: var(--m-color-grey-darken-4, #212121) !important;
 }
 
 .m-application .shades.black {
-    background-color: #000000 !important;
+  background-color: #000000 !important;
 }
 
 .m-application .shades--text.text--black {
-    color: #000000 !important;
-    caret-color: #000000 !important;
+  color: #000000 !important;
+  caret-color: #000000 !important;
 }
 
 .m-application .shades.white {
-    background-color: #FFFFFF !important;
+  background-color: #FFFFFF !important;
 }
 
 .m-application .shades--text.text--white {
-    color: #FFFFFF !important;
-    caret-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
 }
 
 .m-application .shades.transparent {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .m-application .shades--text.text--transparent {
-    color: transparent !important;
-    caret-color: transparent !important;
+  color: transparent !important;
+  caret-color: transparent !important;
 }
 
 /*!
