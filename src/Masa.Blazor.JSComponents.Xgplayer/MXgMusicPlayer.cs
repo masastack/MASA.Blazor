@@ -20,8 +20,6 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
 {
     [Inject] private I18n I18n { get; set; } = null!;
 
-    [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
-
     /// <summary>
     /// Media resource URL, when the URL is in the form of an array,
     /// [Source tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/source) will be used for playback.
@@ -130,20 +128,20 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
     public string? ProgressColor { get; set; }
 
-    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
-    public string? PlayedColor { get; set; }
+    [Parameter] [MasaApiParameter("#FFFFFF", ReleasedIn = "v1.11.0")]
+    public string? PlayedColor { get; set; } = "#FFFFFF";
 
     [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
     public string? CachedColor { get; set; }
 
-    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
-    public string? VolumeColor { get; set; }
+    [Parameter] [MasaApiParameter("#FFFFFF", ReleasedIn = "v1.11.0")]
+    public string? VolumeColor { get; set; } = "#FFFFFF";
 
-    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
-    public string? SliderBtnBackground { get; set; }
+    [Parameter] [MasaApiParameter("#FFFFFF", ReleasedIn = "v1.11.0")]
+    public string? SliderBtnBackground { get; set; } = "#FFFFFF";
 
-    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
-    public string? SliderBtnShadow { get; set; }
+    [Parameter] [MasaApiParameter("#FFFFFF", ReleasedIn = "v1.11.0")]
+    public string? SliderBtnShadow { get; set; } = "#FFFFFF";
 
     private CancellationTokenSource? _cancellationTokenSource;
     private bool _hasFirstRender;
@@ -289,7 +287,7 @@ public class MXgMusicPlayer : MasaComponentBase, IXgplayer
             MarginControls = MarginControls,
             Ignores = Ignores,
             CommonStyle = new CommonStyle(ProgressColor, PlayedColor, CachedColor, VolumeColor, SliderBtnBackground,
-                SliderBtnShadow, MasaBlazor.Theme.Themes.Dark),
+                SliderBtnShadow),
             Music = new XgplayerMusic(), // indicate that this is a music player
             Controls = _controlsPlugin,
             Play = _playPlugin,
