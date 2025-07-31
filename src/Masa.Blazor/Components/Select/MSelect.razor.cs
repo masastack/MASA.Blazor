@@ -103,7 +103,8 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
     private static Func<TItem, bool> ItemDivider { get; } = GetFuncOrDefault<bool>("Divider");
     
     private bool _onClearInvoked;
-    private bool _onSelectItemInvoked;
+
+    protected bool OnSelectItemInvoked { get; set; }
 
     private IList<TItem> CachedItems { get; set; } = new List<TItem>();
 
@@ -252,12 +253,12 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
     {
         if (val) return;
 
-        if (_onSelectItemInvoked || _onClearInvoked)
+        if (OnSelectItemInvoked || _onClearInvoked)
         {
             await TryInvokeFieldChangeOfInputsFilter(isClear: _onClearInvoked);
 
             _onClearInvoked = false;
-            _onSelectItemInvoked = false;
+            OnSelectItemInvoked = false;
         }
     }
 
@@ -457,7 +458,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
 
     internal virtual async Task SelectItem(SelectedItem<TItem> item, bool closeOnSelect = true)
     {
-        _onSelectItemInvoked = true;
+        OnSelectItemInvoked = true;
 
         bool isSelected;
 

@@ -151,6 +151,8 @@ public partial class MCascader<TItem, TItemValue, TValue> : MSelect<TItem, TItem
 
     internal override async Task SelectItem(SelectedItem<TItem> item, bool closeOnSelect = true)
     {
+        OnSelectItemInvoked = true;
+
         _selectedItems = _displaySelectedItems.ToList();
 
         if (typeof(TValue) == typeof(TItemValue))
