@@ -218,7 +218,7 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
     [MasaApiPublicMethod]
     public async Task<XgplayerPropsAndStates?> GetCurrentVideoPropsAndStatesAsync()
     {
-        return CurrentVideo is null ? null : await CurrentVideo.Player?.GetPropsAndStatesAsync();
+        return CurrentVideo?.Player is null ? null : await CurrentVideo.Player.GetPropsAndStatesAsync();
     }
 
     private async Task ToggleMode()
