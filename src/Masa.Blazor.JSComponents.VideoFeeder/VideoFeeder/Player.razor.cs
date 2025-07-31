@@ -35,6 +35,8 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
 
     [Parameter] public EventCallback OnEnded { get; set; }
 
+    [Parameter] public EventCallback OnGoBack { get; set; }
+
     [Parameter] public EventCallback<TItem> OnLongPress { get; set; }
 
     [Parameter] public RenderFragment<TItem>? ActionsContent { get; set; }

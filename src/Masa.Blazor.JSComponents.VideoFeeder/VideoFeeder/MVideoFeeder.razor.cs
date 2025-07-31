@@ -68,6 +68,8 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
     /// </summary>
     [Parameter] public bool OnlyShowPosterInMusicMode { get; set; }
 
+    [Parameter] public EventCallback OnGoBack { get; set; }
+
     private static readonly Block Block = new("m-video-feeder");
     private readonly ModifierBuilder _blockBuilder = Block.CreateModifierBuilder();
 
