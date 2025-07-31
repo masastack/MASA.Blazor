@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Components.Xgplayer.Plugins;
+﻿using Masa.Blazor.Components.Xgplayer;
+using Masa.Blazor.Components.Xgplayer.Plugins;
 using Masa.Blazor.JSComponents.VideoFeeder;
 using Masa.Blazor.JSComponents.Xgplayer;
 using Masa.Blazor.JSModules;
@@ -206,6 +207,11 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
         {
             await _xgplayer.ToVideoPlayerAsync();
         }
+    }
+
+    internal async Task<XgplayerPropsAndStates?> GetPropsAndStatesAsync()
+    {
+        return _xgplayer is null ? null : await _xgplayer.GetPropsAndStatesAsync();
     }
 
     protected override async ValueTask DisposeAsyncCore()
