@@ -104,7 +104,7 @@ public partial class MSelect<TItem, TItemValue, TValue> : MTextField<TValue>, IO
     
     private bool _onClearInvoked;
 
-    internal bool OnSelectItemInvoked { get; set; }
+    protected bool OnSelectItemInvoked { get; set; }
 
     private IList<TItem> CachedItems { get; set; } = new List<TItem>();
 
