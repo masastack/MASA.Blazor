@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.JSComponents.VideoFeeder;
+﻿using Masa.Blazor.Components.Xgplayer;
+using Masa.Blazor.JSComponents.VideoFeeder;
 
 namespace Masa.Blazor;
 
@@ -212,6 +213,12 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
         {
             await CurrentVideo.Player.SetPlaybackRateAsync(_playbackRate.AsT2);
         }
+    }
+
+    [MasaApiPublicMethod]
+    public async Task<XgplayerPropsAndStates?> GetCurrentVideoPropsAndStatesAsync()
+    {
+        return CurrentVideo is null ? null : await CurrentVideo.Player?.GetPropsAndStatesAsync();
     }
 
     private async Task ToggleMode()
