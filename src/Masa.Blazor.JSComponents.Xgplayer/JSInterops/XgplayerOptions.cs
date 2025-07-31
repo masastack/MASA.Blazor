@@ -261,18 +261,16 @@ internal class CommonStyle
     public SliderBtnStyle? SliderBtnStyle { get; set; }
 
     public CommonStyle(string? progressColor, string? playedColor, string? cachedColor, string? volumeColor,
-        string? sliderBtnBackground, string? sliderBtnShadow, ThemeOptions themeOptions)
+        string? sliderBtnBackground, string? sliderBtnShadow)
     {
-        var primary = themeOptions.InversePrimary;
-
-        PlayedColor = playedColor ?? primary;
-        VolumeColor = volumeColor ?? primary;
+        PlayedColor = playedColor;
+        VolumeColor = volumeColor;
         ProgressColor = progressColor;
         CachedColor = cachedColor;
         SliderBtnStyle = new SliderBtnStyle()
         {
-            Background = sliderBtnBackground ?? primary + "4e",
-            BoxShadow = sliderBtnShadow ?? "0 0 1px " + primary + "62"
+            Background = sliderBtnBackground + "4e",
+            BoxShadow = "0 0 1px " + sliderBtnShadow + "62"
         };
     }
 }
