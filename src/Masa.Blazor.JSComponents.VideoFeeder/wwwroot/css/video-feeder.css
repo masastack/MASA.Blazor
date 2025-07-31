@@ -27,12 +27,22 @@
 }
 
 .m-video-feeder__controls-top {
+  display: flex;
+  align-items: start;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   margin: 24px 18px 0 18px;
   color: rgba(var(--m-theme-on-surface), var(--m-high-emphasis-opacity));
+}
+
+.m-video-feeder__controls-top .go-back-btn {
+  margin-right: 4px;
+}
+
+.m-video-feeder__controls-top .top-content {
+  line-height: 36px;
 }
 
 .m-video-feeder__controls-bottom {

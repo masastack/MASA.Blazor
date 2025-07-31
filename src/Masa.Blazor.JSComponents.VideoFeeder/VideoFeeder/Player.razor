@@ -53,7 +53,12 @@
             </MChip>
         }
         <div class="@ControlsTopElement">
-            @TopContent?.Invoke(Data.Item)
+            @if (OnGoBack.HasDelegate)
+            {
+                <MButton Class="go-back-btn" Color="white" Text IconName="$goBack" OnClick="@OnGoBack"/>
+            }
+
+            <div class="top-content">@TopContent?.Invoke(Data.Item)</div>
         </div>
         <div class="@ControlsBottomElement">
             @BottomContent?.Invoke(Data.Item)
