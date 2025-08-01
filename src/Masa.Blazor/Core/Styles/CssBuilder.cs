@@ -23,6 +23,6 @@ public class CssBuilder
 
     public override string ToString()
     {
-        return _stringBuilder.ToString();
+        return _stringBuilder.ToString().Trim();
     }
 }

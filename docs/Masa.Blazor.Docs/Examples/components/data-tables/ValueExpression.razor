@@ -17,17 +17,16 @@
 
     private List<DataTableHeader<Dessert>> _headers =
     [
-        new("Dessert (100g serving)", d => d.Name)
+        new("Dessert (100g serving)", nameof(Dessert.Name), d => d.Name)
         {
             Align = DataTableHeaderAlign.Start,
             Sortable = false,
         },
-
-        new("Calories", d => d.Data.Calories),
-        new("Fat (g)", d => d.Data.Fat),
-        new("Carbs (g)", d => d.Data.Carbs),
-        new("Protein (g)", d => d.Data.Protein),
-        new("Iron (%)", d => d.Data.Iron)
+        new("Calories", nameof(Dessert.Data.Calories), d => d.Data.Calories),
+        new("Fat (g)", nameof(Dessert.Data.Fat), d => d.Data.Fat),
+        new("Carbs (g)", nameof(Dessert.Data.Carbs), d => d.Data.Carbs),
+        new("Protein (g)", nameof(Dessert.Data.Protein), d => d.Data.Protein),
+        new("Iron (%)", nameof(Dessert.Data.Iron), d => d.Data.Iron)
     ];
 
     private List<Dessert> _desserts =

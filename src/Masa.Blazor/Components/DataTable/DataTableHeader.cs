@@ -8,8 +8,8 @@ public class DataTableHeader
 
     public DataTableHeader(string text, string value)
     {
-        Text = text ?? throw new ArgumentNullException(nameof(text));
-        Value = value ?? throw new ArgumentNullException(nameof(value));
+        Text = text;
+        Value = value;
     }
 
     public DataTableHeader(string text, string value, bool sortable) : this(text, value)
@@ -27,20 +27,34 @@ public class DataTableHeader
         Sortable = sortable;
     }
 
+    /// <summary>
+    /// Display a divider at the right slide of the column.
+    /// </summary>
     public bool Divider { get; set; }
 
     /// <summary>
-    /// The name of the property, used for getting the value of the item by reflection.
-    /// It's recommended to use <see cref="ValueExpression"/> instead of this property.
+    /// The identifier of the column.
     /// </summary>
-    public virtual string? Value { get; set; }
+    public string? Value { get; set; }
 
+    /// <summary>
+    /// The text displayed in the header cell.
+    /// </summary>
     public string? Text { get; set; }
 
+    /// <summary>
+    /// Determines whether the column is sortable.
+    /// </summary>
     public bool Sortable { get; set; } = true;
 
+    /// <summary>
+    /// The alignment of the column.
+    /// </summary>
     public DataTableHeaderAlign Align { get; set; } = DataTableHeaderAlign.Start;
 
+    /// <summary>
+    /// Determines whether the column is groupable.
+    /// </summary>
     public bool Groupable { get; set; } = true;
 
     /// <summary>
@@ -53,8 +67,14 @@ public class DataTableHeader
     /// </summary>
     public string? CellClass { get; set; }
 
+    /// <summary>
+    /// The width of the column.
+    /// </summary>
     public StringNumber? Width { get; set; }
 
+    /// <summary>
+    /// Determines whether the column is fixed.
+    /// </summary>
     public DataTableFixed Fixed { get; set; }
 
     public DataTableEllipsis? Ellipsis { get; set; }

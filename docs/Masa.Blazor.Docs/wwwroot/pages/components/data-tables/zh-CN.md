@@ -19,7 +19,8 @@ related:
 
 #### ValueExpression {released-on=v1.11.0}
 
-`DataTableHeader<TItem>.ValueExpression` 属性允许你指定一个表达式来获取数据表格的值。这对于在数据表格中使用复杂对象时非常有用。
+设置 `ValueExpression` 允许你指向复杂类型的属性。例如，如果你有一个 `Person` 类，
+包含一个 `Address` 属性，你可以使用 `ValueExpression="x => x.Address.City"` 来指向 `City` 属性。
 
 <masa-example file="Examples.components.data_tables.ValueExpression"></masa-example>
 
