@@ -6,36 +6,20 @@
 
 @code {
 
-    public class Dessert(string name, int calories, double fat, int carbs, double protein, string iron)
-    {
-        public string Name { get; set; } = name;
-
-        public int Calories { get; set; } = calories;
-
-        public double Fat { get; set; } = fat;
-
-        public int Carbs { get; set; } = carbs;
-
-        public double Protein { get; set; } = protein;
-
-        public string Iron { get; set; } = iron;
-    }
+    private record Dessert(string Name, int Calories, double Fat, int Carbs, double Protein, string Iron);
 
     private List<DataTableHeader<Dessert>> _headers =
     [
-        new()
+        new("Dessert (100g serving)", nameof(Dessert.Name))
         {
-            Text = "Dessert (100g serving)",
             Align = DataTableHeaderAlign.Start,
             Sortable = false,
-            Value = nameof(Dessert.Name)
         },
-
-        new() { Text = "Calories", Value = nameof(Dessert.Calories) },
-        new() { Text = "Fat (g)", Value = nameof(Dessert.Fat) },
-        new() { Text = "Carbs (g)", Value = nameof(Dessert.Carbs) },
-        new() { Text = "Protein (g)", Value = nameof(Dessert.Protein) },
-        new() { Text = "Iron (%)", Value = nameof(Dessert.Iron) }
+        new("Calories", nameof(Dessert.Calories)),
+        new("Fat (g)", nameof(Dessert.Fat)),
+        new("Carbs (g)", nameof(Dessert.Carbs)),
+        new("Protein (g)", nameof(Dessert.Protein)),
+        new("Iron (%)", nameof(Dessert.Iron))
     ];
 
     private List<Dessert> _desserts =

@@ -19,7 +19,9 @@ The standard data-table will by default render your data as simple rows.
 
 #### ValueExpression {released-on=v1.11.0}
 
-The `DataTableHeader<TItem>.ValueExpression` property allows you to specify an expression to get the value of the data table. This is useful when working with complex objects in your data table.
+Setting the `ValueExpression` allows you to point to properties of complex types.
+For example, if you have a `Person` class with an `Address` property,
+you can use `ValueExpression="x => x.Address.City` to point to the `City` property.
 
 <masa-example file="Examples.components.data_tables.ValueExpression"></masa-example>
 

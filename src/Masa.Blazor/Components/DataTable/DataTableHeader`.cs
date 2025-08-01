@@ -6,55 +6,34 @@ public class DataTableHeader<TItem> : DataTableHeader
     {
     }
 
-    public DataTableHeader(string text, Func<TItem, object?> valueExpression)
+    public DataTableHeader(string text, string value, Func<TItem, object?>? valueExpression = null)
     {
-        Text = text ?? throw new ArgumentNullException(nameof(text));
-        ValueExpression = valueExpression ?? throw new ArgumentNullException(nameof(valueExpression));
+        Text = text;
+        Value = value;
+        ValueExpression = valueExpression;
     }
-    
-    private Func<TItem, object?>? _valueExpression;
 
     public Func<object?, string?, TItem, bool>? Filter { get; set; }
 
     public bool Filterable { get; set; } = true;
 
+    /// <summary>
+    /// Simple way to render the cell content.
+    /// </summary>
     public Func<TItem, OneOf<string, RenderFragment>>? CellRender { get; set; }
 
-    public Func<TItem, object?>? ValueExpression
-    {
-        get => _valueExpression;
-        set
-        {
-            _valueExpression = value;
-            UpdateItemValue();
-        }
-    }
+    /// <summary>
+    /// Gets the expression for the item property value to be displayed in the column.
+    /// It is recommended to set this property;
+    /// otherwise the system will use reflection to get the property value, which may affect performance.
+    /// </summary>
+    public Func<TItem, object?>? ValueExpression { get; init; }
 
-    public override string? Value
-    {
-        get => base.Value;
-        set
-        {
-            base.Value = value;
-            UpdateItemValue();
-        }
-    }
+    public ItemValue<TItem>? ItemValue => field ??= GetItemValue();
 
-    public ItemValue<TItem>? ItemValue { get; private set; }
-
-    private void UpdateItemValue()
+    private ItemValue<TItem>? GetItemValue()
     {
-        if (_valueExpression is not null)
-        {
-            ItemValue = new ItemValue<TItem>(_valueExpression);
-        }
-        else if (Value is not null)
-        {
-            ItemValue = new ItemValue<TItem>(Value);
-        }
-        else
-        {
-            ItemValue = null;
-        }
+        var hasValue = Value != null;
+        return !hasValue ? null : new ItemValue<TItem>(Value, ValueExpression);
     }
 }

@@ -275,7 +275,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
         base.OnInitialized();
 
         CustomFilter = CustomFilterWithColumns;
-        ItemValues = Headers.Select(header => new ItemValue<TItem>(header.Value));
+        ItemValues = Headers.Select(header => header.ItemValue).Where(u => u != null);
 
         _prevIsMobile = IsMobile;
         _prevResizeMode = ResizeMode;
