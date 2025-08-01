@@ -21,7 +21,7 @@ The standard data-table will by default render your data as simple rows.
 
 Setting the `ValueExpression` allows you to point to properties of complex types.
 For example, if you have a `Person` class with an `Address` property,
-you can use `ValueExpression="x => x.Address.City` to point to the `City` property.
+you can use `ValueExpression="x => x.Address.City"` to point to the `City` property.
 
 <masa-example file="Examples.components.data_tables.ValueExpression"></masa-example>
 
