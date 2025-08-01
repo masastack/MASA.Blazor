@@ -2,7 +2,7 @@
 
 public partial class MDataTableHeaderBase: MasaComponentBase
 {
-    [Inject] protected I18n I18n { get; set; } = default!;
+    [Inject] protected I18n I18n { get; set; } = null!;
 
     [Inject] private MasaBlazor MasaBlazor { get; set; } = null!;
 
@@ -57,6 +57,11 @@ public partial class MDataTableHeaderBase: MasaComponentBase
     protected string GetHeaderClass(DataTableHeader header)
     {
         CssBuilder stringBuilder = new();
+        
+        if (header.Divider)
+        {
+            stringBuilder.Add("m-data-table__divider");
+        }
 
         if (!DisableSort && header.Sortable)
         {
@@ -65,10 +70,6 @@ public partial class MDataTableHeaderBase: MasaComponentBase
             var isDesc = beingSorted && Options.SortDesc.ElementAtOrDefault(sortIndex);
 
             stringBuilder.Add("sortable");
-            if (header.Divider)
-            {
-                stringBuilder.Add(" m-data-table__divider");
-            }
 
             if (beingSorted)
             {
