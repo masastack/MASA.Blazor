@@ -13,6 +13,8 @@ public partial class PPageStack : MasaComponentBase
 
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
+    [Parameter] public RenderFragment? LoaderContent { get; set; }
+
     [Parameter] public string? Name { get; set; }
 
     /// <summary>
@@ -98,10 +100,14 @@ public partial class PPageStack : MasaComponentBase
     /// Indicates whether to emit the underlay slide effect.
     /// </summary>
     private bool _emitUnderlaySlide;
+    
+    private RenderFragment? _defaultLoaderContent;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
+
+        _defaultLoaderContent = RenderDefaultLoader();
 
         var targetPath = NavigationManager.GetAbsolutePath();
         var tabbedPattern = TabRules.FirstOrDefault(u => u.Regex.IsMatch(targetPath));
@@ -503,7 +509,7 @@ public partial class PPageStack : MasaComponentBase
                 Console.Error.WriteLine($"Error in BlockScroll: {ex}");
             }
         });
-        
+
         _module?.InvokeVoidAsync("blockScroll").ConfigureAwait(false);
     }
 

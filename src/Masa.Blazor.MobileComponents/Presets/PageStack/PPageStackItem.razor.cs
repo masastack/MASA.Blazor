@@ -16,13 +16,26 @@ public partial class PPageStackItem : MasaComponentBase
 
     [Parameter] public bool DisableUnderlaySlide { get; set; }
 
+    [Parameter] public RenderFragment? LoaderContent { get; set; }
+
+    private static Block _block = new("m-page-stack-item");
+    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+
+    private MDialog? _dialog;
     private TouchJSObjectResult? _touchJSObjectResult;
+
+    private bool _render;
+    private CancellationTokenSource? _renderCts;
 
     private string Transition => Data.DisableTransition ? string.Empty : "dialog-right-transition";
 
     private bool IncludingAppBar => AppBarVisible || Visible;
 
+    /// <summary>
+    /// Indicates whether the bar of the stack page is visible.
+    /// </summary>
     internal bool Visible { get; set; }
+
     internal RenderFragment<PageStackGoBackContext>? AppBarContent { get; set; }
     internal RenderFragment<PageStackGoBackContext>? GoBackContent { get; set; }
     internal RenderFragment<Dictionary<string, object?>>? ImageContent { get; set; }
@@ -43,6 +56,7 @@ public partial class PPageStackItem : MasaComponentBase
     internal bool ElevateOnScroll { get; set; }
     internal bool ShrinkOnScroll { get; set; }
     internal string? AppBarTheme { get; set; }
+    internal RenderFragment? ActionContent { get; set; }
 
     private int ComputedBarHeight
     {
@@ -84,12 +98,38 @@ public partial class PPageStackItem : MasaComponentBase
         }
     }
 
-    internal RenderFragment? ActionContent { get; set; }
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
 
-    private static Block _block = new("m-page-stack-item");
-    private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
+        if (Data.DisableTransition)
+        {
+            _render = true;
+        }
+        else
+        {
+            _renderCts = new CancellationTokenSource();
+            _ = DelayRenderAsync(_renderCts.Token);
+        }
+    }
 
-    private MDialog? _dialog;
+    private async Task DelayRenderAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            await Task.Delay(300, cancellationToken);
+
+            if (!cancellationToken.IsCancellationRequested)
+            {
+                _render = true;
+                await InvokeAsync(StateHasChanged);
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            // ignored
+        }
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -142,6 +182,9 @@ public partial class PPageStackItem : MasaComponentBase
 
     protected override ValueTask DisposeAsyncCore()
     {
+        _renderCts?.Cancel();
+        _renderCts?.Dispose();
+        
         NavController.NotifyPageClosed(Data.AbsolutePath);
 
         _touchJSObjectResult?.Un();

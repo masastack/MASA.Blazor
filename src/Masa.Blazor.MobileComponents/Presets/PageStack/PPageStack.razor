@@ -25,8 +25,20 @@
                         Data="pageData"
                         CanRender="@canRender"
                         OnGoBack="@HandleOnPrevious"
+                        ChildContent="@ChildContent"
+                        LoaderContent="@(LoaderContent ?? _defaultLoaderContent)"
                         @key="@pageData.Id">
-            @ChildContent
         </PPageStackItem>
     }
 </CascadingValue>
+
+@code {
+
+    private RenderFragment RenderDefaultLoader() => __builder =>
+    {
+        <MProgressCircular Indeterminate
+                           Size="48"
+                           Style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"/>
+    };
+
+}
