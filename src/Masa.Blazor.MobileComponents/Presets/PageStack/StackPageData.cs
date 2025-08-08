@@ -34,6 +34,8 @@ public class StackPageData(string absolutePath, int id)
 
     public bool Active { get; private set; }
     
+    internal bool ReadyToRender { get; set; }
+    
     internal void UpdateState(object? state) => State = state;
 
     internal void UpdatePath(string absolutePath) => AbsolutePath = absolutePath;

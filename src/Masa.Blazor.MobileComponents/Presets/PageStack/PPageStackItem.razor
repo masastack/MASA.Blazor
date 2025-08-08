@@ -12,7 +12,7 @@
          NoOutsideClick
          ContentAttributes="@(new Dictionary<string, object> { { "page-stack-id", Data.Id } })"
          @ref="_dialog">
-    @if (!_render)
+    @if (!(Data.ReadyToRender && _render))
     {
         @LoaderContent
     }
