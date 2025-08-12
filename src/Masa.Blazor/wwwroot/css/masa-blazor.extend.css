@@ -61,9 +61,9 @@
     margin-right: 0;
 }
 
-/* strip in datatable */
+/* stripe in datatable */
 .m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
-    background: rgba(var(--m-theme-surface-container-lowest));
+    background: rgba(var(--m-theme-surface-container-highest), var(--m-low-emphasis-opacity, .38));
 }
 
 .m-data-table--fixed-header > .m-data-table__wrapper > table > thead > tr > th.m-data-table__column--fixed-left {
