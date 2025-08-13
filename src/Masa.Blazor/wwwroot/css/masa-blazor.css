@@ -20921,13 +20921,26 @@ html.overflow-y-hidden {
 .m-application--is-ltr .m-list-item--slim .m-list-item__action:first-child,
 .m-application--is-ltr .m-list--slim .m-list-item__icon:first-child,
 .m-application--is-ltr .m-list-item--slim .m-list-item__icon:first-child {
-    margin-right: 20px;
+  margin-right: 12px;
 }
 .m-application--is-rtl .m-list--slim .m-list-item__action:first-child,
 .m-application--is-rtl .m-list-item--slim .m-list-item__action:first-child,
 .m-application--is-rtl .m-list--slim .m-list-item__icon:first-child,
 .m-application--is-rtl .m-list-item--slim .m-list-item__icon:first-child {
-    margin-left: 20px;
+  margin-left: 12px;
+}
+
+.m-application--is-ltr .m-list--dense.m-list--slim .m-list-item .m-list-item__action:first-child,
+.m-application--is-ltr .m-list-item--dense.m-list-item--slim .m-list-item__action:first-child,
+.m-application--is-ltr .m-list--dense.m-list--slim .m-list-item__icon:first-child,
+.m-application--is-ltr .m-list-item--dense.m-list-item--slim .m-list-item__icon:first-child {
+  margin-right: 8px;
+}
+.m-application--is-rtl .m-list--dense.m-list--slim .m-list-item__action:first-child,
+.m-application--is-rtl .m-list-item--dense.m-list-item--slim .m-list-item__action:first-child,
+.m-application--is-rtl .m-list--dense.m-list--slim .m-list-item__icon:first-child,
+.m-application--is-rtl .m-list-item--dense.m-list-item--slim .m-list-item__icon:first-child {
+  margin-left: 8px;
 }
 
 .m-list-item__action,
