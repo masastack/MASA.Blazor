@@ -1,0 +1,15 @@
+{
+  "props": {
+    "Dense": "Whether to use dense mode.",
+    "HideDivider": "Whether to hide the divider.",
+    "Subheader": "Subheader content.",
+    "BackgroundColor": "Background color.",
+    "Outlined": "Whether to show outline border.",
+    "Theme": "Theme.",
+    "CellMinHeight": "Minimum cell height."
+  },
+  "events": {},
+  "contents": {
+    "ChildContent": "Child content."
+  }
+}

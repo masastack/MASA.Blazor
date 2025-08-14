@@ -1,0 +1,64 @@
+﻿<div class="surface-container-high" style="height: 100%; max-width: 380px; margin: 0 auto;">
+    <MCellGroup Subheader="Interface and display">
+        <MCell Title="Dark Mode" Value="@_darkMode" OnClick="@OnDarkMode"></MCell>
+        <MCell Title="Landscape Display">
+            <MSwitch TValue="bool" Inset></MSwitch>
+        </MCell>
+        <MCell Title="Enable NFC">
+            <MSwitch TValue="bool" Inset></MSwitch>
+        </MCell>
+        <MCell Title="Auto Update" Value="Never" Href="/blazor/mobiles/cell#auto-update"></MCell>
+        <MCell Title="Language" Value="English" Href="/blazor/mobiles/cell#language"></MCell>
+    </MCellGroup>
+
+    <MCellGroup Subheader="Others">
+        <MCell Title="Storage" Href="/blazor/mobiles/cell#storage"></MCell>
+        <MCell Title="Text Size" Href="/blazor/mobiles/cell#text-size"></MCell>
+        <MCell Title="Photos, Videos, Files & Calls" Href="/blazor/mobiles/cell#miscs"></MCell>
+        <MCell Title="Listen" Href="/blazor/mobiles/cell#listen"></MCell>
+    </MCellGroup>
+</div>
+
+<MBottomSheet @bind-Value="_darkModeSheet"
+              @bind-Value:after="OnDarkModeSheetUpdated">
+    <MToolbar Dense Flat Color="surface-container-high">
+        <MToolbarTitle>Dark Mode</MToolbarTitle>
+        <MSpacer/>
+        <MButton OnClick="@OnDarkModeUpdate" Color="primary" Small>Save</MButton>
+    </MToolbar>
+    <MListItemGroup @bind-Value="@_tempDarkMode"
+                    ActiveClass="primary--text">
+        <MListItem Title="Auto" Value="@("Auto")" AppendIcon="@GetIcon("Auto")"/>
+        <MListItem Title="Light" Value="@("Light")" AppendIcon="@GetIcon("Light")"/>
+        <MListItem Title="Dark" Value="@("Dark")" AppendIcon="@GetIcon("Dark")"/>
+    </MListItemGroup>
+</MBottomSheet>
+
+@code {
+
+    private bool _darkModeSheet;
+    private string _darkMode = "Auto";
+    private StringNumber _tempDarkMode = "Auto";
+
+    private void OnDarkMode()
+    {
+        _darkModeSheet = true;
+    }
+
+    private void OnDarkModeSheetUpdated()
+    {
+        _tempDarkMode = _darkMode;
+    }
+
+    private void OnDarkModeUpdate()
+    {
+        _darkMode = _tempDarkMode.AsT0;
+        _darkModeSheet = false;
+    }
+
+    private string? GetIcon(string value)
+    {
+        return _tempDarkMode.AsT0 == value ? "mdi-check" : null;
+    }
+
+}

@@ -1,3 +1,4 @@
+using System.Data;
 using Masa.Blazor.Components.ItemGroup;
 
 namespace Masa.Blazor;
@@ -90,16 +91,18 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
     [Parameter]
     [MasaApiParameter(ReleasedIn = "v1.9.0")]
     public bool Slim { get; set; }
-    
+
     [Parameter]
     [MasaApiParameter(ReleasedIn = "v1.10.0")]
     public string? ActiveColor { get; set; }
 
-    private bool ComputedRipple => IsDirtyParameter(nameof(Ripple)) ? Ripple : (!Disabled && IsClickable);
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public StringNumber? MinHeight { get; set; }
+
+    private bool ComputedRipple => !Disabled && IsClickable && (!IsDirtyParameter(nameof(Ripple)) || Ripple);
 
     protected bool IsClickable => Router?.IsClickable is true || Matched;
-
-    public bool IsLink => Router?.IsLink is true;
 
     protected override bool IsRoutable => Href != null && List?.Routable is true;
 
@@ -190,5 +193,13 @@ public partial class MListItem : MRoutableGroupItem<MItemGroupBase>, IThemeable
             .AddTextColor(Color)
             .AddTheme(ComputedTheme)
             .Build();
+    }
+
+    protected override IEnumerable<string?> BuildComponentStyle()
+    {
+        if (MinHeight is not null)
+        {
+            yield return CssStyleUtils.GetHeight(MinHeight, "min-height");
+        }
     }
 }

@@ -215,6 +215,7 @@
   "markdown-parsers": "Markdown parsers（Markdown解析器）",
   "menus": "Menus（菜单）",
   "mobiles": "移动端组件",
+  "cell": "Cells（单元格）",
   "mobile-cascader": "Mobile cascader（移动端级联）",
   "mobile-date-pickers": "Mobile date pickers（移动端日期选择器）",
   "mobile-date-time-pickers": "Mobile date time pickers（移动端日期时间选择器）",

@@ -43,6 +43,10 @@
     "MCarousel",
     "MCarouselItem"
   ],
+  "cell": [
+    "MCellGroup",
+    "MCell"
+  ],
   "checkboxes": [
     "MCheckbox",
     "MSimpleCheckbox"

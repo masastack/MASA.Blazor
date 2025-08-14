@@ -124,13 +124,18 @@ public static class RenderFragments
         });
     }
 
-    public static RenderFragment RenderFragmentOrText(
+    public static RenderFragment? RenderFragmentOrText(
         RenderFragment? fragment,
         string? text,
         string? css = null,
         string? wrapperTag = "div",
         string? style = null)
     {
+        if (fragment is null && string.IsNullOrWhiteSpace(text))
+        {
+            return null;
+        }
+        
         var hasWrapper = !string.IsNullOrWhiteSpace(wrapperTag);
 
         return builder =>
@@ -158,13 +163,18 @@ public static class RenderFragments
         };
     }
 
-    public static RenderFragment RenderFragmentOrText<TContext>(
+    public static RenderFragment? RenderFragmentOrText<TContext>(
         RenderFragment<TContext>? fragment,
         TContext context,
         string? text,
         string? css = null,
         string? wrapperTag = "div")
     {
+        if (fragment is null && string.IsNullOrWhiteSpace(text))
+        {
+            return null;
+        }
+        
         var hasWrapper = !string.IsNullOrWhiteSpace(wrapperTag);
 
         return builder =>

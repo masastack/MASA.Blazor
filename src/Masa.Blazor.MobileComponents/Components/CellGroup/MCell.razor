@@ -1,0 +1,62 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<MListItem PrependAvatar="@PrependAvatar"
+           Slim
+           Href="@Href"
+           OnClick="@OnClick"
+           Id="@Id"
+           Class="@GetClass()"
+           Style="@GetStyle()"
+           Ripple="@ComputedRipple"
+           MinHeight="@(CellGroup?.CellMinHeight)"
+           @attributes="@Attributes">
+
+    @if (PrependIcon != null || PrependIconContent != null)
+    {
+        <MListItemIcon>
+            @if (PrependIconContent != null)
+            {
+                @PrependIconContent
+            }
+            else
+            {
+                <MIcon>@PrependIcon</MIcon>
+            }
+        </MListItemIcon>
+    }
+
+    <MListItemContent>
+        <MListItemTitle>@RenderFragments.RenderFragmentOrText(TitleContent, Title, wrapperTag: null)</MListItemTitle>
+
+        @{
+            var subtitle = RenderFragments.RenderFragmentOrText(SubtitleContent, Subtitle, wrapperTag: null);
+            if (subtitle != null)
+            {
+                <MListItemSubtitle>@subtitle</MListItemSubtitle>
+            }
+        }
+    </MListItemContent>
+
+    <MListItemAction>
+        @if (ChildContent != null)
+        {
+            @ChildContent
+        }
+        else
+        {
+            <MListItemActionText>@Value</MListItemActionText>
+        }
+
+        @if (ShowRightArrow)
+        {
+            <MIcon Class="m-cell__action-next">$next</MIcon>
+        }
+    </MListItemAction>
+
+</MListItem>
+
+@if (AppendDivider)
+{
+    <MDivider></MDivider>
+}

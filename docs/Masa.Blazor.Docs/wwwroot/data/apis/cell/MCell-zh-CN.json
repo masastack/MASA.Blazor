@@ -1,0 +1,22 @@
+{
+  "props": {
+    "Title": "主标题。",
+    "Subtitle": "副标题。",
+    "Value": "右侧内容。",
+    "PrependIcon": "左侧图标。",
+    "PrependAvatar": "左侧头像。",
+    "Href": "跳转地址。",
+    "HideDivider": "是否隐藏分割线。",
+    "BackgroundColor": "背景色。",
+    "Ripple": "是否显示水波纹效果。"
+  },
+  "events": {
+    "OnClick": "点击事件。"
+  },
+  "contents": {
+    "ChildContent": "自定义内容。",
+    "TitleContent": "自定义主标题内容。",
+    "SubtitleContent": "自定义副标题内容。",
+    "PrependIconContent": "自定义左侧图标内容。"
+  }
+}
