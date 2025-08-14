@@ -12,64 +12,67 @@
          NoOutsideClick
          ContentAttributes="@(new Dictionary<string, object> { { "page-stack-id", Data.Id } })"
          @ref="_dialog">
-    <MShouldRender Value="@CanRender">
-        <CascadingValue Value="this" IsFixed>
-            @if (IncludingAppBar)
-            {
-                <MAppBar Class="@GetClass(_block.Element("bar").Name, AppBarClass)"
-                         Style="@AppBarStyle"
-                         Collapse="@AppBarCollapse"
-                         Color="@AppBarColor"
-                         Dense="@AppBarDense"
-                         Short="@AppBarShort"
-                         ElevateOnScroll="@ElevateOnScroll"
-                         ExtensionContent="@ExtensionContent"
-                         ExtensionHeight="@ExtensionHeight"
-                         Elevation="@Elevation"
-                         Fixed
-                         Flat="@AppBarFlat"
-                         Height="@(AppBarHeight == 0 ? null : AppBarHeight)"
-                         ImgContent="@ImageContent"
-                         ShrinkOnScroll="@ShrinkOnScroll"
-                         Src="@AppBarImage"
-                         ScrollTarget="@Data.Selector"
-                         Theme="@AppBarTheme">
-                    <ChildContent>
-                        @if (AppBarContent is not null)
-                        {
-                            @AppBarContent.Invoke(new PageStackGoBackContext(HandleOnGoBack))
-                        }
-                        else
-                        {
-                            @if (GoBackContent is not null)
+    @if (Data.ReadyToRender)
+    {
+        <MShouldRender Value="@CanRender">
+            <CascadingValue Value="this" IsFixed>
+                @if (IncludingAppBar)
+                {
+                    <MAppBar Class="@GetClass(_block.Element("bar").Name, AppBarClass)"
+                             Style="@AppBarStyle"
+                             Collapse="@AppBarCollapse"
+                             Color="@AppBarColor"
+                             Dense="@AppBarDense"
+                             Short="@AppBarShort"
+                             ElevateOnScroll="@ElevateOnScroll"
+                             ExtensionContent="@ExtensionContent"
+                             ExtensionHeight="@ExtensionHeight"
+                             Elevation="@Elevation"
+                             Fixed
+                             Flat="@AppBarFlat"
+                             Height="@(AppBarHeight == 0 ? null : AppBarHeight)"
+                             ImgContent="@ImageContent"
+                             ShrinkOnScroll="@ShrinkOnScroll"
+                             Src="@AppBarImage"
+                             ScrollTarget="@Data.Selector"
+                             Theme="@AppBarTheme">
+                        <ChildContent>
+                            @if (AppBarContent is not null)
                             {
-                                @GoBackContent.Invoke(new PageStackGoBackContext(HandleOnGoBack))
+                                @AppBarContent.Invoke(new PageStackGoBackContext(HandleOnGoBack))
                             }
                             else
                             {
-                                <MButton Icon OnClick="@OnGoBack">
-                                    <MIcon>$goBack</MIcon>
-                                </MButton>
+                                @if (GoBackContent is not null)
+                                {
+                                    @GoBackContent.Invoke(new PageStackGoBackContext(HandleOnGoBack))
+                                }
+                                else
+                                {
+                                    <MButton Icon OnClick="@OnGoBack">
+                                        <MIcon>$goBack</MIcon>
+                                    </MButton>
+                                }
+
+                                <MAppBarTitle>
+                                    @AppBarTitle
+                                </MAppBarTitle>
+
+                                <MSpacer/>
+
+                                <div class="@_block.Element("actions")">
+                                    @ActionContent
+                                </div>
                             }
+                        </ChildContent>
+                    </MAppBar>
+                }
 
-                            <MAppBarTitle>
-                                @AppBarTitle
-                            </MAppBarTitle>
-
-                            <MSpacer/>
-
-                            <div class="@_block.Element("actions")">
-                                @ActionContent
-                            </div>
-                        }
-                    </ChildContent>
-                </MAppBar>
-            }
-
-            <div class="@_block.Element("content")"
-                 style="@($"--m-page-stack-item-bar-height: {ComputedBarHeight}px;")">
-                @ChildContent
-            </div>
-        </CascadingValue>
-    </MShouldRender>
+                <div class="@_block.Element("content")"
+                     style="@($"--m-page-stack-item-bar-height: {ComputedBarHeight}px;")">
+                    @ChildContent
+                </div>
+            </CascadingValue>
+        </MShouldRender>
+    }
 </MDialog>

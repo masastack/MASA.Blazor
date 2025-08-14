@@ -33,6 +33,8 @@ public class StackPageData(string absolutePath, int id)
     public object? State { get; private set; }
 
     public bool Active { get; private set; }
+
+    internal bool ReadyToRender { get; set; }
     
     internal void UpdateState(object? state) => State = state;
 

@@ -18,12 +18,24 @@
         var index = i;
         var pageData = Pages.ElementAt(index);
         var isTop = i == Pages.Count - 1;
-        var canRender = isTop && NavigationManager.GetAbsolutePath().Equals(pageData.AbsolutePath, StringComparison.OrdinalIgnoreCase);
+        var shouldRender = isTop && NavigationManager.GetAbsolutePath().Equals(pageData.AbsolutePath, StringComparison.OrdinalIgnoreCase);
+
+        /*
+         * Even if shouldRender is false, ChildContent will be rendered on the first load.
+         * At this point, ChildContent may contain content from the previous page,
+         * causing unnecessary re-rendering.
+         * Only when shouldRender is true, we can ensure ChildContent is from the current page
+         */
+        if (shouldRender)
+        {
+            // Control the actual content rendering in PPageStackItem component by setting ReadyToRender flag
+            pageData.ReadyToRender = true;
+        }
 
         <PPageStackItem AppBarVisible="@AppBarAlwaysVisible"
                         DisableUnderlaySlide="@DisableUnderlaySlide"
                         Data="pageData"
-                        CanRender="@canRender"
+                        CanRender="@shouldRender"
                         OnGoBack="@HandleOnPrevious"
                         @key="@pageData.Id">
             @ChildContent
