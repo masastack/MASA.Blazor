@@ -22,9 +22,9 @@ public static class CssStyleUtils
         return $"background-color: {color}; border-color: {color};";
     }
 
-    public static string? GetHeight(StringNumber? height)
+    public static string? GetHeight(StringNumber? height, string? key = "height")
     {
-        return height != null ? $"height: {height.ToUnit()};" : null;
+        return height != null ? $"{key}: {height.ToUnit()};" : null;
     }
 
     public static string? GetWidth(StringNumber? width, string? key = "width")

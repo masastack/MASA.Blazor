@@ -1,0 +1,22 @@
+{
+  "props": {
+    "Title": "Title text.",
+    "Subtitle": "Subtitle text.",
+    "Value": "Right content value.",
+    "PrependIcon": "Left icon.",
+    "PrependAvatar": "Left avatar.",
+    "Href": "Navigation address.",
+    "HideDivider": "Whether to hide the divider.",
+    "BackgroundColor": "Background color.",
+    "Ripple": "Whether to show ripple effect."
+  },
+  "events": {
+    "OnClick": "Click event."
+  },
+  "contents": {
+    "ChildContent": "Custom content.",
+    "TitleContent": "Custom title content.",
+    "SubtitleContent": "Custom subtitle content.",
+    "PrependIconContent": "Custom left icon content."
+  }
+}

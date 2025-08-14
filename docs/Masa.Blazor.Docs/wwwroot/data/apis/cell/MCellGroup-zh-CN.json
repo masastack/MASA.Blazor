@@ -1,0 +1,15 @@
+{
+  "props": {
+    "Dense": "是否使用紧凑模式。",
+    "HideDivider": "是否隐藏分割线。",
+    "Subheader": "子标题内容。",
+    "BackgroundColor": "背景色。",
+    "Outlined": "是否显示外边框。",
+    "Theme": "主题。",
+    "CellMinHeight": "单元格最小高度。"
+  },
+  "events": {},
+  "contents": {
+    "ChildContent": "子内容。"
+  }
+}

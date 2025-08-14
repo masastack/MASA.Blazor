@@ -579,7 +579,12 @@
     "title": "mobiles",
     "icon": "mdi-cellphone",
     "group": "mobiles",
+    "state": "update",
     "items": [
+      {
+        "title": "cell",
+        "state": "labs"
+      },
       "mobile-cascader",
       "mobile-date-pickers",
       "mobile-date-time-pickers",
