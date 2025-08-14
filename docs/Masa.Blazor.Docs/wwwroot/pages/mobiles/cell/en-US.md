@@ -27,6 +27,6 @@ or `OnClick` exists, an arrow will be displayed on the right side.
 
 ### Misc
 
-#### #Weixin
+#### Weixin
 
 <masa-example file="Examples.mobiles.cell.WeiXin"></masa-example>
