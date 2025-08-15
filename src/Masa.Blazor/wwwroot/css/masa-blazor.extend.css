@@ -1706,3 +1706,32 @@ html.m-overlay-scroll-blocked {
 .m-cell-group .m-list-item__icon {
   align-self: center;
 }
+
+/* swipe cell */
+.m-swipe-cell {
+  cursor: grab;
+  position: relative;
+  overflow: hidden;
+}
+
+.m-swipe-cell__wrapper {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(.18, .89, .32, 1);
+}
+
+.m-swipe-cell__left, .m-swipe-cell__right {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  top: 0;
+}
+
+.m-swipe-cell__left {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.m-swipe-cell__right {
+  right: 0;
+  transform: translateX(100%);
+}
