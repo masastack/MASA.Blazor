@@ -1,5 +1,4 @@
 ﻿@namespace Masa.Blazor.Components.VideoFeeder
-@using Masa.Blazor.Components.Xgplayer.Plugins
 @using Masa.Blazor.Components.Xgplayer.Plugins.Controls
 @inherits MasaComponentBase
 @inject I18n I18n
@@ -12,6 +11,7 @@
     <MXgplayer Poster="@poster"
                Autoplay="@Autoplay"
                AutoplayMuted
+               StartTime="@Data.StartTime"
                Loop="@Loop"
                Url="@Data.Url"
                Ignores="@IgnoredXgplayerPlugins"

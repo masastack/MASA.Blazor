@@ -32,6 +32,8 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
 
     [Parameter] public bool OnlyShowPosterInMusicMode { get; set; }
 
+    [Parameter] public int StartTime { get; set; }
+
     [Parameter] public EventCallback<FullscreenEventArgs<TItem>> OnFullscreen { get; set; }
 
     [Parameter] public EventCallback OnEnded { get; set; }
