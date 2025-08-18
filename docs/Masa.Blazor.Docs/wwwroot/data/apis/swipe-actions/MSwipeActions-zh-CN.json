@@ -1,0 +1,9 @@
+﻿{
+  "props": {
+    "CloseOnClick": "点击LeftContent和RightContent后恢复到初始状态。"
+  },
+  "contents": {
+    "leftContent": "左侧操作插槽。",
+    "rightContent": "右侧操作插槽。"
+  }
+}

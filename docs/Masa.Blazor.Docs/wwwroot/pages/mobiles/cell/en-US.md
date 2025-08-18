@@ -2,6 +2,8 @@
 title: Cells
 desc: "Used for information display in various category rows."
 release: v1.11.0
+related:
+  - /blazor/mobiles/swipe-actions
 ---
 
 ## Installation

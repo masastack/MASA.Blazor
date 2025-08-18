@@ -1,0 +1,21 @@
+﻿@inject IPopupService PopupService
+
+<MSwipeActions CloseOnClick="false" Style="max-width: 375px;" Class="mx-auto">
+    <ChildContent>
+        <MCell Title="单元格" Value="内容"></MCell>
+    </ChildContent>
+    <RightContent>
+        <MButton Color="error" OnClick="@(() => OnDelete(context))">Delete</MButton>
+    </RightContent>
+</MSwipeActions>
+
+@code {
+
+    private async Task OnDelete(SwipeActionContext swipeAction)
+    {
+        var confirmed = await PopupService.ConfirmAsync("Are you sure you want to delete this item?");
+        // do something with the confirmed result
+        swipeAction.Close();
+    }
+
+}
