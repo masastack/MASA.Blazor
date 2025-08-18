@@ -19,7 +19,7 @@ export default defineConfig({
       "./src/components/scroll-to-target/index.ts",
     "components/transition/index": "./src/components/transition/index.ts",
     "components/window/touch": "./src/components/window/touch.ts",
-    "components/swipe-cell/index": "./src/components/swipe-cell/index.ts",
+    "components/swipe-actions/index": "./src/components/swipe-actions/index.ts",
 
     "mixins/activatable/index": "./src/mixins/activatable.ts",
     "mixins/intersect/index": "./src/mixins/intersect.ts",

@@ -1707,31 +1707,32 @@ html.m-overlay-scroll-blocked {
   align-self: center;
 }
 
-/* swipe cell */
-.m-swipe-cell {
+/* swipe actions */
+.m-swipe-actions {
   cursor: grab;
   position: relative;
   overflow: hidden;
 }
 
-.m-swipe-cell__wrapper {
+.m-swipe-actions__wrapper {
   transition-property: transform;
   transition-timing-function: cubic-bezier(.18, .89, .32, 1);
 }
 
-.m-swipe-cell__left, .m-swipe-cell__right {
+.m-swipe-actions__left, .m-swipe-actions__right {
   position: absolute;
   display: flex;
   height: 100%;
   top: 0;
 }
 
-.m-swipe-cell__left {
+.m-swipe-actions__left {
   left: 0;
   transform: translateX(-100%);
 }
 
-.m-swipe-cell__right {
+.m-swipe-actions__right {
   right: 0;
-  transform: translateX(100%);
+  /*transform: translateX(100%);*/
+  transform: translateX(calc(100% + 1px));
 }
