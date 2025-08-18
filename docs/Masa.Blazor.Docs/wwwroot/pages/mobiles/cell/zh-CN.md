@@ -2,6 +2,8 @@
 title: Cells（单元格）
 desc: "用于各个类别行的信息展示。"
 release: v1.11.0
+related: 
+  - /blazor/mobiles/swipe-actions
 ---
 
 ## 安装

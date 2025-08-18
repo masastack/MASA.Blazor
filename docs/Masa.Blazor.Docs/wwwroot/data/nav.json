@@ -602,6 +602,10 @@
         "title": "pull-refresh"
       },
       {
+        "title": "swipe-actions",
+        "state": "labs"
+      },
+      {
         "title": "swiper"
       }
     ]

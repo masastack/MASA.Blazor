@@ -1,0 +1,34 @@
+﻿@namespace Masa.Blazor
+@inherits MasaComponentBase
+
+<div id="@Id"
+     class="@GetClass()"
+     style="@GetStyle()"
+     @attributes="Attributes"
+     @ref="Ref">
+    <div class="@WrapperElement" @ref="_wrapperEl">
+        @GenActionContent(LeftContent, LeftElement.Name)
+        @ChildContent
+        @GenActionContent(RightContent, RightElement.Name)
+    </div>
+</div>
+
+@code {
+
+    private RenderFragment GenActionContent(RenderFragment<SwipeActionContext>? content, string? css) => __builder =>
+    {
+        if (content == null)
+        {
+            return;
+        }
+
+        <div class="@css" @onclick="OnClick" @onclick:stopPropagation>
+            <MDefaultsProvider Defaults="@_actionDefaults">
+                @content(_actionContext)
+            </MDefaultsProvider>
+        </div>
+    };
+
+    
+
+}

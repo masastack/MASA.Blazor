@@ -5,6 +5,7 @@
   "components/page-stack/index.js": "components/page-stack/index-b474a991.js",
   "components/page-stack/touch.js": "components/page-stack/touch-d586c70c.js",
   "components/scroll-to-target/index.js": "components/scroll-to-target/index-0cf62978.js",
+  "components/swipe-actions/index.js": "components/swipe-actions/index-41197cbd.js",
   "components/transition/index.js": "components/transition/index-05245d7e.js",
   "components/window/touch.js": "components/window/touch-f9d2ba92.js",
   "mixins/activatable/index.js": "mixins/activatable/index-55deb3a9.js",

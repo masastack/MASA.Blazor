@@ -1,0 +1,9 @@
+{
+  "props": {
+    "CloseOnClick": "Clicking on LeftContent and RightContent will restore to the initial state."
+  },
+  "contents": {
+    "leftContent": "Left action slot.",
+    "rightContent": "Right action slot."
+  }
+}
