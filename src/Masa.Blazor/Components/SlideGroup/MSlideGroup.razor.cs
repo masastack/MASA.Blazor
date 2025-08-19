@@ -142,6 +142,7 @@ namespace Masa.Blazor
             if (_firstRendered)
             {
                 var needSetWidths = false;
+                var needUpdateWidths = false;
                 StringNumber? value = null;
                 
                 if (_prevItemsLength != Items.Count)
@@ -149,6 +150,7 @@ namespace Masa.Blazor
                     _prevItemsLength = Items.Count;
                     value = Value;
                     needSetWidths = true;
+                    needUpdateWidths = true;
                 }
 
                 if (_prevInternalValue != InternalValue)
@@ -164,14 +166,14 @@ namespace Masa.Blazor
                     // Make sure the value of WrapperWidth is after IsOverflowing takes effect.
                     StateHasChanged();
 
-                    await GetWidths(true);
                     value = Value;
                     needSetWidths = true;
+                    needUpdateWidths = true;
                 }
 
                 if (needSetWidths)
                 {
-                    await SetWidths(value);
+                    await SetWidths(value, needUpdateWidths);
                 }
             }
 
