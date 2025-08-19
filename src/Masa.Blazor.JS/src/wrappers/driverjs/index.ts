@@ -5,15 +5,39 @@ import { Config, driver, DriveStep } from "driver.js";
 class DriverWrapper {
   private driverInstance: ReturnType<typeof driver>;
   private config: Config;
+  private dotnet: DotNet.DotNetObject;
+  private clicks: Config;
 
-  constructor(config: Config = {}) {
-    this.driverInstance = driver(config);
+  constructor(config: Config = {}, dotnet: DotNet.DotNetObject) {
+    this.dotnet = dotnet;
+    this.config = {
+      ...config,
+      onNextClick: (el, step, opts) => {
+        opts.driver.moveNext();
+        this.dotnet.invokeMethodAsync("NextClick", step.element);
+      },
+      onCloseClick: (el, step, opts) => {
+        opts.driver.destroy();
+        this.dotnet.invokeMethodAsync("CloseClick", step.element);
+      },
+      onPrevClick: (el, step, opts) => {
+        opts.driver.movePrevious();
+        this.dotnet.invokeMethodAsync("PrevClick", step.element);
+      },
+    };
+
+    this.driverInstance = driver(this.config);
   }
 
   updateConfig(config: Config, drive: boolean) {
     this.debug("updateConfig", config, drive);
-    this.config = config;
-    this.driverInstance.setConfig(config);
+    this.config = {
+      ...config,
+      onNextClick: this.config.onNextClick,
+      onCloseClick: this.config.onCloseClick,
+      onPrevClick: this.config.onPrevClick,
+    };
+    this.driverInstance.setConfig(this.config);
     if (drive) {
       this.observeElementResizeOnce(0);
       this.driverInstance.drive();
@@ -35,14 +59,21 @@ class DriverWrapper {
       ...args,
       popover: {
         onNextClick: (el, step, opts) => {
+          this.dotnet.invokeMethodAsync("NextClick", step.element);
           opts.driver.destroy();
         },
         onCloseClick: (el, step, opts) => {
+          this.dotnet.invokeMethodAsync("CloseClick", step.element);
           opts.driver.destroy();
         },
         ...popover,
       },
     });
+  }
+
+  dispose() {
+    this.driverInstance.destroy();
+    this.dotnet.dispose();
   }
 
   /**
@@ -106,6 +137,6 @@ class DriverWrapper {
   }
 }
 
-export function init(config: Config) {
-  return new DriverWrapper(config);
+export function init(config: Config, dotnet: DotNet.DotNetObject) {
+  return new DriverWrapper(config, dotnet);
 }

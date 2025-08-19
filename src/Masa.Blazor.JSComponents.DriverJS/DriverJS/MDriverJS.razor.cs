@@ -88,6 +88,34 @@ public partial class MDriverJS : DisposableComponentBase
     [MasaApiParameter(DefaultDoneBtnText)]
     public string? DoneBtnText { get; set; } = DefaultDoneBtnText;
 
+    /// <summary>
+    /// Event callback for when the next button is clicked.
+    /// The argument is the selector of the current step.
+    /// </summary>
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback<string> OnNextClick { get; set; }
+
+    /// <summary>
+    /// The event callback for when the previous button is clicked.
+    /// The argument is the selector of the current step.
+    /// </summary>
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback<string> OnPrevClick { get; set; }
+
+    /// <summary>
+    /// The event callback for when the close button is clicked.
+    /// The argument is the selector of the current step.
+    /// </summary>
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback<string> OnCloseClick { get; set; }
+
+    /// <summary>
+    /// The event callback for when the last next button is clicked.
+    /// This is typically used to finalize the driver tour.
+    /// </summary>
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public EventCallback OnDoneClick { get; set; }
+
     private const string DefaultNextBtnText = "$masaBlazor.driverjs.next";
     private const string DefaultPrevBtnText = "$masaBlazor.driverjs.prev";
     private const string DefaultDoneBtnText = "$masaBlazor.driverjs.done";
@@ -97,15 +125,24 @@ public partial class MDriverJS : DisposableComponentBase
     private CancellationTokenSource? _initStepsCts;
     private List<IDriverJSStep> _steps = [];
     private IJSObjectReference? _importJSObjectReference;
+    private DotNetObjectReference<MDriverJS> _dotNetObjectReference = null!;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        _dotNetObjectReference = DotNetObjectReference.Create(this);
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             var importJSObjectReference = await JSRuntime.InvokeAsync<IJSObjectReference>("import",
-                "./_content/Masa.Blazor.JSComponents.DriverJS/MDriverJS.js?v=1.10.3").ConfigureAwait(false);
-            _importJSObjectReference =
-                await importJSObjectReference.InvokeAsync<IJSObjectReference>("init", GetConfig());
+                "./_content/Masa.Blazor.JSComponents.DriverJS/MDriverJS.js?v=1.10.5").ConfigureAwait(false);
+            _importJSObjectReference
+                = await importJSObjectReference.InvokeAsync<IJSObjectReference>("init", GetConfig(),
+                    _dotNetObjectReference);
             await importJSObjectReference.DisposeAsync();
 
             _hasRendered = true;
@@ -152,6 +189,32 @@ public partial class MDriverJS : DisposableComponentBase
         _steps.Add(step);
 
         await InitDriverJsAsync();
+    }
+
+    [JSInvokable]
+    public async Task NextClick(string selector)
+    {
+        var isLast = _steps.Count == 0 || _steps.Last().Element == selector;
+        if (isLast)
+        {
+            await OnDoneClick.InvokeAsync();
+        }
+        else
+        {
+            await OnNextClick.InvokeAsync(selector);
+        }
+    }
+
+    [JSInvokable]
+    public async Task PrevClick(string selector)
+    {
+        await OnPrevClick.InvokeAsync(selector);
+    }
+
+    [JSInvokable]
+    public async Task CloseClick(string selector)
+    {
+        await OnCloseClick.InvokeAsync(selector);
     }
 
     private async Task InitDriverJsAsync()
@@ -241,6 +304,7 @@ public partial class MDriverJS : DisposableComponentBase
 
         if (_importJSObjectReference is not null)
         {
+            await _importJSObjectReference.InvokeVoidAsync("dispose");
             await _importJSObjectReference.DisposeAsync();
             _importJSObjectReference = null;
         }
