@@ -14,24 +14,33 @@ public class PStackPageBase : ComponentBase, IAsyncDisposable
     /// The root selector of the stack page.
     /// </summary>
     protected string? PageSelector => Page?.Selector;
+    
+    private bool _initialized;
 
-    protected override void OnInitialized()
+    public override async Task SetParametersAsync(ParameterView parameters)
     {
-        if (PageStack is null)
+        await base.SetParametersAsync(parameters);
+        
+        if (!_initialized)
         {
-            return;
-        }
+            _initialized = true;
+            
+            if (PageStack is null)
+            {
+                return;
+            }
 
-        var currentPath = NavigationManager.GetAbsolutePath();
-        if (PageStack.Pages.TryPeek(out var page) && page.AbsolutePath == currentPath)
-        {
-            Page = page;
-            Page.ActiveChanged += PageOnActiveChanged;
-            _ = RunPageActivatedAsync(Page.State);
-        }
-        else
-        {
-            PageStack.Pages.PagePushed += PagesOnPagePushed;
+            var currentPath = NavigationManager.GetAbsolutePath();
+            if (PageStack.Pages.TryPeek(out var page) && page.AbsolutePath == currentPath)
+            {
+                Page = page;
+                Page.ActiveChanged += PageOnActiveChanged;
+                _ = RunPageActivatedAsync(Page.State);
+            }
+            else
+            {
+                PageStack.Pages.PagePushed += PagesOnPagePushed;
+            }
         }
     }
     
