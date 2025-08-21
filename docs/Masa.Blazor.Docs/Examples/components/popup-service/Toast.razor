@@ -1,0 +1,30 @@
+﻿@inject IPopupService PopupService
+
+<MButton OnClick="@ShowToast">Default</MButton>
+<MButton OnClick="@ShowLoadingToast">Loading</MButton>
+<MButton OnClick="@(() => PopupService.ShowSuccessToast("Success"))">Success</MButton>
+<MButton OnClick="@(() => PopupService.ShowErrorToast("Error"))">Error</MButton>
+
+@code {
+
+    private void ShowToast()
+    {
+        PopupService.ShowToast($"Toast created at {DateTime.Now:HH:mm:ss}");
+    }
+
+    private async Task ShowLoadingToast()
+    {
+        try
+        {
+            PopupService.ShowLoadingToast();
+
+            // Simulate a delay for loading
+            await Task.Delay(3000);
+        }
+        finally
+        {
+            PopupService.CloseToast();
+        }
+    }
+
+}

@@ -34,4 +34,11 @@ public interface IPopupService
     /// <param name="componentType"></param>
     /// <param name="parameters"></param>
     void Open(Type componentType, IDictionary<string, object?>? parameters = null);
+
+    /// <summary>
+    /// Open or update the specified type of popup component with the given parameters.
+    /// </summary>
+    /// <param name="componentType"></param>
+    /// <param name="parameters"></param>
+    void OpenOrUpdate(Type componentType, IDictionary<string, object?>? parameters = null);
 }

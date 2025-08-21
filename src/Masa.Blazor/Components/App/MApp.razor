@@ -14,7 +14,7 @@
 
             @foreach (var item in PopupService.GetItems())
             {
-                <CascadingValue @key="item" Value="item">
+                <CascadingValue @key="item" Value="item" IsFixed="true">
                     <DynamicComponent Type="item.ComponentType" Parameters="item.Parameters"></DynamicComponent>
                 </CascadingValue>
             }
