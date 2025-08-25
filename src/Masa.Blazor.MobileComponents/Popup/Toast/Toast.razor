@@ -1,0 +1,33 @@
+﻿@inherits Masa.Blazor.Popup.Components.PopupComponentBase
+@namespace Masa.Blazor.Popup.Components
+
+<MDialog Value="Visible"
+         HideOverlay="@HideOverlay"
+         Persistent
+         OverlayScrimClass="transparent"
+         NoPersistentAnimation
+         Class="@GetClass()"
+         Style="@GetStyle()"
+         ContentClass="@_contentModifier.Add(Type).Build()"
+         Transition="fade-transition">
+    @if (Type == ToastType.Loading)
+    {
+        <MProgressCircular Indeterminate Size="36"/>
+    }
+    else if (Type == ToastType.Success)
+    {
+        <MIcon Large>@SuccessIcon</MIcon>
+    }
+    else if (Type == ToastType.Error)
+    {
+        <MIcon Large>@ErrorIcon</MIcon>
+    }
+    else if (Icon is not null)
+    {
+        <MIcon Large>@Icon</MIcon>
+    }
+
+    <span class="@_messageElement.Name">
+        @Content
+    </span>
+</MDialog>

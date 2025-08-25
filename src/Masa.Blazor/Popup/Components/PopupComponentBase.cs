@@ -4,13 +4,20 @@ public class PopupComponentBase : MasaComponentBase
 {
     [Inject] protected I18n I18n { get; set; } = null!;
 
-    [CascadingParameter] private ProviderItem? PopupItem { get; set; }
+    [CascadingParameter] protected ProviderItem? PopupItem { get; set; }
+    
+    private bool _isUnsubscribed;
 
     protected bool Visible { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
+
+        if (PopupItem != null)
+        {
+            PopupItem.OnUpdate += OnUpdate;
+        }
 
         NextTick(async () =>
         {
@@ -21,6 +28,11 @@ public class PopupComponentBase : MasaComponentBase
             Visible = true;
             StateHasChanged();
         });
+    }
+
+    protected virtual void OnUpdate(object? sender, EventArgs e)
+    {
+        Visible = true;
     }
 
     /// <summary>
@@ -34,6 +46,22 @@ public class PopupComponentBase : MasaComponentBase
             Visible = false;
             await Task.Delay(256);
             PopupItem.Discard(returnVal);
+            Unsubscribe();
+        }
+    }
+
+    protected override ValueTask DisposeAsyncCore()
+    {
+        Unsubscribe();
+        return base.DisposeAsyncCore();
+    }
+    
+    private void Unsubscribe()
+    {
+        if (PopupItem != null && !_isUnsubscribed)
+        {
+            _isUnsubscribed = true;
+            PopupItem.OnUpdate -= OnUpdate;
         }
     }
 }

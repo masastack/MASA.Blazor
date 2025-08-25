@@ -148,6 +148,31 @@ services.AddMasaBlazor(options =>
 })
 ```
 
+### Toast {#toast released-on=v1.11.0}
+
+The toast is commonly used in mobile applications to provide brief message notifications.
+
+```shell
+dotnet add package Masa.Blazor.MobileComponents
+```
+
+<masa-example file="Examples.components.popup_service.Toast"></masa-example>
+
+> To customize the configuration of the toast, specify it in the **Program.cs**.
+
+```cs
+builder.Services.AddMasaBlazor(opts =>
+{
+    opts.Defaults = new Dictionary<string, IDictionary<string, object?>?>()
+    {
+        [Masa.Blazor.Popup.Components.Toast.ComponentId] = new Dictionary<string, object?>()
+        {
+            { nameof(Masa.Blazor.Popup.Components.Toast.Duration), 5000 },
+        }
+    };
+});
+```
+
 ## Advance
 
 You can use open your own popup component using `IPopupSerivce.OpenAsync`.

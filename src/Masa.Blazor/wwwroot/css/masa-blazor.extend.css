@@ -1736,3 +1736,31 @@ html.m-overlay-scroll-blocked {
   /*transform: translateX(100%);*/
   transform: translateX(calc(100% + 1px));
 }
+
+
+/* toast */
+
+.m-toast__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    max-width: 12rem;
+    width: auto;
+    margin: 0;
+    background: rgba(var(--m-theme-on-surface), var(--m-medium-emphasis-opacity));
+    color: white;
+    padding: 16px 0;
+}
+
+.m-toast__message {
+    padding: 0 16px;
+    min-width: 7rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.m-progress-circular + .m-toast__message, .m-icon + .m-toast__message {
+    margin-top: 8px;
+    text-align: center;
+}

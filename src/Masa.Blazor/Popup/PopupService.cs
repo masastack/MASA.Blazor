@@ -26,6 +26,20 @@ public class PopupService : IPopupService
         return Add(componentType, parameters).TaskCompletionSource.Task;
     }
 
+    public void OpenOrUpdate(Type componentType, IDictionary<string, object?> parameters)
+    {
+        var providerItem = GetItems().FirstOrDefault(item => item.ComponentType == componentType);
+        if (providerItem is null)
+        {
+            Open(componentType, parameters);
+        }
+        else
+        {
+            providerItem.UpdateParameters(parameters);
+            StateHasChanged();
+        }
+    }
+
     public void Close(Type componentType)
     {
         var item = GetItems().LastOrDefault(u => u.ComponentType == componentType);

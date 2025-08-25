@@ -150,6 +150,31 @@ services.AddMasaBlazor(options =>
 })
 ```
 
+### 轻提示 {#toast released-on=v1.11.0}
+
+轻提示常用于移动端应用中，提供短暂的消息提示。
+
+```shell
+dotnet add package Masa.Blazor.MobileComponents
+```
+
+<masa-example file="Examples.components.popup_service.Toast"></masa-example>
+
+> 如需自定义轻提示的配置，请在 **Program.cs** 中指定。
+
+```cs
+builder.Services.AddMasaBlazor(opts =>
+{
+    opts.Defaults = new Dictionary<string, IDictionary<string, object?>?>()
+    {
+        [Masa.Blazor.Popup.Components.Toast.ComponentId] = new Dictionary<string, object?>()
+        {
+            { nameof(Masa.Blazor.Popup.Components.Toast.Duration), 5000 },
+        }
+    };
+});
+```
+
 ## 高级用法 {#advance}
 
 你可以使用 `IPopupService.OpenAsync` 打开你自己的组件。

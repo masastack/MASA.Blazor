@@ -12,6 +12,11 @@
           "type": "(Type componentType, Dictionary<string, object?> parameters) => void"
         },
         {
+          "name": "OpenOrUpdate",
+          "type": "(Type componentType, Dictionary<string, object?> parameters) => void",
+          "releasedOn": "v1.11.0"
+        },
+        {
           "name": "Close",
           "type": "(Type componentType) => void"
         },
