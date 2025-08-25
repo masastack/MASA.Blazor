@@ -5,6 +5,8 @@ public class PopupComponentBase : MasaComponentBase
     [Inject] protected I18n I18n { get; set; } = null!;
 
     [CascadingParameter] protected ProviderItem? PopupItem { get; set; }
+    
+    private bool _isUnsubscribed;
 
     protected bool Visible { get; set; }
 
@@ -44,17 +46,22 @@ public class PopupComponentBase : MasaComponentBase
             Visible = false;
             await Task.Delay(256);
             PopupItem.Discard(returnVal);
-            PopupItem.OnUpdate -= OnUpdate;
+            Unsubscribe();
         }
     }
 
     protected override ValueTask DisposeAsyncCore()
     {
-        if (PopupItem != null)
+        Unsubscribe();
+        return base.DisposeAsyncCore();
+    }
+    
+    private void Unsubscribe()
+    {
+        if (PopupItem != null && !_isUnsubscribed)
         {
+            _isUnsubscribed = true;
             PopupItem.OnUpdate -= OnUpdate;
         }
-
-        return base.DisposeAsyncCore();
     }
 }
