@@ -18,9 +18,9 @@ public class ProviderItem(Type componentType, IDictionary<string, object?>? para
         Service.Remove(this);
     }
 
-    public void UpdateParameters(IDictionary<string, object?>? newParameters)
+    public void UpdateParameters(IDictionary<string, object?> newParameters)
     {
-        if (Parameters == null || newParameters == null) return;
+        Parameters ??= new Dictionary<string, object?>();
 
         foreach (var key in Parameters.Keys)
         {
