@@ -36,4 +36,20 @@ public class Column
     public bool Searchable { get; set; }
 
     public bool IsNested => Id.Contains('.');
+
+    /// <summary>
+    /// Get the expected data type based on the column type.
+    /// For filtering and sorting purposes.
+    /// </summary>
+    /// <returns></returns>
+    public ExpectedType GetExpectedType()
+    {
+        return Type switch
+        {
+            ColumnType.Number or ColumnType.Progress or ColumnType.Rating => ExpectedType.Float,
+            ColumnType.Date => ExpectedType.DateTime,
+            ColumnType.Switch or ColumnType.Checkbox => ExpectedType.Boolean,
+            _ => ExpectedType.String,
+        };
+    }
 }

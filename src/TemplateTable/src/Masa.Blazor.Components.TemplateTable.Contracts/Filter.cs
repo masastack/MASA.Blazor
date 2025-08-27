@@ -39,5 +39,9 @@ public enum ExpectedType
     Float,
     DateTime,
     Boolean,
+
+    /// <summary>
+    /// Internal use only, do not set this value.
+    /// </summary>
     Expression
 }
