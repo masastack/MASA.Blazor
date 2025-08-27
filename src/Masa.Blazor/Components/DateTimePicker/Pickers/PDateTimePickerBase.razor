@@ -44,10 +44,12 @@
     private RenderFragment DefaultActivator(ActivatorProps context) => __builder =>
     {
         _defaultActivator ??= new();
-        var value = Value is DateTime dateTime ? dateTime.ToString(_defaultActivator.Format) : null;
 
-        <MTextField Value="@value"
-                    Readonly
+        <MTextField Value="_display"
+                    ValueChanged="DisplayChanged"
+                    UpdateOnChange
+                    TValue="string?"
+                    Readonly="false"
                     Clearable="@_defaultActivator.Clearable"
                     Dense="@_defaultActivator.Dense"
                     Label="@_defaultActivator.Label"
@@ -76,8 +78,19 @@
     {
         <MDivider/>
         <div class="@BasePickerBlock.Element("actions")">
+            <div>
+                <MButton Text Small Color="primary"
+                         OnClick="@(() => InternalDateTime = (TValue)(object)DateTime.Now)">Today
+                </MButton>
+                <MButton Text Small Color="primary"
+                         OnClick="@(() => InternalDateTime = (TValue)(object)DateTime.Now.AddDays(1))">Tomorrow
+                </MButton>
+                <MButton Text Small Color="primary"
+                         OnClick="@(() => InternalDateTime = (TValue)(object)DateTime.Now.AddDays(7))">Next Week
+                </MButton>
+            </div>
+            <MSpacer/>
             <MButton Color="primary"
-                     Text
                      OnClick="@HandleOnConfirm"
                      Dark="@Dark"
                      Light="@Light">

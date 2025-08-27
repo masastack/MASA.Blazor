@@ -152,6 +152,8 @@ public class PDateTimePickerViewBase<TValue> : ComponentBase
     {
         _prevValue = value;
 
+        SetDisplay(value);
+
         if (value is null || value.Value == default)
         {
             InternalDate = null;
@@ -163,6 +165,8 @@ public class PDateTimePickerViewBase<TValue> : ComponentBase
             InternalTime = System.TimeOnly.FromDateTime(value.Value);
         }
     }
+    
+    protected virtual void SetDisplay(DateTime? value) { }
 
     protected async Task DateChanged(DateOnly? date)
     {

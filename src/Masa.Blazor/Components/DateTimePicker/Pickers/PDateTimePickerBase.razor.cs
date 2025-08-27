@@ -25,6 +25,7 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
 
     private bool _menu;
     private DateTimePickerViewType _prevViewType;
+    private string? _display;
 
     private string Class => BasePickerModifierBuilder.Add("compact", IsCompact).Build();
 
@@ -39,7 +40,7 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
     public void UpdateActivator(PDefaultDateTimePickerActivator pDefaultDateTimePickerActivator)
     {
         _defaultActivator = pDefaultDateTimePickerActivator;
-        
+
         StateHasChanged();
     }
 
@@ -67,6 +68,11 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
 
             CheckViewType();
         }
+    }
+
+    protected override void SetDisplay(DateTime? value)
+    {
+        _display = value?.ToString(_defaultActivator?.Format);
     }
 
     private void MasaBlazorOnMobileChanged(object? sender, MobileChangedEventArgs e)
@@ -122,11 +128,32 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
         }
     }
 
+    private async Task DisplayChanged(string? val)
+    {
+        if (string.IsNullOrEmpty(val))
+        {
+            _display = null;
+            await ValueChanged.InvokeAsync(default);
+            InternalDateTime = default;
+        }
+        else if (DateTime.TryParse(val, out var dateTime))
+        {
+            _display = dateTime.ToString(_defaultActivator?.Format);
+            await ValueChanged.InvokeAsync((TValue)(object)dateTime);
+            InternalDateTime = (TValue)(object)dateTime;
+        }
+    }
+
     private async Task HandleOnConfirm()
     {
         _menu = false;
         await ValueChanged.InvokeAsync(InternalDateTime);
         await OnConfirm.InvokeAsync();
+
+        _display = InternalDateTime == null
+            ? null
+            : ((DateTime)(object)InternalDateTime).ToString(_defaultActivator?.Format);
+
         InputsFilter?.NotifyFieldChange(null); // TODO: support for form
     }
 
