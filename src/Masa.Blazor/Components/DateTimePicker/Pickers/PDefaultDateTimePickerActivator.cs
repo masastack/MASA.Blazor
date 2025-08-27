@@ -22,6 +22,9 @@ public class PDefaultDateTimePickerActivator : ComponentBase
 
     [Parameter] public string? Format { get; set; }
 
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.11.0")]
+    public string? Label { get; set; }
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
