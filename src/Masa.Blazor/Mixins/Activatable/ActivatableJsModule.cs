@@ -20,7 +20,8 @@ public class ActivatableJsModule(IJSRuntime js)
             _owner.OpenOnFocus,
             _owner.OpenDelay,
             _owner.CloseDelay,
-            _selfReference
+            _selfReference,
+            _owner.ToggleOnClick
         );
     }
 

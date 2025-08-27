@@ -15,6 +15,7 @@ class Activatable extends Delayable {
   openOnClick: boolean;
   openOnHover: boolean;
   openOnFocus: boolean;
+  toggleOnClick: boolean;
 
   closeOnOutsideClick: boolean;
   closeOnContentClick: boolean;
@@ -31,7 +32,8 @@ class Activatable extends Delayable {
     openOnFocus: boolean,
     openDelay: number,
     closeDelay: number,
-    dotNetHelper: DotNet.DotNetObject
+    dotNetHelper: DotNet.DotNetObject,
+    toggleOnClick: boolean
   ) {
     super(openDelay, closeDelay, dotNetHelper);
 
@@ -43,6 +45,7 @@ class Activatable extends Delayable {
     this.openOnClick = openOnClick;
     this.openOnHover = openOnHover;
     this.openOnFocus = openOnFocus;
+    this.toggleOnClick = toggleOnClick;
     this.dotNetHelper = dotNetHelper;
   }
 
@@ -96,7 +99,9 @@ class Activatable extends Delayable {
 
         this.dotNetHelper.invokeMethodAsync("OnClick", parseMouseEvent(e));
 
-        this.setActive(!this.isActive);
+        if (this.toggleOnClick || !this.isActive) {
+          this.setActive(!this.isActive);
+        }
       };
     }
 
@@ -231,7 +236,8 @@ function init(
   openOnFocus: boolean,
   openDelay: number,
   closeDelay: number,
-  dotNetHelper: DotNet.DotNetObject
+  dotNetHelper: DotNet.DotNetObject,
+  toggleOnClick: boolean = true
 ) {
   var instance = new Activatable(
     isActive,
@@ -242,7 +248,8 @@ function init(
     openOnFocus,
     openDelay,
     closeDelay,
-    dotNetHelper
+    dotNetHelper,
+    toggleOnClick
   );
 
   instance.addActivatorEvents();
