@@ -49,8 +49,9 @@
                     ValueChanged="DisplayChanged"
                     UpdateOnChange
                     TValue="string?"
-                    Readonly="false"
-                    Clearable="@_defaultActivator.Clearable"
+                    Readonly="@Readonly"
+                    Disabled="@Disabled"
+                    Clearable="@(!Readonly && _defaultActivator.Clearable)"
                     Dense="@_defaultActivator.Dense"
                     Label="@_defaultActivator.Label"
                     Filled="@_defaultActivator.Filled"
