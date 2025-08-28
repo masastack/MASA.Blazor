@@ -120,7 +120,12 @@
 
                                     if (value is null)
                                     {
-                                        @GenNotNull(template.Column)
+                                        @GenNotFound(template.Column)
+                                    }
+                                    else if (template.Column.Type == ColumnType.Custom && CustomCellContent is not null)
+                                    {
+                                        CustomCellContext context = new(template.Column.Id, value.Value, item.Data);
+                                        @CustomCellContent.Invoke(context)
                                     }
                                     else
                                     {
@@ -191,7 +196,7 @@
         }
     };
 
-    private RenderFragment GenNotNull(ColumnInfo column) => __builder =>
+    private RenderFragment GenNotFound(ColumnInfo column) => __builder =>
     {
         <span class="error--text">@column.Id not found</span>
     };

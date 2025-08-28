@@ -25,6 +25,12 @@
                 OnSave="@Save"
                 CheckboxColor="primary"
                 OnRemove="@Remove">
+    <CustomCellContent>
+        @if (context.ColumnId == "Name")
+        {
+            <span class="text-capitalize font-weight-bold">@context.Value.GetString()</span>
+        }
+    </CustomCellContent>
     <ViewActionsContent>
         <MButton OnClick="@(() => OnExport(context.SelectedRows))" Color="primary">
             Export @context.SelectedKeys.Count</MButton>

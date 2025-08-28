@@ -31,6 +31,8 @@ public partial class MTemplateTable
 
     [Parameter] public RenderFragment<ViewActionsContext>? ViewActionsContent { get; set; }
 
+    [Parameter] public RenderFragment<CustomCellContext>? CustomCellContent { get; set; }
+
     [Parameter] public Role Role { get; set; }
 
     [Parameter] public int DefaultPageSize { get; set; } = 10;

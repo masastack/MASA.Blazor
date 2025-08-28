@@ -71,6 +71,8 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public RenderFragment<RowActionsContext>? RowActionsContent { get; set; }
 
+    [Parameter] public RenderFragment<CustomCellContext>? CustomCellContent { get; set; }
+
     [Parameter] public List<string> SelectedKeys { get; set; } = [];
 
     // [Parameter] public List<string> SelectableKeys { get; set; } = [];
