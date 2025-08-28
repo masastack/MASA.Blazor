@@ -37,6 +37,14 @@ public class MActivatableBase : MToggleable, IActivatableJsCallbacks
     [Parameter]
     public string? Activator { get; set; }
 
+    /// <summary>
+    /// Open or close the popup content when clicking on the activator.
+    /// If false, the opened popup content cannot be closed by clicking on the activator again.
+    /// </summary>
+    [Parameter]
+    [MasaApiParameter(true, ReleasedIn = "v1.11.0")]
+    public bool ToggleOnClick { get; set; } = true;
+
     private string? _activatorId;
 
     protected bool IsBooted { get; set; }

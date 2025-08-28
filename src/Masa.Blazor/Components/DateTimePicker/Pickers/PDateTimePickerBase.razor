@@ -20,6 +20,7 @@
         <MMenu Value="_menu"
                ValueChanged="OnMenuChanged"
                CloseOnContentClick="false"
+               ToggleOnClick="false"
                OffsetY
                NudgeBottom="1"
                ActivatorContent="@ComputedActivatorContent"
@@ -44,12 +45,16 @@
     private RenderFragment DefaultActivator(ActivatorProps context) => __builder =>
     {
         _defaultActivator ??= new();
-        var value = Value is DateTime dateTime ? dateTime.ToString(_defaultActivator.Format) : null;
 
-        <MTextField Value="@value"
-                    Readonly
-                    Clearable="@_defaultActivator.Clearable"
+        <MTextField Value="_display"
+                    ValueChanged="DisplayChanged"
+                    UpdateOnChange
+                    TValue="string?"
+                    Readonly="@Readonly"
+                    Disabled="@Disabled"
+                    Clearable="@(!Readonly && _defaultActivator.Clearable)"
                     Dense="@_defaultActivator.Dense"
+                    Label="@_defaultActivator.Label"
                     Filled="@_defaultActivator.Filled"
                     HideDetails="@_defaultActivator.HideDetails"
                     Outlined="@_defaultActivator.Outlined"
@@ -75,8 +80,19 @@
     {
         <MDivider/>
         <div class="@BasePickerBlock.Element("actions")">
+            <div>
+                <MButton Text Small Color="primary"
+                         OnClick="@(() => InternalDateTime = (TValue)(object)DateTime.Now)">Today
+                </MButton>
+                <MButton Text Small Color="primary"
+                         OnClick="@(() => InternalDateTime = (TValue)(object)DateTime.Now.AddDays(1))">Tomorrow
+                </MButton>
+                <MButton Text Small Color="primary"
+                         OnClick="@(() => InternalDateTime = (TValue)(object)DateTime.Now.AddDays(7))">Next Week
+                </MButton>
+            </div>
+            <MSpacer/>
             <MButton Color="primary"
-                     Text
                      OnClick="@HandleOnConfirm"
                      Dark="@Dark"
                      Light="@Light">

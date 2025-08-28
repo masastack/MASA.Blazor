@@ -36,8 +36,8 @@ public static class SupportedFilter
         StandardFilter.BeforeOrOnDate,
         StandardFilter.AfterDate,
         StandardFilter.AfterOrOnDate,
-        StandardFilter.Set,
-        StandardFilter.NotSet
+        // StandardFilter.Set,
+        // StandardFilter.NotSet
     ];
 
     public static readonly StandardFilter[] SupportedSelectFilters =

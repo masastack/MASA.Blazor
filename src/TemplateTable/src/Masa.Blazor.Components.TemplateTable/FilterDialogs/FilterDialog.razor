@@ -1,7 +1,7 @@
 ﻿@namespace Masa.Blazor.Components.TemplateTable.FilterDialogs
 
 <PModal @bind-Value="dialog"
-        Width="640"
+        Width="668"
         BodyStyle="min-height: 180px"
         Title="Filters"
         Persistent
@@ -79,14 +79,33 @@
             }
             else if (!_noExpectedFuncs.Contains(filter.Func))
             {
-                <MTextField @bind-Value="@filter.Expected"
-                            Label="Expected"
-                            Class="mr-2"
-                            Style="max-width: 150px"
-                            Filled
-                            Dense
-                            HideDetails="@true">
-                </MTextField>
+                if (filter.Type == ExpectedType.DateTime)
+                {
+                    DateTime? date = DateTime.TryParse(filter.Expected, out var dt) ? dt : null;
+
+                    <PDateDigitalClockPicker Value="@date"
+                                             ValueChanged="@(v => filter.Expected = (v.ToString() ?? string.Empty))"
+                                             TValue="DateTime?"
+                                             ViewType="DateTimePickerViewType.Desktop"
+                                             TimeFormat="TimeFormat.Hr24"
+                                             MultiSection
+                                             UseSeconds>
+                        <PDefaultDateTimePickerActivator Label="Expected"
+                                                         Filled
+                                                         Format="yyyy-MM-dd HH:mm:ss"/>
+                    </PDateDigitalClockPicker>
+                }
+                else
+                {
+                    <MTextField @bind-Value="@filter.Expected"
+                                Label="Expected"
+                                Class="mr-2"
+                                Style="max-width: 150px"
+                                Filled
+                                Dense
+                                HideDetails="@true">
+                    </MTextField>
+                }
             }
 
             <MSpacer/>

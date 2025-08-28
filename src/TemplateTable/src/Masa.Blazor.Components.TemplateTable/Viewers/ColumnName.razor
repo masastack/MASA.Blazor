@@ -130,7 +130,8 @@
             {
                 ColumnId = Data.Id,
                 OrderBy = SortOrder.Asc,
-                Index = sort.Options.MaxBy(u => u.Index)?.Index + 1 ?? 0
+                Index = sort.Options.MaxBy(u => u.Index)?.Index + 1 ?? 0,
+                Type = Data.GetExpectedType()
             };
 
             sort.Options.Add(sortOption);

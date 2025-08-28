@@ -133,7 +133,8 @@ public class HotChocolateGetFilteringTests
                 new FilterOption()
                 {
                     ColumnId = "value",
-                    Func = StandardFilter.Set
+                    Func = StandardFilter.Set,
+                    Type = ExpectedType.String
                 }
             ]
         };
@@ -154,7 +155,8 @@ public class HotChocolateGetFilteringTests
                 new FilterOption()
                 {
                     ColumnId = "value",
-                    Func = StandardFilter.True
+                    Func = StandardFilter.True,
+                    Type = ExpectedType.Boolean
                 }
             ]
         };
@@ -175,7 +177,8 @@ public class HotChocolateGetFilteringTests
                 new FilterOption()
                 {
                     ColumnId = "value",
-                    Func = StandardFilter.False
+                    Func = StandardFilter.False,
+                    Type = ExpectedType.Boolean
                 }
             ]
         };

@@ -1044,6 +1044,10 @@ input[type=number] {
     max-width: 589px;
 }
 
+.m-date-time-picker--compact {
+    max-width: 290px;
+}
+
 .m-date-time-picker:not(.m-date-time-picker--compact) {
     font-size: 0;
 }
@@ -1056,6 +1060,7 @@ input[type=number] {
 .m-date-time-picker__actions {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     padding: 8px;
 }
 

@@ -17,4 +17,6 @@ public interface IActivatableJsCallbacks : IDelayable, IOutsideClickJsCallback
     Task SetActive(bool val);
 
     Task HandleOnClickAsync(MouseEventArgs args);
+
+    bool ToggleOnClick { get; }
 }
