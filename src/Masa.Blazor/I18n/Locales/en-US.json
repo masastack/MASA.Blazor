@@ -11,6 +11,7 @@
     "fold": "Fold",
     "unfold": "Unfold",
     "required": "Required.",
+    "today": "Today",
     "dataIterator": {
       "noResultsText": "No matching records found",
       "loadingText": "Loading items..."
