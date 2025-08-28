@@ -475,6 +475,11 @@ public partial class MForm : MasaComponentBase
 
     private async Task UpdateValue(bool val)
     {
+        if (Value == val)
+        {
+            return;
+        }
+
         if (ValueChanged.HasDelegate)
         {
             await ValueChanged.InvokeAsync(val);
