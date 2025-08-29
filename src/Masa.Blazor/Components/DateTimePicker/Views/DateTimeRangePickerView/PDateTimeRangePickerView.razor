@@ -1,0 +1,87 @@
+﻿@namespace Masa.Blazor.Presets
+@inject I18n I18n
+
+<div class="@_modifierBuilder.Add("range").Add(IsEndView ? "end" : "start")">
+    <MDatePicker Value="InternalDate"
+                 OnDateClick="OnDateClick"
+                 InternalTableDate="@_tableDate"
+                 OnPickerDateUpdate="OnPickerDateUpdate"
+                 TValue="List<DateOnly?>"
+                 Range
+                 AllowedDates="@AllowedDates"
+                 Color="@Color"
+                 DayFormat="@DayFormat"
+                 Disabled="@Disabled"
+                 FirstDayOfWeek="@FirstDayOfWeek"
+                 Locale="@Locale"
+                 Max="@MaxDate"
+                 Min="@MinDate"
+                 MonthFormat="@MonthFormat"
+                 NoTitle
+                 NextIcon="@NextIcon"
+                 PrevIcon="@PrevIcon"
+                 Reactive="@Reactive"
+                 Readonly="@Readonly"
+                 Scrollable="@Scrollable"
+                 ShowAdjacentMonths="@ShowAdjacentMonths"
+                 ShowCurrent="@ShowCurrent"
+                 ShowWeek="@ShowWeek"
+                 WeekdayFormat="@WeekdayFormat"
+                 YearFormat="@YearFormat"
+                 YearIcon="@YearIcon"
+                 Theme="@Theme">
+    </MDatePicker>
+    <MDivider Vertical Style="margin:0"/>
+    <MDigitalClock Value="CurrentTime"
+                   ValueChanged="TimeChanged"
+                   AllowedHours="@AllowedHours"
+                   AllowedMinutes="@AllowedMinutes"
+                   AllowedSeconds="@AllowedSeconds"
+                   AllowedTimes="@AllowedTimes"
+                   TValue="TimeOnly?"
+                   Color="@Color"
+                   Disabled="@Disabled"
+                   Height="290"
+                   Format="@TimeFormat"
+                   Max="@MaxTime"
+                   Min="@MinTime"
+                   MultiSection="@MultiSection"
+                   Readonly="@Readonly"
+                   Step="@Step"
+                   HourStep="@HourStep"
+                   MinuteStep="@MinuteStep"
+                   SecondStep="@SecondStep"
+                   UseSeconds="@UseSeconds"
+                   Theme="@Theme">
+    </MDigitalClock>
+</div>
+<MDivider></MDivider>
+<div class="m-date-time-picker__actions">
+    <MItemGroup ActiveClass="primary--text"
+                Mandatory
+                Value="_currentIndex"
+                ValueChanged="v => _currentIndex = v.AsT1"
+                Class="toggle-btns">
+        <MItem Value="0">
+            <MButton Class="@context.ActiveClass"
+                     Text
+                     Small
+                     OnClick="@(() => ToggleTo(0))">
+                @I18n.T("$masaBlazor.datePicker.start"): @Start
+            </MButton>
+        </MItem>
+        <MItem Value="1">
+            <MButton Class="@context.ActiveClass"
+                     Text
+                     Small
+                     OnClick="@(() => ToggleTo(1))">
+                @I18n.T("$masaBlazor.datePicker.end"): @End
+            </MButton>
+        </MItem>
+    </MItemGroup>
+    <MSpacer/>
+    @if (Start.HasValue && End.HasValue)
+    {
+        <MButton Color="primary" Depressed Class="ml-1" OnClick="@(() => { })">Done</MButton>
+    }
+</div>

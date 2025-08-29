@@ -1048,10 +1048,6 @@ input[type=number] {
     max-width: 290px;
 }
 
-.m-date-time-picker:not(.m-date-time-picker--compact) {
-    font-size: 0;
-}
-
 .m-date-time-picker:not(.m-date-time-picker--compact) .m-digital-clock {
     font-size: 16px;
     padding: 4px 0;
@@ -1065,7 +1061,7 @@ input[type=number] {
 }
 
 .m-date-time-picker__view {
-    display: inline-flex;
+    display: flex;
 }
 
 .m-date-time-picker__view .m-picker--date {
@@ -1130,6 +1126,27 @@ input[type=number] {
     width: calc(290px / 4);
 }
 
+/* DateTimeRangePickerView */
+
+.m-date-time-picker__actions {
+    align-items: center;
+}
+
+.m-date-time-picker__actions .toggle-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.m-date-time-picker__actions .toggle-btns .m-btn {
+    width: 100%;
+    min-width: 200px;
+}
+
+.m-date-time-picker__actions .toggle-btns .m-btn__content {
+    justify-content: start;
+}
+
 /* DigitalClock */
 
 .m-digital-clock {
@@ -1187,14 +1204,6 @@ input[type=number] {
 
 .m-digital-clock--disabled .m-digital-clock__item, .m-digital-clock--readonly .m-digital-clock__item {
     pointer-events: none;
-}
-
-.m-digital-clock__item:first-of-type {
-    margin-top: 4px;
-}
-
-.m-digital-clock__item:last-of-type {
-    margin-bottom: 4px;
 }
 
 .m-digital-clock__item-content {
