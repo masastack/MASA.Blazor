@@ -65,6 +65,10 @@
     </ChildContent>
 </MMenu>
 
+<CascadingValue Value="this" IsFixed>
+    @ChildContent
+</CascadingValue>
+
 @code {
 
     private RenderFragment DefaultActivator(ActivatorProps context) => __builder =>

@@ -238,6 +238,7 @@
   "digital-clocks": "Digital clocks（数字时钟）",
   "date-time-pickers": "Date time picker（日期时间选择器）",
   "date-digital-clock-pickers": "Date digital clock pickers（日期数字时钟选择器）",
+  "date-time-range-pickers": "Date time range pickers（日期时间范围选择器）",
   "popup-service": "Popup service（弹出层服务）",
   "progress": "Progress（进度条）",
   "progress-circular": "Progress circular（进度环）",

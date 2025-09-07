@@ -1,0 +1,14 @@
+﻿<PDateTimeRangePicker @bind-Start="_start"
+                      @bind-End="_end"
+                      TimeFormat="TimeFormat.Hr24">
+    <PDefaultDateTimePickerActivator Filled
+                                     Clearable
+                                     Format="yyyy-MM-dd HH:mm:ss"/>
+</PDateTimeRangePicker>
+
+@code {
+
+    private DateTime? _start;
+    private DateTime? _end;
+
+}

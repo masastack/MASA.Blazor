@@ -240,6 +240,7 @@
   "digital-clocks": "Digital clocks",
   "date-time-pickers": "Date time picker",
   "date-digital-clock-pickers": "Date digital clock pickers",
+  "date-time-range-pickers": "Date time range pickers",
   "popup-service": "Popup service",
   "progress": "Progress",
   "progress-circular": "Progress circular",

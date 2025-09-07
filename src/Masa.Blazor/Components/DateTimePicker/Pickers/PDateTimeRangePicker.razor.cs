@@ -1,8 +1,12 @@
-﻿namespace Masa.Blazor.Presets;
+﻿using Masa.Blazor.Components.DateTimePicker.Pickers;
 
-public partial class PDateTimeRangePicker : PDateTimeRangePickerView
+namespace Masa.Blazor.Presets;
+
+public partial class PDateTimeRangePicker : PDateTimeRangePickerView, IDateTimePicker
 {
     [Parameter] public RenderFragment<ActivatorProps>? ActivatorContent { get; set; }
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
 
     private PDateTimeRangePickerView _pickerView = null!;
 
@@ -83,5 +87,12 @@ public partial class PDateTimeRangePicker : PDateTimeRangePickerView
         {
             _display = string.Empty;
         }
+    }
+
+    public void UpdateActivator(PDefaultDateTimePickerActivator pDefaultDateTimePickerActivator)
+    {
+        _defaultActivator = pDefaultDateTimePickerActivator;
+        
+        StateHasChanged();
     }
 }
