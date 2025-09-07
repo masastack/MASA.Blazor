@@ -1,9 +1,10 @@
 ﻿@namespace Masa.Blazor.Presets
-@inject I18n I18n
 
 <div class="@_modifierBuilder.Add("range").Add(IsEndView ? "end" : "start")">
     <MDatePicker Value="InternalDate"
                  OnDateClick="OnDateClick"
+                 ActivePicker="_activePicker"
+                 OnActivePickerUpdate="OnActivePickerUpdate"
                  InternalTableDate="@_tableDate"
                  OnPickerDateUpdate="OnPickerDateUpdate"
                  TValue="List<DateOnly?>"
@@ -55,33 +56,4 @@
                    Theme="@Theme">
     </MDigitalClock>
 </div>
-<MDivider></MDivider>
-<div class="m-date-time-picker__actions">
-    <MItemGroup ActiveClass="primary--text"
-                Mandatory
-                Value="_currentIndex"
-                ValueChanged="v => _currentIndex = v.AsT1"
-                Class="toggle-btns">
-        <MItem Value="0">
-            <MButton Class="@context.ActiveClass"
-                     Text
-                     Small
-                     OnClick="@(() => ToggleTo(0))">
-                @I18n.T("$masaBlazor.datePicker.start"): @Start
-            </MButton>
-        </MItem>
-        <MItem Value="1">
-            <MButton Class="@context.ActiveClass"
-                     Text
-                     Small
-                     OnClick="@(() => ToggleTo(1))">
-                @I18n.T("$masaBlazor.datePicker.end"): @End
-            </MButton>
-        </MItem>
-    </MItemGroup>
-    <MSpacer/>
-    @if (Start.HasValue && End.HasValue)
-    {
-        <MButton Color="primary" Depressed Class="ml-1" OnClick="@(() => { })">Done</MButton>
-    }
-</div>
+

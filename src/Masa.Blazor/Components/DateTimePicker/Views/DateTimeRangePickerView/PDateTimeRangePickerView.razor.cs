@@ -34,8 +34,8 @@ public partial class PDateTimeRangePickerView
 
             if (value.HasValue)
             {
-                MinDate = System.DateOnly.FromDateTime(value.Value);
-                MinTime = System.TimeOnly.FromDateTime(value.Value);
+                MinDate = DateOnly.FromDateTime(value.Value);
+                MinTime = TimeOnly.FromDateTime(value.Value);
             }
             else
             {
@@ -55,8 +55,8 @@ public partial class PDateTimeRangePickerView
 
             if (value.HasValue)
             {
-                MaxDate = System.DateOnly.FromDateTime(value.Value);
-                MaxTime = System.TimeOnly.FromDateTime(value.Value);
+                MaxDate = DateOnly.FromDateTime(value.Value);
+                MaxTime = TimeOnly.FromDateTime(value.Value);
             }
             else
             {
@@ -129,8 +129,12 @@ public partial class PDateTimeRangePickerView
     private static Block _block = new("m-date-time-picker__view");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
-    private DateOnly _tableDate = DateOnly.FromDateTime(System.DateTime.Now);
-    private List<DateTime?> _prevValue = [null, null];
+    private DateOnly _tableDate = DateOnly.FromDateTime(DateTime.Now);
+    private DatePickerType _activePicker = DatePickerType.Date;
+
+    private DateTime? _prevStart;
+    private DateTime? _prevEnd;
+
     protected List<DateOnly?> InternalDate = [null, null];
     protected List<TimeOnly?> InternalTime = [null, null];
     private bool IsEndView => _currentIndex == 1;
@@ -148,32 +152,21 @@ public partial class PDateTimeRangePickerView
     {
         base.OnParametersSet();
 
-        var date = IsEndView ? End : Start;
-        var index = IsEndView ? 1 : 0;
-        var prevDate = _prevValue[index];
-
-        if (date is null)
+        if (Start != _prevStart)
         {
-            if (prevDate != null)
-            {
-                UpdateInternalDateTime(null);
-            }
+            _prevStart = Start;
+            UpdateInternalDateTime(Start, 0);
         }
-        else
+
+        if (End != _prevEnd)
         {
-            if (prevDate != date)
-            {
-                UpdateInternalDateTime(date);
-            }
+            _prevEnd = End;
+            UpdateInternalDateTime(End, 1);
         }
     }
 
-    private void UpdateInternalDateTime(DateTime? value)
+    private void UpdateInternalDateTime(DateTime? value, int index)
     {
-        var index = IsEndView ? 1 : 0;
-
-        _prevValue[index] = value;
-
         if (value is null || value.Value == default)
         {
             InternalDate[index] = null;
@@ -181,32 +174,41 @@ public partial class PDateTimeRangePickerView
         }
         else
         {
-            InternalDate[index] = System.DateOnly.FromDateTime(value.Value);
-            InternalTime[index] = System.TimeOnly.FromDateTime(value.Value);
+            InternalDate[index] = DateOnly.FromDateTime(value.Value);
+            InternalTime[index] = TimeOnly.FromDateTime(value.Value);
         }
     }
 
     private async Task OnDateClick(DateOnly date)
     {
-        var currentDate = InternalDate[_currentIndex];
-        if (currentDate.HasValue && currentDate.Value == date)
+        if (Start.HasValue && !End.HasValue)
         {
-            return;
+            _currentIndex = 1;
+        }
+        else
+        {
+            _currentIndex = 0;
+            InternalDate[1] = null;
+            _prevEnd = null;
         }
 
         InternalDate[_currentIndex] = date;
+
         _tableDate = date;
-        Console.Out.WriteLine("[PDateTimeRangePickerView] OnDateClick: " + date);
 
         await UpdateValue();
     }
-    
+
     private void OnPickerDateUpdate(DateOnly date)
     {
-        Console.Out.WriteLine("[PDateTimeRangePickerView] OnPickerDateUpdate: " + date);
         _tableDate = date;
     }
-    
+
+    private void OnActivePickerUpdate(DatePickerType picker)
+    {
+        _activePicker = picker;
+    }
+
     protected async Task TimeChanged(TimeOnly? time)
     {
         if (!time.HasValue)
@@ -244,30 +246,9 @@ public partial class PDateTimeRangePickerView
         }
         else
         {
-            if (End < newValue)
-            {
-                await EndChanged.InvokeAsync(newValue);
-                await StartChanged.InvokeAsync(End);
-                (InternalDate[0], InternalDate[1]) = (InternalDate[1], InternalDate[0]);
-            }
-            else
-            {
-                await StartChanged.InvokeAsync(newValue);
-            }
+            await StartChanged.InvokeAsync(newValue);
+            await EndChanged.InvokeAsync(null);
         }
-    }
-    
-    private void ToggleTo(int index)
-    {
-        _currentIndex = index;
-        var date = IsEndView ? End : Start;
-
-        if (date.HasValue)
-        {
-            _tableDate = DateOnly.FromDateTime(date.Value);
-        }
-
-        UpdateInternalDateTime(date);
     }
 
     private DateTime MergeDateAndTime()
@@ -306,5 +287,11 @@ public partial class PDateTimeRangePickerView
         }
 
         return new DateTime(year, month, day, hour, minute, second);
+    }
+
+    internal void ResetPickerView(DateOnly date)
+    {
+        _activePicker = DatePickerType.Date;
+        _tableDate = date;
     }
 }

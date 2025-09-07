@@ -1,0 +1,92 @@
+﻿@namespace Masa.Blazor.Presets
+@inherits PDateTimeRangePickerView
+@inject I18n I18n
+
+<MMenu Value="_menu"
+       ValueChanged="OnMenuChanged"
+       CloseOnContentClick="false"
+       ToggleOnClick="false"
+       OffsetY
+       NudgeBottom="1"
+       ActivatorContent="@ComputedActivatorContent"
+       ContentClass="@Class">
+    <ChildContent>
+        <PDateTimeRangePickerView @bind-Start="@_start"
+                                  @bind-End="@_end"
+                                  AllowedDates="@AllowedDates"
+                                  AllowedHours="@AllowedHours"
+                                  AllowedMinutes="@AllowedMinutes"
+                                  AllowedSeconds="@AllowedSeconds"
+                                  AllowedTimes="@AllowedTimes"
+                                  Color="@Color"
+                                  DayFormat="@DayFormat"
+                                  Disabled="@Disabled"
+                                  FirstDayOfWeek="@FirstDayOfWeek"
+                                  TimeFormat="@TimeFormat"
+                                  Locale="@Locale"
+                                  Max="@Max"
+                                  Min="@Min"
+                                  MonthFormat="@MonthFormat"
+                                  MultiSection="@MultiSection"
+                                  NextIcon="@NextIcon"
+                                  PrevIcon="@PrevIcon"
+                                  Reactive="@Reactive"
+                                  Readonly="@Reactive"
+                                  Scrollable="@Scrollable"
+                                  ShowAdjacentMonths="@ShowAdjacentMonths"
+                                  ShowCurrent="@ShowCurrent"
+                                  ShowWeek="@ShowWeek"
+                                  Step="@Step"
+                                  HourStep="@HourStep"
+                                  MinuteStep="@MinuteStep"
+                                  SecondStep="@SecondStep"
+                                  UseSeconds="@UseSeconds"
+                                  WeekdayFormat="@WeekdayFormat"
+                                  YearFormat="@YearFormat"
+                                  YearIcon="@YearIcon"
+                                  Theme="@Theme"
+                                  @ref="_pickerView">
+        </PDateTimeRangePickerView>
+
+        <MDivider></MDivider>
+        <div class="m-date-time-picker__actions">
+            <div class="text--secondary caption">
+                <div>@I18n.T("$masaBlazor.datePicker.start"): @_start?.ToString(_defaultActivator?.Format)</div>
+                <div>@I18n.T("$masaBlazor.datePicker.end"): @_end?.ToString(_defaultActivator?.Format)</div>
+            </div>
+            <MSpacer/>
+            @if (_end.HasValue)
+            {
+                <MButton Color="primary" Depressed Class="ml-1" OnClick="@OnOk">
+                    @I18n.T("$masaBlazor.ok")
+                </MButton>
+            }
+        </div>
+    </ChildContent>
+</MMenu>
+
+@code {
+
+    private RenderFragment DefaultActivator(ActivatorProps context) => __builder =>
+    {
+        _defaultActivator ??= new();
+
+        <MTextField Value="_display"
+                    ValueChanged="DisplayChanged"
+                    UpdateOnChange
+                    TValue="string?"
+                    Readonly="@Readonly"
+                    Disabled="@Disabled"
+                    Clearable="@(!Readonly && _defaultActivator.Clearable)"
+                    Dense="@_defaultActivator.Dense"
+                    Label="@_defaultActivator.Label"
+                    Filled="@_defaultActivator.Filled"
+                    HideDetails="@_defaultActivator.HideDetails"
+                    Outlined="@_defaultActivator.Outlined"
+                    Solo="@_defaultActivator.Solo"
+                    SoloInverted="@_defaultActivator.SoloInverted"
+                    RootAttributes="@context.Attrs">
+        </MTextField>
+    };
+
+}

@@ -106,6 +106,8 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
 
         var prevIsCompact = IsCompact;
         var prevIsDialog = IsDialog;
+        
+        // TODO: bottomSheet/menu/dialog
 
         switch (ViewType)
         {

@@ -1173,6 +1173,7 @@ input[type=number] {
 
 .m-digital-clock .m-digital-clock__items {
     border-right-color: rgba(var(--m-theme-on-surface),.12);
+    padding: 4px 0;
 }
 
 .m-digital-clock__items:last-of-type {
@@ -1187,7 +1188,7 @@ input[type=number] {
 .m-digital-clock__items:after {
     display: block;
     content: "";
-    height: calc((100% - 36px) - 8px);
+    height: calc(100% - 36px);
 }
 
 .m-digital-clock__item {
