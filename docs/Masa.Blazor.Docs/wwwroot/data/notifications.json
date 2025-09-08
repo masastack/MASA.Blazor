@@ -68,5 +68,15 @@
     "href": "/blazor/getting-started/release-notes?v=v1.10.0",
     "upgradeGuide": "/blazor/getting-started/upgrade-guide#upgrading-from-v1-9-x-to-v1-10-0",
     "createdAt": "2025-07-07"
+  },
+  {
+    "title": "v1.11.0",
+    "content": {
+      "zh": "亮点：\r\n- 为移动端新增了[单元格](/blazor/mobiles/cell)和[滑动操作](/blazor/mobiles/swipe-actions)组件。\r\n- 提供类抖音的[视频流](/blazor/components/video-feeder)组件。\r\n- [PopupService](/blazor/components/popup-service)支持显示轻提示。\r\n- 提供[日期时间选择器组件](/blazor/components/date-time-range-pickers)。",
+        "en": "Highlights:\r\n- Added [Cell](/blazor/mobiles/cell) and [Swipe Actions](/blazor/mobiles/swipe-actions) components for mobile.\r\n- Provided a TikTok-like [Video Feeder](/blazor/components/video-feeder) component.\r\n- [PopupService](/blazor/components/popup-service) supports displaying toasts.\r\n- Provided [Date Time Range Pickers](/blazor/components/date-time-range-pickers) component."
+    },
+    "type": 0,
+    "href": "/blazor/getting-started/release-notes?v=v1.11.0",
+    "createdAt": "2025-09-15"
   }
 ]
