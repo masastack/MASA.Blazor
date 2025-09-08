@@ -46,11 +46,11 @@
         ? null
         : __builder =>
         {
-            <MDatePickerTitle Date="@(Type == DatePickerType.Year ? Formatters.Year(TableDate) : Formatters.TitleDate(MultipleValue))"
+            <MDatePickerTitle Date="@(Type == DatePickerType.Year ? Formatters.Year(InternalTableDate) : Formatters.TitleDate(MultipleValue))"
                               Disabled="@Disabled"
                               Readonly="@Readonly"
                               SelectingYear="@(InternalActivePicker == DatePickerType.Year)"
-                              Year="@Formatters.Year(TableDate)"
+                              Year="@Formatters.Year(InternalTableDate)"
                               YearIcon="@YearIcon"
                               Value="@MultipleValue.FirstOrDefault()"
                               OnSelectingYearUpdate="@OnSelectingYearUpdate">
@@ -69,7 +69,7 @@
                           Min="@MinYear"
                           Max="@MaxYear"
                           Value="@TableYear"
-                          TableDate="@TableDate"
+                          TableDate="@InternalTableDate"
                           Locale="@CurrentLocale"
                           Type="@Type"
                           OnInput="@OnYearClickAsync"
@@ -98,7 +98,8 @@
 
         void OnInput(DateOnly val)
         {
-            TableDate = val;
+            InternalTableDate = val;
+            OnTableDateUpdate.InvokeAsync(val);
         }
 
         void OnToggle()

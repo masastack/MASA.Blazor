@@ -42,7 +42,10 @@
       "nextMonthAriaLabel": "下个月",
       "nextYearAriaLabel": "明年",
       "prevMonthAriaLabel": "前一个月",
-      "prevYearAriaLabel": "前一年"
+      "prevYearAriaLabel": "前一年",
+      "today": "今天",
+      "start": "开始日期",
+      "end": "结束日期"
     },
     "noDataText": "没有数据",
     "carousel": {

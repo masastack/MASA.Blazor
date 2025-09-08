@@ -1,4 +1,5 @@
-﻿using Masa.Blazor.Components.DateTimePicker.Pickers;
+﻿using Masa.Blazor.Components.DateTimePicker;
+using Masa.Blazor.Components.DateTimePicker.Pickers;
 
 namespace Masa.Blazor.Presets;
 
@@ -23,9 +24,25 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
 
     [Parameter] public EventCallback OnConfirm { get; set; }
 
+    [Parameter] public RenderFragment<ShortcutContext>? ShortcutsContent { get; set; }
+
+    private readonly IDictionary<string, IDictionary<string, object>> _shortcutDefaults =
+        new Dictionary<string, IDictionary<string, object>>()
+        {
+            [nameof(MButton)] = new Dictionary<string, object>()
+            {
+                [nameof(MButton.Text)] = true,
+                [nameof(MButton.Small)] = true,
+                [nameof(MButton.Color)] = "primary",
+            }
+        };
+
     private bool _menu;
     private DateTimePickerViewType _prevViewType;
     private string? _display;
+
+    private PDefaultDateTimePickerActivator? _defaultActivator;
+    private ShortcutContext _shortcutContext = null!;
 
     private string Class => BasePickerModifierBuilder.Add("compact", IsCompact).Build();
 
@@ -35,7 +52,6 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
 
     internal TValue? InternalDateTime { get; set; }
 
-    private PDefaultDateTimePickerActivator? _defaultActivator;
 
     public void UpdateActivator(PDefaultDateTimePickerActivator pDefaultDateTimePickerActivator)
     {
@@ -47,6 +63,8 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
     protected override void OnInitialized()
     {
         base.OnInitialized();
+
+        _shortcutContext = new((dt) => InternalDateTime = (TValue)(object)dt);
 
         MasaBlazor.MobileChanged += MasaBlazorOnMobileChanged;
 
@@ -88,6 +106,8 @@ public partial class PDateTimePickerBase<TValue> : PDateTimePickerView<TValue>, 
 
         var prevIsCompact = IsCompact;
         var prevIsDialog = IsDialog;
+        
+        // TODO: bottomSheet/menu/dialog
 
         switch (ViewType)
         {

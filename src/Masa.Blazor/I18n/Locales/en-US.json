@@ -42,7 +42,10 @@
       "nextMonthAriaLabel": "Next month",
       "nextYearAriaLabel": "Next year",
       "prevMonthAriaLabel": "Previous month",
-      "prevYearAriaLabel": "Previous year"
+      "prevYearAriaLabel": "Previous year",
+      "today": "Today",
+      "start": "Start date",
+      "end": "End date"
     },
     "noDataText": "No data available",
     "carousel": {

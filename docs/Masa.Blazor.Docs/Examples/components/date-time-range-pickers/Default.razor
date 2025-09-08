@@ -1,0 +1,51 @@
+﻿<MRow>
+    <MCol Cols="12">
+        <MSelect @bind-Value="_format"
+                 Filled
+                 HideDetails="true"
+                 Label="TimeFormat"
+                 Items="_items"
+                 ItemValue="u => u.Value"
+                 ItemText="u => u.Name">
+        </MSelect>
+
+        <MCheckbox @bind-Value="_multiSection"
+                   Label="MultiSection"
+                   HideDetails="true">
+            MultiSection
+        </MCheckbox>
+
+        @if (_multiSection)
+        {
+            <MCheckbox @bind-Value="_useSeconds"
+                       Label="UseSeconds"
+                       HideDetails="true">
+            </MCheckbox>
+        }
+    </MCol>
+    <MCol Cols="12">
+        <PDateTimeRangePicker @bind-Start="_start"
+                              @bind-End="_end"
+                              MultiSection="@_multiSection"
+                              UseSeconds="@_useSeconds"
+                              TimeFormat="_format">
+        </PDateTimeRangePicker>
+    </MCol>
+</MRow>
+
+@code {
+
+    private List<(string Name, TimeFormat Value)> _items = new()
+    {
+        new("AM/PM", TimeFormat.AmPm),
+        new("24 Hour", TimeFormat.Hr24)
+    };
+
+    private DateTime? _start = DateTime.Now;
+    private DateTime? _end = DateTime.Now.AddDays(1);
+
+    private bool _multiSection;
+    private bool _useSeconds;
+    private TimeFormat _format;
+
+}

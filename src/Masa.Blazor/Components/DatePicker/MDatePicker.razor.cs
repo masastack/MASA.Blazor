@@ -114,6 +114,8 @@ public partial class MDatePicker<TValue>
 
     [Parameter] public EventCallback<int> OnYearClick { get; set; }
 
+    [Parameter] public EventCallback<DateOnly> OnTableDateUpdate { get; set; }
+
     protected DatePickerType InternalActivePicker
     {
         get { return GetValue<DatePickerType>(); }
@@ -142,15 +144,16 @@ public partial class MDatePicker<TValue>
         }
     }
 
-    protected DateOnly TableDate
+    [Parameter]
+    public DateOnly InternalTableDate
     {
         get => GetValue<DateOnly>();
         set => SetValue(value);
     }
 
-    protected int TableMonth => TableDate.Month - 1;
+    protected int TableMonth => InternalTableDate.Month - 1;
 
-    protected int TableYear => TableDate.Year;
+    protected int TableYear => InternalTableDate.Year;
 
     protected DateOnly? MinMonth => Min != null ? new DateOnly(Min.Value.Year, Min.Value.Month, 1) : null;
 
@@ -226,11 +229,13 @@ public partial class MDatePicker<TValue>
 
         InternalActivePicker = ActivePicker ?? Type;
 
-        //Init TableDate
-        var multipleValue = WrapInArray(Value);
-        TableDate = multipleValue.Count > 0
-            ? multipleValue[multipleValue.Count - 1]
-            : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now));
+        if (!IsDirtyParameter(nameof(InternalTableDate)))
+        {
+            var multipleValue = WrapInArray(Value);
+            InternalTableDate = multipleValue.Count > 0
+                ? multipleValue[^1]
+                : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now));
+        }
     }
 
     protected override void RegisterWatchers(PropertyWatcher watcher)
@@ -239,7 +244,7 @@ public partial class MDatePicker<TValue>
 
         watcher
             .Watch<DatePickerType?>(nameof(ActivePicker), val => { InternalActivePicker = val ?? Type; })
-            .Watch<DateOnly>(nameof(TableDate), val =>
+            .Watch<DateOnly>(nameof(InternalTableDate), val =>
             {
                 if (OnPickerDateUpdate.HasDelegate)
                 {
@@ -256,7 +261,7 @@ public partial class MDatePicker<TValue>
             .Watch<TValue>(nameof(Value), val =>
             {
                 var multipleValue = WrapInArray(val);
-                TableDate = multipleValue.Count > 0
+                InternalTableDate = multipleValue.Count > 0
                     ? multipleValue[^1]
                     : (ShowCurrent.IsT0 ? ShowCurrent.AsT0 : DateOnly.FromDateTime(DateTime.Now));
             });
@@ -266,7 +271,7 @@ public partial class MDatePicker<TValue>
     {
         if (value is DateOnly date && date != DateOnly.MinValue && date != DateOnly.MaxValue)
         {
-            return new List<DateOnly>
+             return new List<DateOnly>
             {
                 date
             };
@@ -285,6 +290,15 @@ public partial class MDatePicker<TValue>
             return dates;
         }
 
+        if (value is IList<DateOnly?> nullableDates)
+        {
+            var dateValues = nullableDates.Where(d => d.HasValue).ToList();
+            if (dateValues.All(d => d != DateOnly.MinValue && d != DateOnly.MaxValue))
+            {
+                return dateValues.Cast<DateOnly>().ToList();
+            }
+        }
+
         if (value is IList<DateTime> dateTimes && dateTimes.All(d => d != DateTime.MinValue && d != DateTime.MaxValue))
         {
             return dateTimes.Select(DateOnly.FromDateTime).ToList();
@@ -300,12 +314,12 @@ public partial class MDatePicker<TValue>
 
     private async Task OnYearClickAsync(int year)
     {
-        TableDate = new DateOnly(year, TableDate.Month, TableDate.Day);
+        InternalTableDate = new DateOnly(year, InternalTableDate.Month, InternalTableDate.Day);
         if (Type == DatePickerType.Year)
         {
             // multiple mode is not supported in year mode 
 
-            Value = TableDate is TValue val ? val : default;
+            Value = InternalTableDate is TValue val ? val : default;
 
             if (ValueChanged.HasDelegate)
             {
@@ -328,7 +342,7 @@ public partial class MDatePicker<TValue>
     {
         if (Type == DatePickerType.Date)
         {
-            TableDate = value;
+            InternalTableDate = value;
             InternalActivePicker = DatePickerType.Date;
         }
         else
@@ -397,7 +411,18 @@ public partial class MDatePicker<TValue>
                 }
             }
 
-            Value = (TValue)values;
+            if (typeof(TValue) == typeof(List<DateOnly?>))
+            {
+                Value = (TValue)(object)values.Cast<DateOnly?>().ToList();
+            }
+            else if (typeof(TValue) == typeof(List<DateOnly>) || typeof(TValue) == typeof(IList<DateOnly>))
+            {
+                Value = (TValue)values;
+            }
+            else
+            {
+                Value = (TValue)values;
+            }
         }
         else
         {
