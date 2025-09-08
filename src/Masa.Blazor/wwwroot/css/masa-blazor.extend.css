@@ -1128,10 +1128,6 @@ input[type=number] {
 
 /* DateTimeRangePickerView */
 
-.m-date-time-picker__actions {
-    align-items: center;
-}
-
 .m-date-time-picker__actions .toggle-btns {
     display: flex;
     flex-direction: column;

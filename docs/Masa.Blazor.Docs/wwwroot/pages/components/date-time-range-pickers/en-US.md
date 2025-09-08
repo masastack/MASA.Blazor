@@ -22,6 +22,6 @@ By default, use a [MTextField](/blazor/components/text-fields) as the activator.
 
 ## View components
 
-### DateDigitalClockPickerView
+### DateTimeRangePickerView
 
 <masa-example file="Examples.components.date_time_range_pickers.Default"></masa-example>

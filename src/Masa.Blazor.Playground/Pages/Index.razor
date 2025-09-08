@@ -1,3 +1,60 @@
 ﻿@page "/"
 
 <h1>Test your code here!</h1>
+
+<h2>Start: @start</h2>
+<h2>End: @end</h2>
+
+@* <PDateTimeRangePickerView @bind-Start="start" @bind-End="end"></PDateTimeRangePickerView> *@
+
+<PDateTimeRangePicker @bind-Start="start"
+                      @bind-Start:after="UpdateDisplay1"
+                      @bind-End="end"
+                      @bind-End:after="UpdateDisplay1"
+                      MultiSection
+                      UseSeconds
+                      TimeFormat="TimeFormat.Hr24">
+</PDateTimeRangePicker>
+
+@code {
+
+    private DateTime? start = new DateTime(2025, 9, 7, 14, 30, 0);
+    private DateTime? end = new DateTime(2025, 9, 7, 16, 0, 0);
+
+    private string _display1;
+
+    private void DisplayChanged1(string val)
+    {
+        if (string.IsNullOrEmpty(val))
+        {
+            _display1 = null;
+            start = null;
+            end = null;
+        }
+        else if (val.Contains("~"))
+        {
+            var arr = val.Split("~");
+            if (DateTime.TryParse(arr[0].Trim(), out var startVal) && DateTime.TryParse(arr[1].Trim(), out var endVal) && startVal <= endVal)
+            {
+                start = startVal;
+                end = endVal;
+                
+                _display1 = $"{start:yyyy-MM-dd HH:mm:ss} ~ {end:yyyy-MM-dd HH:mm:ss}";
+            }
+        }
+    }
+
+    private void UpdateDisplay1()
+    {
+        if (start.HasValue && end.HasValue)
+        {
+            _display1 = $"{start:yyyy-MM-dd HH:mm:ss} ~ {end:yyyy-MM-dd HH:mm:ss}";
+        }
+        else
+        {
+            _display1 = string.Empty;
+        }
+    }
+
+
+}
