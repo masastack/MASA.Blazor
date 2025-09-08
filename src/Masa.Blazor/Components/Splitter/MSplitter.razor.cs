@@ -348,7 +348,7 @@ public partial class MSplitter
         var panesToResize = new int?[] { splitterIndex, splitterIndex + 1 };
         if (dragPercentage < sums.prevPanesSize + _panes[panesToResize[0]!.Value].Min)
         {
-            panesToResize[0] = _panes.Reverse().First(p => p.InternalIndex < splitterIndex && p.InternalSize > p.Min)?.InternalIndex;
+            panesToResize[0] = _panes.Reverse().FirstOrDefault(p => p.InternalIndex < splitterIndex && p.InternalSize > p.Min)?.InternalIndex;
 
             sums.prevReachedMinPanes = 0;
 
