@@ -1,6 +1,4 @@
-﻿using Masa.Blazor.Components.TemplateTable.Actions;
-
-namespace Masa.Blazor.Components.TemplateTable.Toolbars;
+﻿namespace Masa.Blazor.Components.TemplateTable.Toolbars;
 
 public partial class Toolbar
 {
@@ -49,6 +47,12 @@ public partial class Toolbar
     [Parameter] public EventCallback OnViewSave { get; set; }
 
     [Parameter] public EventCallback OnRowRemove { get; set; }
+
+    [Parameter] public bool ShowToolbarViews { get; set; } = true;
+
+    [Parameter] public bool ShowToolbar { get; set; } = true;
+
+    [Parameter] public bool ShowToolbarActions { get; set; } = true;
 
     [Parameter] public bool HasSelectedKeys { get; set; }
 

@@ -1,25 +1,27 @@
 ﻿@namespace Masa.Blazor.Components.TemplateTable.FilterDialogs
+@inject I18n i18N;
 
-<PModal @bind-Value="dialog"
-        Width="668"
+<PModal @bind-Value="Show"
+        Width="@Width"
         BodyStyle="min-height: 180px"
-        Title="Filters"
+        Title="@i18N.T("Filters")"
         Persistent
+        OnCancel="@HandleOnCancel"
         OnSave="HandleOnSave">
 
     @for (int i = 0; i < _filters.Count; i++)
     {
         var index = i;
         var filter = _filters[index];
-
+        if (filter.Persistent) continue;
         <div class="d-flex align-center mb-2">
             <div style="width: 86px; flex: none;"
                  class="mr-2 text-right">
                 @if (index == 0)
                 {
-                    <span>When</span>
+                    <span>@i18N.T("When")</span>
                 }
-                else if (index == 1)
+                @* else if (index == 1)
                 {
                     <MSelect @bind-Value="@_operator"
                              Items="@Operators"
@@ -30,18 +32,19 @@
                              Outlined
                              HideDetails="@true">
                     </MSelect>
-                }
+                } *@
                 else
                 {
-                    <span>@_operator</span>
+                    <span>@i18N.T(@_operator)</span>
                 }
             </div>
 
             <MSelect @bind-Value="@filter.ColumnId"
+                     Placeholder="@i18N.T("ColumnId")"
                      Items="_computedColumns"
                      ItemText="u => u.Name"
                      ItemValue="u => u.Id"
-                     Label="Field"
+                     Label="@i18N.T("ColumnId")"
                      TItem="ColumnInfo"
                      TItemValue="string"
                      TValue="string"
@@ -50,65 +53,92 @@
                      Dense
                      Filled
                      HideDetails="@true"
+                     Readonly="filter.Persistent"
                      OnSelect="@filter.OnSelect">
             </MSelect>
-            <MSelect @bind-Value="@filter.Func"
+            <MSelect @bind-Value="@filter.Func" Placeholder="@i18N.T("Func")"
                      Items="@filter.FuncList"
-                     ItemText="u => u.ToString()"
+                     ItemText="@(u => i18N.T($"SDF_{u}"))"
                      ItemValue="u => u"
-                     Label="Func"
+                     Label="@i18N.T("Func")"
                      Class="mr-2"
                      Style="max-width: 150px"
                      Dense
                      Filled
+                     Readonly="filter.Persistent"
                      HideDetails="@true">
             </MSelect>
-            @if ((filter.Func is StandardFilter.Equals or StandardFilter.NotEquals) && filter.SelectOptions is not null)
+            @if ((filter.Func is StandardFilter.Equals or StandardFilter.NotEquals or StandardFilter.Contains or StandardFilter.NotContains) && filter.SelectOptions is not null)
             {
-                <MSelect @bind-Value="@filter.Expected"
-                         Items="@filter.SelectOptions"
-                         ItemText="u => u.Label"
-                         ItemValue="u => u.Value"
-                         Label="Expected"
-                         Class="mr-2"
-                         Style="max-width: 150px"
-                         Dense
-                         Filled
-                         HideDetails="@true">
-                </MSelect>
-            }
-            else if (!_noExpectedFuncs.Contains(filter.Func))
-            {
-                if (filter.Type == ExpectedType.DateTime)
+                bool isList = filter.Func is StandardFilter.Contains or StandardFilter.NotContains;
+                if (isList)
                 {
-                    DateTime? date = DateTime.TryParse(filter.Expected, out var dt) ? dt : null;
-
-                    <PDateDigitalClockPicker Value="@date"
-                                             ValueChanged="@(v => filter.Expected = (v.ToString() ?? string.Empty))"
-                                             TValue="DateTime?"
-                                             ViewType="DateTimePickerViewType.Desktop"
-                                             TimeFormat="TimeFormat.Hr24"
-                                             MultiSection
-                                             UseSeconds>
-                        <PDefaultDateTimePickerActivator Label="Expected"
-                                                         Filled
-                                                         Format="yyyy-MM-dd HH:mm:ss"/>
-                    </PDateDigitalClockPicker>
+                    List<string> values = [.. filter.Expected.Replace('[', ' ').Replace(']', ' ').Replace('"', ' ').Split(',').Select(s => s.Trim())];
+                    <MAutocomplete Value="values"
+                                   ValueChanged="(List<string> values) => ValueChange(index, values)"
+                                   Clearable
+                                   Multiple
+                                   Items="@filter.SelectOptions"
+                                   ItemText="u => u.Label"
+                                   ItemValue="u => u.Value"
+                                   Label="@i18N.T("Expected")"
+                                   Placeholder="@i18N.T("Expected")"
+                                   Color="primary"
+                                   Class="mr-2 m-input--dense-48"
+                                   Style="max-width: 150px"
+                                   Dense
+                                   Filled
+                                   Readonly="filter.Persistent"
+                                   HideDetails="@("auto")">
+                    </MAutocomplete>
                 }
                 else
                 {
-                    <MTextField @bind-Value="@filter.Expected"
-                                Label="Expected"
-                                Class="mr-2"
-                                Style="max-width: 150px"
-                                Filled
-                                Dense
-                                HideDetails="@true">
-                    </MTextField>
+                    <MAutocomplete @bind-Value="@filter.Expected"
+                                   Placeholder="@i18N.T("Expected")"
+                                   Items="@filter.SelectOptions"
+                                   ItemText="u => u.Label"
+                                   ItemValue="u => u.Value"
+                                   Label="@i18N.T("Expected")"
+                                   Class="mr-2 m-input--dense-48"
+                                   Style="max-width: 150px"
+                                   Dense
+                                   Filled
+                                   Readonly="filter.Persistent"
+                                   HideDetails="@("auto")">
+                    </MAutocomplete>
                 }
             }
+            else if (filter.Type == ExpectedType.DateTime && (filter.Func is not StandardFilter.Set && filter.Func is not StandardFilter.NotSet))
+            {
+                DateTime? date = DateTime.TryParse(filter.Expected, out var dt) ? dt : null;
+                <PDateDigitalClockPicker Value="@date"
+                                         ValueChanged="@(v => filter.Expected = (v.ToString() ?? string.Empty))"
+                                         TValue="DateTime?"
+                                         ViewType="DateTimePickerViewType.Desktop"
+                                         TimeFormat="TimeFormat.Hr24"
+                                         MultiSection
+                                         UseSeconds>
+                    <PDefaultDateTimePickerActivator Label="Expected"
+                                                     Filled
+                                                     Format="yyyy-MM-dd HH:mm:ss" />
+                </PDateDigitalClockPicker>                
+            }
+            else if (!_noExpectedFuncs.Contains(filter.Func))
+            {
+                <MTextField @bind-Value="@filter.Expected"
+                            Placeholder="@i18N.T("Expected")"
+                            Readonly="filter.Persistent"
+                            Label="@i18N.T("Expected")"
+                            Class="mr-2 m-input--dense-48"
+                            Style="max-width: 150px"
+                            Filled
+                            Dense
+                            HideDetails="@("auto")">
+                </MTextField>
+            }
 
-            <MSpacer/>
+            <MSpacer />
 
             @if (filter.Persistent)
             {
@@ -127,9 +157,7 @@
         <MButton Text
                  LeftIconName="mdi-plus"
                  Color="primary"
-                 OnClick="@AddNewFilter">
-            Add filter
-        </MButton>
+                 OnClick="@AddNewFilter">@i18N.T("Add")</MButton>
     </div>
 </PModal>
 
@@ -138,6 +166,7 @@
     [Parameter] public IList<ColumnInfo> Columns { get; set; } = [];
 
     /// <summary>
+    ///
     /// Use this to filter out hidden columns when selecting columns.
     /// </summary>
     [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
@@ -145,6 +174,16 @@
     [Parameter] public View? ActiveView { get; set; }
 
     [Parameter] public EventCallback<Filter> OnSave { get; set; }
+
+    [Parameter] public Filter Filter { get; set; } = new();
+
+    [Parameter] public EventCallback<Filter> FilterChanged { get; set; }
+
+    [Parameter] public StringNumber Width { get; set; } = 720;
+
+    [Parameter] public bool Show { get; set; }
+
+    [Parameter] public EventCallback<bool> ShowChanged { get; set; }
 
     private static readonly IList<string> Operators = ["and", "or"];
 
@@ -179,7 +218,9 @@
             _filters.Clear();
             foreach (var option in ActiveView.Filter.Options)
             {
-                var column = Columns.FirstOrDefault(u => u.Id == option.ColumnId);
+                var columnName = option.ColumnId;
+                var column = Columns.FirstOrDefault(u => u.Id == option.ColumnId || option.Type == ExpectedType.DateTime && u.Id.StartsWith(option.ColumnId));
+
                 if (column is null)
                 {
                     continue;
@@ -199,13 +240,11 @@
         }
     }
 
-    private bool dialog;
-
     private readonly List<FilterModel> _filters = [];
 
     internal void Open()
     {
-        dialog = true;
+        Show = true;
         StateHasChanged();
     }
 
@@ -216,7 +255,7 @@
             return;
         }
 
-        var filter = new FilterModel(Columns.First());
+        var filter = new FilterModel(Columns[0]);
 
         _filters.Add(filter);
     }
@@ -236,17 +275,38 @@
         filter.Expected = "{ in: [" + string.Join(", ", filter.MultiSelect.Select(u => $"\"{u}\"")) + "]}";
     }
 
-    private void HandleOnSave()
+    private async Task HandleOnSave()
     {
-        dialog = false;
+        await HandleOnCancel();
 
-        var request = new Filter
+        Filter.Options = _filters.Select(u =>
         {
-            Options = _filters.Select(u => u.ToFilterOption()).ToList(),
-            Operator = _operator == "and" ? FilterOperator.And : FilterOperator.Or
-        };
+            u.UpdateType();
+            return u.ToFilterOption();
+        }).ToList();
+        Filter.Operator = _operator == "and" ? FilterOperator.And : FilterOperator.Or;
 
-        OnSave.InvokeAsync(request);
+        if (FilterChanged.HasDelegate)
+            await FilterChanged.InvokeAsync(Filter);
     }
 
+    private async Task HandleOnCancel()
+    {
+        Show = false;
+        if (ShowChanged.HasDelegate)
+            await ShowChanged.InvokeAsync(Show);
+    }
+
+    private void TimeChange(int index, DateTime time)
+    {
+        var filter = _filters[index];
+        filter.Expected = time.ToString();
+    }
+
+    private void ValueChange(int index, List<string> values)
+    {
+        var filter = _filters[index];
+        var tt = $"[\"{string.Join(""",""", values)}\"]";
+        filter.Expected = values.Count == 0 ? "[]" : tt;
+    }
 }

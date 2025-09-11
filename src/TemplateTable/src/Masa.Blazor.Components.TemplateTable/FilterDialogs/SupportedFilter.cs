@@ -42,6 +42,8 @@ public static class SupportedFilter
 
     public static readonly StandardFilter[] SupportedSelectFilters =
     [
+        StandardFilter.Contains,
+        StandardFilter.NotContains,
         StandardFilter.Equals,
         StandardFilter.NotEquals,
         StandardFilter.Set,

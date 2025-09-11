@@ -1,15 +1,15 @@
-﻿using System.Runtime.CompilerServices;
-using GraphQL;
+﻿using GraphQL;
 using GraphQL.Client.Abstractions.Utilities;
-using GraphQL.Client.Http;
 using Masa.Blazor.Components.TemplateTable.Abstractions;
 using Masa.Blazor.Components.TemplateTable.Contracts;
+using System.Runtime.CompilerServices;
+using GraphQLClient = GraphQL.Client.Abstractions.IGraphQLClient;
 
 [assembly: InternalsVisibleTo("Masa.Blazor.Components.TemplateTable.Test")]
 
 namespace Masa.Blazor.Components.TemplateTable.Cubejs.GraphQL;
 
-public class CubejsGraphQLClient(GraphQLHttpClient httpClient) : IGraphQLClient
+public class CubejsGraphQLClient(GraphQLClient httpClient) : IGraphQLClient
 {
     public async Task<QueryResult> QueryAsync(QueryRequest request)
     {
@@ -185,6 +185,11 @@ public class CubejsGraphQLClient(GraphQLHttpClient httpClient) : IGraphQLClient
             case StandardFilter.NotSet:
                 filter = CubejsFilter.Set;
                 expected = "false";
+                type = ExpectedType.Boolean;
+                break;
+            case StandardFilter.Set:
+                filter = CubejsFilter.Set;
+                expected = "true";
                 type = ExpectedType.Boolean;
                 break;
             case StandardFilter.True:

@@ -1,8 +1,9 @@
 ﻿@namespace Masa.Blazor.Components.TemplateTable.SortDialogs
+@inject I18n i18N
 
-<PModal @bind-Value="dialog"
+<PModal @bind-Value="Show"
         Width="640"
-        Title="Sorting"
+        Title="@i18N.T("Sorting")"
         Persistent
         BodyStyle="min-height: 180px"
         OnCancel="@HandleOnCancel"
@@ -13,7 +14,7 @@
         var option = _sorts[index];
         <div class="d-flex align-center justify-end mb-2">
             <div class="mr-2 text-right">
-                @(index == 0 ? "Sort by" : "Then by")
+                @(index == 0 ? i18N.T("Sortby") : i18N.T("Thenby"))
                 <span class="font-weight-bold">
                     @($"{option.Column.Name}({option.ColumnId})")
                 </span>
@@ -22,7 +23,7 @@
             <MSelect @bind-Value="@option.OrderBy"
                      Items="@_directions"
                      ItemValue="u => u.Value"
-                     ItemText="u => u.Label"
+                     ItemText="@(u => i18N.T($"{u.Label}"))"
                      Class="mr-2"
                      Dense
                      Filled
@@ -48,7 +49,7 @@
         <div class="text-right" style="margin-right: 44px;">
             <SortBy Columns="@ComputedColumns"
                     OnSelect="@AddSort">
-                @(_sorts.Count == 0 ? "Sort by" : "Then by")
+                @(_sorts.Count == 0 ? i18N.T("Sortby") : i18N.T("Add"))
             </SortBy>
         </div>
     }
@@ -65,13 +66,16 @@
 
     [Parameter] public EventCallback<Sort> OnSave { get; set; }
 
+    [Parameter] public bool Show { get; set; }
+
+    [Parameter] public EventCallback<bool> ShowChanged { get; set; }
+
     private static (SortOrder Value, string Label)[] _directions =
     [
         (SortOrder.Asc, "ascending"),
         (SortOrder.Desc, "descending")
     ];
 
-    private bool dialog;
     private IList<ColumnInfo> _computedColumns = [];
 
     private IList<SortModel> _sorts = [];
@@ -111,7 +115,7 @@
     internal void Open()
     {
         SetSorts();
-        dialog = true;
+        Show = true;
         StateHasChanged();
     }
 
@@ -126,25 +130,30 @@
         {
             return;
         }
-        
+
         _sorts.Remove(model);
     }
 
-    private void HandleOnCancel()
+    private async Task HandleOnCancel()
     {
         _sorts.Clear();
-        dialog = false;
+        Show = false;
+        if (ShowChanged.HasDelegate)
+            await ShowChanged.InvokeAsync(Show);
     }
 
-    private void HandleOnSave()
+    private async Task HandleOnSave()
     {
-        dialog = false;
+        Show = false;
+        if (ShowChanged.HasDelegate)
+            await ShowChanged.InvokeAsync(Show);
 
         var sort = new Sort()
         {
             Options = _sorts.Select(u => u.ToSortOption()).ToList()
         };
 
-        OnSave.InvokeAsync(sort);
+        if (OnSave.HasDelegate)
+            await OnSave.InvokeAsync(sort);
     }
 }

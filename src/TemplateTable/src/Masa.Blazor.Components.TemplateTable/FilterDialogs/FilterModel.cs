@@ -15,7 +15,6 @@ public class FilterModel : FilterOption
     {
         Column = column;
         ColumnId = column.Id;
-
         UpdateOperator();
     }
 
@@ -61,7 +60,7 @@ public class FilterModel : FilterOption
             case ColumnType.Select:
                 FuncList = SupportedFilter.SupportedSelectFilters;
                 Func = FuncList[0];
-                Type = ExpectedType.String;
+                Type = Func == StandardFilter.Contains || Func == StandardFilter.NotContains ? ExpectedType.Expression : ExpectedType.String;
                 SelectOptions = (Column.ConfigObject as SelectConfig)?.Options;
                 break;
             case ColumnType.Date:
@@ -69,6 +68,24 @@ public class FilterModel : FilterOption
                 Func = FuncList[0];
                 Type = ExpectedType.DateTime;
                 break;
+        }
+    }
+
+    public void UpdateType()
+    {
+        if (Type == ExpectedType.Expression)
+        {
+            if (Func is StandardFilter.Contains or StandardFilter.NotContains)
+                return;
+
+            Type = ExpectedType.String;
+        }
+        else if (Func is StandardFilter.Contains or StandardFilter.NotContains)
+        {
+            if (Type == ExpectedType.Expression)
+                return;
+
+            Type = ExpectedType.Expression;
         }
     }
 }

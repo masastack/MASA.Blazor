@@ -1,8 +1,4 @@
-﻿using System.Net.Http.Headers;
-using GraphQL.Client.Http;
-using GraphQL.Client.Serializer.SystemTextJson;
-
-namespace Microsoft.Extensions.DependencyInjection;
+﻿namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
@@ -16,7 +12,7 @@ public static class ServiceCollectionExtensions
     public static IMasaBlazorBuilder AddGraphQLClientForTemplateTable(this IMasaBlazorBuilder builder, string endPoint,
         string? bearerToken = null)
     {
-        builder.Services.AddScoped<GraphQLHttpClient>(_ =>
+        builder.Services.AddScoped<GraphQL.Client.Abstractions.IGraphQLClient>(_ =>
         {
             var client = new GraphQLHttpClient(endPoint,
                 new SystemTextJsonSerializer(new JsonSerializerOptions(JsonSerializerDefaults.Web)));
@@ -27,9 +23,23 @@ public static class ServiceCollectionExtensions
                     new AuthenticationHeaderValue("Bearer", bearerToken);
             }
 
-            return client;
+            return (GraphQL.Client.Abstractions.IGraphQLClient)client;
         });
 
         return builder;
+    }
+
+    public static IMasaBlazorBuilder AddGraphQLClientForTemplateTable(this IMasaBlazorBuilder builder, Func<IServiceProvider, GraphQL.Client.Abstractions.IGraphQLClient> func)
+    {
+        ArgumentNullException.ThrowIfNull(func);
+        builder.Services.AddScoped(func);
+        return builder;
+    }
+
+    public static Task<IMasaBlazorBuilder> AddTemplateTableI18nAsync(this IMasaBlazorBuilder builder, string hostPath)
+    {
+        ArgumentNullException.ThrowIfNull(hostPath);
+        var i18nPath = $"{hostPath}/_content/Masa.Blazor.Components.TemplateTable/i18n";
+        return builder.AddI18nForWasmAsync(i18nPath);
     }
 }
