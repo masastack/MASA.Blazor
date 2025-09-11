@@ -9,7 +9,11 @@ public partial class MTemplateTable
 
     [Inject] private IGraphQLClient GraphQLClient { get; set; } = null!;
 
-    [Parameter] [EditorRequired] public Sheet? Sheet { get; set; }
+    [Parameter] public string Class { get; set; } = default!;
+
+    [Parameter] public bool Dense { get; set; } = false;
+
+    [Parameter][EditorRequired] public Sheet? Sheet { get; set; }
 
     [Parameter] public IList<View>? UserViews { get; set; }
 
@@ -31,14 +35,50 @@ public partial class MTemplateTable
 
     [Parameter] public RenderFragment<ViewActionsContext>? ViewActionsContent { get; set; }
 
+    [Parameter] public RenderFragment<ColumnsContext>? ColumnsContent { get; set; }
+
+    [Parameter] public bool ShowToolbarViews { get; set; }
+
+    [Parameter] public bool ShowToolbar { get; set; }
+
+    [Parameter] public bool ShowToolbarActions { get; set; }
+
     [Parameter] public RenderFragment<CustomCellContext>? CustomCellContent { get; set; }
 
     [Parameter] public Role Role { get; set; }
 
     [Parameter] public int DefaultPageSize { get; set; } = 10;
 
+    [Parameter] public bool ShowFilter { get; set; }
+
+    [Parameter] public EventCallback<bool> ShowFilterChanged { get; set; }
+
+    [Parameter] public bool ShowSort { get; set; }
+
+    [Parameter] public EventCallback<bool> ShowSortChanged { get; set; }
+
+    [Parameter] public bool Stripe { get; set; }
+
+    [Parameter]
+    public string TableClass { get; set; } = default!;
+
+    [Parameter]
+    public string HeaderClass { get; set; } = "m-data-table-header";
+
+    [Parameter]
+    public string HeaderThClass { get; set; } = "sortable text-start";
+
+    [Parameter]
+    public string BodyTrClass { get; set; } = default!;
+
+    [Parameter]
+    public string BodyTdClass { get; set; } = "text-start";
+
+    [Parameter]
+    public string StripeClass { get; set; } = default!;
+
     private SheetInfo? _sheet = null;
-    private bool _init;
+
     private ViewActionsContext _viewActionsContext = new();
 
     /// <summary>
@@ -57,7 +97,7 @@ public partial class MTemplateTable
 
     protected override async Task OnParametersSetAsync()
     {
-        // base.OnParametersSetAsync();
+        await base.OnParametersSetAsync();
 
         if (_prevSheet != Sheet)
         {
@@ -77,12 +117,21 @@ public partial class MTemplateTable
                 }
             }
         }
+
+        if (ShowFilter)
+        {
+            _filterDialog?.Open();
+        }
+        if (ShowSort)
+        {
+            _sortDialog?.Open();
+        }
     }
 
     private void FormatSheet()
     {
         _sheet = SheetInfo.From(Sheet);
-        _allColumns = [Preset.CreateSelectColumn(), .._sheet.Columns, Preset.CreateActionsColumn()];
+        _allColumns = [Preset.CreateSelectColumn(), .. _sheet.Columns, Preset.CreateActionsColumn()];
 
         UpdateStateOfActiveView();
     }
@@ -174,7 +223,7 @@ public partial class MTemplateTable
         {
             Operator = _sheet!.ActiveView.Value.Filter.Operator,
             Search = _sheet.ActiveView.Value.Filter.Search,
-            Options = [.._sheet.ActiveView.Value.Filter.Options]
+            Options = [.. _sheet.ActiveView.Value.Filter.Options]
         };
 
         return new QueryRequest(_sheet.QueryBody, _sheet.CountField, filterRequest,

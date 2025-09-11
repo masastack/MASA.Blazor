@@ -1,7 +1,7 @@
 ﻿@inject IJSRuntime JSRuntime
 
 <div @ref="_ref"
-     class="masa-table-viewer__header-column-content @Class"
+     class="masa-table-viewer__header-column-content d-flex px-4 @Class"
      @onclick="@HandleOnClick">
     @if (IsRowSelect)
     {
@@ -9,12 +9,12 @@
                          Indeterminate="@IsIndeterminate"
                          Value="@IsSelectedAll"
                          ValueChanged="@OnSelectAll"
-                         Color="@CheckboxColor"/>
+                         Color="@CheckboxColor" />
     }
     else
     {
         @Templates.GenTypeIcon(Data.Type, true)
-        <span class="text-truncate">@Data.Name</span>
+        <span class="text-truncate px-2">@Data.Name</span>
     }
 
     @if (!Internal)
@@ -43,7 +43,7 @@
 
 @if (!Internal)
 {
-    <Resizor/>
+    <Resizor />
 }
 
 @code {
@@ -130,8 +130,8 @@
             {
                 ColumnId = Data.Id,
                 OrderBy = SortOrder.Asc,
-                Index = sort.Options.MaxBy(u => u.Index)?.Index + 1 ?? 0,
-                Type = Data.GetExpectedType()
+                Type = Data.Type.ConvertToExpectedType(),
+                Index = sort.Options.MaxBy(u => u.Index)?.Index + 1 ?? 0
             };
 
             sort.Options.Add(sortOption);

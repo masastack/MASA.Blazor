@@ -4,141 +4,143 @@
 @using Masa.Blazor.Components.TemplateTable.Actions
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 
-<MSimpleTable FixedHeader
-              Class="@_modifierBuilder.Add(RowHeight.ToString()).Add(_sized).Build()"
-              Style="@($"--mt-row-height: {RowHeightValue}")"
+<MSimpleTable FixedHeader Class="@Class"
               Height="@Height"
               @ref="_simpleTable">
-    <thead>
-    <tr @ref="_headerTrRef">
-        <MSortableProvider Items="ViewColumns"
-                           ItemKey="@(u => u.ColumnId)"
-                           GhostClass="accent"
-                           ContainerRef="@_headerTrRef"
-                           ForceFallback
-                           Ignore=".ignore-elements"
-                           Order="@ColumnOrder"
-                           OrderChanged="@ColumnOrderChanged">
-            <ItemContent Context="context">
-                @{
-                    var (hidden, css, style) = GetHeaderColCss(context.Item);
-                }
-
-                <th class="@css"
-                    style="@style"
-                    @key="@(context.Item.Column.Id)"
-                    @attributes="@context.Attrs">
-                    @if (!hidden)
-                    {
-                        <ColumnName Data="@context.Item.Column"
-                                    Editable="@Editable"
-                                    Sort="@Sort"
-                                    OnClick="@OnSortUpdate"
-                                    OnColumnToggle="@OnColumnToggle"
-                                    OnColumnEditClick="@OnColumnEditClick"
-                                    IsIndeterminate="@SelectionState.Indeterminate"
-                                    IsSelectedAll="@SelectionState.AllSelected"
-                                    OnSelectAll="@OnSelectAll"
-                                    CheckboxColor="@CheckboxColor"/>
+    <thead class="@TableHeaderClass">
+        <tr @ref="_headerTrRef">
+            <MSortableProvider Items="ViewColumns"
+                               ItemKey="@(u => u.ColumnId)"
+                               GhostClass="accent"
+                               ContainerRef="@_headerTrRef"
+                               ForceFallback
+                               Ignore=".ignore-elements"
+                               Order="@ColumnOrder"
+                               OrderChanged="@ColumnOrderChanged">
+                <ItemContent Context="context">
+                    @{
+                        var (hidden, css, style) = GetHeaderColCss(context.Item);
                     }
-                </th>
-            </ItemContent>
-        </MSortableProvider>
-    </tr>
+
+                    <th class="@TableHeaderThClass @css"
+                        style="@style"
+                        @key="@(context.Item.Column.Id)"
+                        @attributes="@context.Attrs">
+                        @if (!hidden)
+                        {
+                            <ColumnName Data="@context.Item.Column"
+                                        Editable="@Editable"
+                                        Sort="@Sort"
+                                        OnClick="@OnSortUpdate"
+                                        OnColumnToggle="@OnColumnToggle"
+                                        OnColumnEditClick="@OnColumnEditClick"
+                                        IsIndeterminate="@SelectionState.Indeterminate"
+                                        IsSelectedAll="@SelectionState.AllSelected"
+                                        OnSelectAll="@OnSelectAll"
+                                        CheckboxColor="@CheckboxColor" />
+                        }
+                    </th>
+                </ItemContent>
+            </MSortableProvider>
+        </tr>
     </thead>
 
     @if (Loading)
     {
         <thead>
-        <tr class="m-data-table__progress">
-            <th class="column" colspan="1000">
-                @*TODO: 设置为正常的colspan*@
-                <MProgressLinear Absolute Indeterminate Color="primary"></MProgressLinear>
-            </th>
-        </tr>
+            <tr class="m-data-table__progress">
+                <th class="column" colspan="1000">
+                    @*TODO: 设置为正常的colspan*@
+                    <MProgressLinear Absolute Indeterminate Color="primary"></MProgressLinear>
+                </th>
+            </tr>
         </thead>
     }
 
+    @{
+        int rowIndex = 1;
+    }
     <tbody>
-    <Virtualize Items="Rows"
-                Context="item"
-                ItemSize="RowHeightValue"
-                OverscanCount="1">
-        @{
-            var isSelected = SelectedKeys.Contains(item.Key);
-        }
+        <Virtualize Items="Rows"
+                    Context="item"
+                    ItemSize="RowHeightValue"
+                    OverscanCount="1">
+            @{
+                var isSelected = SelectedKeys.Contains(item.Key);
+                bool isStripe = rowIndex % 2 == 0;
+                rowIndex++;
+            }
 
-        <tr class="@_rowModifierBuilder.AddClass("m-data-table__selected", isSelected)">
-            @foreach (var template in _orderedViewColumns)
-            {
-                var (hidden, css, style) = GetCss(template);
+            <tr class="@_rowModifierBuilder.AddClass("m-data-table__selected", isSelected).AddClass(TableStripeClass, isStripe)">
+                @foreach (var template in _orderedViewColumns)
+                {
+                    var (hidden, css, style) = GetCss(template);
 
-                <td class="@css"
-                    style="@style"
-                    @key="template.Column.Id">
-                    @if (!hidden)
-                    {
-                        <div class="masa-table-viewer__cell">
-                            <div class="masa-table-viewer__cell-content">
-                                @if (template.Column.Type == ColumnType.Actions)
-                                {
-                                    <MDefaultsProvider Defaults="@_actionsDefautls">
-                                        @GenActionsCell(item.Data)
-                                    </MDefaultsProvider>
-                                }
-                                else if (template.Column.Type == ColumnType.RowSelect)
-                                {
-                                    @GenRowSelectCell(item, isSelected)
-                                }
-                                else
-                                {
-                                    JsonElement? value = null;
-
-                                    if (template.Column.IsNested)
+                    <td class="@TableBodyTdClass @css"
+                        style="@style"
+                        @key="template.Column.Id">
+                        @if (!hidden)
+                        {
+                            <div class="masa-table-viewer__cell">
+                                <div class="masa-table-viewer__cell-content">
+                                    @if (template.Column.Type == ColumnType.Actions)
                                     {
-                                        var tree = template.Column.Id.Split('.');
-                                        var firstKey = tree[0];
-                                        var key = item.Data.Keys.FirstOrDefault(u => string.Equals(u, firstKey, StringComparison.OrdinalIgnoreCase));
-                                        if (key is not null)
+                                        <MDefaultsProvider Defaults="@_actionsDefautls">
+                                            @GenActionsCell(item.Data)
+                                        </MDefaultsProvider>
+                                    }
+                                    else if (template.Column.Type == ColumnType.RowSelect)
+                                    {
+                                        @GenRowSelectCell(item, isSelected)
+                                    }
+                                    else
+                                    {
+                                        JsonElement? value = null;
+
+                                        if (template.Column.IsNested)
                                         {
-                                            value = item.Data[key];
-                                            for (var i = 1; i < tree.Length; i++)
+                                            var tree = template.Column.Id.Split('.');
+                                            var firstKey = tree[0];
+                                            var key = item.Data.Keys.FirstOrDefault(u => string.Equals(u, firstKey, StringComparison.OrdinalIgnoreCase));
+                                            if (key is not null)
                                             {
-                                                // 默认使用驼峰命名法
-                                                value = value.Value.GetProperty(tree[i].ToCamelCase());
+                                                value = item.Data[key];
+                                                for (var i = 1; i < tree.Length; i++)
+                                                {
+                                                    // 默认使用驼峰命名法
+                                                    value = value.Value.GetProperty(tree[i].ToCamelCase());
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            var key = item.Data.Keys.FirstOrDefault(u => string.Equals(u, template.ColumnId, StringComparison.OrdinalIgnoreCase));
+                                            if (key is not null)
+                                            {
+                                                value = item.Data[key];
+                                            }
+                                        }
+                                        if (value is null)
+                                        {
+                                            @GenNotNull(template.Column)
+                                        }
+                                        else
+                                        {
+                                            var context = new ColumnsContext(template.Column, item.Data, value, DefaultGenCol);
+
+                                            if (ColumnsContent != null)
+                                            {
+                                                @ColumnsContent(context)
                                             }
                                         }
                                     }
-                                    else
-                                    {
-                                        var key = item.Data.Keys.FirstOrDefault(u => string.Equals(u, template.ColumnId, StringComparison.OrdinalIgnoreCase));
-                                        if (key is not null)
-                                        {
-                                            value = item.Data[key];
-                                        }
-                                    }
-
-                                    if (value is null)
-                                    {
-                                        @GenNotFound(template.Column)
-                                    }
-                                    else if (template.Column.Type == ColumnType.Custom && CustomCellContent is not null)
-                                    {
-                                        CustomCellContext context = new(template.Column.Id, value.Value, item.Data);
-                                        @CustomCellContent.Invoke(context)
-                                    }
-                                    else
-                                    {
-                                        @GenCell(template.Column, value.Value)
-                                    }
-                                }
+                                </div>
                             </div>
-                        </div>
-                    }
-                </td>
-            }
-        </tr>
-    </Virtualize>
+                        }
+                    </td>
+                }
+            </tr>
+        </Virtualize>
     </tbody>
 </MSimpleTable>
 
@@ -184,6 +186,8 @@
         }
     };
 
+    private RenderFragment DefaultGenCol(ColumnsContext context) => @GenCell(context.Column, context.Value!.Value);
+
     private RenderFragment GenCell(ColumnInfo column, JsonElement value) => __builder =>
     {
         if (column.Type == ColumnType.Image)
@@ -205,13 +209,13 @@
     {
         var isChecked = value.GetBoolean();
         <MIcon Icon="@(isChecked ? "$checkboxOn" : "$checkboxOff")"
-               Color="@(isChecked ? "primary" : "")"/>
+               Color="@(isChecked ? "primary" : "")" />
     };
 
     private static RenderFragment GenSwitchCell(JsonElement value) => __builder =>
     {
         var isChecked = value.GetBoolean();
-        <MSwitch Value="@isChecked" Inset Disabled/>
+        <MSwitch Value="@isChecked" Inset Disabled />
     };
 
     private static RenderFragment GenTextCell(JsonElement value) => __builder =>
@@ -364,7 +368,7 @@
             <div class="image-list" @onclick="@(() => OnImagePreview.InvokeAsync(urls))">
                 @foreach (var url in urls)
                 {
-                    <img src="@url" alt=""/>
+                    <img src="@url" alt="" />
                 }
             </div>
 

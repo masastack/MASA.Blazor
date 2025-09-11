@@ -17,6 +17,9 @@
 {
     <div class="m-template-table">
         <Toolbar DefaultViewId="@_sheet.DefaultViewId"
+                 ShowToolbar="@ShowToolbar"
+                 ShowToolbarActions="@ShowToolbarActions"
+                 ShowToolbarViews="@ShowToolbarViews"
                  Role="@Role"
                  ActiveView="@_sheet.ActiveViewId"
                  ActiveViewChanged="@HandleOnActiveViewChanged"
@@ -49,14 +52,20 @@
                  OnSortClick="@(() => _sortDialog?.Open())"
                  OnRowRemove="@Remove"
                  OnSearch="@Search"
-                 OnSave="@SaveSheet"/>
+                 OnSave="@SaveSheet" />
 
         <Viewer ViewColumns="@_sheet.ActiveView.Columns"
                 HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
                 ColumnOrder="@_sheet.ActiveView.Order"
                 ColumnOrderChanged="@HandleOnColumnOrderChanged"
                 Editable="@Editable"
+                Class="@TableClass"
                 Loading="@_loading"
+                TableStripeClass="@StripeClass"
+                TableBodyTdClass="@BodyTdClass"
+                TableBodyTrClass="@BodyTrClass"
+                TableHeaderThClass="@HeaderThClass"
+                TableHeaderClass="@HeaderClass"
                 RowHeight="@_rowHeight"
                 Rows="@_rows"
                 Sort="@_sheet.ActiveView.Value.Sort"
@@ -71,6 +80,7 @@
                 OnDetail="@OpenDetailDialog"
                 CheckboxColor="@CheckboxColor"
                 SelectedKeys="@_viewActionsContext.SelectedKeys"
+                ColumnsContent="@ColumnsContent"
                 OnSelect="@HandleOnSelect"
                 OnSelectAll="@HandleOnSelectAll"
                 HasCustomRowActions="@HasCustomRowActions"
@@ -98,21 +108,26 @@
         </ColumnDialog>
 
         <FilterDialog @ref="_filterDialog"
+                      Show=ShowFilter
+                      ShowChanged="ShowFilterChanged"
                       ActiveView="@_sheet.ActiveView.Value"
                       Columns="@_sheet.Columns"
-                      OnSave="@SaveFilter">
+                      Filter=" _sheet!.ActiveView.Value.Filter"
+                      FilterChanged="SaveFilter">
         </FilterDialog>
 
         <SortDialog @ref="_sortDialog"
+                    Show=ShowSort
+                    ShowChanged="ShowSortChanged"
                     ActiveView="@_sheet.ActiveView.Value"
                     Columns="@_sheet.Columns"
                     HiddenColumnIds="@_sheet.ActiveViewHiddenColumnIds"
                     OnSave="@SortUpdate">
         </SortDialog>
 
-        <ImageViewer @ref="_imageViewer"/>
+        <ImageViewer @ref="_imageViewer" />
 
-        <DetailDialog @ref="_detailDialog" OnImagePreview="@OpenImageViewer"/>
+        <DetailDialog @ref="_detailDialog" OnImagePreview="@OpenImageViewer" />
 
     </div>
 }
@@ -191,11 +206,12 @@
         EnsureActiveViewActionsColumnWidthCorrectly();
 
         ResetSheet();
+        await Task.CompletedTask;
     }
 
     private async Task ResetView()
     {
-        foreach (var column in _sheet.ActiveView.Columns.Where(u => !Preset.InternalColumnIds.Contains(u.ColumnId)))
+        foreach (var column in _sheet!.ActiveView.Columns.Where(u => !Preset.InternalColumnIds.Contains(u.ColumnId)))
         {
             column.Hidden = false;
             column.Width = 0;
@@ -251,7 +267,7 @@
 
         if (_sheet.ActiveViewId == view.Value.Id)
         {
-            _sheet.SetActiveView(_sheet.Views.First().Value.Id);
+            _sheet.SetActiveView(_sheet.Views[0].Value.Id);
         }
     }
 
@@ -276,7 +292,7 @@
     private async Task HandleOnActiveViewChanged(Guid viewId)
     {
         _sheet!.SetActiveView(viewId);
-        
+
         _viewActionsContext = new ViewActionsContext();
 
         ResetSheet();
@@ -304,7 +320,7 @@
 
     private void HandleOnColumnOrderChanged(List<string> columnOrder)
     {
-        _sheet.ActiveView.Order = columnOrder;
+        _sheet!.ActiveView.Order = columnOrder;
 
         if (!_sheet.ActiveView.Order.Contains(Preset.ActionsColumnId))
         {
@@ -336,7 +352,7 @@
         if (!pageSizeOptions.Contains(_sheet.ActiveView.PageSize))
         {
             _sheet.ActiveView.PageIndex = 1;
-            _sheet.ActiveView.PageSize = pageSizeOptions.First();
+            _sheet.ActiveView.PageSize = pageSizeOptions[0];
 
             await RefreshItemsAsync(GetItemsProviderRequest());
         }
@@ -362,7 +378,7 @@
 
     private void OpenColumnEditDialog(Column column)
     {
-        var viewColumn = _sheet.ActiveView.Columns.First(u => u.ColumnId == column.Id);
+        var viewColumn = _sheet!.ActiveView.Columns.First(u => u.ColumnId == column.Id);
         _columnEditDialog?.Open(column, viewColumn.Fixed);
     }
 
@@ -410,9 +426,9 @@
         {
             _sheet.ActiveView.Selection[item] = selected;
         }
-        
+
         _viewActionsContext = new ViewActionsContext(_sheet.ActiveView.Selection);
-        
+
         StateHasChanged();
     }
 
@@ -482,5 +498,14 @@
         };
 
         await OnSave.InvokeAsync(sheet);
+    }
+
+    public async Task ReloadAsync(int? page = default, int? pageSize = default)
+    {
+        if (page.HasValue && page > 0)
+            _sheet!.ActiveView.PageIndex = page.Value;
+        if (pageSize.HasValue && pageSize > 0)
+            _sheet!.ActiveView.PageSize = pageSize.Value;
+        await RefreshItemsAsync(GetItemsProviderRequest());
     }
 }

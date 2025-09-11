@@ -1,7 +1,5 @@
 ﻿using BemIt;
 using Masa.Blazor.Components.TemplateTable.Actions;
-using Microsoft.AspNetCore.Components.Rendering;
-using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Masa.Blazor.Components.TemplateTable.Viewers;
 
@@ -10,6 +8,8 @@ public partial class Viewer : IAsyncDisposable
     [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
 
     [Inject] private MasaBlazor MasaBlazor { get; set; } = default!;
+
+    [Parameter] public string Class { get; set; } = default!;
 
     /// <summary>
     /// View columns without an order, that will be ordered by <see cref="ColumnOrder"/>.
@@ -43,6 +43,8 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public EventCallback<Sort> OnSortUpdate { get; set; }
 
+    [Parameter] public RenderFragment<ColumnsContext>? ColumnsContent { get; set; }
+
     /// <summary>
     /// The height of the table.
     /// </summary>
@@ -75,11 +77,21 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public List<string> SelectedKeys { get; set; } = [];
 
-    // [Parameter] public List<string> SelectableKeys { get; set; } = [];
-
     [Parameter] public Action<(Row Item, bool Selected)> OnSelect { get; set; } = default!;
 
     [Parameter] public Action<bool> OnSelectAll { get; set; } = default!;
+
+    [Parameter] public string TableHeaderClass { get; set; } = default!;
+
+    [Parameter] public string TableHeaderThClass { get; set; } = default!;
+
+    [Parameter] public string TableBodyTrClass { get; set; } = default!;
+
+    [Parameter] public string TableBodyTdClass { get; set; } = default!;
+
+    [Parameter] public string TableStripeClass { get; set; } = default!;
+
+    [Parameter] public EventCallback<IReadOnlyCollection<Row>> OnRemove { get; set; }
 
     private IDictionary<string, IDictionary<string, object?>> _actionsDefautls =
         new Dictionary<string, IDictionary<string, object?>>
@@ -303,6 +315,7 @@ public partial class Viewer : IAsyncDisposable
         if (width > 0)
         {
             styleBuilder.AddWidth(width);
+            styleBuilder.AddMinWidth(width);
         }
 
         if (fixedLeft)
