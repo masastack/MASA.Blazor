@@ -12,3 +12,4 @@ global using Microsoft.JSInterop;
 global using System.Net.Http.Headers;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
+global using Masa.Blazor.Components.TemplateTable.Actions;

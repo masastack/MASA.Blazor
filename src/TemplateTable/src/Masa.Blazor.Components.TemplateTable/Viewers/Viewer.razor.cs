@@ -43,8 +43,6 @@ public partial class Viewer : IAsyncDisposable
 
     [Parameter] public EventCallback<Sort> OnSortUpdate { get; set; }
 
-    [Parameter] public RenderFragment<ColumnsContext>? ColumnsContent { get; set; }
-
     /// <summary>
     /// The height of the table.
     /// </summary>

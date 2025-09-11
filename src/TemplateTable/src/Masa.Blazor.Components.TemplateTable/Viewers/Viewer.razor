@@ -122,16 +122,16 @@
                                         }
                                         if (value is null)
                                         {
-                                            @GenNotNull(template.Column)
+                                            @GenNotFound(template.Column)
+                                        }
+                                        else if (CustomCellContent is not null)
+                                        {
+                                            CustomCellContext context = new(template.Column.Id, value.Value, item.Data, @GenCell(template.Column, value.Value));
+                                            @CustomCellContent.Invoke(context)
                                         }
                                         else
                                         {
-                                            var context = new ColumnsContext(template.Column, item.Data, value, DefaultGenCol);
-
-                                            if (ColumnsContent != null)
-                                            {
-                                                @ColumnsContent(context)
-                                            }
+                                            @GenCell(template.Column, value.Value)
                                         }
                                     }
                                 </div>
@@ -185,8 +185,6 @@
                 break;
         }
     };
-
-    private RenderFragment DefaultGenCol(ColumnsContext context) => @GenCell(context.Column, context.Value!.Value);
 
     private RenderFragment GenCell(ColumnInfo column, JsonElement value) => __builder =>
     {

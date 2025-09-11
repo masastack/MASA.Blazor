@@ -35,8 +35,6 @@ public partial class MTemplateTable
 
     [Parameter] public RenderFragment<ViewActionsContext>? ViewActionsContent { get; set; }
 
-    [Parameter] public RenderFragment<ColumnsContext>? ColumnsContent { get; set; }
-
     [Parameter] public bool ShowToolbarViews { get; set; }
 
     [Parameter] public bool ShowToolbar { get; set; }

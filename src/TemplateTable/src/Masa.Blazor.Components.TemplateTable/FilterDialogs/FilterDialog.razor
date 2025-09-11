@@ -111,15 +111,18 @@
             }
             else if (filter.Type == ExpectedType.DateTime && (filter.Func is not StandardFilter.Set && filter.Func is not StandardFilter.NotSet))
             {
-                var time = string.IsNullOrEmpty(filter.Expected) ? DateTime.Now : DateTime.Parse(filter.Expected);
-                <PDateTimePicker Value="time"
-                                 TValue="DateTime"
-                                 Readonly="filter.Persistent"
-                                 ViewType=" DateTimePickerViewType.Mobile"
-                                 ValueChanged="(time)=>TimeChange(index,time)">
-                    <PDefaultDateTimePickerActivator Filled Clearable Format="yyyy-MM-dd HH:mm:ss">
-                    </PDefaultDateTimePickerActivator>
-                </PDateTimePicker>
+                DateTime? date = DateTime.TryParse(filter.Expected, out var dt) ? dt : null;
+                <PDateDigitalClockPicker Value="@date"
+                                         ValueChanged="@(v => filter.Expected = (v.ToString() ?? string.Empty))"
+                                         TValue="DateTime?"
+                                         ViewType="DateTimePickerViewType.Desktop"
+                                         TimeFormat="TimeFormat.Hr24"
+                                         MultiSection
+                                         UseSeconds>
+                    <PDefaultDateTimePickerActivator Label="Expected"
+                                                     Filled
+                                                     Format="yyyy-MM-dd HH:mm:ss" />
+                </PDateDigitalClockPicker>                
             }
             else if (!_noExpectedFuncs.Contains(filter.Func))
             {
