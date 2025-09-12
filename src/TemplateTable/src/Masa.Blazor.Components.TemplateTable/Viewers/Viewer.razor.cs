@@ -1,7 +1,4 @@
-﻿using BemIt;
-using Masa.Blazor.Components.TemplateTable.Actions;
-
-namespace Masa.Blazor.Components.TemplateTable.Viewers;
+﻿namespace Masa.Blazor.Components.TemplateTable.Viewers;
 
 public partial class Viewer : IAsyncDisposable
 {
@@ -10,6 +7,8 @@ public partial class Viewer : IAsyncDisposable
     [Inject] private MasaBlazor MasaBlazor { get; set; } = default!;
 
     [Parameter] public string Class { get; set; } = default!;
+
+    [Parameter] public AlignTypes HeaderTextAlign { get; set; }
 
     /// <summary>
     /// View columns without an order, that will be ordered by <see cref="ColumnOrder"/>.
@@ -40,6 +39,8 @@ public partial class Viewer : IAsyncDisposable
     [Parameter] public ICollection<Row> Rows { get; set; } = [];
 
     [Parameter] public Sort? Sort { get; set; }
+
+    [Parameter] public Filter? Filter { get; set; }
 
     [Parameter] public EventCallback<Sort> OnSortUpdate { get; set; }
 

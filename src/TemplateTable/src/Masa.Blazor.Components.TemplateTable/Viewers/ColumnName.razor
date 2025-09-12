@@ -1,44 +1,48 @@
 ﻿@inject IJSRuntime JSRuntime
 
 <div @ref="_ref"
-     class="masa-table-viewer__header-column-content d-flex px-4 @Class"
-     @onclick="@HandleOnClick">
-    @if (IsRowSelect)
-    {
-        <MSimpleCheckbox Class="m-data-table__checkbox"
-                         Indeterminate="@IsIndeterminate"
-                         Value="@IsSelectedAll"
-                         ValueChanged="@OnSelectAll"
-                         Color="@CheckboxColor" />
-    }
-    else
-    {
-        @Templates.GenTypeIcon(Data.Type, true)
-        <span class="text-truncate px-2">@Data.Name</span>
-    }
-
-    @if (!Internal)
-    {
-        <MIcon Small Class="sort-icon">$sort</MIcon>
-
-        @if (Index > 0)
+     class="masa-table-viewer__header-column-content d-flex justify-space-between @Class"
+     @onclick="@HandleCloumOnClick">
+    <div class="flex-grow-1 @AlignClass">
+        @if (IsRowSelect)
         {
+            <MSimpleCheckbox Class="m-data-table__checkbox"
+                             Indeterminate="@IsIndeterminate"
+                             Value="@IsSelectedAll"
+                             ValueChanged="@OnSelectAll"
+                             Color="@CheckboxColor" />
+        }
+        else
+        {
+            @* @Templates.GenTypeIcon(Data.Type, true) *@
+            <span class="text-truncate px-2">@Data.Name</span>
+        }
+
+        @if (!Internal && Index > 0)
+        {
+            <MIcon Small Class="sort-icon">@SortClass</MIcon>
             <span class="m-data-table-header__sort-badge">@Index</span>
         }
-    }
 
-    @if (!IsRowSelect && Editable)
-    {
-        <Dropdown>
-            @if (!Internal)
-            {
-                <MListItem Title="Edit" PrependIcon="mdi-pencil-outline"
-                           OnClick="@(() => OnColumnEditClick.InvokeAsync(Data))"></MListItem>
-            }
-            <MListItem Title="Hide" PrependIcon="mdi-eye-off-outline"
-                       OnClick="@(() => OnColumnToggle.InvokeAsync(Data.Id))"></MListItem>
-        </Dropdown>
-    }
+        @if (!IsRowSelect && Editable)
+        {
+            <Dropdown>
+                @if (!Internal)
+                {
+                    <MListItem Title="Edit" PrependIcon="mdi-pencil-outline"
+                               OnClick="@(() => OnColumnEditClick.InvokeAsync(Data))"></MListItem>
+                }
+                <MListItem Title="Hide" PrependIcon="mdi-eye-off-outline"
+                           OnClick="@(() => OnColumnToggle.InvokeAsync(Data.Id))"></MListItem>
+            </Dropdown>
+        }
+    </div>
+    <div class="justify-end">
+        @if (HasFilter)
+        {
+            <MIcon Small Class="sort-icon">mdi-filter</MIcon>
+        }
+    </div>
 </div>
 
 @if (!Internal)
@@ -67,6 +71,10 @@
     [Parameter] public EventCallback<bool> OnSelectAll { get; set; }
 
     [Parameter] public string? CheckboxColor { get; set; }
+
+    [Parameter] public Filter? Filter { get; set; }
+
+    [Parameter] public AlignTypes Align { get; set; } = AlignTypes.Start;
 
     private ElementReference _ref;
 
@@ -115,7 +123,46 @@
         }
     }
 
-    private async Task HandleOnClick()
+    private string AlignClass
+    {
+        get
+        {
+            return Align switch
+            {
+                AlignTypes.Start => "text-left",
+                AlignTypes.Center => "text-center",
+                AlignTypes.End => "text-right",
+                _ => ""
+            };
+        }
+    }
+
+    private string SortClass
+    {
+        get
+        {
+            if (SortOption is null)
+            {
+                return "";
+            }
+            return SortOption.OrderBy switch
+            {
+                SortOrder.Asc => "mdi-arrow-up",
+                SortOrder.Desc => "mdi-arrow-down",
+                _ => ""
+            };
+        }
+    }
+
+    private bool HasFilter
+    {
+        get
+        {
+            return Filter != null && Filter.Options != null && Filter.Options.Any(f => !f.Persistent && (f.ColumnId == Data.Id || Data.Type == ColumnType.Date && Data.Id.StartsWith(f.ColumnId)));
+        }
+    }
+
+    private async Task HandleCloumOnClick()
     {
         if (Internal)
         {
@@ -147,5 +194,4 @@
 
         await OnClick.InvokeAsync(sort);
     }
-
 }
