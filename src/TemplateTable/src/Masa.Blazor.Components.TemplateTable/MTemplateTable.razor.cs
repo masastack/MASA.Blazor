@@ -1,7 +1,4 @@
-﻿using Masa.Blazor.Components.TemplateTable.Actions;
-using Microsoft.Extensions.Logging;
-
-namespace Masa.Blazor;
+﻿namespace Masa.Blazor;
 
 public partial class MTemplateTable
 {
@@ -43,6 +40,8 @@ public partial class MTemplateTable
 
     [Parameter] public RenderFragment<CustomCellContext>? CustomCellContent { get; set; }
 
+    [Parameter] public RenderFragment<PaginationContext>? PaginationContent { get; set; }
+
     [Parameter] public Role Role { get; set; }
 
     [Parameter] public int DefaultPageSize { get; set; } = 10;
@@ -65,6 +64,8 @@ public partial class MTemplateTable
 
     [Parameter]
     public string HeaderThClass { get; set; } = "sortable text-start";
+
+    [Parameter] public AlignTypes HeaderTextAlign { get; set; } = AlignTypes.Start;
 
     [Parameter]
     public string BodyTrClass { get; set; } = default!;

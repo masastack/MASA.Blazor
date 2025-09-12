@@ -11,6 +11,8 @@
   "SDF_NotEquals": "!=",
   "SDF_Contains": "in",
   "SDF_NotContains": "not in",
+  "SDF_Like": "like",
+  "SDF_Not_Like": "not like",
   "SDF_StartsWith": "left like",
   "SDF_NotStartsWith": "not left like",
   "SDF_EndsWith": "right like",

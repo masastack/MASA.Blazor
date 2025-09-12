@@ -56,9 +56,10 @@
                      Readonly="filter.Persistent"
                      OnSelect="@filter.OnSelect">
             </MSelect>
-            <MSelect @bind-Value="@filter.Func" Placeholder="@i18N.T("Func")"
+            <MSelect TValue="StandardFilter" TItemValue="StandardFilter" TItem="StandardFilter"
+                     Value="@filter.Func" Placeholder="@i18N.T("Func")" ValueChanged="(value) => OnFuncChange(index, value)"
                      Items="@filter.FuncList"
-                     ItemText="@(u => i18N.T($"SDF_{u}"))"
+                     ItemText="@(u => i18N.T($"SDF_{GetFuncI18n(u, filter.Column.Type)}"))"
                      ItemValue="u => u"
                      Label="@i18N.T("Func")"
                      Class="mr-2"
@@ -122,7 +123,7 @@
                     <PDefaultDateTimePickerActivator Label="Expected"
                                                      Filled
                                                      Format="yyyy-MM-dd HH:mm:ss" />
-                </PDateDigitalClockPicker>                
+                </PDateDigitalClockPicker>
             }
             else if (!_noExpectedFuncs.Contains(filter.Func))
             {
@@ -166,7 +167,6 @@
     [Parameter] public IList<ColumnInfo> Columns { get; set; } = [];
 
     /// <summary>
-    ///
     /// Use this to filter out hidden columns when selecting columns.
     /// </summary>
     [Parameter] public HashSet<string> HiddenColumnIds { get; set; } = [];
@@ -230,7 +230,8 @@
                 {
                     Func = option.Func,
                     Expected = option.Expected,
-                    Persistent = option.Persistent
+                    Persistent = option.Persistent,
+                    Type = option.Type,
                 };
 
                 _filters.Add(filterOption);
@@ -272,18 +273,18 @@
 
     private void OnMultiSelect(FilterModel filter)
     {
-        filter.Expected = "{ in: [" + string.Join(", ", filter.MultiSelect.Select(u => $"\"{u}\"")) + "]}";
+        filter.Expected = "{ in: [" + string.Join(",", filter.MultiSelect.Select(u => $"\"{u}\"")) + "]}";
     }
 
     private async Task HandleOnSave()
     {
         await HandleOnCancel();
 
-        Filter.Options = _filters.Select(u =>
-        {
-            u.UpdateType();
-            return u.ToFilterOption();
-        }).ToList();
+        Filter.Options = [.. _filters.Select(u =>
+    {
+    u.UpdateType();
+    return u.ToFilterOption();
+    })];
         Filter.Operator = _operator == "and" ? FilterOperator.And : FilterOperator.Or;
 
         if (FilterChanged.HasDelegate)
@@ -297,6 +298,23 @@
             await ShowChanged.InvokeAsync(Show);
     }
 
+    private void OnFuncChange(int index, StandardFilter func)
+    {
+        var filter = _filters[index];
+        filter.Func = func;
+        if (filter.Column.Type == ColumnType.Select)
+        {
+            if (func is StandardFilter.Contains or StandardFilter.NotContains)
+            {
+                filter.Type = ExpectedType.Expression;
+            }
+            else
+            {
+                filter.Type = ExpectedType.String;
+            }
+        }
+    }
+
     private void TimeChange(int index, DateTime time)
     {
         var filter = _filters[index];
@@ -306,7 +324,36 @@
     private void ValueChange(int index, List<string> values)
     {
         var filter = _filters[index];
-        var tt = $"[\"{string.Join(""",""", values)}\"]";
+        var value = string.Join("\",\"", values.Where(s => s.Length > 0));
+        var tt = $"[\"{value}\"]";
         filter.Expected = values.Count == 0 ? "[]" : tt;
+    }
+
+    private string GetFuncI18n(StandardFilter filter, ColumnType type)
+    {
+        return filter switch
+        {
+            StandardFilter.Contains =>
+                 type switch
+                 {
+                     ColumnType.Text => "Like",
+                     ColumnType.Email => "Like",
+                     ColumnType.Phone => "Like",
+                     ColumnType.Link => "Like",
+                     ColumnType.Image => "Like",
+                     _ => filter.ToString()
+                 },
+            StandardFilter.NotContains =>
+                 type switch
+                 {
+                     ColumnType.Text => "Not_Like",
+                     ColumnType.Email => "Not_Like",
+                     ColumnType.Phone => "Not_Like",
+                     ColumnType.Link => "Not_Like",
+                     ColumnType.Image => "Not_Like",
+                     _ => filter.ToString()
+                 },
+            _ => filter.ToString()
+        };
     }
 }

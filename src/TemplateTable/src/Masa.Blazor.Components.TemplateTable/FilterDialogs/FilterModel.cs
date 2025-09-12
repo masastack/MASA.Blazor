@@ -32,7 +32,8 @@ public class FilterModel : FilterOption
             ColumnId = ColumnId,
             Func = Func,
             Expected = Expected,
-            Type = Type
+            Type = Type,
+            Persistent = Persistent
         };
     }
 
@@ -73,19 +74,19 @@ public class FilterModel : FilterOption
 
     public void UpdateType()
     {
-        if (Type == ExpectedType.Expression)
-        {
-            if (Func is StandardFilter.Contains or StandardFilter.NotContains)
-                return;
+        //if (Type == ExpectedType.Expression)
+        //{
+        //    if (Func is StandardFilter.Contains or StandardFilter.NotContains)
+        //        return;
 
-            Type = ExpectedType.String;
-        }
-        else if (Func is StandardFilter.Contains or StandardFilter.NotContains)
-        {
-            if (Type == ExpectedType.Expression)
-                return;
+        //    Type = ExpectedType.String;
+        //}
+        //else if (Func is StandardFilter.Contains or StandardFilter.NotContains)
+        //{
+        //    if (Type == ExpectedType.Expression)
+        //        return;
 
-            Type = ExpectedType.Expression;
-        }
+        //    Type = ExpectedType.Expression;
+        //}
     }
 }

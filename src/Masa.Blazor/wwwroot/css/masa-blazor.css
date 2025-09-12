@@ -23687,11 +23687,15 @@ html.overflow-y-hidden {
     justify-content: center;
     align-items: center;
     border: 0px;
-    border-radius: 50%;
-    min-width: 18px;
-    min-height: 18px;
-    height: 18px;
-    width: 18px;
+    border-radius: 80%;
+    min-width: 14px;
+    min-height: 14px;
+    height: 14px;
+    width: 14px;
+    font-size: 9px;
+    position:relative;
+    top: -6px;
+    left: -6px;    
 }
 
 .m-data-table-header-mobile th {

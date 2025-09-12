@@ -30,14 +30,12 @@ public static class SupportedFilter
 
     public static readonly StandardFilter[] SupportedDateTimeFilters =
     [
-        StandardFilter.Equals,
-        StandardFilter.NotEquals,
         StandardFilter.BeforeDate,
         StandardFilter.BeforeOrOnDate,
         StandardFilter.AfterDate,
         StandardFilter.AfterOrOnDate,
-        // StandardFilter.Set,
-        // StandardFilter.NotSet
+        StandardFilter.Set,
+        StandardFilter.NotSet
     ];
 
     public static readonly StandardFilter[] SupportedSelectFilters =

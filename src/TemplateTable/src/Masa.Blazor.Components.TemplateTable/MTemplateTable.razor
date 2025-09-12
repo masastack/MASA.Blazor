@@ -68,7 +68,9 @@
                 TableHeaderClass="@HeaderClass"
                 RowHeight="@_rowHeight"
                 Rows="@_rows"
+                HeaderTextAlign="@HeaderTextAlign"
                 Sort="@_sheet.ActiveView.Value.Sort"
+                Filter="@_sheet.ActiveView.Value.Filter"
                 OnSortUpdate="@SortUpdate"
                 HasActions="@_sheet.ActiveView.Value.ShowActions"
                 ShowSelect="@_sheet.ActiveView.Value.ShowSelect"
@@ -88,7 +90,13 @@
                 @ref="_viewer">
         </Viewer>
 
-        @{
+        @if (PaginationContent != null)
+        {
+            var context = new PaginationContext(_sheet.ActiveView.PageIndex, _sheet.ActiveView.PageSize, _totalCount, _sheet.Pagination.PageSizeOptions, HandleOnPaginationUpdateAsync);
+            @PaginationContent(context)
+        }
+        else
+        {
             var pageStart = (_sheet.ActiveView.PageIndex - 1) * _sheet.ActiveView.PageSize;
             var pageStop = Math.Min(_sheet.ActiveView.PageIndex * _sheet.ActiveView.PageSize, _totalCount);
 
