@@ -5,8 +5,7 @@ public class FilterModel : FilterOption
     public ColumnInfo Column { get; private set; }
 
     public List<SelectOption>? SelectOptions { get; private set; }
-
-    // TODO: 初始化
+    
     public List<string> MultiSelect { get; internal set; } = [];
 
     public StandardFilter[] FuncList { get; private set; }
@@ -70,23 +69,5 @@ public class FilterModel : FilterOption
                 Type = ExpectedType.DateTime;
                 break;
         }
-    }
-
-    public void UpdateType()
-    {
-        //if (Type == ExpectedType.Expression)
-        //{
-        //    if (Func is StandardFilter.Contains or StandardFilter.NotContains)
-        //        return;
-
-        //    Type = ExpectedType.String;
-        //}
-        //else if (Func is StandardFilter.Contains or StandardFilter.NotContains)
-        //{
-        //    if (Type == ExpectedType.Expression)
-        //        return;
-
-        //    Type = ExpectedType.Expression;
-        //}
     }
 }

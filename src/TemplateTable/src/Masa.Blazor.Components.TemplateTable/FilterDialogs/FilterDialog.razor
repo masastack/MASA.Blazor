@@ -209,14 +209,14 @@
     {
         base.OnParametersSet();
 
-        if (ActiveView is not null && (_prevActiveViewId != ActiveView.Id || !_prevHiddenColumnIds.SetEquals(HiddenColumnIds)))
+        if (Show && ActiveView is not null)//&& (_prevActiveViewId != ActiveView.Id || !_prevHiddenColumnIds.SetEquals(HiddenColumnIds)))
         {
             _prevActiveViewId = ActiveView.Id;
             _prevHiddenColumnIds = HiddenColumnIds;
             _computedColumns = Columns.Where(u => !HiddenColumnIds.Contains(u.Id)).Where(u => u.Type != ColumnType.Actions).ToList();
 
             _filters.Clear();
-            foreach (var option in ActiveView.Filter.Options)
+            foreach (var option in Filter.Options)
             {
                 var columnName = option.ColumnId;
                 var column = Columns.FirstOrDefault(u => u.Id == option.ColumnId || option.Type == ExpectedType.DateTime && u.Id.StartsWith(option.ColumnId));
@@ -237,7 +237,7 @@
                 _filters.Add(filterOption);
             }
 
-            _operator = ActiveView.Filter.Operator == FilterOperator.And ? "and" : "or";
+            _operator = Filter.Operator == FilterOperator.And ? "and" : "or";
         }
     }
 
@@ -280,11 +280,7 @@
     {
         await HandleOnCancel();
 
-        Filter.Options = [.. _filters.Select(u =>
-    {
-    u.UpdateType();
-    return u.ToFilterOption();
-    })];
+        Filter.Options = [.. _filters.Select(u =>u.ToFilterOption())];
         Filter.Operator = _operator == "and" ? FilterOperator.And : FilterOperator.Or;
 
         if (FilterChanged.HasDelegate)

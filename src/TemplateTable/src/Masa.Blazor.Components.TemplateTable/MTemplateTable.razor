@@ -458,6 +458,7 @@
     {
         _sheet!.ActiveView.Value.Filter = filter;
         _sheet.ActiveView.PageIndex = 1;
+        StateHasChanged();
         await RefreshItemsAsync(GetItemsProviderRequest());
     }
 
