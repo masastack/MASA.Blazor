@@ -100,7 +100,7 @@ public partial class PPageStack : MasaComponentBase
     /// Indicates whether to emit the underlay slide effect.
     /// </summary>
     private bool _emitUnderlaySlide;
-    
+
     private RenderFragment? _defaultLoaderContent;
 
     protected override void OnInitialized()
@@ -182,11 +182,16 @@ public partial class PPageStack : MasaComponentBase
         InvokeAsync(StateHasChanged);
     }
 
+    private bool _popstateExecuting = false;
+
     [JSInvokable]
     public void Popstate(string absolutePath)
     {
+        if (_popstateExecuting) return;
+        _popstateExecuting = true;
         if (Pages.Count == 0)
         {
+            DelayPopstateExecute();
             return;
         }
 
@@ -211,6 +216,7 @@ public partial class PPageStack : MasaComponentBase
                 await Task.Delay(DelayForPageClosingAnimation); // wait for the transition to complete
                 Pages.RemoveRange(startIndex, delta);
                 await InvokeAsync(StateHasChanged);
+                _popstateExecuting = false;
             });
 
             return;
@@ -224,6 +230,7 @@ public partial class PPageStack : MasaComponentBase
             Pages.RemoveRange(0, Pages.Count - 1);
             InternalReplaceHandler(relativeUri, state);
             _uriForReplaceAndClearStack = null;
+            DelayPopstateExecute();
             return;
         }
 
@@ -238,7 +245,7 @@ public partial class PPageStack : MasaComponentBase
             replaceUri = GetAbsolutePath(replaceUri);
             CloseTopPages(delta, disableTransition, state, replaceUri);
             _uriForGoBackToAndReplace = null;
-
+            DelayPopstateExecute();
             return;
         }
 
@@ -265,6 +272,7 @@ public partial class PPageStack : MasaComponentBase
         if (_popstateByUserAction)
         {
             _popstateByUserAction = false;
+            DelayPopstateExecute();
             return;
         }
 
@@ -273,6 +281,16 @@ public partial class PPageStack : MasaComponentBase
         {
             CloseTopPageOfStack();
         }
+        DelayPopstateExecute();
+    }
+
+    private void DelayPopstateExecute()
+    {
+        _ = Task.Run(async () =>
+        {
+            await Task.Delay(150);
+            _popstateExecuting = false;
+        });
     }
 
     [JSInvokable("Scroll")]
