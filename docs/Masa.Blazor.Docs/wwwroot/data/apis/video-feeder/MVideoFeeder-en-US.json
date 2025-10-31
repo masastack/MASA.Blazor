@@ -1,22 +1,32 @@
 {
   "props": {
+    "dynamicBg": "Dynamic background.",
+    "index": "Set the currently playing video by index.",
     "items": "Data source. Due to the virtualization feature of the MSwiper component, all data must be provided at once and cannot be updated incrementally.",
     "itemUrl": "Video URL.",
     "itemPoster": "Video poster URL.",
+    "itemStartTime": "Video start time in seconds.",
     "height": "Height of the video area, default is 100vh.",
     "width": "Width of the video area, default is 100%.",
     "defaultAutoplayNext": "Whether to autoplay the next video by default.",
     "autoplay": "Whether to autoplay the current video.",
-    "rotateFullscreen": "Whether to automatically rotate in fullscreen mode, commonly used for landscape effects on mobile devices."
+    "rotateFullscreen": "Whether to automatically rotate in fullscreen mode, commonly used for landscape effects on mobile devices.",
+    "autoCoverInPortrait": "Whether to automatically cover the video in portrait mode, commonly used for portrait effects on mobile devices.",
+    "onlyShowPosterInMusicMode": "Only show the poster in music mode."
   },
   "events": {
+    "indexChanged": "Triggered when the index of the currently playing video changes.",
     "OnFullscreen": "Triggered when the fullscreen state changes, with parameters for the current video and fullscreen status.",
-    "OnDownload": "Triggered when the download button is clicked, with parameters for the current video item."
+    "OnDownload": "Triggered when the download button is clicked, with parameters for the current video item.",
+    "onGoBack": "Triggered when clicking the back button in rotate fullscreen mode."
   },
   "contents": {
     "sideActionsContent": "Custom content slot for right-side action buttons.",
     "topContent": "Custom content slot for the top area, can be used to display video title, subtitles, etc.",
     "bottomContent": "Custom content slot for the bottom area, can be used to display video title, subtitles, etc.",
     "bottomActionsContent": "Custom content slot for the bottom action bar, supports custom MListItem components."
+  },
+  "methods": {
+    "getCurrentVideoPropsAndStatesAsync": "Get the properties and states of the current video."
   }
 }

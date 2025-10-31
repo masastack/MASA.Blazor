@@ -1,22 +1,32 @@
 {
   "props": {
-    "items": "数据源，由于 MSwiper 组件虚拟化特性的缺陷，只能一次性提供所有数据，无法增量更新。",
-    "itemUrl": "视频地址。",
-    "itemPoster": "视频封面地址。",
-    "height": "视频区域高度，默认 100vh。",
-    "width": "视频区域宽度，默认 100%。",
-    "defaultAutoplayNext": "是否默认自动播放下一个视频。",
+    "autoCoverInPortrait": "竖屏时是否自动铺满，常用于移动端竖屏效果。",
     "autoplay": "是否自动播放当前视频。",
-    "rotateFullscreen": "全屏时是否自动旋转，常用于移动端横屏效果。"
+    "defaultAutoplayNext": "是否默认自动播放下一个视频。",
+    "dynamicBg": "动态背景。",
+    "height": "视频区域高度，默认 100vh。",
+    "index": "通过索引设置当前播放视频。",
+    "items": "数据源，由于 MSwiper 组件虚拟化特性的缺陷，只能一次性提供所有数据，无法增量更新。",
+    "itemPoster": "视频封面地址。",
+    "itemStartTime": "视频起始播放时间，单位为秒。",
+    "itemUrl": "视频地址。",
+    "onlyShowPosterInMusicMode": "只在音乐模式下显示封面。",
+    "rotateFullscreen": "全屏时是否自动旋转，常用于移动端横屏效果。",
+    "width": "视频区域宽度，默认 100%。"
   },
   "events": {
+    "indexChanged": "当前播放视频索引变化时触发。",
     "OnFullscreen": "全屏状态变化时触发，参数为当前视频及全屏状态。",
-    "OnDownload": "点击下载按钮时触发，参数为当前视频项。"
+    "OnDownload": "点击下载按钮时触发，参数为当前视频项。",
+    "onGoBack": "在旋转全屏模式下点击返回按钮时触发。"
   },
   "contents": {
     "sideActionsContent": "右侧操作按钮插槽。",
     "topContent": "顶部内容插槽，可用于展示视频标题、字幕等。",
     "bottomContent": "底部内容插槽，可用于展示视频标题、字幕等。",
     "bottomActionsContent": "底部操作栏插槽，支持自定义 <MListItem> 组件。"
+  },
+  "methods": {
+    "getCurrentVideoPropsAndStatesAsync": "获取当前视频的属性和状态。"
   }
 }
