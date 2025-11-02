@@ -31,14 +31,14 @@ public static class DateFormatters
     {
         // try
         // {
-            return date => locale.DateTimeFormat.GetAbbreviatedDayName(date.DayOfWeek);
+        return date => locale.DateTimeFormat.GetAbbreviatedDayName(date.DayOfWeek);
         // }
         // catch (ArgumentOutOfRangeException)
         // {
         //     return date => CultureInfo.InvariantCulture.DateTimeFormat.GetAbbreviatedDayName(date.DayOfWeek);
         // }
     }
-    
+
     /// <summary>
     /// Get the shortest day of week name
     /// </summary>
@@ -48,7 +48,7 @@ public static class DateFormatters
     {
         // try
         // {
-            return date => locale.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
+        return date => locale.DateTimeFormat.GetShortestDayName(date.DayOfWeek);
         // }
         // catch (ArgumentOutOfRangeException)
         // {
@@ -86,7 +86,11 @@ public static class DateFormatters
     {
         try
         {
-            return date => locale.DateTimeFormat.GetMonthName(date.Month);
+            return date =>
+            {
+                int monthInCalendar = locale.DateTimeFormat.Calendar.GetMonth(date.ToDateTime(TimeOnly.MinValue));
+                return locale.DateTimeFormat.GetMonthName(monthInCalendar);
+            };
         }
         catch (ArgumentOutOfRangeException)
         {
@@ -103,7 +107,11 @@ public static class DateFormatters
     {
         try
         {
-            return date => locale.DateTimeFormat.GetAbbreviatedMonthName(date.Month);
+            return date =>
+            {
+                int monthInCalendar = locale.DateTimeFormat.Calendar.GetMonth(date.ToDateTime(TimeOnly.MinValue));
+                return locale.DateTimeFormat.GetAbbreviatedMonthName(monthInCalendar);
+            };
         }
         catch (ArgumentOutOfRangeException)
         {
