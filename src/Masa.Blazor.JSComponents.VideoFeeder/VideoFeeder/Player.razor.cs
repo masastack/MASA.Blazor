@@ -16,6 +16,8 @@ public partial class Player<TItem> : MasaComponentBase where TItem : notnull
 
     [Parameter] public bool Autoplay { get; set; }
 
+    [Parameter] public bool AutoplayMuted { get; set; }
+
     [Parameter] public int Index { get; set; }
 
     [Parameter] public bool GlobalMuted { get; set; }
