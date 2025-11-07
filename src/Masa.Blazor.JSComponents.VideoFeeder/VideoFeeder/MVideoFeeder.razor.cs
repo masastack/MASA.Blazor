@@ -25,6 +25,8 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
 
     [Parameter] public bool Autoplay { get; set; }
 
+    [Parameter] public bool AutoplayMuted { get; set; }
+
     [Parameter] public bool DynamicBg { get; set; }
 
     /// <summary>
@@ -93,6 +95,7 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
         base.OnInitialized();
 
         _autoplayNext = DefaultAutoplayNext;
+        _globalMuted = AutoplayMuted;
         UpdateVideos();
     }
 
@@ -111,7 +114,7 @@ public partial class MVideoFeeder<TItem> where TItem : notnull
         if (!_itemsHasSet && Items.Count > 0)
         {
             _itemsHasSet = true;
-            _videos = Items.Select(i => new Video<TItem>(i, ItemUrl, ItemPoster, ItemStartTime)).ToList();
+            _videos = Items.Select(i => new Video<TItem>(i, ItemUrl, ItemPoster, ItemStartTime, AutoplayMuted)).ToList();
         }
     }
 
