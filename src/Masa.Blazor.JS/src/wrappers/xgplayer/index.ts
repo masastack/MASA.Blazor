@@ -1,12 +1,12 @@
 import Xgplayer, { Events, IPlayerOptions, Start } from "xgplayer";
 import MusicPreset, { Music } from "xgplayer-music";
+import DynamicBg from "xgplayer/es/plugins/dynamicBg";
 import Mobile from "xgplayer/es/plugins/mobile";
 import Play from "xgplayer/es/plugins/play";
 import Playbackrate from "xgplayer/es/plugins/playbackRate";
 import Progress from "xgplayer/es/plugins/progress";
 import Time from "xgplayer/es/plugins/time";
 import Volume from "xgplayer/es/plugins/volume";
-import DynamicBg from "xgplayer/es/plugins/dynamicBg";
 
 export type XgplayerOptions = Omit<
   IPlayerOptions,
@@ -339,11 +339,18 @@ class XgplayerProxy {
   };
 
   destroy() {
-    this.el &&
+    if (this.el) {
       this.el.removeEventListener("touchend", this.onFullscreenTouchend);
-    this.player.destroy();
-    this.player = null;
-    this.handle.dispose();
+    }
+
+    if (this.player) {
+      this.player.destroy();
+      this.player = null;
+    }
+
+    if (this.handle) {
+      this.handle.dispose();
+    }
   }
 
   private debug(message: string, ...args: any[]) {
