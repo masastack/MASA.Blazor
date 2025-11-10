@@ -125,15 +125,6 @@ public partial class MNavigationDrawer : ThemeComponentBase, IOutsideClickJsCall
     private static Block _block = new("m-navigation-drawer");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
-    private readonly Dictionary<string, IDictionary<string, object?>> _defaults
-        = new()
-        {
-            [nameof(MList)] = new Dictionary<string, object?>()
-            {
-                [nameof(MList.BackgroundColor)] = "transparent"
-            }
-        };
-
     private bool _prevPermanent;
     private bool _prevIsMobile;
     private StringNumber _prevWidth;
