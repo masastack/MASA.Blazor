@@ -29,9 +29,7 @@
                 @GenPosition("prepend")
 
                 <div class="@_block.Element("content")">
-                    <MDefaultsProvider Defaults="@_defaults">
-                        @ChildContent
-                    </MDefaultsProvider>
+                    @ChildContent
                 </div>
 
                 @GenPosition("append")
