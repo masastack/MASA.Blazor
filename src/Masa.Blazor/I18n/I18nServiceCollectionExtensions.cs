@@ -80,7 +80,8 @@ public static class I18nServiceCollectionExtensions
         {
             await using var stream = await httpclient.GetStreamAsync(Path.Combine(localesDirectoryApi, $"{culture}.json"));
             using StreamReader reader = new StreamReader(stream);
-            var map = I18nReader.Read(reader.ReadToEnd(), encoding);
+            var jsonData = await reader.ReadToEndAsync();
+            var map = I18nReader.Read(jsonData, encoding);
             locales.Add((culture, map));
         }
 
