@@ -36,7 +36,12 @@ public partial class MWindowItem : MGroupItem<MItemGroupBase>
     /// </summary>
     public virtual string Tag { get; set; }
 
-    protected override bool IsEager => Eager;
+    /// <summary>
+    /// Indicates whether this component is interactive. #2567 
+    /// </summary>
+    private bool _isInteractive;
+
+    protected override bool IsEager => Eager || !_isInteractive;
 
     private bool InTransition { get; set; }
 
@@ -52,6 +57,16 @@ public partial class MWindowItem : MGroupItem<MItemGroupBase>
             }
 
             return ReverseTransition ?? WindowGroup?.ComputedTransition;
+        }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+
+        if (firstRender)
+        {
+            _isInteractive = true;
         }
     }
 
