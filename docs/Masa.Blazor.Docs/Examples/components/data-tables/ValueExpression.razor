@@ -2,6 +2,16 @@
             Items="_desserts"
             ItemsPerPage="5"
             Class="elevation-1">
+    <ItemColContent>
+        @if (context.Header.Value == "actions")
+        {
+            <MButton IconName="mdi-eye"></MButton>
+        }
+        else
+        {
+            @context.Value
+        }
+    </ItemColContent>
 </MDataTable>
 
 @code {
@@ -26,7 +36,8 @@
         new("Fat (g)", nameof(Dessert.Data.Fat), d => d.Data.Fat),
         new("Carbs (g)", nameof(Dessert.Data.Carbs), d => d.Data.Carbs),
         new("Protein (g)", nameof(Dessert.Data.Protein), d => d.Data.Protein),
-        new("Iron (%)", nameof(Dessert.Data.Iron), d => d.Data.Iron)
+        new("Iron (%)", nameof(Dessert.Data.Iron), d => d.Data.Iron),
+        new("Actions", "actions", _ => null)
     ];
 
     private List<Dessert> _desserts =
