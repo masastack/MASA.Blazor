@@ -69,7 +69,9 @@ public interface IRoutable
     {
         if (Href is null) return false;
 
-        var absolutePath = NavigationManager.GetAbsolutePath();
+        var relativePath = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        var pathOnly = relativePath.Split('?', '#')[0];
+        var absolutePath = "/" + pathOnly;
 
         try
         {
