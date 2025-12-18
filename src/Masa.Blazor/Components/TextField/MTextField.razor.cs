@@ -183,7 +183,7 @@ public partial class MTextField<TValue> : MInput<TValue>
 
     public override string? ComputedColor => !SoloInverted || !IsFocused ? base.ComputedColor : Color;
 
-    public override bool HasColor => IsFocused;
+    public override bool HasColor => IsFocused || Focused;
 
     public virtual string Tag => "input";
 
@@ -519,9 +519,10 @@ public partial class MTextField<TValue> : MInput<TValue>
         return HandleOnInputOrChangeEvent(args, OnInput);
     }
 
-    public override Task HandleOnChangeAsync(ChangeEventArgs args)
+    public override async Task HandleOnChangeAsync(ChangeEventArgs args)
     {
-        return HandleOnInputOrChangeEvent(args, OnChange);
+        await OnChangeEvent.InvokeAsync(args);
+        await HandleOnInputOrChangeEvent(args, OnChange);
     }
 
     private bool IsNumberType => Type.Equals("number", StringComparison.OrdinalIgnoreCase);
@@ -777,6 +778,8 @@ public partial class MTextField<TValue> : MInput<TValue>
     /// Update the bound value immediately.
     /// For some scenarios, like OnEnter event and inner icon click event,
     /// we need to update the value immediately.
+    ///
+    /// Update at 2025/12/18 (bug): OnChange would be triggered twice.
     /// </summary>
     [MasaApiPublicMethod]
     public async Task UpdateValueImmediatelyAsync()

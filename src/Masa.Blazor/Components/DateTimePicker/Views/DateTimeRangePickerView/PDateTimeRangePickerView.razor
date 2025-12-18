@@ -1,5 +1,41 @@
 ﻿@namespace Masa.Blazor.Presets
 
+<div class="row row--dense" style="padding: 8px 8px 4px 8px">
+    <MTextField Class="col" TValue="string"
+                Value="InternalDate[0]?.ToString(DateFormatString)"
+                OnChangeEvent="@OnStartDateChange"
+                HideDetails="true"
+                Dense
+                OnFocus="@OnStartDateFocus"
+                Outlined
+                Focused="@(_currentIndex == 0 && _customDate)"></MTextField>
+    <MTextField Class="col" TValue="string"
+                Value="InternalTime[0]?.ToString(TimeFormatString)"
+                OnChangeEvent="@OnStartTimeChange"
+                HideDetails="true"
+                Dense
+                OnFocus="@OnStartTimeFocus"
+                Outlined
+                Focused="@(_currentIndex == 0 && _customTime)"></MTextField>
+    <span class="col flex-grow-0 my-auto">~</span>
+    <MTextField Class="col" TValue="string"
+                Value="InternalDate[1]?.ToString(DateFormatString)"
+                OnChangeEvent="@OnEndDateChange"
+                HideDetails="true"
+                Dense
+                OnFocus="@OnEndDateFocus"
+                Outlined
+                Focused="@(_currentIndex == 1  && _customDate)"></MTextField>
+    <MTextField Class="col" TValue="string"
+                Value="InternalTime[1]?.ToString(TimeFormatString)"
+                OnChangeEvent="@OnEndTimeChange"
+                HideDetails="true"
+                Dense
+                OnFocus="@OnEndTimeFocus"
+                Outlined
+                Focused="@(_currentIndex == 1 && _customTime)"></MTextField>
+</div>
+<MDivider/>
 <div class="@_modifierBuilder.Add("range").Add(IsEndView ? "end" : "start")">
     <MDatePicker Value="InternalDate"
                  OnDateClick="OnDateClick"
