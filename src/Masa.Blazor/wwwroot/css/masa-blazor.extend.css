@@ -1041,12 +1041,7 @@ input[type=number] {
 .m-date-time-picker {
     min-width: auto !important;
     width: auto;
-    /*max-width: 589px;*/
     max-width: min-content;
-}
-
-.m-date-time-picker--compact {
-    /*max-width: 290px;*/
 }
 
 .m-date-time-picker:not(.m-date-time-picker--compact) .m-digital-clock {
