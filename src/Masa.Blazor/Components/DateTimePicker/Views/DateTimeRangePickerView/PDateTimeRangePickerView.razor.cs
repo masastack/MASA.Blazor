@@ -283,6 +283,7 @@ public partial class PDateTimeRangePickerView
             if (Start > newValue)
             {
                 (InternalDate[0], InternalDate[1]) = (InternalDate[1], InternalDate[0]);
+                (InternalTime[0], InternalTime[1]) = (InternalTime[1], InternalTime[0]);
                 _prevStart = newValue;
                 await StartChanged.InvokeAsync(newValue);
                 _prevEnd = Start;
@@ -392,6 +393,7 @@ public partial class PDateTimeRangePickerView
             if (End.HasValue && newValue > End.Value)
             {
                 (InternalDate[0], InternalDate[1]) = (InternalDate[1], InternalDate[0]);
+                (InternalTime[0], InternalTime[1]) = (InternalTime[1], InternalTime[0]);
                 _prevStart = End;
                 await StartChanged.InvokeAsync(End);
                 _prevEnd = newValue;
@@ -408,6 +410,7 @@ public partial class PDateTimeRangePickerView
             if (Start.HasValue && newValue < Start.Value)
             {
                 (InternalDate[0], InternalDate[1]) = (InternalDate[1], InternalDate[0]);
+                (InternalTime[0], InternalTime[1]) = (InternalTime[1], InternalTime[0]);
                 _prevStart = newValue;
                 await StartChanged.InvokeAsync(newValue);
                 _prevEnd = Start;

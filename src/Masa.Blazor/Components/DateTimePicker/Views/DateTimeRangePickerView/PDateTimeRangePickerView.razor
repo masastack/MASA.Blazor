@@ -25,7 +25,7 @@
                 Dense
                 OnFocus="@OnEndDateFocus"
                 Outlined
-                Focused="@(_currentIndex == 1  && _customDate)"></MTextField>
+                Focused="@(_currentIndex == 1 && _customDate)"></MTextField>
     <MTextField Class="col" TValue="string"
                 Value="InternalTime[1]?.ToString(TimeFormatString)"
                 OnChangeEvent="@OnEndTimeChange"

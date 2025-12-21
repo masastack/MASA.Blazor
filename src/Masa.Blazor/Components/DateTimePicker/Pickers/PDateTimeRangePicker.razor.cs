@@ -83,17 +83,10 @@ public partial class PDateTimeRangePicker : PDateTimeRangePickerView, IDateTimeP
     {
         if (Start.HasValue && End.HasValue)
         {
-            string? format;
+            var format = !string.IsNullOrWhiteSpace(DateFormatString) && !string.IsNullOrWhiteSpace(TimeFormatString)
+                ? $"{DateFormatString} {TimeFormatString}"
+                : _defaultActivator?.Format;
 
-            if (!string.IsNullOrWhiteSpace(DateFormatString) && !string.IsNullOrWhiteSpace(TimeFormatString))
-            {
-                format = $"{DateFormatString} {TimeFormatString}";
-            }
-            else
-            {
-                format = _defaultActivator?.Format;
-            }
-            
             _display = $"{Start?.ToString(format)} ~ {End?.ToString(format)}";
         }
         else
