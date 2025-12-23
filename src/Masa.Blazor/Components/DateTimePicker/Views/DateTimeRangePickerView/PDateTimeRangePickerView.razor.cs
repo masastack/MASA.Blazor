@@ -126,6 +126,12 @@ public partial class PDateTimeRangePickerView
     [Parameter] [MasaApiParameter(1)]
     public int SecondStep { get; set; } = 1;
 
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.12.0")]
+    public string? DateFormatString { get; set; }
+
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.12.0")]
+    public string? TimeFormatString { get; set; }
+
     private static Block _block = new("m-date-time-picker__view");
     private ModifierBuilder _modifierBuilder = _block.CreateModifierBuilder();
 
@@ -148,15 +154,34 @@ public partial class PDateTimeRangePickerView
     protected TimeOnly? MaxTime;
     protected TimeOnly? MinTime;
 
+    /*
+     * Click the input box after clicking the date or time,
+     * update the current date or time value directly
+     */
+    private bool _customDate;
+    private bool _customTime;
+
+    /// <summary>
+    /// The <see cref="PDateTimeRangePicker"/> component inherits this component,
+    /// OnParametersSet logic for <see cref="PDateTimeRangePicker"/> is useless,
+    /// this property is used to control whether to execute OnParametersSet logic.
+    /// </summary>
+    protected virtual bool ShouldWatchInputStartAndEndChanged => true;
+    
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
+
+        if (!ShouldWatchInputStartAndEndChanged)
+        {
+            return;
+        }
 
         if (Start != _prevStart)
         {
             _prevStart = Start;
             UpdateInternalDateTime(Start, 0);
-        }
+        } 
 
         if (End != _prevEnd)
         {
@@ -181,6 +206,17 @@ public partial class PDateTimeRangePickerView
 
     private async Task OnDateClick(DateOnly date)
     {
+        // Update start or end date directly
+        if (_customDate)
+        {
+            _customDate = false;
+            InternalDate[_currentIndex] = date;
+            await UpdateValue(_currentIndex);
+            return;
+        }
+
+        // At the DatePicker component in range mode,
+        // clicking to set the start date will automatically clear the end date
         if (Start.HasValue && !End.HasValue)
         {
             _currentIndex = 1;
@@ -216,6 +252,14 @@ public partial class PDateTimeRangePickerView
             return;
         }
 
+        if (_customTime)
+        {
+            _customTime = false;
+            InternalTime[_currentIndex] = time;
+            await UpdateValue(_currentIndex);
+            return;
+        }
+
         var currentTime = InternalTime[_currentIndex];
         if (currentTime.HasValue && currentTime == time.Value)
         {
@@ -227,38 +271,47 @@ public partial class PDateTimeRangePickerView
         await UpdateValue();
     }
 
+    /// <summary>
+    /// Update start and end value
+    /// </summary>
     private async Task UpdateValue()
     {
-        var newValue = MergeDateAndTime();
+        var newValue = MergeDateAndTime(_currentIndex);
 
         if (IsEndView)
         {
             if (Start > newValue)
             {
-                await StartChanged.InvokeAsync(newValue);
-                await EndChanged.InvokeAsync(Start);
                 (InternalDate[0], InternalDate[1]) = (InternalDate[1], InternalDate[0]);
+                (InternalTime[0], InternalTime[1]) = (InternalTime[1], InternalTime[0]);
+                _prevStart = newValue;
+                await StartChanged.InvokeAsync(newValue);
+                _prevEnd = Start;
+                await EndChanged.InvokeAsync(Start);
             }
             else
             {
+                _prevEnd = newValue;
                 await EndChanged.InvokeAsync(newValue);
             }
         }
         else
         {
+            _prevStart = newValue;
             await StartChanged.InvokeAsync(newValue);
+            _prevEnd = null;
             await EndChanged.InvokeAsync(null);
         }
     }
 
-    private DateTime MergeDateAndTime()
+    private DateTime MergeDateAndTime(int index)
     {
         int year, month, day, hour, minute, second;
 
         var now = DateTime.Now;
 
-        var date = InternalDate[_currentIndex];
-        var time = InternalTime[_currentIndex];
+        var date = InternalDate[index];
+        var time = InternalTime[index];
 
         if (date.HasValue)
         {
@@ -293,5 +346,103 @@ public partial class PDateTimeRangePickerView
     {
         _activePicker = DatePickerType.Date;
         _tableDate = date;
+    }
+
+    private Task OnStartDateChange(ChangeEventArgs args) => OnDateChange(args.Value?.ToString(), 0);
+
+    private Task OnEndDateChange(ChangeEventArgs args) => OnDateChange(args.Value?.ToString(), 1);
+
+    private async Task OnDateChange(string? value, int index)
+    {
+        if (string.IsNullOrWhiteSpace(value) || !DateOnly.TryParse(value, out var date))
+        {
+            return;
+        }
+
+        InternalDate[index] = date;
+        _tableDate = date;
+        await UpdateValue(index);
+    }
+
+    private Task OnStartTimeChange(ChangeEventArgs args) => OnTimeChange(args.Value?.ToString(), 0);
+
+    private Task OnEndTimeChange(ChangeEventArgs args) => OnTimeChange(args.Value?.ToString(), 1);
+
+    private async Task OnTimeChange(string? value, int index)
+    {
+        if (string.IsNullOrWhiteSpace(value) || !TimeOnly.TryParse(value, out var time))
+        {
+            return;
+        }
+
+        InternalTime[index] = time;
+
+        await UpdateValue(index);
+    }
+
+    /// <summary>
+    /// Update start or end value depending on the index
+    /// </summary>
+    /// <param name="index"></param>
+    private async Task UpdateValue(int index)
+    {
+        var newValue = MergeDateAndTime(index);
+
+        if (index == 0)
+        {
+            if (End.HasValue && newValue > End.Value)
+            {
+                (InternalDate[0], InternalDate[1]) = (InternalDate[1], InternalDate[0]);
+                (InternalTime[0], InternalTime[1]) = (InternalTime[1], InternalTime[0]);
+                _prevStart = End;
+                await StartChanged.InvokeAsync(End);
+                _prevEnd = newValue;
+                await EndChanged.InvokeAsync(newValue);
+            }
+            else
+            {
+                _prevStart = newValue;
+                await StartChanged.InvokeAsync(newValue);
+            }
+        }
+        else
+        {
+            if (Start.HasValue && newValue < Start.Value)
+            {
+                (InternalDate[0], InternalDate[1]) = (InternalDate[1], InternalDate[0]);
+                (InternalTime[0], InternalTime[1]) = (InternalTime[1], InternalTime[0]);
+                _prevStart = newValue;
+                await StartChanged.InvokeAsync(newValue);
+                _prevEnd = Start;
+                await EndChanged.InvokeAsync(Start);
+            }
+            else
+            {
+                _prevEnd = newValue;
+                await EndChanged.InvokeAsync(newValue);
+            }
+        }
+    }
+
+    private void OnStartDateFocus() => OnDateFocus(0);
+
+    private void OnEndDateFocus() => OnDateFocus(1);
+
+    private void OnDateFocus(int index)
+    {
+        _currentIndex = index;
+        _customDate = true;
+        _customTime = false;
+    }
+
+    private void OnStartTimeFocus() => OnTimeFocus(0);
+
+    private void OnEndTimeFocus() => OnTimeFocus(1);
+
+    private void OnTimeFocus(int index)
+    {
+        _currentIndex = index;
+        _customTime = true;
+        _customDate = false;
     }
 }

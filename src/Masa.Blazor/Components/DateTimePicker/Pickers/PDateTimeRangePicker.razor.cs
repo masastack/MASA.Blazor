@@ -21,6 +21,8 @@ public partial class PDateTimeRangePicker : PDateTimeRangePickerView, IDateTimeP
 
     private string Class => "m-date-time-picker";
 
+    protected override bool ShouldWatchInputStartAndEndChanged => false;
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
@@ -81,7 +83,11 @@ public partial class PDateTimeRangePicker : PDateTimeRangePickerView, IDateTimeP
     {
         if (Start.HasValue && End.HasValue)
         {
-            _display = $"{Start?.ToString(_defaultActivator?.Format)} ~ {End?.ToString(_defaultActivator?.Format)}";
+            var format = !string.IsNullOrWhiteSpace(DateFormatString) && !string.IsNullOrWhiteSpace(TimeFormatString)
+                ? $"{DateFormatString} {TimeFormatString}"
+                : _defaultActivator?.Format;
+
+            _display = $"{Start?.ToString(format)} ~ {End?.ToString(format)}";
         }
         else
         {

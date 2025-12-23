@@ -24,6 +24,11 @@ public partial class MInput<TValue> : ThemeComponentBase, IThemeable, IFilterInp
     [Parameter] public EventCallback<TValue> OnChange { get; set; }
 
     /// <summary>
+    /// The event callback for the change event with original <see cref="ChangeEventArgs"/>.
+    /// </summary>
+    [Parameter] public EventCallback<ChangeEventArgs> OnChangeEvent { get; set; }
+
+    /// <summary>
     /// The required rule built-in.
     /// </summary>
     [Parameter]
@@ -90,6 +95,11 @@ public partial class MInput<TValue> : ThemeComponentBase, IThemeable, IFilterInp
     [Parameter] public EventCallback<MouseEventArgs> OnPrependClick { get; set; }
 
     [Parameter] public EventCallback<MouseEventArgs> OnAppendClick { get; set; }
+
+    /// <summary>
+    /// Force the input to be focused.
+    /// </summary>
+    [Parameter] [MasaApiParameter(ReleasedIn = "v1.12.0")] public bool Focused { get; set; }
 
     protected bool HasMouseDown { get; set; }
 
@@ -270,7 +280,7 @@ public partial class MInput<TValue> : ThemeComponentBase, IThemeable, IFilterInp
             .Add(IsLabelActive)
             .Add(IsDirty)
             .Add(IsDisabled)
-            .Add(IsFocused)
+            .Add("is-focused", IsFocused || Focused)
             .Add("is-loading", Loading != null && Loading != false)
             .Add(IsReadonly)
             .Add(Dense)

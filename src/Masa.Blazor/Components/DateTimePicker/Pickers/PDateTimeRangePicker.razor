@@ -45,22 +45,17 @@
                                   YearFormat="@YearFormat"
                                   YearIcon="@YearIcon"
                                   Theme="@Theme"
+                                  TimeFormatString="@TimeFormatString"
+                                  DateFormatString="@DateFormatString"
                                   @ref="_pickerView">
         </PDateTimeRangePickerView>
 
         <MDivider></MDivider>
         <div class="m-date-time-picker__actions">
-            <div class="text--secondary caption">
-                <div>@I18n.T("$masaBlazor.datePicker.start"): @_start?.ToString(_defaultActivator?.Format)</div>
-                <div>@I18n.T("$masaBlazor.datePicker.end"): @_end?.ToString(_defaultActivator?.Format)</div>
-            </div>
             <MSpacer/>
-            @if (_end.HasValue)
-            {
-                <MButton Color="primary" Depressed Class="ml-1" OnClick="@OnOk">
-                    @I18n.T("$masaBlazor.ok")
-                </MButton>
-            }
+            <MButton Color="primary" Depressed Disabled="@(!_end.HasValue)" Class="ml-1" OnClick="@OnOk">
+                @I18n.T("$masaBlazor.ok")
+            </MButton>
         </div>
     </ChildContent>
 </MMenu>
