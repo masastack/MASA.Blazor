@@ -22,7 +22,7 @@
             return;
         }
 
-        <div class="@css" @onpointerup="@OnClick" @onpointerup:stopPropagation>
+        <div class="@css" @onclick="@OnClick" @onclick:stopPropagation>
             <MDefaultsProvider Defaults="@_actionDefaults">
                 @content(_actionContext)
             </MDefaultsProvider>
