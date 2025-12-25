@@ -118,11 +118,6 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
     hasStartedSwipe = false;
 
     velocity.addMovement(event);
-
-    console.log('Touch start:', touch.clientX, touch.clientY);
-
-    // 暂时不阻止默认行为，等待确认是否滑动
-    // event.preventDefault();  // 移除此处
   }
 
   // 触摸移动
@@ -243,8 +238,6 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
     } as any;
 
     velocity.addMovement(mockTouchEvent);
-
-    console.log('Mouse down:', event.clientX, event.clientY);
 
     // 阻止默认行为，防止选中文本
     event.preventDefault();
@@ -390,7 +383,6 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
 
   // 绑定事件
   function bindEvents() {
-    console.log('Binding touch and mouse events');
     // 触摸事件
     wrapperElement.addEventListener('touchstart', onTouchStart, { passive: false });
     wrapperElement.addEventListener('touchmove', onTouchMove, { passive: false });
