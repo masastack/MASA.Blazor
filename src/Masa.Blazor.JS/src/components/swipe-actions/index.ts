@@ -1,4 +1,4 @@
-import { useVelocity } from '../../mixins/touch';
+import { useVelocity } from "../../mixins/touch";
 
 export interface SwipeActionsOptions {
   /** 滑动阈值，超过此值才会打开/关闭 */
@@ -7,6 +7,8 @@ export interface SwipeActionsOptions {
   duration?: number;
   /** 是否禁用滑动 */
   disabled?: boolean;
+  /** 最小滑动距离，低于此值视为点击 */
+  minSwipeDistance?: number;
 }
 
 export interface SwipeActionsState {
@@ -22,7 +24,8 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
   const {
     threshold = 0.5,
     duration = 300,
-    disabled = false
+    disabled = false,
+    minSwipeDistance = 10
   } = options;
 
   const velocity = useVelocity();
@@ -37,6 +40,7 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
   let startOffset = 0;
   let touchId: number | null = null;
   let isMouseDown = false;
+  let hasStartedSwipe = false;
 
   // 获取左右元素的宽度
   function getElementWidths() {
@@ -110,19 +114,15 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
     touchId = touch.identifier;
     startX = touch.clientX;
     startOffset = state.offset;
-    state.dragging = true;
+    state.dragging = false;  // 初始不设为 true，等待移动确认
+    hasStartedSwipe = false;
 
     velocity.addMovement(event);
-
-    console.log('Touch start:', touch.clientX, touch.clientY);
-
-    // 阻止默认行为，防止页面滚动
-    event.preventDefault();
   }
 
   // 触摸移动
   function onTouchMove(event: TouchEvent) {
-    if (disabled || !state.dragging || touchId === null) return;
+    if (disabled || touchId === null) return;
 
     velocity.addMovement(event);
 
@@ -130,6 +130,19 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
     if (!touch) return;
 
     const deltaX = touch.clientX - startX;
+
+    // 如果移动距离小于阈值，不开始滑动
+    if (Math.abs(deltaX) < minSwipeDistance) {
+      return;
+    }
+
+    // 开始滑动
+    if (!hasStartedSwipe) {
+      hasStartedSwipe = true;
+      state.dragging = true;
+      event.preventDefault();  // 现在阻止默认行为
+    }
+
     let newOffset = startOffset + deltaX;
     const { leftWidth, rightWidth } = getElementWidths();
 
@@ -156,9 +169,10 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
 
   // 触摸结束
   function onTouchEnd(event: TouchEvent) {
-    if (disabled || !state.dragging || touchId === null) return;
+    if (disabled || touchId === null) return;
 
     state.dragging = false;
+    hasStartedSwipe = false;
 
     try {
       const velocityData = velocity.getVelocity(touchId);
@@ -167,7 +181,6 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
       setTransform(targetOffset, true);
       updatePosition(targetOffset);
     } catch (error) {
-      // 如果获取速度失败，使用当前偏移量判断
       const targetOffset = getTargetOffset(state.offset, 0);
       setTransform(targetOffset, true);
       updatePosition(targetOffset);
@@ -179,9 +192,10 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
 
   // 触摸取消
   function onTouchCancel(event: TouchEvent) {
-    if (disabled || !state.dragging) return;
+    if (disabled) return;
 
     state.dragging = false;
+    hasStartedSwipe = false;
     velocity.endTouch(event);
     touchId = null;
 
@@ -224,8 +238,6 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
     } as any;
 
     velocity.addMovement(mockTouchEvent);
-
-    console.log('Mouse down:', event.clientX, event.clientY);
 
     // 阻止默认行为，防止选中文本
     event.preventDefault();
@@ -371,7 +383,6 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
 
   // 绑定事件
   function bindEvents() {
-    console.log('Binding touch and mouse events');
     // 触摸事件
     wrapperElement.addEventListener('touchstart', onTouchStart, { passive: false });
     wrapperElement.addEventListener('touchmove', onTouchMove, { passive: false });
