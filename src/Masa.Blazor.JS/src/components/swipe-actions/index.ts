@@ -110,6 +110,8 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
   function onTouchStart(event: TouchEvent) {
     if (disabled || event.touches.length !== 1) return;
 
+    event.stopPropagation();
+
     const touch = event.touches[0];
     touchId = touch.identifier;
     startX = touch.clientX;
@@ -141,6 +143,7 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
       hasStartedSwipe = true;
       state.dragging = true;
       event.preventDefault();  // 现在阻止默认行为
+      event.stopPropagation();
     }
 
     let newOffset = startOffset + deltaX;
@@ -171,6 +174,8 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
   function onTouchEnd(event: TouchEvent) {
     if (disabled || touchId === null) return;
 
+    event.stopPropagation();
+
     state.dragging = false;
     hasStartedSwipe = false;
 
@@ -193,6 +198,8 @@ export function useTouch(wrapperElement: HTMLElement, options: SwipeActionsOptio
   // 触摸取消
   function onTouchCancel(event: TouchEvent) {
     if (disabled) return;
+
+    event.stopPropagation();
 
     state.dragging = false;
     hasStartedSwipe = false;
