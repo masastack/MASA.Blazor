@@ -60,7 +60,6 @@ class DrawflowProxy {
 
     this.editor.on("contextmenu", function (e) {
       const args = parseMouseEvent(e);
-      console.log('contextmenu event triggered', e, args);
       dotnetHelper.invokeMethodAsync("OnContextmenu", args);
     });
 
