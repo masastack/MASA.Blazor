@@ -20,8 +20,24 @@ public class MDrawflow : MDrop, IAsyncDisposable
 
     [Parameter] public EventCallback<string> OnNodeDataChanged { get; set; }
 
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.12.0")]
+    public EventCallback<MouseEventArgs> OnContextmenu { get; set; }
+
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.12.0")]
+    public EventCallback<ConnectionStartEventArgs> OnConnectionStart { get; set; }
+
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.12.0")]
+    public EventCallback OnConnectionCancel { get; set; }
+
+    [Parameter]
+    [MasaApiParameter(ReleasedIn = "v1.12.0")]
+    public EventCallback<MouseUpEventArgs> OnMouseUp { get; set; }
+
     [Parameter] public EventCallback OnImport { get; set; }
-    
+
     private readonly ModifierBuilder _modifierBuilder = new Block("m-drawflow").CreateModifierBuilder();
 
     private DrawflowEditorMode? _prevMode;
@@ -39,8 +55,6 @@ public class MDrawflow : MDrop, IAsyncDisposable
             _prevMode = Mode;
             _drawflowProxy?.SetMode(Mode);
         }
-
-        
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -54,15 +68,13 @@ public class MDrawflow : MDrop, IAsyncDisposable
 
             if (DataInitializer != null)
             {
-                 var data = await DataInitializer.Invoke();
+                var data = await DataInitializer.Invoke();
 
-                 if (!string.IsNullOrWhiteSpace(data))
-                 {
-                     await _drawflowProxy!.ImportAsync(data);
-                 }
+                if (!string.IsNullOrWhiteSpace(data))
+                {
+                    await _drawflowProxy!.ImportAsync(data);
+                }
             }
-
-            
         }
     }
 
@@ -203,6 +215,14 @@ public class MDrawflow : MDrop, IAsyncDisposable
         if (_drawflowProxy == null) return;
 
         await _drawflowProxy.RemoveConnectionNodeIdAsync(nodeId).ConfigureAwait(false);
+    }
+
+    [MasaApiPublicMethod]
+    public async Task AddConnectionAsync(string outputId, string inputId, string outputClass, string inputClass)
+    {
+        if (_drawflowProxy == null) return;
+
+        await _drawflowProxy.AddConnectionAsync(outputId, inputId, outputClass, inputClass).ConfigureAwait(false);
     }
 
     async ValueTask IAsyncDisposable.DisposeAsync()
