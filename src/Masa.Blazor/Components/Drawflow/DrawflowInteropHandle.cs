@@ -40,6 +40,30 @@ public class DrawflowInteropHandle
     }
 
     [JSInvokable]
+    public async Task OnContextmenu(MouseEventArgs args)
+    {
+        await _drawflow.OnContextmenu.InvokeAsync(args);
+    }
+
+    [JSInvokable]
+    public async Task OnConnectionStart(ConnectionStartEventArgs args)
+    {
+        await _drawflow.OnConnectionStart.InvokeAsync(args);
+    }
+
+    [JSInvokable]
+    public async Task OnConnectionCancel()
+    {
+        await _drawflow.OnConnectionCancel.InvokeAsync();
+    }
+
+    [JSInvokable]
+    public async Task OnMouseUp(MouseUpEventArgs args)
+    {
+        await _drawflow.OnMouseUp.InvokeAsync(args);
+    }
+
+    [JSInvokable]
     public async Task OnImport()
     {
         await _drawflow.OnImport.InvokeAsync();

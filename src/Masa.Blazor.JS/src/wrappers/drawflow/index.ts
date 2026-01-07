@@ -1,10 +1,15 @@
 import DrawflowClass, { DrawFlowEditorMode, DrawflowModuleData } from "drawflow";
+import { parseMouseEvent } from "events/EventType";
 
 declare const Drawflow: DrawflowClass;
 
 class DrawflowProxy {
   editor: DrawflowClass;
   dotnetHelper: DotNet.DotNetObject;
+  connectionStartPayload: any;
+
+  // Used to determine if the mouseup event is triggered after a connection cancel
+  connectionCancelFlag = false;
 
   mousedown = new MouseEvent("mousedown", {
     view: window,
@@ -27,7 +32,7 @@ class DrawflowProxy {
     this.editor = new (Drawflow as any)(el);
     this.editor.start();
     this.editor.editor_mode = mode;
-    const that = this;
+    this.dotnetHelper = dotnetHelper;
 
     this.editor.on("nodeCreated", function (id) {
       dotnetHelper.invokeMethodAsync("OnNodeCreated", id.toString());
@@ -52,7 +57,46 @@ class DrawflowProxy {
     this.editor.on("import", function (e) {
       dotnetHelper.invokeMethodAsync("OnImport");
     });
+
+    this.editor.on("contextmenu", function (e) {
+      const args = parseMouseEvent(e);
+      dotnetHelper.invokeMethodAsync("OnContextmenu", args);
+    });
+
+    this.editor.on("connectionStart", this.connectionStart);
+
+    this.editor.on("connectionCancel", this.connectionCancel);
+
+    this.editor.on("mouseUp" as any, this.mouseUp);
   }
+
+  connectionStart = (e: any) => {
+    this.connectionStartPayload = {
+      outputId: e.output_id,
+      outputClass: e.output_class,
+    };
+    this.dotnetHelper.invokeMethodAsync(
+      "OnConnectionStart",
+      this.connectionStartPayload
+    );
+  };
+
+  connectionCancel = (e: any) => {
+    this.connectionCancelFlag = true;
+    this.dotnetHelper.invokeMethodAsync("OnConnectionCancel");
+  };
+
+  mouseUp = (e: MouseEvent) => {
+    var args = parseMouseEvent(e);
+    this.dotnetHelper.invokeMethodAsync("OnMouseUp", {
+      ...args,
+      connectionStart: this.connectionCancelFlag
+      ? this.connectionStartPayload
+      : null,
+    });
+
+    this.connectionCancelFlag = false;
+  };
 
   setMode(mode: DrawFlowEditorMode) {
     this.editor.editor_mode = mode;
@@ -150,6 +194,15 @@ class DrawflowProxy {
     this.editor.removeConnectionNodeId(id);
   }
 
+  addConnection(
+    outputId: string,
+    inputId: string,
+    outputClass: string,
+    inputClass: string
+  ) {
+    this.editor.addConnection(outputId, inputId, outputClass, inputClass);
+  }
+
   clear() {
     this.editor.clear();
   }
@@ -198,10 +251,13 @@ class DrawflowProxy {
       window.setTimeout(() => {
         node.style.transform = "scale(1.0)";
       }, millisecondsStart + millisecondsAnimate);
-      window.setTimeout(() => {
-        node.style.transition = "";
-        node.style.transform = "";
-      }, millisecondsStart + millisecondsAnimate * 2);
+      window.setTimeout(
+        () => {
+          node.style.transition = "";
+          node.style.transform = "";
+        },
+        millisecondsStart + millisecondsAnimate * 2
+      );
     }
 
     this.focusNode(id);

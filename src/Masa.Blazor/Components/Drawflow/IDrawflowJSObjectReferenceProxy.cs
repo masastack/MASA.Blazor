@@ -49,4 +49,6 @@ public interface IDrawflow
     Task UpdateConnectionNodesAsync(string nodeId);
 
     Task RemoveConnectionNodeIdAsync(string nodeId);
+    
+    Task AddConnectionAsync(string outputId, string inputId, string outputClass, string inputClass);
 }
