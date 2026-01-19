@@ -42,6 +42,7 @@
                 if (field != value)
                 {
                     field = value;
+                    (Application.Left, Application.Right) = (Application.Right, Application.Left);
                     OnRTLChange?.Invoke(field);
                     RTLChanged?.Invoke(this, EventArgs.Empty);
                 }
