@@ -63,7 +63,7 @@
 
 /* stripe in datatable */
 .m-data-table > .m-data-table__wrapper > table > tbody > tr.stripe {
-    background: rgba(var(--m-theme-surface-container-highest), var(--m-low-emphasis-opacity, .38));
+    background: rgba(var(--m-theme-stripe));
 }
 
 .m-data-table--fixed-header > .m-data-table__wrapper > table > thead > tr > th.m-data-table__column--fixed-left {

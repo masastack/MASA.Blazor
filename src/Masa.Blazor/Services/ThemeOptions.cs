@@ -62,6 +62,11 @@ public class ThemeOptions
     public string? InverseOnSurface { get; set; }
 
     public string? InversePrimary { get; set; }
+    
+    /// <summary>
+    /// The background color of the stripe, out of roles of material design
+    /// </summary>
+    public string? Stripe { get; set; }
 
     // TODO: Scrim, Shadow
 
@@ -108,6 +113,7 @@ public class ThemeOptions
                 {BuildCssVariable("inverse-surface", InverseSurface)}
                 {BuildCssVariable("inverse-on-surface", InverseOnSurface)}
                 {BuildCssVariable("inverse-primary", InversePrimary)}
+                {BuildCssVariable("stripe", Stripe)}
 
                 {Variables}
  
