@@ -11,7 +11,6 @@
             SSROptions? ssr = null,
             IDictionary<string, IDictionary<string, object?>?>? defaults = null)
         {
-            RTL = rtl;
             Breakpoint = breakpoint;
             Breakpoint.OnWindowResize = e =>
             {
@@ -28,6 +27,7 @@
                 }
             };
             Application = application;
+            RTL = rtl;
             Theme = theme;
             Icons = icons;
             Ssr = ssr;
@@ -83,7 +83,7 @@
         /// <summary>
         /// An event that fires when the value of Mobile property from <see cref="Breakpoint"/> has changed.
         /// </summary>
-        public event EventHandler<MobileChangedEventArgs> MobileChanged;
+        public event EventHandler<MobileChangedEventArgs>? MobileChanged;
 
         public event EventHandler? DefaultsChanged;
 
