@@ -31,7 +31,8 @@ internal static class MasaBlazorPreset
         SurfaceContainerHighest = "#e0e0e0",
         InverseSurface = "#302f3b",
         InverseOnSurface = "#f3eeff",
-        InversePrimary = "#c5c0ff"
+        InversePrimary = "#c5c0ff",
+        Stripe = "#ebebeb",
     };
 
     internal static ThemeOptions GetDarkTheme() => new()
@@ -63,7 +64,8 @@ internal static class MasaBlazorPreset
         SurfaceContainerHighest = "#454545",
         InverseSurface = "#e4e0f0",
         InverseOnSurface = "#302f3b",
-        InversePrimary = "#4f33ff"
+        InversePrimary = "#4f33ff",
+        Stripe = "#424242"
     };
 
     internal static Breakpoint GetBreakpoint() => new()
