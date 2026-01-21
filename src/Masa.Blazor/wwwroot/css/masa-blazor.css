@@ -27659,9 +27659,6 @@ html.overflow-y-hidden {
 .m-stepper .m-stepper__step__step .m-icon {
     color: rgba(var(--m-theme-inverse-on-surface));
 }
-.m-stepper .m-stepper__header .m-divider {
-    border-color: rgba(var(--m-theme-outline-variant));
-}
 .m-stepper .m-stepper__step--complete .m-stepper__step__label {
     color: rgba(var(--m-theme-on-surface), var(--m-high-emphasis-opacity));
 }
