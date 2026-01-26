@@ -12,7 +12,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
     public RenderFragment? CaptionContent { get; set; }
 
     [Parameter]
-    public IEnumerable<DataTableHeader<TItem>> Headers { get; set; } = [];
+    public IEnumerable<DataTableHeader<TItem>>? Headers { get; set; } = [];
 
     [Parameter]
     public RenderFragment? TopContent { get; set; }
@@ -134,17 +134,17 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
     private DataTableResizeMode _prevResizeMode;
     private IJSObjectReference? _resizableJSResult;
 
-    private bool HasFixedColumn => Headers.Any(h => h.Fixed != DataTableFixed.None);
+    private bool HasFixedColumn => Headers?.Any(h => h.Fixed != DataTableFixed.None) is true;
 
-    private bool HasLeftFixedColumn => Headers.Any(h => h.Fixed == DataTableFixed.Left);
+    private bool HasLeftFixedColumn => Headers?.Any(h => h.Fixed == DataTableFixed.Left) is true;
 
     public IEnumerable<DataTableHeader<TItem>> ComputedHeaders
     {
         get
         {
-            var headers = Headers
+            var headers = Headers?
                           .Where(header => header.Value == null || InternalOptions.GroupBy.FirstOrDefault(by => by == header.Value) == null)
-                          .ToList();
+                          .ToList() ?? [];
 
             if (ShowSerialNumber)
             {
@@ -224,7 +224,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
 
     public bool HasBottom => FooterContent != null || !HideDefaultFooter;
     
-    private bool HasEllipsis => Headers.Any(u => u.HasEllipsis);
+    private bool HasEllipsis => Headers?.Any(u => u.HasEllipsis) is true;
 
     private bool IsMobile
     {
@@ -253,10 +253,10 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
         { "colspan", IsMobile ? null : (HeadersLength > 0 ? HeadersLength : ComputedHeaders.Count()) }
     };
 
-    public List<DataTableHeader<TItem>> HeadersWithCustomFilters => Headers.Where(header => header.Filter != null && header.Filterable).ToList();
+    public List<DataTableHeader<TItem>> HeadersWithCustomFilters => Headers?.Where(header => header.Filter != null && header.Filterable).ToList() ?? [];
 
     public List<DataTableHeader<TItem>> HeadersWithoutCustomFilters
-        => Headers.Where(header => header.Filter == null && header.Filterable).ToList();
+        => Headers?.Where(header => header.Filter == null && header.Filterable).ToList() ?? [];
 
     public bool HasHeaderFilter => HeadersWithCustomFilters.Count > 0;
 
@@ -270,12 +270,14 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
         return base.SetParametersAsync(parameters);
     }
 
+    protected override IEnumerable<ItemValue<TItem>?> ItemValues
+        => Headers?.Select(h => h.ItemValue).Where(v => v != null) ?? [];
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
 
         CustomFilter = CustomFilterWithColumns;
-        ItemValues = Headers.Select(header => header.ItemValue).Where(u => u != null);
 
         _prevIsMobile = IsMobile;
         _prevResizeMode = ResizeMode;
@@ -320,7 +322,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
             _prevResizeMode = ResizeMode;
         }
     }
-    
+
     private async Task DisposeResizableJS()
     {
         if (_resizableJSResult is not null)
@@ -387,7 +389,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
 
     private string GetText(string value)
     {
-        return Headers.FirstOrDefault(h => h.Value == value)?.Text ?? value;
+        return Headers?.FirstOrDefault(h => h.Value == value)?.Text ?? value;
     }
 
     private void MasaBlazorWindowSizeChanged(object? sender, WindowSizeChangedEventArgs e)
@@ -420,7 +422,7 @@ public partial class MDataTable<TItem> : MDataIterator<TItem>
         var e = OnRowDblClick.HasDelegate ? OnRowDblClick : OnRowDbClick;
         return e.InvokeAsync(rowMouseEventArgs); }
 
-    private IEnumerable<TItem> CustomFilterWithColumns(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> filter, string? search)
+    private IEnumerable<TItem> CustomFilterWithColumns(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>?> filter, string? search)
     {
         return SearchTableItems(items, search, HeadersWithCustomFilters, HeadersWithoutCustomFilters, CustomItemFilter);
     }
