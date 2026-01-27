@@ -23,10 +23,11 @@ public abstract class MData<TItem> : MasaComponentBase
     }
 
     [Parameter]
-    public Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, IList<string>, List<bool>, IEnumerable<TItem>> CustomSort
+    public Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, IList<string>, List<bool>, IEnumerable<TItem>>
+        CustomSort
     {
-        get => _customSort ?? DefaultSortItems;
-        set => _customSort = value;
+        get => field ?? DefaultSortItems;
+        set;
     }
 
     [Parameter]
@@ -66,10 +67,11 @@ public abstract class MData<TItem> : MasaComponentBase
     public IList<bool> GroupDesc { get; set; } = new List<bool>();
 
     [Parameter]
-    public Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, IList<string>, IList<bool>, IEnumerable<IGrouping<string, TItem>>> CustomGroup
+    public Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, IList<string>, IList<bool>,
+        IEnumerable<IGrouping<string, TItem>>> CustomGroup
     {
-        get => _customGroup ?? DefaultGroupItems;
-        set => _customGroup = value;
+        get => field ?? DefaultGroupItems;
+        set;
     }
 
     [Parameter]
@@ -85,29 +87,21 @@ public abstract class MData<TItem> : MasaComponentBase
     public string? Search { get; set; }
 
     [Parameter]
-    public Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, string?, IEnumerable<TItem>> CustomFilter
+    public Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>?>, string?, IEnumerable<TItem>> CustomFilter
     {
-        get => _customFilter ?? DefaultSearchItems;
-        set => _customFilter = value;
+        get => field ?? DefaultSearchItems;
+        set;
     }
 
     [Parameter] [MasaApiParameter(-1)] public int ServerItemsLength { get; set; } = -1;
 
-    [Parameter]
-    public IEnumerable<ItemValue<TItem>>? ItemValues { get; set; } = new List<ItemValue<TItem>>();
+    protected virtual IEnumerable<ItemValue<TItem>?> ItemValues { get; } = [];
 
     [Parameter]
     public EventCallback<int> OnPageCount { get; set; }
 
     [Parameter]
     public EventCallback<DataOptions> OnOptionsUpdate { get; set; }
-
-    private Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, string?, IEnumerable<TItem>>? _customFilter;
-
-    private Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, IList<string>, List<bool>, IEnumerable<TItem>>? _customSort;
-
-    private Func<IEnumerable<TItem>, IEnumerable<ItemValue<TItem>>, IList<string>, IList<bool>, IEnumerable<IGrouping<string, TItem>>>?
-        _customGroup;
 
     protected DataOptions InternalOptions { get; init; } = new();
 
@@ -158,7 +152,7 @@ public abstract class MData<TItem> : MasaComponentBase
 
     public int PageCount { get; private set; }
 
-    public static IEnumerable<TItem> DefaultSearchItems(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> itemValues, string? search)
+    public static IEnumerable<TItem> DefaultSearchItems(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>?> itemValues, string? search)
     {
         if (string.IsNullOrWhiteSpace(search))
         {
@@ -166,7 +160,7 @@ public abstract class MData<TItem> : MasaComponentBase
         }
 
         search = search.ToLowerInvariant();
-        return items.Where(item => itemValues.Any(itemValue => DefaultFilter(itemValue.Invoke(item), search, item)));
+        return items.Where(item => itemValues.Any(itemValue => DefaultFilter(itemValue?.Invoke(item), search, item)));
     }
 
     public static bool DefaultFilter(object? value, string? search, TItem item)
@@ -204,7 +198,7 @@ public abstract class MData<TItem> : MasaComponentBase
         return sortedItems ?? items;
     }
 
-    private static IEnumerable<IGrouping<string, TItem>> DefaultGroupItems(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>> itemValues,
+    private static IEnumerable<IGrouping<string, TItem>> DefaultGroupItems(IEnumerable<TItem> items, IEnumerable<ItemValue<TItem>?> itemValues,
         IList<string> groupBy, IList<bool> groupDesc)
     {
         var key = groupBy.FirstOrDefault();
@@ -228,7 +222,7 @@ public abstract class MData<TItem> : MasaComponentBase
     {
         var filteringItems = new List<TItem>(Items ?? []);
 
-        if (!DisableFiltering && ServerItemsLength <= 0 && ItemValues != null)
+        if (!DisableFiltering && ServerItemsLength <= 0)
         {
             FilteredItems = CustomFilter(filteringItems, ItemValues, Search).ToList();
         }
@@ -338,7 +332,7 @@ public abstract class MData<TItem> : MasaComponentBase
     private bool _prevDisablePagination;
     private bool _prevDisableFiltering;
     private int _prevServerItemsLength;
-    private IEnumerable<ItemValue<TItem>>? _prevItemValues;
+    private IEnumerable<ItemValue<TItem>?>? _prevItemValues;
     private HashSet<TItem>? _prevItems;
     private string? _prevSearch;
     private int _prevPageCount;
