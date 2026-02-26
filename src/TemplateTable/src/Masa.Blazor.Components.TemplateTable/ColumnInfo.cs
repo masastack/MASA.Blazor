@@ -1,6 +1,4 @@
-﻿using Masa.Blazor.Presets;
-
-namespace Masa.Blazor.Components.TemplateTable;
+﻿namespace Masa.Blazor.Components.TemplateTable;
 
 public class ColumnInfo : Column
 {

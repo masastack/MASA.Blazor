@@ -14,11 +14,11 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.7" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Masa.Blazor.Components.TemplateTable.Abstractions\Masa.Blazor.Components.TemplateTable.Abstractions.csproj" />
-    </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Masa.Blazor.Components.TemplateTable.Abstractions\Masa.Blazor.Components.TemplateTable.Abstractions.csproj" />
+	</ItemGroup>
 
-    <ItemGroup>
+	<ItemGroup>
       <Content Update="wwwroot\i18n\en-US.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
@@ -29,5 +29,9 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Options\" />
+	</ItemGroup>
 
 </Project>

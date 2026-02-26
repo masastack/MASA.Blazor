@@ -1,4 +1,6 @@
-﻿namespace Microsoft.Extensions.DependencyInjection;
+﻿using Masa.Blazor.Components.TemplateTable;
+
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
@@ -12,6 +14,10 @@ public static class ServiceCollectionExtensions
     public static IMasaBlazorBuilder AddGraphQLClientForTemplateTable(this IMasaBlazorBuilder builder, string endPoint,
         string? bearerToken = null)
     {
+        if (!builder.Services.Any(t => t.ServiceType == typeof(ITemplateTableComponent)))
+        {
+            builder.Services.AddSingleton<ITemplateTableComponent, DefaultTemplateTableComponent>();
+        }
         builder.Services.AddScoped<GraphQL.Client.Abstractions.IGraphQLClient>(_ =>
         {
             var client = new GraphQLHttpClient(endPoint,
@@ -32,6 +38,10 @@ public static class ServiceCollectionExtensions
     public static IMasaBlazorBuilder AddGraphQLClientForTemplateTable(this IMasaBlazorBuilder builder, Func<IServiceProvider, GraphQL.Client.Abstractions.IGraphQLClient> func)
     {
         ArgumentNullException.ThrowIfNull(func);
+        if (!builder.Services.Any(t => t.ServiceType == typeof(ITemplateTableComponent)))
+        {
+            builder.Services.AddSingleton<ITemplateTableComponent, DefaultTemplateTableComponent>();
+        }
         builder.Services.AddScoped(func);
         return builder;
     }

@@ -56,25 +56,23 @@ public partial class MTemplateTable
 
     [Parameter] public bool Stripe { get; set; }
 
-    [Parameter]
-    public string TableClass { get; set; } = default!;
+    [Parameter] public string TableClass { get; set; } = default!;
 
-    [Parameter]
-    public string HeaderClass { get; set; } = "m-data-table-header";
+    [Parameter] public string HeaderClass { get; set; } = "m-data-table-header";
 
-    [Parameter]
-    public string HeaderThClass { get; set; } = "sortable text-start";
+    [Parameter] public string HeaderThClass { get; set; } = "sortable text-start";
 
     [Parameter] public AlignTypes HeaderTextAlign { get; set; } = AlignTypes.Start;
 
-    [Parameter]
-    public string BodyTrClass { get; set; } = default!;
+    [Parameter] public string BodyTrClass { get; set; } = default!;
 
-    [Parameter]
-    public string BodyTdClass { get; set; } = "text-start";
+    [Parameter] public string BodyTdClass { get; set; } = "text-start";
 
-    [Parameter]
-    public string StripeClass { get; set; } = default!;
+    [Parameter] public string StripeClass { get; set; } = default!;
+
+    [Parameter] public StringNumber FilterDialogWidth { get; set; } = 720;
+
+    [Parameter] public StringNumber SortDialogWidth { get; set; } = 720;
 
     private SheetInfo? _sheet = null;
 
@@ -89,7 +87,6 @@ public partial class MTemplateTable
 
     private long _totalCount;
     private bool _loading;
-
     private Sheet? _prevSheet;
 
     private bool Editable => Role == _sheet?.ActiveView.AccessRole;

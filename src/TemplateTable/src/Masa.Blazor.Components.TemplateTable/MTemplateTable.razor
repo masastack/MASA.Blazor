@@ -115,6 +115,7 @@
         </ColumnDialog>
 
         <FilterDialog @ref="_filterDialog"
+                      Width="FilterDialogWidth"
                       Show=ShowFilter
                       ShowChanged="ShowFilterChanged"
                       ActiveView="@_sheet.ActiveView.Value"
@@ -125,6 +126,7 @@
 
         <SortDialog @ref="_sortDialog"
                     Show=ShowSort
+                    Width="SortDialogWidth"
                     ShowChanged="ShowSortChanged"
                     ActiveView="@_sheet.ActiveView.Value"
                     Columns="@_sheet.Columns"
