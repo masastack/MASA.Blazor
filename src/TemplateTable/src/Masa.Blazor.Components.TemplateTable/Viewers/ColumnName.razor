@@ -1,48 +1,46 @@
 ﻿@inject IJSRuntime JSRuntime
 
 <div @ref="_ref"
-     class="masa-table-viewer__header-column-content d-flex justify-space-between @Class"
+     class="masa-table-viewer__header-column-content @Class @AlignClass"
      @onclick="@HandleCloumOnClick">
-    <div class="flex-grow-1 @AlignClass">
-        @if (IsRowSelect)
-        {
-            <MSimpleCheckbox Class="m-data-table__checkbox"
-                             Indeterminate="@IsIndeterminate"
-                             Value="@IsSelectedAll"
-                             ValueChanged="@OnSelectAll"
-                             Color="@CheckboxColor" />
-        }
-        else
-        {
-            @* @Templates.GenTypeIcon(Data.Type, true) *@
-            <span class="text-truncate px-2">@Data.Name</span>
-        }
 
-        @if (!Internal && Index > 0)
-        {
-            <MIcon Small Class="sort-icon">@SortClass</MIcon>
-            <span class="m-data-table-header__sort-badge">@Index</span>
-        }
+    @if (IsRowSelect)
+    {
+        <MSimpleCheckbox Class="m-data-table__checkbox"
+                         Indeterminate="@IsIndeterminate"
+                         Value="@IsSelectedAll"
+                         ValueChanged="@OnSelectAll"
+                         Color="@CheckboxColor" />
+    }
+    else
+    {
+        @* @Templates.GenTypeIcon(Data.Type, true) *@
+        <span class="text-truncate px-2">@Data.Name</span>
+    }
 
-        @if (!IsRowSelect && Editable)
-        {
-            <Dropdown>
-                @if (!Internal)
-                {
-                    <MListItem Title="Edit" PrependIcon="mdi-pencil-outline"
-                               OnClick="@(() => OnColumnEditClick.InvokeAsync(Data))"></MListItem>
-                }
-                <MListItem Title="Hide" PrependIcon="mdi-eye-off-outline"
-                           OnClick="@(() => OnColumnToggle.InvokeAsync(Data.Id))"></MListItem>
-            </Dropdown>
-        }
-    </div>
-    <div class="justify-end">
-        @if (HasFilter)
-        {
-            <MIcon Small Class="sort-icon">mdi-filter</MIcon>
-        }
-    </div>
+    @if (HasFilter)
+    {
+        <MIcon Small Class="sort-icon">mdi-filter</MIcon>
+    }
+
+    @if (!Internal && Index > 0)
+    {
+        <MIcon Small Class="sort-icon">@SortClass</MIcon>
+        <span class="m-data-table-header__sort-badge">@Index</span>
+    }
+
+    @if (!IsRowSelect && Editable)
+    {
+        <Dropdown>
+            @if (!Internal)
+            {
+                <MListItem Title="Edit" PrependIcon="mdi-pencil-outline"
+                           OnClick="@(() => OnColumnEditClick.InvokeAsync(Data))"></MListItem>
+            }
+            <MListItem Title="Hide" PrependIcon="mdi-eye-off-outline"
+                       OnClick="@(() => OnColumnToggle.InvokeAsync(Data.Id))"></MListItem>
+        </Dropdown>
+    }
 </div>
 
 @if (!Internal)

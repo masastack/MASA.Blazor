@@ -1,166 +1,16 @@
 ﻿@namespace Masa.Blazor.Components.TemplateTable.FilterDialogs
 @inject I18n i18N;
+@inject ITemplateTableComponent ComponentService
 
-<PModal @bind-Value="Show"
-        Width="@Width"
-        BodyStyle="min-height: 180px"
-        Title="@i18N.T("Filters")"
-        Persistent
-        OnCancel="@HandleOnCancel"
-        OnSave="HandleOnSave">
-
-    @for (int i = 0; i < _filters.Count; i++)
-    {
-        var index = i;
-        var filter = _filters[index];
-        if (filter.Persistent) continue;
-        <div class="d-flex align-center mb-2">
-            <div style="width: 86px; flex: none;"
-                 class="mr-2 text-right">
-                @if (index == 0)
-                {
-                    <span>@i18N.T("When")</span>
-                }
-                @* else if (index == 1)
-                {
-                    <MSelect @bind-Value="@_operator"
-                             Items="@Operators"
-                             ItemText="u => u"
-                             ItemValue="u => u"
-                             Class="filter-operator"
-                             Dense
-                             Outlined
-                             HideDetails="@true">
-                    </MSelect>
-                } *@
-                else
-                {
-                    <span>@i18N.T(@_operator)</span>
-                }
-            </div>
-
-            <MSelect @bind-Value="@filter.ColumnId"
-                     Placeholder="@i18N.T("ColumnId")"
-                     Items="_computedColumns"
-                     ItemText="u => u.Name"
-                     ItemValue="u => u.Id"
-                     Label="@i18N.T("ColumnId")"
-                     TItem="ColumnInfo"
-                     TItemValue="string"
-                     TValue="string"
-                     Class="mr-2"
-                     Style="max-width: 150px"
-                     Dense
-                     Filled
-                     HideDetails="@true"
-                     Readonly="filter.Persistent"
-                     OnSelect="@filter.OnSelect">
-            </MSelect>
-            <MSelect TValue="StandardFilter" TItemValue="StandardFilter" TItem="StandardFilter"
-                     Value="@filter.Func" Placeholder="@i18N.T("Func")" ValueChanged="(value) => OnFuncChange(index, value)"
-                     Items="@filter.FuncList"
-                     ItemText="@(u => i18N.T($"SDF_{GetFuncI18n(u, filter.Column.Type)}"))"
-                     ItemValue="u => u"
-                     Label="@i18N.T("Func")"
-                     Class="mr-2"
-                     Style="max-width: 150px"
-                     Dense
-                     Filled
-                     Readonly="filter.Persistent"
-                     HideDetails="@true">
-            </MSelect>
-            @if ((filter.Func is StandardFilter.Equals or StandardFilter.NotEquals or StandardFilter.Contains or StandardFilter.NotContains) && filter.SelectOptions is not null)
-            {
-                bool isList = filter.Func is StandardFilter.Contains or StandardFilter.NotContains;
-                if (isList)
-                {
-                    List<string> values = [.. filter.Expected.Replace('[', ' ').Replace(']', ' ').Replace('"', ' ').Split(',').Select(s => s.Trim())];
-                    <MAutocomplete Value="values"
-                                   ValueChanged="(List<string> values) => ValueChange(index, values)"
-                                   Clearable
-                                   Multiple
-                                   Items="@filter.SelectOptions"
-                                   ItemText="u => u.Label"
-                                   ItemValue="u => u.Value"
-                                   Label="@i18N.T("Expected")"
-                                   Placeholder="@i18N.T("Expected")"
-                                   Color="primary"
-                                   Class="mr-2 m-input--dense-48"
-                                   Style="max-width: 150px"
-                                   Dense
-                                   Filled
-                                   Readonly="filter.Persistent"
-                                   HideDetails="@("auto")">
-                    </MAutocomplete>
-                }
-                else
-                {
-                    <MAutocomplete @bind-Value="@filter.Expected"
-                                   Placeholder="@i18N.T("Expected")"
-                                   Items="@filter.SelectOptions"
-                                   ItemText="u => u.Label"
-                                   ItemValue="u => u.Value"
-                                   Label="@i18N.T("Expected")"
-                                   Class="mr-2 m-input--dense-48"
-                                   Style="max-width: 150px"
-                                   Dense
-                                   Filled
-                                   Readonly="filter.Persistent"
-                                   HideDetails="@("auto")">
-                    </MAutocomplete>
-                }
-            }
-            else if (filter.Type == ExpectedType.DateTime && (filter.Func is not StandardFilter.Set && filter.Func is not StandardFilter.NotSet))
-            {
-                DateTime? date = DateTime.TryParse(filter.Expected, out var dt) ? dt : null;
-                <PDateDigitalClockPicker Value="@date"
-                                         ValueChanged="@(v => filter.Expected = (v.ToString() ?? string.Empty))"
-                                         TValue="DateTime?"
-                                         ViewType="DateTimePickerViewType.Desktop"
-                                         TimeFormat="TimeFormat.Hr24"
-                                         MultiSection
-                                         UseSeconds>
-                    <PDefaultDateTimePickerActivator Label="Expected"
-                                                     Filled
-                                                     Format="yyyy-MM-dd HH:mm:ss" />
-                </PDateDigitalClockPicker>
-            }
-            else if (!_noExpectedFuncs.Contains(filter.Func))
-            {
-                <MTextField @bind-Value="@filter.Expected"
-                            Placeholder="@i18N.T("Expected")"
-                            Readonly="filter.Persistent"
-                            Label="@i18N.T("Expected")"
-                            Class="mr-2 m-input--dense-48"
-                            Style="max-width: 150px"
-                            Filled
-                            Dense
-                            HideDetails="@("auto")">
-                </MTextField>
-            }
-
-            <MSpacer />
-
-            @if (filter.Persistent)
-            {
-                <div style="min-width: 36px;"></div>
-            }
-            else
-            {
-                <MButton IconName="mdi-close"
-                         OnClick="@(() => RemoveFilter(filter))">
-                </MButton>
-            }
-        </div>
-    }
-
-    <div class="text-right" style="margin-right: 44px;">
-        <MButton Text
-                 LeftIconName="mdi-plus"
-                 Color="primary"
-                 OnClick="@AddNewFilter">@i18N.T("Add")</MButton>
-    </div>
-</PModal>
+@{
+    var modalRender = ComponentService.RenderFilterDialog(i18N, Width, Show,
+        EventCallback.Factory.Create<bool>(this, value => Show = value),
+        EventCallback.Factory.Create<ModalActionEventArgs>(this, value => HandleOnSave()),
+       EventCallback.Factory.Create<ModalActionEventArgs>(this, val => HandleOnCancel()),
+       ChildContent()
+    );
+    @modalRender
+}
 
 @code {
 
@@ -280,7 +130,7 @@
     {
         await HandleOnCancel();
 
-        Filter.Options = [.. _filters.Select(u =>u.ToFilterOption())];
+        Filter.Options = [.. _filters.Select(u => u.ToFilterOption())];
         Filter.Operator = _operator == "and" ? FilterOperator.And : FilterOperator.Or;
 
         if (FilterChanged.HasDelegate)
@@ -311,10 +161,10 @@
         }
     }
 
-    private void TimeChange(int index, DateTime time)
+    private void TimeChange(int index, DateTime? time)
     {
         var filter = _filters[index];
-        filter.Expected = time.ToString();
+        filter.Expected = time?.ToString();
     }
 
     private void ValueChange(int index, List<string> values)
@@ -352,4 +202,90 @@
             _ => filter.ToString()
         };
     }
+
+    private RenderFragment ChildContent() => __builder =>
+     {
+
+         for (int i = 0; i < _filters.Count; i++)
+         {
+             var index = i;
+             var filter = _filters[index];
+             if (filter.Persistent) continue;
+             <div class="d-flex align-center mb-2">
+                 <div style="flex: none;"
+                      class="mr-2 text-right">
+                     @if (index == 0)
+                     {
+                         <span>@i18N.T("When")</span>
+                     }
+                     @* else if (index == 1)
+                {
+                    <MSelect @bind-Value="@_operator"
+                             Items="@Operators"
+                             ItemText="u => u"
+                             ItemValue="u => u"
+                             Class="filter-operator"
+                             Dense
+                             Outlined
+                             HideDetails="@true">
+                    </MSelect>
+                } *@
+                     else
+                     {
+                         <span>@i18N.T(@_operator)</span>
+                     }
+                 </div>
+
+
+                 @{
+                     var columnRender = ComponentService.RenderFilterDialogColumnInfo(i18N, filter, _computedColumns, EventCallback.Factory.Create<string>
+                     (this, val => filter.ColumnId = val), EventCallback.Factory.Create<ValueTuple<ColumnInfo, bool>>(this, val => filter.OnSelect(val)));
+
+                     @columnRender
+
+                     var funcRender = ComponentService.RenderFilterDialogFunc(i18N, filter, filter.FuncList, EventCallback.Factory.Create<StandardFilter>(this, value => OnFuncChange(index, value)), GetFuncI18n);
+
+                     @funcRender
+
+
+                     @if ((filter.Func is StandardFilter.Equals or StandardFilter.NotEquals or StandardFilter.Contains or StandardFilter.NotContains) && filter.SelectOptions is not null && filter.SelectOptions.Count > 0)
+                     {
+                         if (filter.Func is StandardFilter.Contains or StandardFilter.NotContains)
+                         {
+                             var multiRender = ComponentService.RenderFilterDialogMultiValues(i18N, filter, EventCallback.Factory.Create<List<string>>(this, values => ValueChange(index, values)));
+                             @multiRender
+                         }
+                         else
+                         {
+                             var valueRender = ComponentService.RenderFilterDialogValue(i18N, filter, EventCallback.Factory.Create<string>(this, val => filter.Expected = val));
+                             @valueRender
+                         }
+                     }
+                     else if (filter.Type == ExpectedType.DateTime && (filter.Func is not StandardFilter.Set && filter.Func is not StandardFilter.NotSet))
+                     {
+                         var timeRender = ComponentService.RenderFilterDialogDateTimeValue(i18N, filter, EventCallback.Factory.Create<DateTime?>(this, time => TimeChange(index, time)));
+                         @timeRender
+                     }
+                     else if (!_noExpectedFuncs.Contains(filter.Func))
+                     {
+                         var valueRender = ComponentService.RenderFilterDialogTextValue(i18N, filter, EventCallback.Factory.Create<string>(this, val => filter.Expected = val));
+                         @valueRender
+                     }
+                 }
+
+                 @if (filter.Persistent)
+                 {
+                     <div style="min-width: 36px;"></div>
+                 }
+                 else
+                 {
+                     var removeRender = ComponentService.RenderFilterDialogRemoveButton(i18N, filter, EventCallback.Factory.Create<MouseEventArgs>(this, e => RemoveFilter(filter)));
+                     @removeRender
+                 }
+             </div>
+         }
+
+         var addRender = ComponentService.RenderFilterDialogAddButton(i18N, EventCallback.Factory.Create<MouseEventArgs>(this, AddNewFilter));
+         @addRender
+     };
 }

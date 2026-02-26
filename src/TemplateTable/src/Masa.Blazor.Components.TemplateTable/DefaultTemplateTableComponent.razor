@@ -1,0 +1,191 @@
+﻿@using Masa.Blazor.Components.TemplateTable.FilterDialogs
+@using Masa.Blazor.Components.TemplateTable.SortDialogs
+@namespace Masa.Blazor.Components.TemplateTable
+
+@code {
+    public virtual RenderFragment RenderFilterDialog(I18n i18N, StringNumber width, bool show, EventCallback<bool> triggerShow, EventCallback<ModalActionEventArgs> onSave, EventCallback<ModalActionEventArgs> onCancel, RenderFragment child) => __builder =>
+        {
+            <PModal Value="show"
+                    ValueChanged="triggerShow"
+                    Width="@width"
+                    BodyStyle="min-height: 380px"
+                    Title="@i18N.T("Filters")"
+                    Persistent
+                    HideCancelAction
+                    HideTitleDivider
+                    HideActionsDivider
+                    OnCancel="@onCancel"
+                    OnSave="onSave"
+                    ChildContent="child">
+            </PModal>
+        };
+
+    public virtual RenderFragment RenderFilterDialogColumnInfo(I18n i18N, FilterModel filter, IList<ColumnInfo> columns, EventCallback<string> valueChanged, EventCallback<ValueTuple<ColumnInfo, bool>> onSelect) => __builder =>
+         {
+             <MAutocomplete Value="@filter.ColumnId"
+                            ValueChanged="valueChanged"
+                            Placeholder="@i18N.T("ColumnId")"
+                            Items="columns"
+                            ItemText="u => u.Name"
+                            ItemValue="u => u.Id"
+                            Label="@i18N.T("ColumnId")"
+                            TItem="ColumnInfo"
+                            TItemValue="string"
+                            TValue="string"
+                            Class="mr-2"
+                            Style="max-width: 200px;width:200px"
+                            Dense
+                            Filled
+                            HideDetails="@true"
+                            Readonly="filter.Persistent"
+                            OnSelect="onSelect" />
+         };
+
+    public virtual RenderFragment RenderFilterDialogFunc(I18n i18N, FilterModel filter, IList<StandardFilter> filters, EventCallback<StandardFilter> valueChanged, Func<StandardFilter, ColumnType, string> i18nFunc) => __builder =>
+         {
+             <MAutocomplete TValue="StandardFilter"
+                            TItemValue="StandardFilter"
+                            TItem="StandardFilter"
+                            Value="@filter.Func"
+                            Placeholder="@i18N.T("Func")"
+                            ValueChanged="valueChanged"
+                            Items="@filter.FuncList"
+                            ItemText="@(u => i18N.T($"SDF_{i18nFunc(u, filter.Column.Type)}"))"
+                            ItemValue="u => u"
+                            Label="@i18N.T("Func")"
+                            Class="@($"mr-2")"
+                            Style="max-width: 200px;width:200px"
+                            Dense
+                            Filled
+                            Readonly="filter.Persistent"
+                            HideDetails="@true">
+             </MAutocomplete>
+         };
+
+    public virtual RenderFragment RenderFilterDialogMultiValues(I18n i18N, FilterModel filter, EventCallback<List<string>> valueChanged) => __builder =>
+        {
+            List<string> values = [.. filter.Expected.Replace('[', ' ').Replace(']', ' ').Replace('"', ' ').Split(',').Select(s => s.Trim())];
+            <MAutocomplete Value="values"
+                           ValueChanged="valueChanged"
+                           Clearable
+                           Multiple
+                           Items="@filter.SelectOptions"
+                           ItemText="u => u.Label"
+                           ItemValue="u => u.Value"
+                           Label="@i18N.T("Expected")"
+                           Placeholder="@i18N.T("Expected")"
+                           Class="@($"mr-2")"
+                           FullWidth
+                           Dense
+                           Filled
+                           Readonly="filter.Persistent"
+                           HideDetails="@("auto")">
+            </MAutocomplete>
+        };
+
+    public virtual RenderFragment RenderFilterDialogValue(I18n i18N, FilterModel filter, EventCallback<string> valueChanged) => __builder =>
+        {
+            <MAutocomplete Value="@filter.Expected"
+                           ValueChanged="valueChanged"
+                           Placeholder="@i18N.T("Expected")"
+                           Items="@filter.SelectOptions"
+                           ItemText="u => u.Label"
+                           ItemValue="u => u.Value"
+                           Label="@i18N.T("Expected")"
+                           Class="@($"mr-2")"
+                           FullWidth
+                           Dense
+                           Filled
+                           Readonly="filter.Persistent"
+                           HideDetails="@("auto")">
+            </MAutocomplete>
+        };
+
+    public virtual RenderFragment RenderFilterDialogDateTimeValue(I18n i18N, FilterModel filter, EventCallback<DateTime?> valueChanged) => __builder =>
+        {
+            DateTime? date = DateTime.TryParse(filter.Expected, out var dt) ? dt : null;
+            <PDateDigitalClockPicker Value="@date"
+                                     ValueChanged="valueChanged"
+                                     TValue="DateTime?"
+                                     ViewType="DateTimePickerViewType.Desktop"
+                                     TimeFormat="TimeFormat.Hr24"
+                                     MultiSection
+                                     UseSeconds>
+                <PDefaultDateTimePickerActivator Label="Expected"
+                                                 Filled
+                                                 Format="yyyy-MM-dd HH:mm:ss" />
+            </PDateDigitalClockPicker>
+        };
+
+    public virtual RenderFragment RenderFilterDialogTextValue(I18n i18N, FilterModel filter, EventCallback<string> valueChanged) => __builder =>
+        {
+            <MTextField Value="@filter.Expected"
+                        ValueChanged="valueChanged"
+                        Placeholder="@i18N.T("Expected")"
+                        Readonly="filter.Persistent"
+                        Label="@i18N.T("Expected")"
+                        Class="@($"mr-2")"
+                        FullWidth
+                        Filled
+                        Dense
+                        HideDetails="@("auto")">
+            </MTextField>
+        };
+
+    public virtual RenderFragment RenderFilterDialogAddButton(I18n i18N, EventCallback<MouseEventArgs> onClick) => __builder =>
+        {
+            <div class="text-right" style="margin-right: 44px;">
+                <MButton Text
+                         LeftIconName="mdi-plus"
+                         OnClick="onClick">@i18N.T("Add")</MButton>
+            </div>
+        };
+
+    public virtual RenderFragment RenderFilterDialogRemoveButton(I18n i18N, FilterModel filter, EventCallback<MouseEventArgs> onClick) => __builder =>
+        {
+            <MButton Icon Class="ml-auto" OnClick="onClick">
+                <MIcon>mdi-close</MIcon>
+            </MButton>
+        };
+
+
+    public virtual RenderFragment RenderSortDialog(I18n i18N, StringNumber width, bool show, EventCallback<bool> triggerShow, EventCallback<ModalActionEventArgs> onSave, EventCallback<ModalActionEventArgs> onCancel, RenderFragment child) => __builder =>
+    {
+        <PModal Value="show"
+                ValueChanged="triggerShow"
+                Width="@width"
+                Title="@i18N.T("Sorting")"
+                Persistent
+                BodyStyle="min-height: 180px"
+                OnCancel="@onCancel"
+                OnSave="@onSave"
+                ChildContent="child">
+        </PModal>
+    };
+
+    public virtual RenderFragment RenderSortDialogSortColumn(I18n i18N, SortModel sort, IList<ValueTuple<SortOrder, string>> columns, EventCallback<SortOrder> valueChanged) => __builder =>
+    {
+        <MSelect Value="@sort.OrderBy"
+                 ValueChanged="valueChanged"
+                 Items="@columns"
+                 ItemValue="u => u.Item1"
+                 ItemText="@(u => i18N.T($"{u.Item2}"))"
+                 Class="mr-2"
+                 Dense
+                 Filled
+                 HideDetails="@true"
+                 Style="width: 160px; max-width: 160px;">
+        </MSelect>
+    };
+
+    public virtual RenderFragment RenderSortDialogAddButton(I18n i18N, EventCallback<MouseEventArgs> onClick) => __builder =>
+    {
+
+    };
+
+    public virtual RenderFragment RenderSortDialogRemoveButton(I18n i18N, EventCallback<MouseEventArgs> onClick) => __builder =>
+    {
+        <MButton IconName="mdi-close" Class="ml-auto" OnClick="onClick">
+        </MButton>
+    };
+}

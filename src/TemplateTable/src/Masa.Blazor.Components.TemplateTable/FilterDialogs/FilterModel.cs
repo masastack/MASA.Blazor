@@ -5,7 +5,7 @@ public class FilterModel : FilterOption
     public ColumnInfo Column { get; private set; }
 
     public List<SelectOption>? SelectOptions { get; private set; }
-    
+
     public List<string> MultiSelect { get; internal set; } = [];
 
     public StandardFilter[] FuncList { get; private set; }
@@ -17,11 +17,12 @@ public class FilterModel : FilterOption
         UpdateOperator();
     }
 
-    public void OnSelect((ColumnInfo Column, bool Selected) item)
+    public Task OnSelect((ColumnInfo Column, bool Selected) item)
     {
         Column = item.Column;
         ColumnId = item.Column.Id;
         UpdateOperator();
+        return Task.CompletedTask;
     }
 
     public FilterOption ToFilterOption()
@@ -38,7 +39,7 @@ public class FilterModel : FilterOption
 
     private void UpdateOperator()
     {
-        SelectOptions = null;
+        SelectOptions = [];
 
         switch (Column.Type)
         {
