@@ -1,10 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="Options\**" />
+      <Content Remove="Options\**" />
+      <EmbeddedResource Remove="Options\**" />
+      <None Remove="Options\**" />
+    </ItemGroup>
 
     <ItemGroup>
         <SupportedPlatform Include="browser" />
@@ -29,9 +36,5 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Options\" />
-	</ItemGroup>
 
 </Project>
