@@ -66,6 +66,7 @@
             _computedColumns = Columns.Where(u => !HiddenColumnIds.Contains(u.Id)).Where(u => u.Type != ColumnType.Actions).ToList();
 
             _filters.Clear();
+            _invalidExpectedIndexes.Clear();
             foreach (var option in Filter.Options)
             {
                 var columnName = option.ColumnId;
@@ -83,6 +84,7 @@
                     Persistent = option.Persistent,
                     Type = option.Type,
                 };
+                filterOption.MultiSelect = ParseSelectExpectedValues(filterOption.Expected);
 
                 _filters.Add(filterOption);
             }
@@ -92,6 +94,7 @@
     }
 
     private readonly List<FilterModel> _filters = [];
+    private readonly HashSet<int> _invalidExpectedIndexes = [];
 
     internal void Open()
     {
@@ -109,6 +112,7 @@
         var filter = new FilterModel(Columns[0]);
 
         _filters.Add(filter);
+        _invalidExpectedIndexes.Clear();
     }
 
     private void RemoveFilter(FilterModel filterModel)
@@ -119,6 +123,7 @@
         }
 
         _filters.Remove(filterModel);
+        _invalidExpectedIndexes.Clear();
     }
 
     private void OnMultiSelect(FilterModel filter)
@@ -128,6 +133,12 @@
 
     private async Task HandleOnSave()
     {
+        if (!CheckParameters())
+        {
+            StateHasChanged();
+            return;
+        }
+
         await HandleOnCancel();
 
         Filter.Options = [.. _filters.Select(u => u.ToFilterOption())];
@@ -144,12 +155,36 @@
             await ShowChanged.InvokeAsync(Show);
     }
 
+    private bool CheckParameters()
+    {
+        _invalidExpectedIndexes.Clear();
+
+        for (var i = 0; i < _filters.Count; i++)
+        {
+            var filter = _filters[i];
+            if (filter.Persistent || !NeedExpectedValue(filter))
+            {
+                continue;
+            }
+
+            if (ExpectedValueMissing(filter))
+            {
+                _invalidExpectedIndexes.Add(i);
+            }
+        }
+
+        return _invalidExpectedIndexes.Count == 0;
+    }
+
     private void OnFuncChange(int index, StandardFilter func)
     {
         var filter = _filters[index];
+        var previousFunc = filter.Func;
         filter.Func = func;
         if (filter.Column.Type == ColumnType.Select)
         {
+            TransferSelectExpectedValue(previousFunc, func, filter);
+
             if (func is StandardFilter.Contains or StandardFilter.NotContains)
             {
                 filter.Type = ExpectedType.Expression;
@@ -159,20 +194,156 @@
                 filter.Type = ExpectedType.String;
             }
         }
+
+        CheckExpectedValidation(index);
+        StateHasChanged();
+    }
+
+    private void TransferSelectExpectedValue(StandardFilter previousFunc, StandardFilter currentFunc, FilterModel filter)
+    {
+        var fromMulti = IsSelectMultiValueFunc(previousFunc);
+        var toMulti = IsSelectMultiValueFunc(currentFunc);
+        var fromSingle = IsSelectSingleValueFunc(previousFunc);
+        var toSingle = IsSelectSingleValueFunc(currentFunc);
+
+        if (fromSingle && toMulti)
+        {
+            var singleValue = filter.Expected?.Trim();
+            if (string.IsNullOrWhiteSpace(singleValue))
+            {
+                filter.MultiSelect = [];
+                filter.Expected = "[]";
+                return;
+            }
+
+            var normalized = singleValue.Trim('"');
+            filter.MultiSelect = [normalized];
+            filter.Expected = $"[\"{normalized}\"]";
+            return;
+        }
+
+        if (fromMulti && toSingle)
+        {
+            var values = filter.MultiSelect.Count > 0 ? [.. filter.MultiSelect.Where(value => !string.IsNullOrWhiteSpace(value))] : ParseSelectExpectedValues(filter.Expected);
+            if (values.Count == 1)
+            {
+                var normalized = NormalizeSelectValue(values[0]);
+                filter.Expected = normalized;
+                filter.MultiSelect = [];
+                return;
+            }
+
+            filter.Expected = string.Empty;
+            filter.MultiSelect = [];
+        }
+    }
+
+    private static bool IsSelectMultiValueFunc(StandardFilter func)
+    {
+        return func is StandardFilter.Contains or StandardFilter.NotContains;
+    }
+
+    private static bool IsSelectSingleValueFunc(StandardFilter func)
+    {
+        return func is StandardFilter.Equals or StandardFilter.NotEquals;
+    }
+
+    private static List<string> ParseSelectExpectedValues(string? expected)
+    {
+        if (string.IsNullOrWhiteSpace(expected))
+        {
+            return [];
+        }
+
+        var normalized = expected.Trim();
+        var listStart = normalized.IndexOf('[');
+        var listEnd = normalized.LastIndexOf(']');
+
+        if (listStart >= 0 && listEnd > listStart)
+        {
+            normalized = normalized[(listStart + 1)..listEnd];
+            if (string.IsNullOrWhiteSpace(normalized))
+            {
+                return [];
+            }
+
+            return [.. normalized
+                .Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
+                .Select(NormalizeSelectValue)
+                .Where(value => !string.IsNullOrWhiteSpace(value))];
+        }
+
+        return [NormalizeSelectValue(normalized)];
+    }
+
+    private static string NormalizeSelectValue(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return string.Empty;
+        }
+
+        return value.Trim().Trim('"');
     }
 
     private void TimeChange(int index, DateTime? time)
     {
         var filter = _filters[index];
         filter.Expected = time?.ToString();
+        CheckExpectedValidation(index);
     }
 
     private void ValueChange(int index, List<string> values)
     {
         var filter = _filters[index];
-        var value = string.Join("\",\"", values.Where(s => s.Length > 0));
+        filter.MultiSelect = [.. values.Where(s => !string.IsNullOrWhiteSpace(s))];
+        var value = string.Join("\",\"", filter.MultiSelect);
         var tt = $"[\"{value}\"]";
-        filter.Expected = values.Count == 0 ? "[]" : tt;
+        filter.Expected = filter.MultiSelect.Count == 0 ? "[]" : tt;
+        CheckExpectedValidation(index);
+    }
+
+    private bool NeedExpectedValue(FilterModel filter)
+    {
+        return !_noExpectedFuncs.Contains(filter.Func);
+    }
+
+    private static bool ExpectedValueMissing(FilterModel filter)
+    {
+        if (string.IsNullOrWhiteSpace(filter.Expected))
+        {
+            return true;
+        }
+
+        return filter.Type == ExpectedType.Expression && filter.Expected.Trim() == "[]";
+    }
+
+    private bool HasExpectedError(int index)
+    {
+        return _invalidExpectedIndexes.Contains(index);
+    }
+
+    private void CheckExpectedValidation(int index)
+    {
+        if (index < 0 || index >= _filters.Count)
+        {
+            return;
+        }
+
+        var filter = _filters[index];
+        if (filter.Persistent || !NeedExpectedValue(filter))
+        {
+            _invalidExpectedIndexes.Remove(index);
+            return;
+        }
+
+        if (ExpectedValueMissing(filter))
+        {
+            _invalidExpectedIndexes.Add(index);
+            return;
+        }
+
+        _invalidExpectedIndexes.Remove(index);
     }
 
     private string GetFuncI18n(StandardFilter filter, ColumnType type)
@@ -252,24 +423,64 @@
                      {
                          if (filter.Func is StandardFilter.Contains or StandardFilter.NotContains)
                          {
-                             var multiRender = ComponentService.RenderFilterDialogMultiValues(i18N, filter, EventCallback.Factory.Create<List<string>>(this, values => ValueChange(index, values)));
-                             @multiRender
+                             <div class="w-100" @key="@($"expected-{index}-{filter.Func}-multi")">
+                                 @{
+                                     var multiRender = ComponentService.RenderFilterDialogMultiValues(i18N, filter, EventCallback.Factory.Create<List<string>>(this, values => ValueChange(index, values)));
+                                     @multiRender
+                                 }
+                                 @if (HasExpectedError(index))
+                                 {
+                                     <div class="red--text">@($"{i18N.T("Required")}")</div>
+                                 }
+                             </div>
                          }
                          else
                          {
-                             var valueRender = ComponentService.RenderFilterDialogValue(i18N, filter, EventCallback.Factory.Create<string>(this, val => filter.Expected = val));
-                             @valueRender
+                             <div class="w-100" @key="@($"expected-{index}-{filter.Func}-single")">
+                                 @{
+                                     var valueRender = ComponentService.RenderFilterDialogValue(i18N, filter, EventCallback.Factory.Create<string>(this, val =>
+                                     {
+                                         filter.Expected = val;
+                                         CheckExpectedValidation(index);
+                                     }));
+                                     @valueRender
+                                 }
+                                 @if (HasExpectedError(index))
+                                 {
+                                     <div class="red--text">@($"{i18N.T("Required")}")</div>
+                                 }
+                             </div>
                          }
                      }
                      else if (filter.Type == ExpectedType.DateTime && (filter.Func is not StandardFilter.Set && filter.Func is not StandardFilter.NotSet))
                      {
-                         var timeRender = ComponentService.RenderFilterDialogDateTimeValue(i18N, filter, EventCallback.Factory.Create<DateTime?>(this, time => TimeChange(index, time)));
-                         @timeRender
+                         <div class="w-100" @key="@($"expected-{index}-{filter.Func}-datetime")">
+                             @{
+                                 var timeRender = ComponentService.RenderFilterDialogDateTimeValue(i18N, filter, EventCallback.Factory.Create<DateTime?>(this, time => TimeChange(index, time)));
+                                 @timeRender
+                             }
+                             @if (HasExpectedError(index))
+                             {
+                                 <div class="red--text">@($"{i18N.T("Required")}")</div>
+                             }
+                         </div>
                      }
                      else if (!_noExpectedFuncs.Contains(filter.Func))
                      {
-                         var valueRender = ComponentService.RenderFilterDialogTextValue(i18N, filter, EventCallback.Factory.Create<string>(this, val => filter.Expected = val));
-                         @valueRender
+                         <div class="w-100" @key="@($"expected-{index}-{filter.Func}-text")">
+                             @{
+                                 var valueRender = ComponentService.RenderFilterDialogTextValue(i18N, filter, EventCallback.Factory.Create<string>(this, val =>
+                                 {
+                                     filter.Expected = val;
+                                     CheckExpectedValidation(index);
+                                 }));
+                                 @valueRender
+                             }
+                             @if (HasExpectedError(index))
+                             {
+                                 <div class="red--text">@($"{i18N.T("Required")}")</div>
+                             }
+                         </div>
                      }
                  }
 
