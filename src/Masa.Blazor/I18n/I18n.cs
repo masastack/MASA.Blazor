@@ -1,5 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Microsoft.Extensions.Options;
+﻿#if NET8_0_OR_GREATER
+using System.Collections.Concurrent;
+#endif
+using System.Diagnostics.CodeAnalysis;
 
 namespace Masa.Blazor;
 
@@ -104,7 +106,11 @@ public class I18n
 
         try
         {
-            return string.Format(value, args);
+#if NET8_0_OR_GREATER
+            return string.Format(Culture, CompositeFormatCache.Parse(Culture, value), args);
+#else
+            return string.Format(Culture, value, args);
+#endif
         }
         catch (FormatException)
         {
@@ -123,3 +129,15 @@ public class I18n
         Locale = I18nCache.GetLocale(uiCulture);
     }
 }
+#if NET8_0_OR_GREATER
+
+public static class CompositeFormatCache
+{
+    private static readonly ConcurrentDictionary<string, CompositeFormat> Cache = new();
+
+    public static CompositeFormat Parse(CultureInfo cultureInfo, string format)
+    {
+        return Cache.GetOrAdd($"{cultureInfo.Name}-{format}", CompositeFormat.Parse);
+    }
+}
+#endif
