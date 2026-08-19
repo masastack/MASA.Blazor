@@ -49,7 +49,7 @@ related:
 
 #### 迷你 {#mini-variant released-on=v1.7.0}
 
-默认情况下，当浏览器窗口小于 *600px* 时，会自动使用迷你样式。你也可以使用 `MinVariant` 属性可以手动设置迷你样式。
+默认情况下，当浏览器窗口小于 *600px* 时，会自动使用迷你样式。你也可以使用 `MiniVariant` 属性可以手动设置迷你样式。
 
 <masa-example file="Examples.components.paginations.MiniVariant"></masa-example>
 

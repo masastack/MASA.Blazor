@@ -49,7 +49,7 @@ Use the `Length` property to set the length of **MPagination**. If the number of
 
 #### Mini variant {released-on=v1.7.0}
 
-By default, when the browser window is less than *600px*, the mini style is automatically used. Use the `MinVariant` property to set the mini style of the pagination.
+By default, when the browser window is less than *600px*, the mini style is automatically used. Use the `MiniVariant` property to set the mini style of the pagination.
 
 <masa-example file="Examples.components.paginations.MiniVariant"></masa-example>
 
