@@ -6,9 +6,13 @@ on:
 jobs:
   push-nuget-on-release:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+
     steps:
     - name: git pull
       uses: actions/checkout@v3
+
     - name: setting dotnet
       uses: actions/setup-dotnet@v1
       with:
@@ -18,9 +22,18 @@ jobs:
           7.0.x
           6.0.x
         include-prerelease: true
+
     - name: build
       run: dotnet build Masa.Blazor.Build.slnx -c Release /p:ContinuousIntegrationBuild=true
+
     - name: pack
       run: dotnet pack Masa.Blazor.Build.slnx --no-build --include-symbols -c Release -p:Version=$GITHUB_REF_NAME
+
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: ${{secrets.NUGET_USER}}
+        
     - name: package push
-      run: dotnet nuget push "**/*.symbols.nupkg" --skip-duplicate -k ${{secrets.NUGET_TOKEN}} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "**/*.symbols.nupkg" --skip-duplicate -k ${{steps.login.outputs.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
